@@ -9,9 +9,13 @@
     
     <!-- Social Share Preview -->
     <meta property="og:title" content="Pau Tacos - Artisanal Nigerian Fusion Cuisine" />
-    <meta property="og:description" content="Discover an elevated dining experience where authentic Nigerian flavors are masterfully fused with global culinary artistry." />
-    <meta property="og:image" content="preview.png" />
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pautacos.com" />
+    <meta property="og:image" content="https://pautacos.com/preview.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1536" />
+    <meta property="og:description" content="Discover an elevated dining experience where authentic Nigerian flavors are masterfully fused with global culinary artistry." />
+    <meta property="og:site_name" content="Pau Tacos" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="logo.png" type="image/png">
@@ -25,6 +29,11 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #121212;
             color: #E0E0E0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.light-mode {
+            background-color: #fdf6e4;
+            color: #333;
         }
         .font-playfair {
             font-family: 'Playfair Display', serif;
@@ -66,10 +75,14 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s, border-color 0.3s;
             display: flex;
             flex-direction: column;
             cursor: pointer;
+        }
+        body.light-mode .menu-card {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-color: rgba(0,0,0,0.1);
         }
         .menu-card:hover {
             transform: translateY(-12px);
@@ -96,6 +109,11 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(220, 38, 38, 0.3);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        body.light-mode .exotics-section-bg {
+            background-color: rgba(255, 235, 238, 0.5);
+            border-color: rgba(220, 38, 38, 0.3);
         }
         .cta-button {
             transition: all 0.3s ease;
@@ -107,6 +125,30 @@
             background-color: #EF4444;
             box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.3);
         }
+        .blur-button {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            display: inline-block;
+            color: #ffffff;
+        }
+        .blur-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .letter-modal-content.light .blur-button {
+             background-color: rgba(0, 0, 0, 0.1);
+             border-color: rgba(0, 0, 0, 0.2);
+             color: #333;
+        }
+        .letter-modal-content.light .blur-button:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
         .text-brand-red {
             color: #DC2626;
         }
@@ -114,6 +156,9 @@
             background-color: rgba(18, 18, 18, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+        }
+        body.light-mode header.scrolled {
+             background-color: rgba(253, 246, 228, 0.95);
         }
         .modal-backdrop {
             background-color: rgba(0,0,0,0.7);
@@ -155,6 +200,27 @@
             height: 100%;
             object-fit: cover;
         }
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -165,12 +231,14 @@
             <a href="#" class="flex items-center">
                 <img src="logo.png" alt="Pau Tacos Logo - Artisanal Nigerian Tacos" class="h-20 w-20" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DC2626/ffffff?text=PT';">
             </a>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-4">
                  <!-- Cart Icon -->
                 <button id="cart-button" class="relative text-white">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
                 </button>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="text-white"></button>
             </div>
         </nav>
     </header>
@@ -186,6 +254,9 @@
             <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 leading-tight">A Symphony of Spice & Tradition</h1>
             <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-300">Discover an elevated dining experience where authentic Nigerian flavors are masterfully fused with global culinary artistry.</p>
         </div>
+        <a href="#menu" class="scroll-hint">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </a>
     </section>
 
     <!-- Menu Section -->
@@ -210,7 +281,7 @@
     <!-- Locations Section -->
     <section id="locations" class="bg-[#181818] py-24">
         <div class="container mx-auto px-6">
-            <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">Our University <span class="text-brand-red">Locations</span></h2>
+            <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">Our <span class="text-brand-red">Locations</span></h2>
             <div id="locations-container" class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Location cards will be dynamically injected here -->
             </div>
@@ -250,7 +321,8 @@
                     <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
-            <p class="text-gray-500 text-sm mt-4">A fromsupply Mall brand, In Chim Wopara Enterprises</p>
+            <p class="text-gray-500 text-sm">A <a href="https://fromsupply.com" target="_blank" class="underline hover:text-red-500">fromsupply Mall</a> brand, In <a href="https://chimwopara.com" target="_blank" class="underline hover:text-red-500">Chim Wopara Enterprises</a></p>
+            <p class="text-gray-500 text-sm mt-2">Pautacos may outsource recipes or meals to deliver on speed.</p>
             <p class="text-gray-500 text-sm mt-2">&copy; 2025 Pau Tacos. All Rights Reserved.</p>
         </div>
     </footer>
@@ -268,19 +340,35 @@
         <div class="modal-backdrop absolute inset-0"></div>
         <div class="cart-modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-full max-w-md relative h-full flex flex-col">
              <div class="p-6 flex justify-between items-center border-b border-gray-700">
-                <h2 class="font-playfair text-2xl text-white">Your Order</h2>
+                <h2 class="font-playfair text-2xl text-white">Your Box</h2>
                 <button id="close-cart-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
              </div>
              <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto">
                 <!-- Cart items will be here -->
              </div>
              <div class="p-6 border-t border-gray-700">
-                <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
-                <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
-                    <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <div class="space-y-4">
+                    <div>
+                        <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
+                        <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
+                    </div>
+                    <div>
+                        <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
+                        <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
+                    </div>
+                    <div>
+                        <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
+                        <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
+                            <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <input type="hidden" id="campus-select-input" name="campus">
+                    </div>
+                    <div>
+                        <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
+                        <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
+                    </div>
                 </div>
-                <input type="hidden" id="campus-select-input" name="campus">
                 <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
              </div>
         </div>
@@ -337,154 +425,154 @@
                     image: 'taco.png',
                     prices: { big: 5000, bigger: 8000, biggest: 10000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">They say you can't improve on a classic. We disagree.</p><p class="mb-4">This recipe was born from a dozen late-night arguments in a Lagos kitchen, a quest to find the perfect balance between the familiar and the divine. Each spice was chosen not just for its taste, but for the story it tells.</p><p>This isn't just a taco. It's a conversation. It's the taste of home, whispered in a new language.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">They say you can't improve on a classic. I disagree. This recipe was born from a dozen late-night arguments in a Lagos kitchen, a quest to find the perfect balance between the familiar and the divine. Each spice was chosen not just for its taste, but for the story it tells. This isn't just a taco. It's a conversation; a taste of home, whispered in a new language.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 burrito: { 
                     name: 'The Obese Burrito',
                     image: 'burrito.png',
                     prices: { big: 6000, bigger: 9000, biggest: 12000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">We were told it was impossible. "Too much," they said. "It cannot be contained."</p><p class="mb-4">We saw it as a challenge. This burrito is an architectural marvel, a testament to ambition. We layered flavors like a master weaver, ensuring every single bite is a journey through a landscape of taste.</p><p>It is a feast in your hands, an experience that demands your full attention. We dare you to conquer it.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We were told it was impossible. "Too much," they said. "It cannot be contained." We saw it as a challenge. This burrito is an architectural marvel, a testament to pure ambition. We layered flavors like a master weaver, ensuring every single bite is a journey through a landscape of taste. It is a feast in your hands, an experience that demands your full attention. I dare you to conquer it.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 poutine: { 
                     name: 'The Montreal Poutine',
                     image: 'poutine.png',
                     prices: { big: 10000, bigger: 16000, biggest: 20000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">A message arrived on a cold wind from the North, a recipe scrawled on birch bark. It spoke of fries, curds, and gravy.</p><p class="mb-4">We honored the tradition, but we could not ignore the call of our own spices. We introduced the warmth of the Sahara to the chill of the Canadian winter.</p><p>The result is a culinary dialogue between two worlds, a comforting dish that tells a story of unexpected friendship.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A message arrived on a cold wind from the North, a recipe scrawled on birch bark. It spoke of fries, curds, and gravy. We honored the tradition, but we could not ignore the call of our own spices. We introduced the warmth of the Sahara to the chill of the Canadian winter. The result is a culinary dialogue between two worlds, a comforting dish that tells a story of unexpected friendship.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 pizza: {
                     name: 'The Italian Special',
                     image: 'pizza.png',
                     prices: { big: 7000, bigger: 10000, biggest: 13000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">An Italian classic, kidnapped and brought to a bustling Lagos market. We showed it our spices, our smoke, our fire.</p><p class="mb-4">It resisted at first, but then it understood. On a bed of hand-stretched dough, Italian tradition and Nigerian audacity dance together. Topped with Suya, Yaji, and our secret sauce, it's a pizza that speaks with a bold new accent.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">An Italian classic, kidnapped and brought to a bustling Lagos market. We showed it our spices, our smoke, our fire. It resisted at first, but then it understood. On a bed of hand-stretched dough, Italian tradition and Nigerian audacity dance together. Topped with Suya, Yaji, and our secret sauce, it's a pizza that speaks with a bold new accent.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                  burger: {
                     name: 'The BBL Burger',
                     image: 'burger.png',
                     prices: { big: 6000, bigger: 9000, biggest: 12000 },
                     toppings: burgerToppings,
-                    letter: `<p class="mb-4">This is not a burger. This is architecture. A tower of flavor, engineered for maximum satisfaction. We flame-grill the patty to seal in the juices, then build upon that foundation with layers of texture and taste. It's a handful of happiness.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This is not a burger. This is architecture. A tower of flavor, engineered for maximum satisfaction. We flame-grill the patty to seal in the juices, then build upon that foundation with layers of texture and taste. It's a handful of happiness, a monument to the art of the grill.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                  spaghetti: {
                     name: 'The Strands de la Foresté',
                     image: 'spaghetti.png',
                     prices: { big: 5500, bigger: 8500, biggest: 11000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">A recipe found in a journal from a traveler who got lost in the deep woods of Italy, only to be saved by a Nigerian chef. A fusion of rich, slow-cooked tomato sauce and the smoky, spicy notes of the motherland. Each strand tells a story of survival and delicious discovery.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A recipe found in a journal from a traveler who got lost in the deep woods of Italy, only to be saved by a Nigerian chef. A fusion of rich, slow-cooked tomato sauce and the smoky, spicy notes of the motherland. Each strand tells a story of survival and delicious discovery, a testament to the unexpected bonds forged over a shared meal.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 shawarma: {
                     name: 'The Midnight Shawarma',
                     image: 'shawarma.png',
                     prices: { big: 4500, bigger: 6500, biggest: 8500 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">Learned from a master on a bustling street corner, under a sky of a thousand stars. The secret isn't just the spice, but the patience of the flame.</p><p>Slow-roasted, hand-carved, and wrapped with reverence. This is the taste of a thousand and one late nights, a story of savory satisfaction told in every bite.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Learned from a master on a bustling street corner, under a sky of a thousand stars. The secret isn't just the spice, but the patience of the flame. Slow-roasted, hand-carved, and wrapped with reverence. This is the taste of a thousand and one late nights, a story of savory satisfaction told in every single bite.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 jollof: {
                     name: "Chim's Smokey Jollof",
                     image: 'jollofrice.png',
                     prices: { big: 4000, bigger: 6000, biggest: 8000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">This isn't just rice. It's a statement. It's the heart of the party, the soul of every gathering.</p><p>Our recipe is a closely guarded secret, passed down through generations who understood the sacred geometry of smoke, tomato, and spice. Each grain is infused with history and flavor. To taste it is to understand.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This isn't just rice. It's a statement. It's the heart of the party, the soul of every gathering. My recipe is a closely guarded secret, passed down through generations who understood the sacred geometry of smoke, tomato, and spice. Each grain is infused with history and flavor. To taste it is to understand.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 friedrice: {
                     name: 'The Chinese Stir Fry Rice',
                     image: 'friedrice.png',
                     prices: { big: 4000, bigger: 6000, biggest: 8000 },
                     toppings: savoryToppings,
-                    letter: `<p class="mb-4">We sought the most vibrant greens, the most crisp vegetables from a hidden market known only to the city's finest chefs.</p><p>This dish is a celebration of freshness, a festival of color and crunch. Each ingredient is flash-fried in a searing wok to lock in its essence, creating a light yet deeply satisfying experience.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We sought the most vibrant greens, the most crisp vegetables from a hidden market known only to the city's finest chefs. This dish is a celebration of freshness, a festival of color and crunch. Each ingredient is flash-fried in a searing wok to lock in its essence, creating a light yet deeply satisfying experience that dances on the palate.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 pancakes: {
                     name: 'The Sunrise Pancake Stack',
                     image: 'pancake.png',
                     prices: { big: 3000, bigger: 4500, biggest: 6000 },
                     toppings: pancakeToppings,
-                    letter: `<p class="mb-4">Found in a grandmother's faded notebook, the recipe simply said: "Patience, good butter, and a happy heart."</p><p>We follow it to the letter. These aren't just mixed, they're coaxed. Rested, then griddled until they are impossibly fluffy and golden. They are comfort, pure and simple.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Found in a grandmother's faded notebook, the recipe simply said: "Patience, good butter, and a happy heart." We follow it to the letter. These aren't just mixed, they're coaxed. Rested, then griddled until they are impossibly fluffy and golden. They are comfort, pure and simple, a warm hug on a plate.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 moimoi: {
                     name: 'The Velvet Moi Moi',
                     image: 'moimoi.png',
                     prices: { big: 2500, bigger: 4000, biggest: 5500 },
                     toppings: moiMoiToppings,
-                    letter: `<p class="mb-4">The art of Moi Moi is the art of transformation. Taking the humble bean and turning it into something ethereal and smooth.</p><p>Ours is steamed slowly, patiently, in seasoned leaves that impart a subtle, earthy aroma. It is a delicate process that results in a savory pudding of unparalleled texture. A true taste of Nigerian culinary grace.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The art of Moi Moi is the art of transformation. Taking the humble bean and turning it into something ethereal and smooth. Ours is steamed slowly, patiently, in seasoned leaves that impart a subtle, earthy aroma. It is a delicate process that results in a savory pudding of unparalleled texture. A true taste of Nigerian culinary grace.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 fries: {
                     name: 'The Perfect Potato Fries',
                     image: 'fries.png',
                     prices: { big: 2000, bigger: 3000, biggest: 4000 },
                     toppings: friesToppings,
-                    letter: `<p class="mb-4">The quest for the perfect fry is a noble one. It led us to fields where the soil is rich and the potatoes are proud.</p><p>We cut them by hand, blanch them twice for that fluffy interior and shatteringly crisp exterior. A sprinkle of sea salt is all they need to sing. Simple perfection is the ultimate luxury.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The quest for the perfect fry is a noble one. It led us to fields where the soil is rich and the potatoes are proud. We cut them by hand, blanch them twice for that fluffy interior and shatteringly crisp exterior. A sprinkle of sea salt is all they need to sing. Simple perfection is the ultimate luxury.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 milkshake: { 
                     name: 'The Perfectly Creamed Milkshake',
                     image: 'milkshake.png',
                     prices: { big: 2000, bigger: 3000, biggest: 4000 },
                     toppings: sweetToppings,
-                    letter: `<p class="mb-4">The secret is in the churn. Not too fast, not too slow. A rhythm passed down from a forgotten artisan who believed that texture was a form of magic.</p><p>We use only the purest cream and the most decadent inclusions, blending them until they reach a state of liquid silk. It is more than a drink; it is a moment of pure, unadulterated bliss.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The secret is in the churn. Not too fast, not too slow. A rhythm passed down from a forgotten artisan who believed that texture was a form of magic. We use only the purest cream and the most decadent inclusions, blending them until they reach a state of liquid silk. It is more than a drink; it is a moment of pure, unadulterated bliss.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 boba: { 
                     name: 'The Taiwanese Original Boba',
                     image: 'boba.png',
                     prices: { big: 2000, bigger: 3000, biggest: 4000 },
                     toppings: sweetToppings,
-                    letter: `<p class="mb-4">From a bustling night market in Taipei, a recipe was carried across oceans. It wasn't written down, but remembered—a precise balance of tea, milk, and the perfect 'Q' of the pearl.</p><p>We brew our tea in small, dedicated batches, ensuring every cup carries the authentic, fragrant soul of its origin. The pearls are prepared hourly, their texture a testament to our dedication.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">From a bustling night market in Taipei, a recipe was carried across oceans. It wasn't written down, but remembered—a precise balance of tea, milk, and the perfect 'Q' of the pearl. We brew our tea in small, dedicated batches, ensuring every cup carries the authentic, fragrant soul of its origin. The pearls are prepared hourly, their texture a testament to our dedication.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 lassi: { 
                     name: 'The Famous Indian Yoghurt',
                     image: 'lassi.png',
                     prices: { big: 2000, bigger: 3000, biggest: 4000 },
                     toppings: sweetToppings,
-                    letter: `<p class="mb-4">A gift from the kitchens of Rajasthan, where this drink is more than refreshment—it's a remedy for the desert heat, a balm for the soul.</p><p>We use a special culture of yoghurt, churned by hand until it reaches a state of impossible smoothness. It is then kissed with fruit and spice, a perfect harmony of tart and sweet.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A gift from the kitchens of Rajasthan, where this drink is more than refreshment—it's a remedy for the desert heat, a balm for the soul. We use a special culture of yoghurt, churned by hand until it reaches a state of impossible smoothness. It is then kissed with fruit and spice, a perfect harmony of tart and sweet.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 coleslaw: {
                     name: 'The Classic Creamy Slaw',
                     image: 'coleslaw.png',
                     prices: { big: 1500, bigger: 2500, biggest: 3500 },
                     toppings: [],
-                    letter: `<p class="mb-4">A cherished family recipe for sunny days and big gatherings. The secret isn't in what you add, but what you don't.</p><p>Crisp, fresh vegetables, a dressing that's both creamy and light, with just a hint of tang. It's the perfect, cooling counterpoint to a feast of spice. A moment of pure, crunchy refreshment.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A cherished family recipe for sunny days and big gatherings. The secret isn't in what you add, but what you don't. Crisp, fresh vegetables, a dressing that's both creamy and light, with just a hint of tang. It's the perfect, cooling counterpoint to a feast of spice. A moment of pure, crunchy refreshment.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 macaronisalad: {
                     name: 'The Picnic Macaroni Salad',
                     image: 'macsalad.png',
                     prices: { big: 2000, bigger: 3000, biggest: 4000 },
                     toppings: [],
-                    letter: `<p class="mb-4">This is the taste of laughter and shared blankets under a shady tree. A simple pleasure, elevated to an art form.</p><p>Tender pasta, crisp vegetables, and a dressing that sings with a sweet, tangy harmony. It's comfort food that reminds you of the best of days.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This is the taste of laughter and shared blankets under a shady tree. A simple pleasure, elevated to an art form. Tender pasta, crisp vegetables, and a dressing that sings with a sweet, tangy harmony. It's comfort food that reminds you of the best of days.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 chinchin: {
                     name: "The Ancestor's Chin Chin",
                     image: 'chinchin.png',
                     prices: { big: 1500, bigger: 2500, biggest: 3500 },
                     toppings: [],
-                    letter: `<p class="mb-4">A recipe whispered by the harmattan wind, a thousand tiny, crunchy pieces of joy. Each one is a memory of celebration, fried to a perfect golden crisp. It's the sound of happiness in a bowl.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A recipe whispered by the harmattan wind, a thousand tiny, crunchy pieces of joy. Each one is a memory of celebration, fried to a perfect golden crisp. It's the sound of happiness in a bowl, a taste of pure nostalgia.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 coffee: {
                     name: 'The Jos Plateau Coffee',
                     image: 'coffee.png',
                     prices: { big: 2000, bigger: 3000, biggest: 4000 },
                     toppings: sweetToppings,
-                    letter: `<p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul to the beauty of the morning.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 cookie: {
                     name: "Cookie Monster's Stash",
                     image: 'cookie.png',
                     prices: { big: 1500, bigger: 2500, biggest: 3500 },
                     toppings: [],
-                    letter: `<p class="mb-4">We embarked on a quest for the perfect cookie. It required melting Belgian chocolate under a full moon and using butter churned only to the sound of Afrobeats. The result is a cookie with crisp edges, a gooey center, and a story in every chunk.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We embarked on a quest for the perfect cookie. It required melting Belgian chocolate under a full moon and using butter churned only to the sound of Afrobeats. The result is a cookie with crisp edges, a gooey center, and a story in every chunk. It's a secret worth keeping.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 cupcake: {
                     name: 'The Cloud-Kissed Cupcake',
                     image: 'cupcake.png',
                     prices: { big: 2000, bigger: 3500, biggest: 5000 },
                     toppings: [],
-                    letter: `<p class="mb-4">An architect and a baker fell in love. This was their creation. A foundation of impossibly light cake and a spire of ethereal frosting. It is a tiny tower of sweetness, a testament to the fact that the best things are built with passion.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">An architect and a baker fell in love. This was their creation. A foundation of impossibly light cake and a spire of ethereal frosting. It is a tiny tower of sweetness, a testament to the fact that the best things are built with passion and a touch of whimsy.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 icecream: {
                     name: "Sweet Northern Glacier",
                     image: 'icecream.png',
                     prices: { big: 2500, bigger: 4000, biggest: 5500 },
                     toppings: sweetToppings,
-                    letter: `<p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients.</p>`
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients, a cool whisper on a hot day.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 }
             };
             
@@ -495,11 +583,11 @@
                     image: 'peppersoup.png',
                     alt: 'Exotic Pepper Soup Selection',
                     letter: `
-                        <p class="mb-4">To my trusted contact,</p>
+                        <p class="mb-4">To Chim,</p>
                         <p class="mb-4">The river hunt was a success. The ancient specimen we sought, the one they call the "River Guardian," put up a legendary fight, but our efforts paid off. Its primal heat will make for a pepper soup of unparalleled potency.</p>
                         <p class="mb-4">We're moving under the cover of night, the cargo is secure. The whispers of the mangrove are behind us. Expect our arrival soon, but you know how this goes... only when the stars align.</p>
                         <p>Prepare the sacred spices. This feast will be one for the ages.</p>
-                        <p class="text-right mt-6">- The Huntsman</p>`
+                        <p class="text-right mt-6">- The Huntsman</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 },
                 sushi: {
                     name: 'Fusion Sushi',
@@ -507,11 +595,11 @@
                     image: 'sushi.png',
                     alt: 'Fusion Sushi',
                     letter: `
-                        <p class="mb-4">My Dearest Associate,</p>
+                        <p class="mb-4">To Chim,</p>
                         <p class="mb-4">The old master in Kyoto finally relented. He has shared the secret techniques, the precise art of the blade and rice. I have paired his ancient wisdom with the fiery spirit of our local spice routes.</p>
                         <p class="mb-4">The result is... something new. A pact between two worlds on a single plate. I am bringing back a very limited quantity of the key ingredients. This cannot be replicated easily.</p>
                         <p>Tell our patrons to prepare their palates for a journey they have never experienced. The consignment is small and will not last.</p>
-                        <p class="text-right mt-6">- The Voyager</p>`
+                        <p class="text-right mt-6">- The Voyager</p><img src="signature.png" class="h-10 ml-auto" alt="Signature">`
                 }
             };
 
@@ -544,9 +632,10 @@
             
             const toppingPrice = 1000;
             let cart = [];
-            let isNoteDarkMode = localStorage.getItem('noteDarkMode') === 'true';
+            let isSiteDarkMode = localStorage.getItem('siteDarkMode') === 'true';
 
             // --- DOM ELEMENTS ---
+            const body = document.body;
             const menuContainer = document.getElementById('menu-items');
             const exoticsContainer = document.getElementById('exotics-container');
             const locationsContainer = document.getElementById('locations-container');
@@ -563,9 +652,8 @@
             const campusSelectInput = document.getElementById('campus-select-input');
             const campusListContainer = document.getElementById('campus-list-container');
             const buyNowButton = document.getElementById('buy-now-button');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
             const header = document.getElementById('header');
+            const themeToggle = document.getElementById('theme-toggle');
 
             // --- FUNCTIONS ---
 
@@ -629,38 +717,46 @@
                 }
             }
 
+            function applyTheme() {
+                if (isSiteDarkMode) {
+                    body.classList.remove('light-mode');
+                    themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`; // Sun icon
+                } else {
+                    body.classList.add('light-mode');
+                    themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`; // Moon icon
+                }
+            }
+            
             function applyNoteTheme() {
-                const noteToggle = document.getElementById('note-theme-toggle');
-                if (isNoteDarkMode) {
+                if (isSiteDarkMode) {
                     noteContent.classList.add('dark');
-                    if(noteToggle) noteToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`; // Sun icon
+                    noteContent.classList.remove('light');
                 } else {
                     noteContent.classList.remove('dark');
-                    if(noteToggle) noteToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`; // Moon icon
+                    noteContent.classList.add('light');
                 }
             }
 
             function openNoteModal(itemKey, type = 'menu') {
                 const item = type === 'menu' ? menuData[itemKey] : (type === 'exotic' ? exoticsData[itemKey] : locationsData[itemKey]);
-                const experienceText = isTouchDevice() ? 'Tap to' : 'Click to';
                 let buttonHtml = '';
 
                 if (type === 'menu') {
-                    buttonHtml = `<button id="experience-now-button" class="cta-button w-full font-bold py-3 mt-6 rounded-full" data-item="${itemKey}">${experienceText} Experience</button>`;
+                    buttonHtml = `<button id="experience-now-button" class="blur-button mt-6" data-item="${itemKey}">Experience at Home</button>`;
                 } else if (type === 'exotic') {
-                    buttonHtml = `<a href="#newsletter" id="update-letter-button" class="cta-button block w-full text-center font-bold py-3 mt-6 rounded-full">${experienceText} Receive an Update Letter</a>`;
+                    buttonHtml = `<a href="#newsletter" id="update-letter-button" class="blur-button mt-6">${isTouchDevice() ? 'Tap' : 'Click'} to Intercept Future Updates</a>`;
                 }
 
                 noteContent.innerHTML = `
                     <div class="absolute top-2 right-4 flex items-center space-x-2">
-                         <button id="note-theme-toggle" class="text-gray-500 hover:text-black"></button>
                          <button id="close-note-modal" class="text-gray-500 hover:text-black text-3xl">&times;</button>
                     </div>
                     <div class="font-kalam text-lg leading-relaxed mt-8">${item.letter}</div>
-                    ${buttonHtml}
+                    <div class="text-center">${buttonHtml}</div>
                 `;
                 noteModal.style.display = 'flex';
                 applyNoteTheme();
+                body.classList.add('modal-open');
             }
 
             function openOrderModal(itemKey) {
@@ -701,13 +797,15 @@
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">${toppingsHtml}</div>
                     </div>
 
-                    <button id="add-to-cart-button" class="cta-button w-full font-bold py-4 mt-8 rounded-full text-lg" data-item="${itemKey}">ADD TO CART</button>
+                    <button id="add-to-cart-button" class="cta-button w-full font-bold py-4 mt-8 rounded-full text-lg" data-item="${itemKey}">Add to Box</button>
                 `;
                 orderModal.style.display = 'flex';
+                body.classList.add('modal-open');
             }
 
             function closeModal(modal) {
                 modal.style.display = 'none';
+                body.classList.remove('modal-open');
             }
 
             function addToCart(itemKey) {
@@ -795,6 +893,7 @@
             renderExotics();
             renderLocations();
             renderCampusList();
+            applyTheme();
 
             menuContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.menu-card');
@@ -823,6 +922,7 @@
                 cartModal.style.display = 'flex';
                 setTimeout(() => cartModal.classList.add('active'), 10);
                 renderCartItems();
+                body.classList.add('modal-open');
             });
 
             cartModal.addEventListener('click', (e) => {
@@ -837,6 +937,7 @@
             
             campusSelectorTrigger.addEventListener('click', () => {
                 campusModal.style.display = 'flex';
+                body.classList.add('modal-open');
             });
 
             campusModal.addEventListener('click', (e) => {
@@ -874,31 +975,20 @@
                 if(e.target.id === 'update-letter-button') {
                     closeModal(noteModal);
                 }
-                if(e.target.closest('#note-theme-toggle')) {
-                    isNoteDarkMode = !isNoteDarkMode;
-                    localStorage.setItem('noteDarkMode', isNoteDarkMode);
-                    applyNoteTheme();
-                }
+            });
+
+            themeToggle.addEventListener('click', () => {
+                isSiteDarkMode = !isSiteDarkMode;
+                localStorage.setItem('siteDarkMode', isSiteDarkMode);
+                applyTheme();
             });
 
             cartItemsContainer.addEventListener('DOMSubtreeModified', updateTotal);
-
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            }
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                });
-            });
             
             window.addEventListener('scroll', () => {
-                header.classList.toggle('scrolled', window.scrollY > 50);
+                if (header) {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                }
             });
         });
     </script>
