@@ -121,6 +121,16 @@
         .modal-content {
             max-height: 90vh;
         }
+        .cart-modal-container {
+            justify-content: flex-end;
+        }
+        .cart-modal-content {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+        }
+        .cart-modal-container.active .cart-modal-content {
+            transform: translateX(0);
+        }
         .letter-modal-content {
             background-color: #fdf6e4; /* Parchment color */
             color: #333;
@@ -161,16 +171,8 @@
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
                 </button>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none ml-4">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
             </div>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#181818] px-6 pt-2 pb-4">
-            <p class="text-center text-gray-400 py-4">Welcome to PAUTACOS.</p>
-        </div>
     </header>
 
     <!-- Hero Section -->
@@ -190,7 +192,7 @@
     <section id="menu" class="py-24 bg-[#121212]">
         <div class="container mx-auto px-6">
             <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">The <span class="text-brand-red">Artisanal</span> Collection</h2>
-            <div id="menu-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div id="menu-items" class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-12">
                 <!-- Menu items will be dynamically injected here by JavaScript -->
             </div>
             
@@ -262,23 +264,25 @@
     </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div id="cart-modal" class="fixed inset-0 z-50 flex items-start justify-end hidden p-4 md:p-8 cart-modal-container">
         <div class="modal-backdrop absolute inset-0"></div>
-        <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-3xl mx-auto relative p-8 overflow-y-auto">
-             <button id="close-cart-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white">&times;</button>
-             <h2 class="font-playfair text-4xl text-white mb-6">Your Order</h2>
-             <div id="cart-items-container" class="mb-6">
+        <div class="cart-modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-full max-w-md relative h-full flex flex-col">
+             <div class="p-6 flex justify-between items-center border-b border-gray-700">
+                <h2 class="font-playfair text-2xl text-white">Your Order</h2>
+                <button id="close-cart-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+             </div>
+             <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto">
                 <!-- Cart items will be here -->
              </div>
-             <div class="border-t border-gray-700 pt-6">
+             <div class="p-6 border-t border-gray-700">
                 <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
                 <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
                     <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
                     <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <input type="hidden" id="campus-select-input" name="campus">
+                <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
              </div>
-             <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
         </div>
     </div>
 
@@ -321,6 +325,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA ---
             const savoryToppings = ['Caramelized Onions', 'Smoked Suya', 'Yaji Spice Dust', 'Kilishi Jerky', 'Crispy Fried Egg', 'Hard-Boiled Egg', 'Sweet Plantain', 'Smoked Sardine', 'Grilled Shrimp', 'Creamy Mayonnaise', 'Classic Ketchup', 'Smoky BBQ Sauce', 'Grilled Steak', 'Suya Chicken', 'Spiced Beef', 'Akara Fritter', 'Roasted Corn', 'Crisp Lettuce', 'Fresh Spinach', 'Shredded Cabbage', 'Julienned Carrot'];
+            const burgerToppings = [...savoryToppings, 'More Meat'];
             const sweetToppings = ['White Chocolate Curls', 'Dark Chocolate Shavings', 'Milk Chocolate Chunks', 'Snickers Pieces', "M&M's", 'Smarties', 'Crushed Oreos', 'Fresh Banana Blend', 'Spiced Apple Blend'];
             const pancakeToppings = ['Maple Syrup', 'Honey', 'Chocolate Sauce', 'Fresh Berries', 'Whipped Cream'];
             const moiMoiToppings = ['Smoked Sardine', 'Hard-Boiled Egg', 'Corned Beef'];
@@ -349,11 +354,25 @@
                     letter: `<p class="mb-4">A message arrived on a cold wind from the North, a recipe scrawled on birch bark. It spoke of fries, curds, and gravy.</p><p class="mb-4">We honored the tradition, but we could not ignore the call of our own spices. We introduced the warmth of the Sahara to the chill of the Canadian winter.</p><p>The result is a culinary dialogue between two worlds, a comforting dish that tells a story of unexpected friendship.</p>`
                 },
                 pizza: {
-                    name: 'The Suya Fusion Pizza',
+                    name: 'The Italian Special',
                     image: 'pizza.png',
                     prices: { big: 7000, bigger: 10000, biggest: 13000 },
                     toppings: savoryToppings,
                     letter: `<p class="mb-4">An Italian classic, kidnapped and brought to a bustling Lagos market. We showed it our spices, our smoke, our fire.</p><p class="mb-4">It resisted at first, but then it understood. On a bed of hand-stretched dough, Italian tradition and Nigerian audacity dance together. Topped with Suya, Yaji, and our secret sauce, it's a pizza that speaks with a bold new accent.</p>`
+                },
+                 burger: {
+                    name: 'The BBL Burger',
+                    image: 'burger.png',
+                    prices: { big: 6000, bigger: 9000, biggest: 12000 },
+                    toppings: burgerToppings,
+                    letter: `<p class="mb-4">This is not a burger. This is architecture. A tower of flavor, engineered for maximum satisfaction. We flame-grill the patty to seal in the juices, then build upon that foundation with layers of texture and taste. It's a handful of happiness.</p>`
+                },
+                 spaghetti: {
+                    name: 'The Strands de la Foresté',
+                    image: 'spaghetti.png',
+                    prices: { big: 5500, bigger: 8500, biggest: 11000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">A recipe found in a journal from a traveler who got lost in the deep woods of Italy, only to be saved by a Nigerian chef. A fusion of rich, slow-cooked tomato sauce and the smoky, spicy notes of the motherland. Each strand tells a story of survival and delicious discovery.</p>`
                 },
                 shawarma: {
                     name: 'The Midnight Shawarma',
@@ -363,14 +382,14 @@
                     letter: `<p class="mb-4">Learned from a master on a bustling street corner, under a sky of a thousand stars. The secret isn't just the spice, but the patience of the flame.</p><p>Slow-roasted, hand-carved, and wrapped with reverence. This is the taste of a thousand and one late nights, a story of savory satisfaction told in every bite.</p>`
                 },
                 jollof: {
-                    name: 'The Legendary Jollof Bowl',
+                    name: "Chim's Smokey Jollof",
                     image: 'jollofrice.png',
                     prices: { big: 4000, bigger: 6000, biggest: 8000 },
                     toppings: savoryToppings,
                     letter: `<p class="mb-4">This isn't just rice. It's a statement. It's the heart of the party, the soul of every gathering.</p><p>Our recipe is a closely guarded secret, passed down through generations who understood the sacred geometry of smoke, tomato, and spice. Each grain is infused with history and flavor. To taste it is to understand.</p>`
                 },
                 friedrice: {
-                    name: 'The Emerald Fried Rice',
+                    name: 'The Chinese Stir Fry Rice',
                     image: 'friedrice.png',
                     prices: { big: 4000, bigger: 6000, biggest: 8000 },
                     toppings: savoryToppings,
@@ -447,7 +466,7 @@
                     letter: `<p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul.</p>`
                 },
                 cookie: {
-                    name: 'The Perfect Chocolate Chunk Cookie',
+                    name: "Cookie Monster's Stash",
                     image: 'cookie.png',
                     prices: { big: 1500, bigger: 2500, biggest: 3500 },
                     toppings: [],
@@ -461,7 +480,7 @@
                     letter: `<p class="mb-4">An architect and a baker fell in love. This was their creation. A foundation of impossibly light cake and a spire of ethereal frosting. It is a tiny tower of sweetness, a testament to the fact that the best things are built with passion.</p>`
                 },
                 icecream: {
-                    name: "The Artisan's Ice Cream",
+                    name: "Sweet Northern Glacier",
                     image: 'icecream.png',
                     prices: { big: 2500, bigger: 4000, biggest: 5500 },
                     toppings: sweetToppings,
@@ -802,12 +821,14 @@
 
             cartButton.addEventListener('click', () => {
                 cartModal.style.display = 'flex';
+                setTimeout(() => cartModal.classList.add('active'), 10);
                 renderCartItems();
             });
 
             cartModal.addEventListener('click', (e) => {
                 if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
-                    closeModal(cartModal);
+                    cartModal.classList.remove('active');
+                    setTimeout(() => closeModal(cartModal), 300);
                 }
                 if (e.target.matches('.remove-item-button')) {
                     removeFromCart(e.target.dataset.index);
@@ -862,7 +883,9 @@
 
             cartItemsContainer.addEventListener('DOMSubtreeModified', updateTotal);
 
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
