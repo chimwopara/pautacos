@@ -3,238 +3,879 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pau Tacos - Nigerian Tacos & More</title>
+    <title>Pau Tacos - Artisanal Nigerian Fusion Cuisine</title>
+    <meta name="description" content="Experience the pinnacle of Nigerian fusion cuisine at Pau Tacos. Serving artisanal tacos, exotic pepper soup, and more at university campuses in Lagos, Port Harcourt, and Abuja.">
+    <meta name="keywords" content="Nigerian Tacos, Fusion Cuisine, Lagos Food, Abuja Restaurants, Port Harcourt Food, Campus Food, Pau Tacos, Artisanal Tacos, Exotic Pepper Soup">
+    
+    <!-- Social Share Preview -->
+    <meta property="og:title" content="Pau Tacos - Artisanal Nigerian Fusion Cuisine" />
+    <meta property="og:description" content="Discover an elevated dining experience where authentic Nigerian flavors are masterfully fused with global culinary artistry." />
+    <meta property="og:image" content="preview.png" />
+    <meta property="og:url" content="https://pautacos.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="icon" href="logo.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&family=Kalam:wght@400&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
         }
-        .font-teko {
-            font-family: 'Teko', sans-serif;
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
         }
-        .hero-bg-gradient {
-            background: linear-gradient(to right, #4a00e0, #8e2de2);
+        .font-kalam {
+            font-family: 'Kalam', cursive;
+        }
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.8);
+            z-index: -1;
         }
         .menu-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
         }
         .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.2);
+        }
+        .location-card {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1));
+            transition: background 0.3s ease;
+        }
+        .exotics-section-bg {
+            background-color: rgba(69, 10, 10, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(220, 38, 38, 0.3);
         }
         .cta-button {
             transition: all 0.3s ease;
+            background-color: #DC2626; /* Red color */
+            color: #ffffff;
+            letter-spacing: 1px;
         }
         .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+            background-color: #EF4444;
+            box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.3);
+        }
+        .text-brand-red {
+            color: #DC2626;
+        }
+        header.scrolled {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .modal-backdrop {
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            max-height: 90vh;
+        }
+        .letter-modal-content {
+            background-color: #fdf6e4; /* Parchment color */
+            color: #333;
+            border: 10px solid #c8bda8;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .letter-modal-content.dark {
+            background-color: #1a1a1a;
+            color: #E0E0E0;
+            border-color: #333;
+        }
+        .aspect-2-3 {
+            position: relative;
+            width: 100%;
+            padding-bottom: 150%; /* 3 / 2 = 1.5 */
+        }
+        .aspect-2-3 img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header id="header" class="bg-transparent fixed top-0 w-full z-50 transition-colors duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center">
-                <img src="logo.png" alt="Pau Tacos Logo" class="h-14 w-14 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/56x56/8e2de2/ffffff?text=PT';">
-                <span class="font-teko text-4xl tracking-wider font-bold text-purple-700">PAU TACOS</span>
+                <img src="logo.png" alt="Pau Tacos Logo - Artisanal Nigerian Tacos" class="h-20 w-20" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DC2626/ffffff?text=PT';">
             </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="text-gray-600 hover:text-purple-600 font-semibold">Home</a>
-                <a href="#menu" class="text-gray-600 hover:text-purple-600 font-semibold">Menu</a>
-                <a href="#locations" class="text-gray-600 hover:text-purple-600 font-semibold">Locations</a>
-                <a href="#contact" class="text-gray-600 hover:text-purple-600 font-semibold">Contact</a>
+            <div class="flex items-center">
+                 <!-- Cart Icon -->
+                <button id="cart-button" class="relative text-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none ml-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
             </div>
-            <a href="#" class="hidden md:block bg-yellow-400 text-gray-900 font-bold py-3 px-6 rounded-full hover:bg-yellow-500 cta-button">ORDER NOW</a>
-             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
-            <a href="#home" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Home</a>
-            <a href="#menu" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Menu</a>
-            <a href="#locations" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Locations</a>
-            <a href="#contact" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Contact</a>
-            <a href="#" class="mt-2 block bg-yellow-400 text-gray-900 text-center font-bold py-3 px-6 rounded-full hover:bg-yellow-500 cta-button">ORDER NOW</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#181818] px-6 pt-2 pb-4">
+            <p class="text-center text-gray-400 py-4">Welcome to PAUTACOS.</p>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg-gradient text-white">
-        <div class="container mx-auto px-6 py-12 md:py-24 grid md:grid-cols-2 items-center gap-8">
-            <div class="text-center md:text-left">
-                <h1 class="font-teko text-6xl md:text-8xl font-bold mb-4 leading-tight">NAIJA FLAVOR, TACO FEVER.</h1>
-                <p class="text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0">The ultimate fusion of bold Nigerian spices and classic Mexican street food. Your campus cravings just got an upgrade.</p>
-                <a href="#menu" class="bg-yellow-400 text-gray-900 font-bold py-4 px-10 rounded-full hover:bg-yellow-500 cta-button text-lg inline-block">SEE THE MENU</a>
-            </div>
-            <div>
-                <img src="https://placehold.co/800x600/ffffff/4a00e0?text=Awesome+Taco" alt="Delicious Taco" class="rounded-lg shadow-2xl">
-            </div>
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="hero.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container mx-auto px-6 relative">
+            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 leading-tight">A Symphony of Spice & Tradition</h1>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-300">Discover an elevated dining experience where authentic Nigerian flavors are masterfully fused with global culinary artistry.</p>
         </div>
     </section>
 
     <!-- Menu Section -->
-    <section id="menu" class="py-20 bg-white">
+    <section id="menu" class="py-24 bg-[#121212]">
         <div class="container mx-auto px-6">
-            <h2 class="font-teko text-6xl font-bold text-center mb-12">EXPLORE THE <span class="text-purple-600">CRAVE</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                
-                <!-- Menu Items -->
-                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/f8c291/4a4a4a?text=Tacos" alt="Tacos" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Taco</h3>
-                        <ul class="space-y-2 text-gray-600 mb-4">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦500</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦2,500</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦3,500</span></li>
-                            <li class="flex justify-between"><span>Biggest</span> <span>₦4,500</span></li>
-                        </ul>
-                    </div>
-                </div>
-                 <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/e0aaff/4a4a4a?text=Milkshake" alt="Milkshake" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Milkshake</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦300</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦2,000</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦2,800</span></li>
-                            <li class="flex justify-between"><span>Biggest</span> <span>₦3,500</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/b8e994/4a4a4a?text=Burrito" alt="Burrito" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Burrito</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦600</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦3,000</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦4,000</span></li>
-                            <li class="flex justify-between"><span>Biggest</span> <span>₦5,000</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/ff7675/4a4a4a?text=Sushi" alt="Sushi" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Sushi</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦800</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦4,000</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦5,500</span></li>
-                            <li class="flex justify-between"><span>Biggest</span> <span>₦7,000</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/74b9ff/4a4a4a?text=Boba" alt="Boba" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Boba</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦400</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦2,200</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦3,000</span></li>
-                            <li class="flex justify-between"><span>Biggest</span> <span>₦3,800</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/d35400/4a4a4a?text=Poutine" alt="Poutine" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Poutine</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦700</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦3,500</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦4,500</span></li>
-                            <li class="flex justify-between"><span>Biggest</span> <span>₦5,500</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden md:col-span-2 lg:col-span-3">
-                    <img src="https://placehold.co/1200x400/c0392b/ffffff?text=Exotic+Pepper+Soup" alt="Exotic Pepper Soup" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-4">Exotic Pepper Soup</h3>
-                        <ul class="space-y-2 text-gray-600 grid md:grid-cols-2 gap-x-8">
-                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦1,000</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Snake</span> <span>₦8,000</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Crocodile</span> <span>₦12,000</span></li>
-                            <li class="flex justify-between border-b pb-2"><span>Snail</span> <span>₦6,000</span></li>
-                        </ul>
-                    </div>
-                </div>
-
+            <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">The <span class="text-brand-red">Artisanal</span> Collection</h2>
+            <div id="menu-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Menu items will be dynamically injected here by JavaScript -->
+            </div>
+            
+            <!-- Exotics Section -->
+            <div class="mt-24 exotics-section-bg rounded-2xl p-8 md:p-16">
+                 <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-6 text-white">The <span class="text-red-400">Exotics</span></h2>
+                 <p class="text-center text-gray-300 max-w-2xl mx-auto mb-12">A curated selection of rare delicacies, available only on Mystery Days. Inquire within for availability.</p>
+                 <div id="exotics-container" class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <!-- Exotic items will be dynamically injected here -->
+                 </div>
             </div>
         </div>
     </section>
 
     <!-- Locations Section -->
-    <section id="locations" class="bg-gray-100 py-20">
+    <section id="locations" class="bg-[#181818] py-24">
         <div class="container mx-auto px-6">
-            <h2 class="font-teko text-6xl font-bold text-center mb-12">FIND US ON <span class="text-purple-600">CAMPUS</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <h3 class="text-2xl font-bold mb-2">Lagos Campuses</h3>
-                    <p class="text-gray-600">UNILAG, LASU, & YABATECH.</p>
+            <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">Our University <span class="text-brand-red">Locations</span></h2>
+            <div id="locations-container" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Location cards will be dynamically injected here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="bg-black py-20">
+        <div class="container mx-auto px-6">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                    <h2 class="font-playfair text-4xl font-bold text-white mb-4">Receive the Huntsman's Letters</h2>
+                    <p class="text-gray-400 max-w-md">Be the first to know when our Exotic selections arrive. Subscribe for exclusive updates and tales from the wild.</p>
                 </div>
-                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <h3 class="text-2xl font-bold mb-2">Port Harcourt Campuses</h3>
-                    <p class="text-gray-600">UNIPORT & RSU.</p>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-                    <h3 class="text-2xl font-bold mb-2">Abuja Campuses</h3>
-                    <p class="text-gray-600">UNIABUJA & Baze University.</p>
+                <div class="md:w-1/2">
+                     <div class="sender-form-field" data-sender-form-id="b68xOn"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-gray-900 text-white py-16">
+    <footer id="contact" class="bg-black text-white pt-10 pb-20 border-t border-gray-800">
         <div class="container mx-auto px-6 text-center">
             <a href="#" class="flex items-center justify-center mb-6">
-                <img src="logo.png" alt="Pau Tacos Logo" class="h-12 w-12 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/48x48/8e2de2/ffffff?text=PT';">
-                <span class="font-teko text-4xl tracking-wider font-bold">PAU TACOS</span>
+                <img src="logo.png" alt="Pau Tacos Logo" class="h-20 w-20" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DC2626/ffffff?text=PT';">
             </a>
-            <p class="mb-6">pautacos.com</p>
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="text-white hover:text-yellow-400">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+            <p class="mb-8 text-gray-400">pautacos.com</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                 <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
                 </a>
-                <a href="#" class="text-white hover:text-yellow-400">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
                 </a>
-                <a href="#" class="text-white hover:text-yellow-400">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd" /></svg>
+                <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd" /></svg>
                 </a>
             </div>
-            <p class="text-gray-400">&copy; 2024 Pau Tacos. All Rights Reserved.</p>
+            <p class="text-gray-500 text-sm mt-4">A fromsupply Mall brand, In Chim Wopara Enterprises</p>
+            <p class="text-gray-500 text-sm mt-2">&copy; 2025 Pau Tacos. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-2xl mx-auto relative p-8 overflow-y-auto">
+            <!-- Modal content will be injected here -->
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-3xl mx-auto relative p-8 overflow-y-auto">
+             <button id="close-cart-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white">&times;</button>
+             <h2 class="font-playfair text-4xl text-white mb-6">Your Order</h2>
+             <div id="cart-items-container" class="mb-6">
+                <!-- Cart items will be here -->
+             </div>
+             <div class="border-t border-gray-700 pt-6">
+                <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
+                <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
+                    <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <input type="hidden" id="campus-select-input" name="campus">
+             </div>
+             <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
+        </div>
+    </div>
+
+    <!-- Campus Selector Modal -->
+    <div id="campus-modal" class="fixed inset-0 z-[60] items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-xl mx-auto relative p-8 overflow-y-auto">
+            <button id="close-campus-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Select a Campus</h2>
+            <div id="campus-list-container" class="space-y-4">
+                <!-- Campuses will be injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Note/Lure Modal -->
+    <div id="note-modal" class="fixed inset-0 z-[60] items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div id="note-content" class="modal-content letter-modal-content rounded-lg shadow-xl w-11/12 md:max-w-lg mx-auto relative p-8">
+            <!-- Letter content will be injected here -->
+        </div>
+    </div>
+
     <script>
-        // JavaScript for mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+      (function (s, e, n, d, er) {
+        s['Sender'] = er;
+        s[er] = s[er] || function () {
+          (s[er].q = s[er].q || []).push(arguments)
+        }, s[er].l = 1 * new Date();
+        var a = e.createElement(n),
+            m = e.getElementsByTagName(n)[0];
+        a.async = 1;
+        a.src = d;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+      sender('722cce33374677')
+    </script>
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const savoryToppings = ['Caramelized Onions', 'Smoked Suya', 'Yaji Spice Dust', 'Kilishi Jerky', 'Crispy Fried Egg', 'Hard-Boiled Egg', 'Sweet Plantain', 'Smoked Sardine', 'Grilled Shrimp', 'Creamy Mayonnaise', 'Classic Ketchup', 'Smoky BBQ Sauce', 'Grilled Steak', 'Suya Chicken', 'Spiced Beef', 'Akara Fritter', 'Roasted Corn', 'Crisp Lettuce', 'Fresh Spinach', 'Shredded Cabbage', 'Julienned Carrot'];
+            const sweetToppings = ['White Chocolate Curls', 'Dark Chocolate Shavings', 'Milk Chocolate Chunks', 'Snickers Pieces', "M&M's", 'Smarties', 'Crushed Oreos', 'Fresh Banana Blend', 'Spiced Apple Blend'];
+            const pancakeToppings = ['Maple Syrup', 'Honey', 'Chocolate Sauce', 'Fresh Berries', 'Whipped Cream'];
+            const moiMoiToppings = ['Smoked Sardine', 'Hard-Boiled Egg', 'Corned Beef'];
+            const friesToppings = ['Yaji Spice Dust', 'Ketchup', 'Mayonnaise', 'Smoky BBQ Sauce'];
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                mobileMenu.classList.add('hidden'); // Close mobile menu on link click
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            const menuData = {
+                taco: { 
+                    name: 'The Beloved Taco',
+                    image: 'taco.png',
+                    prices: { big: 5000, bigger: 8000, biggest: 10000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">They say you can't improve on a classic. We disagree.</p><p class="mb-4">This recipe was born from a dozen late-night arguments in a Lagos kitchen, a quest to find the perfect balance between the familiar and the divine. Each spice was chosen not just for its taste, but for the story it tells.</p><p>This isn't just a taco. It's a conversation. It's the taste of home, whispered in a new language.</p>`
+                },
+                burrito: { 
+                    name: 'The Obese Burrito',
+                    image: 'burrito.png',
+                    prices: { big: 6000, bigger: 9000, biggest: 12000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">We were told it was impossible. "Too much," they said. "It cannot be contained."</p><p class="mb-4">We saw it as a challenge. This burrito is an architectural marvel, a testament to ambition. We layered flavors like a master weaver, ensuring every single bite is a journey through a landscape of taste.</p><p>It is a feast in your hands, an experience that demands your full attention. We dare you to conquer it.</p>`
+                },
+                poutine: { 
+                    name: 'The Montreal Poutine',
+                    image: 'poutine.png',
+                    prices: { big: 10000, bigger: 16000, biggest: 20000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">A message arrived on a cold wind from the North, a recipe scrawled on birch bark. It spoke of fries, curds, and gravy.</p><p class="mb-4">We honored the tradition, but we could not ignore the call of our own spices. We introduced the warmth of the Sahara to the chill of the Canadian winter.</p><p>The result is a culinary dialogue between two worlds, a comforting dish that tells a story of unexpected friendship.</p>`
+                },
+                pizza: {
+                    name: 'The Suya Fusion Pizza',
+                    image: 'pizza.png',
+                    prices: { big: 7000, bigger: 10000, biggest: 13000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">An Italian classic, kidnapped and brought to a bustling Lagos market. We showed it our spices, our smoke, our fire.</p><p class="mb-4">It resisted at first, but then it understood. On a bed of hand-stretched dough, Italian tradition and Nigerian audacity dance together. Topped with Suya, Yaji, and our secret sauce, it's a pizza that speaks with a bold new accent.</p>`
+                },
+                shawarma: {
+                    name: 'The Midnight Shawarma',
+                    image: 'shawarma.png',
+                    prices: { big: 4500, bigger: 6500, biggest: 8500 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">Learned from a master on a bustling street corner, under a sky of a thousand stars. The secret isn't just the spice, but the patience of the flame.</p><p>Slow-roasted, hand-carved, and wrapped with reverence. This is the taste of a thousand and one late nights, a story of savory satisfaction told in every bite.</p>`
+                },
+                jollof: {
+                    name: 'The Legendary Jollof Bowl',
+                    image: 'jollofrice.png',
+                    prices: { big: 4000, bigger: 6000, biggest: 8000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">This isn't just rice. It's a statement. It's the heart of the party, the soul of every gathering.</p><p>Our recipe is a closely guarded secret, passed down through generations who understood the sacred geometry of smoke, tomato, and spice. Each grain is infused with history and flavor. To taste it is to understand.</p>`
+                },
+                friedrice: {
+                    name: 'The Emerald Fried Rice',
+                    image: 'friedrice.png',
+                    prices: { big: 4000, bigger: 6000, biggest: 8000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">We sought the most vibrant greens, the most crisp vegetables from a hidden market known only to the city's finest chefs.</p><p>This dish is a celebration of freshness, a festival of color and crunch. Each ingredient is flash-fried in a searing wok to lock in its essence, creating a light yet deeply satisfying experience.</p>`
+                },
+                pancakes: {
+                    name: 'The Sunrise Pancake Stack',
+                    image: 'pancake.png',
+                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
+                    toppings: pancakeToppings,
+                    letter: `<p class="mb-4">Found in a grandmother's faded notebook, the recipe simply said: "Patience, good butter, and a happy heart."</p><p>We follow it to the letter. These aren't just mixed, they're coaxed. Rested, then griddled until they are impossibly fluffy and golden. They are comfort, pure and simple.</p>`
+                },
+                moimoi: {
+                    name: 'The Velvet Moi Moi',
+                    image: 'moimoi.png',
+                    prices: { big: 2500, bigger: 4000, biggest: 5500 },
+                    toppings: moiMoiToppings,
+                    letter: `<p class="mb-4">The art of Moi Moi is the art of transformation. Taking the humble bean and turning it into something ethereal and smooth.</p><p>Ours is steamed slowly, patiently, in seasoned leaves that impart a subtle, earthy aroma. It is a delicate process that results in a savory pudding of unparalleled texture. A true taste of Nigerian culinary grace.</p>`
+                },
+                fries: {
+                    name: 'The Perfect Potato Fries',
+                    image: 'fries.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: friesToppings,
+                    letter: `<p class="mb-4">The quest for the perfect fry is a noble one. It led us to fields where the soil is rich and the potatoes are proud.</p><p>We cut them by hand, blanch them twice for that fluffy interior and shatteringly crisp exterior. A sprinkle of sea salt is all they need to sing. Simple perfection is the ultimate luxury.</p>`
+                },
+                milkshake: { 
+                    name: 'The Perfectly Creamed Milkshake',
+                    image: 'milkshake.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">The secret is in the churn. Not too fast, not too slow. A rhythm passed down from a forgotten artisan who believed that texture was a form of magic.</p><p>We use only the purest cream and the most decadent inclusions, blending them until they reach a state of liquid silk. It is more than a drink; it is a moment of pure, unadulterated bliss.</p>`
+                },
+                boba: { 
+                    name: 'The Taiwanese Original Boba',
+                    image: 'boba.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">From a bustling night market in Taipei, a recipe was carried across oceans. It wasn't written down, but remembered—a precise balance of tea, milk, and the perfect 'Q' of the pearl.</p><p>We brew our tea in small, dedicated batches, ensuring every cup carries the authentic, fragrant soul of its origin. The pearls are prepared hourly, their texture a testament to our dedication.</p>`
+                },
+                lassi: { 
+                    name: 'The Famous Indian Yoghurt',
+                    image: 'lassi.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">A gift from the kitchens of Rajasthan, where this drink is more than refreshment—it's a remedy for the desert heat, a balm for the soul.</p><p>We use a special culture of yoghurt, churned by hand until it reaches a state of impossible smoothness. It is then kissed with fruit and spice, a perfect harmony of tart and sweet.</p>`
+                },
+                coleslaw: {
+                    name: 'The Classic Creamy Slaw',
+                    image: 'coleslaw.png',
+                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
+                    toppings: [],
+                    letter: `<p class="mb-4">A cherished family recipe for sunny days and big gatherings. The secret isn't in what you add, but what you don't.</p><p>Crisp, fresh vegetables, a dressing that's both creamy and light, with just a hint of tang. It's the perfect, cooling counterpoint to a feast of spice. A moment of pure, crunchy refreshment.</p>`
+                },
+                macaronisalad: {
+                    name: 'The Picnic Macaroni Salad',
+                    image: 'macsalad.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: [],
+                    letter: `<p class="mb-4">This is the taste of laughter and shared blankets under a shady tree. A simple pleasure, elevated to an art form.</p><p>Tender pasta, crisp vegetables, and a dressing that sings with a sweet, tangy harmony. It's comfort food that reminds you of the best of days.</p>`
+                },
+                chinchin: {
+                    name: "The Ancestor's Chin Chin",
+                    image: 'chinchin.png',
+                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
+                    toppings: [],
+                    letter: `<p class="mb-4">A recipe whispered by the harmattan wind, a thousand tiny, crunchy pieces of joy. Each one is a memory of celebration, fried to a perfect golden crisp. It's the sound of happiness in a bowl.</p>`
+                },
+                coffee: {
+                    name: 'The Jos Plateau Coffee',
+                    image: 'coffee.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul.</p>`
+                },
+                cookie: {
+                    name: 'The Perfect Chocolate Chunk Cookie',
+                    image: 'cookie.png',
+                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
+                    toppings: [],
+                    letter: `<p class="mb-4">We embarked on a quest for the perfect cookie. It required melting Belgian chocolate under a full moon and using butter churned only to the sound of Afrobeats. The result is a cookie with crisp edges, a gooey center, and a story in every chunk.</p>`
+                },
+                cupcake: {
+                    name: 'The Cloud-Kissed Cupcake',
+                    image: 'cupcake.png',
+                    prices: { big: 2000, bigger: 3500, biggest: 5000 },
+                    toppings: [],
+                    letter: `<p class="mb-4">An architect and a baker fell in love. This was their creation. A foundation of impossibly light cake and a spire of ethereal frosting. It is a tiny tower of sweetness, a testament to the fact that the best things are built with passion.</p>`
+                },
+                icecream: {
+                    name: "The Artisan's Ice Cream",
+                    image: 'icecream.png',
+                    prices: { big: 2500, bigger: 4000, biggest: 5500 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients.</p>`
+                }
+            };
+            
+            const exoticsData = {
+                peppersoup: {
+                    name: 'Exotic Pepper Soup',
+                    description: 'Featuring rare ingredients like Snake, Crocodile, and Snail. Price upon request.',
+                    image: 'peppersoup.png',
+                    alt: 'Exotic Pepper Soup Selection',
+                    letter: `
+                        <p class="mb-4">To my trusted contact,</p>
+                        <p class="mb-4">The river hunt was a success. The ancient specimen we sought, the one they call the "River Guardian," put up a legendary fight, but our efforts paid off. Its primal heat will make for a pepper soup of unparalleled potency.</p>
+                        <p class="mb-4">We're moving under the cover of night, the cargo is secure. The whispers of the mangrove are behind us. Expect our arrival soon, but you know how this goes... only when the stars align.</p>
+                        <p>Prepare the sacred spices. This feast will be one for the ages.</p>
+                        <p class="text-right mt-6">- The Huntsman</p>`
+                },
+                sushi: {
+                    name: 'Fusion Sushi',
+                    description: 'A unique blend of Japanese technique and Nigerian flavors. Price upon request.',
+                    image: 'sushi.png',
+                    alt: 'Fusion Sushi',
+                    letter: `
+                        <p class="mb-4">My Dearest Associate,</p>
+                        <p class="mb-4">The old master in Kyoto finally relented. He has shared the secret techniques, the precise art of the blade and rice. I have paired his ancient wisdom with the fiery spirit of our local spice routes.</p>
+                        <p class="mb-4">The result is... something new. A pact between two worlds on a single plate. I am bringing back a very limited quantity of the key ingredients. This cannot be replicated easily.</p>
+                        <p>Tell our patrons to prepare their palates for a journey they have never experienced. The consignment is small and will not last.</p>
+                        <p class="text-right mt-6">- The Voyager</p>`
+                }
+            };
+
+            const locationsData = {
+                lagos: {
+                    name: 'Lagos',
+                    image: 'lagos.png',
+                    universities: ['University of Lagos (UNILAG)', 'Lagos State University (LASU)', 'Yaba College of Technology (YABATECH)', 'Pan-Atlantic University (PAU)', 'Caleb University', 'National Open University (Lagos)', 'Federal College of Education (Akoka)'],
+                    letter: `
+                        <p class="mb-4">My journey began in the concrete jungle, a city that never sleeps. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Lagos, its energy a vibrant pulse. I found willing palates at LASU and YABATECH, their hunger for new flavors insatiable. The scholars at Pan-Atlantic University, Caleb, the National Open University, and the Federal College of Education all welcomed the craft. The city is vast, a sprawling map of taste, and I will continue mapping it to bring this magic to more people.</p>
+                        <p class="text-right mt-6">- The Cartographer</p>`
+                },
+                portharcourt: {
+                    name: 'Port Harcourt',
+                    image: 'portharcourt.png',
+                    universities: ['University of Port Harcourt (UNIPORT)', 'Rivers State University (RSU)', 'Ignatius Ajuru University of Education'],
+                    letter: `
+                        <p class="mb-4">The Garden City called. I followed the rivers inland, carrying my secrets. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Port Harcourt, where the air is thick with knowledge and humidity. The bright minds at Rivers State University and the Ignatius Ajuru University of Education proved to be discerning connoisseurs. This city's appetite is strong, and my work here is only just beginning. I will continue mapping this vibrant place to bring the magic to more people.</p>
+                        <p class="text-right mt-6">- The Cartographer</p>`
+                },
+                abuja: {
+                    name: 'Abuja',
+                    image: 'abuja.png',
+                    universities: ['University of Abuja (UNIABUJA)', 'Baze University', 'Nile University of Nigeria', 'African University of Science & Tech', 'National Open University (Abuja)'],
+                    letter: `
+                        <p class="mb-4">I arrived in the nation's capital, a city of wide roads and grand ambitions. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Abuja, a place of power and potential. The future leaders at Baze University, Nile University, the African University of Science & Tech, and the National Open University all shared in the experience. This city is a center of influence, and its influence will soon carry the taste of our craft far and wide. I will continue mapping its boulevards to bring the magic to more people.</p>
+                        <p class="text-right mt-6">- The Cartographer</p>`
+                }
+            };
+            
+            const toppingPrice = 1000;
+            let cart = [];
+            let isNoteDarkMode = localStorage.getItem('noteDarkMode') === 'true';
+
+            // --- DOM ELEMENTS ---
+            const menuContainer = document.getElementById('menu-items');
+            const exoticsContainer = document.getElementById('exotics-container');
+            const locationsContainer = document.getElementById('locations-container');
+            const orderModal = document.getElementById('order-modal');
+            const cartModal = document.getElementById('cart-modal');
+            const campusModal = document.getElementById('campus-modal');
+            const noteModal = document.getElementById('note-modal');
+            const noteContent = document.getElementById('note-content');
+            const cartButton = document.getElementById('cart-button');
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const campusSelectorTrigger = document.getElementById('campus-selector-trigger');
+            const selectedCampusText = document.getElementById('selected-campus-text');
+            const campusSelectInput = document.getElementById('campus-select-input');
+            const campusListContainer = document.getElementById('campus-list-container');
+            const buyNowButton = document.getElementById('buy-now-button');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const header = document.getElementById('header');
+
+            // --- FUNCTIONS ---
+
+            function isTouchDevice() {
+                return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            }
+
+            function renderMenu() {
+                menuContainer.innerHTML = '';
+                for (const key in menuData) {
+                    const item = menuData[key];
+                    const card = document.createElement('div');
+                    card.className = 'menu-card rounded-lg shadow-lg overflow-hidden';
+                    card.dataset.item = key;
+                    card.innerHTML = `
+                        <div class="aspect-2-3">
+                           <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://placehold.co/1024x1536/1a1a1a/333333?text=Image+Coming+Soon';">
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h3 class="text-2xl font-bold text-white text-center flex-grow flex items-center justify-center">${item.name}</h3>
+                        </div>
+                    `;
+                    menuContainer.appendChild(card);
+                }
+            }
+
+            function renderExotics() {
+                exoticsContainer.innerHTML = '';
+                for (const key in exoticsData) {
+                    const item = exoticsData[key];
+                    const card = document.createElement('div');
+                    card.className = 'menu-card exotic-card rounded-lg shadow-lg overflow-hidden';
+                    card.dataset.exoticKey = key;
+                    card.innerHTML = `
+                        <div class="aspect-2-3">
+                           <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://placehold.co/1024x1536/1a1a1a/333333?text=Image+Coming+Soon';">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-2 text-white">${item.name}</h3>
+                            <p class="text-gray-300">${item.description}</p>
+                        </div>
+                    `;
+                    exoticsContainer.appendChild(card);
+                }
+            }
+            
+            function renderLocations() {
+                locationsContainer.innerHTML = '';
+                for (const key in locationsData) {
+                    const item = locationsData[key];
+                    const card = document.createElement('div');
+                    card.className = 'menu-card location-card h-80 rounded-lg shadow-lg overflow-hidden';
+                    card.style.backgroundImage = `url('${item.image}')`;
+                    card.dataset.locationKey = key;
+                    card.innerHTML = `
+                        <div class="p-8 h-full flex flex-col justify-end relative z-10">
+                            <h3 class="text-3xl font-bold text-white text-center">${item.name}</h3>
+                        </div>
+                    `;
+                    locationsContainer.appendChild(card);
+                }
+            }
+
+            function applyNoteTheme() {
+                const noteToggle = document.getElementById('note-theme-toggle');
+                if (isNoteDarkMode) {
+                    noteContent.classList.add('dark');
+                    if(noteToggle) noteToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`; // Sun icon
+                } else {
+                    noteContent.classList.remove('dark');
+                    if(noteToggle) noteToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`; // Moon icon
+                }
+            }
+
+            function openNoteModal(itemKey, type = 'menu') {
+                const item = type === 'menu' ? menuData[itemKey] : (type === 'exotic' ? exoticsData[itemKey] : locationsData[itemKey]);
+                const experienceText = isTouchDevice() ? 'Tap to' : 'Click to';
+                let buttonHtml = '';
+
+                if (type === 'menu') {
+                    buttonHtml = `<button id="experience-now-button" class="cta-button w-full font-bold py-3 mt-6 rounded-full" data-item="${itemKey}">${experienceText} Experience</button>`;
+                } else if (type === 'exotic') {
+                    buttonHtml = `<a href="#newsletter" id="update-letter-button" class="cta-button block w-full text-center font-bold py-3 mt-6 rounded-full">${experienceText} Receive an Update Letter</a>`;
+                }
+
+                noteContent.innerHTML = `
+                    <div class="absolute top-2 right-4 flex items-center space-x-2">
+                         <button id="note-theme-toggle" class="text-gray-500 hover:text-black"></button>
+                         <button id="close-note-modal" class="text-gray-500 hover:text-black text-3xl">&times;</button>
+                    </div>
+                    <div class="font-kalam text-lg leading-relaxed mt-8">${item.letter}</div>
+                    ${buttonHtml}
+                `;
+                noteModal.style.display = 'flex';
+                applyNoteTheme();
+            }
+
+            function openOrderModal(itemKey) {
+                const item = menuData[itemKey];
+                const modalContent = orderModal.querySelector('.modal-content');
+                
+                let toppingsHtml = item.toppings.length > 0 ? item.toppings.map(topping => `
+                    <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-lg">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600 bg-gray-800 border-gray-600 rounded focus:ring-red-500" value="${topping}">
+                        <span class="text-gray-300">${topping}</span>
+                    </label>
+                `).join('') : '<p class="text-gray-400 col-span-2 md:col-span-3">This item is perfect as it is.</p>';
+
+                modalContent.innerHTML = `
+                    <button id="close-order-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+                    <h2 class="font-playfair text-4xl text-white mb-6">Customize ${item.name}</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-bold text-xl mb-3 text-brand-red">Select Size</h3>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="size" value="big" class="peer sr-only" checked />
+                                <span class="block text-center p-4 rounded-lg border border-gray-600 hover:border-red-500 peer-checked:bg-red-600 peer-checked:text-white peer-checked:border-red-600">Big</span>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="size" value="bigger" class="peer sr-only" />
+                                <span class="block text-center p-4 rounded-lg border border-gray-600 hover:border-red-500 peer-checked:bg-red-600 peer-checked:text-white peer-checked:border-red-600">Bigger</span>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="size" value="biggest" class="peer sr-only" />
+                                <span class="block text-center p-4 rounded-lg border border-gray-600 hover:border-red-500 peer-checked:bg-red-600 peer-checked:text-white peer-checked:border-red-600">Biggest</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl mb-3 text-brand-red">Select Additions</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">${toppingsHtml}</div>
+                    </div>
+
+                    <button id="add-to-cart-button" class="cta-button w-full font-bold py-4 mt-8 rounded-full text-lg" data-item="${itemKey}">ADD TO CART</button>
+                `;
+                orderModal.style.display = 'flex';
+            }
+
+            function closeModal(modal) {
+                modal.style.display = 'none';
+            }
+
+            function addToCart(itemKey) {
+                const size = document.querySelector('input[name="size"]:checked').value;
+                const selectedToppings = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+                
+                cart.push({
+                    id: Date.now(),
+                    key: itemKey,
+                    name: menuData[itemKey].name,
+                    size: size,
+                    toppings: selectedToppings
                 });
+
+                updateCart();
+                closeModal(orderModal);
+            }
+
+            function updateCart() {
+                cartCount.textContent = cart.length;
+                renderCartItems();
+            }
+
+            function renderCartItems() {
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center">Your cart is empty.</p>`;
+                    buyNowButton.textContent = 'BUY NOW';
+                    buyNowButton.disabled = true;
+                    return;
+                }
+
+                cartItemsContainer.innerHTML = cart.map((item, index) => `
+                    <div class="flex justify-between items-start py-4 border-b border-gray-700">
+                        <div>
+                            <h4 class="font-bold text-lg text-white">${item.name} <span class="text-sm capitalize text-gray-400">(${item.size})</span></h4>
+                            <p class="text-gray-500 text-sm">${item.toppings.join(', ') || 'No extra additions'}</p>
+                        </div>
+                        <button class="text-gray-500 hover:text-red-500 remove-item-button" data-index="${index}">&times;</button>
+                    </div>
+                `).join('');
+                
+                buyNowButton.disabled = false;
+                updateTotal();
+            }
+            
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCart();
+            }
+
+            function updateTotal() {
+                let total = 0;
+                cart.forEach(item => {
+                    total += menuData[item.key].prices[item.size];
+                    total += item.toppings.length * toppingPrice;
+                });
+                buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
+            }
+
+            function renderCampusList() {
+                campusListContainer.innerHTML = '';
+                for (const key in locationsData) {
+                    const location = locationsData[key];
+                    const cityHeader = document.createElement('h3');
+                    cityHeader.className = 'font-bold text-xl text-brand-red mt-4 first:mt-0';
+                    cityHeader.textContent = location.name;
+                    campusListContainer.appendChild(cityHeader);
+
+                    const cityList = document.createElement('div');
+                    cityList.className = 'grid grid-cols-1 gap-2 mt-2';
+                    
+                    location.universities.forEach(campus => {
+                        const campusItem = document.createElement('div');
+                        campusItem.className = 'p-3 rounded-lg hover:bg-[#2a2a2a] cursor-pointer text-gray-300';
+                        campusItem.textContent = campus;
+                        campusItem.dataset.campus = campus;
+                        cityList.appendChild(campusItem);
+                    });
+                    campusListContainer.appendChild(cityList);
+                }
+            }
+            
+            // --- EVENT LISTENERS ---
+            renderMenu();
+            renderExotics();
+            renderLocations();
+            renderCampusList();
+
+            menuContainer.addEventListener('click', (e) => {
+                const card = e.target.closest('.menu-card');
+                if (card) {
+                    openNoteModal(card.dataset.item, 'menu');
+                }
+            });
+            
+            locationsContainer.addEventListener('click', (e) => {
+                const card = e.target.closest('.location-card');
+                if (card) {
+                    openNoteModal(card.dataset.locationKey, 'location');
+                }
+            });
+
+            orderModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-order-modal') {
+                    closeModal(orderModal);
+                }
+                if (e.target.id === 'add-to-cart-button') {
+                    addToCart(e.target.dataset.item);
+                }
+            });
+
+            cartButton.addEventListener('click', () => {
+                cartModal.style.display = 'flex';
+                renderCartItems();
+            });
+
+            cartModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
+                    closeModal(cartModal);
+                }
+                if (e.target.matches('.remove-item-button')) {
+                    removeFromCart(e.target.dataset.index);
+                }
+            });
+            
+            campusSelectorTrigger.addEventListener('click', () => {
+                campusModal.style.display = 'flex';
+            });
+
+            campusModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-campus-modal') {
+                    closeModal(campusModal);
+                }
+            });
+
+            campusListContainer.addEventListener('click', (e) => {
+                if (e.target.dataset.campus) {
+                    const campusName = e.target.dataset.campus;
+                    selectedCampusText.textContent = campusName;
+                    selectedCampusText.classList.remove('text-gray-400');
+                    selectedCampusText.classList.add('text-white');
+                    campusSelectInput.value = campusName;
+                    closeModal(campusModal);
+                }
+            });
+
+            exoticsContainer.addEventListener('click', (e) => {
+                const card = e.target.closest('.exotic-card');
+                if (card) {
+                    openNoteModal(card.dataset.exoticKey, 'exotic');
+                }
+            });
+            
+            noteModal.addEventListener('click', (e) => {
+                 if (e.target.matches('.modal-backdrop') || e.target.id === 'close-note-modal') {
+                    closeModal(noteModal);
+                }
+                if(e.target.id === 'experience-now-button') {
+                    closeModal(noteModal);
+                    openOrderModal(e.target.dataset.item);
+                }
+                if(e.target.id === 'update-letter-button') {
+                    closeModal(noteModal);
+                }
+                if(e.target.closest('#note-theme-toggle')) {
+                    isNoteDarkMode = !isNoteDarkMode;
+                    localStorage.setItem('noteDarkMode', isNoteDarkMode);
+                    applyNoteTheme();
+                }
+            });
+
+            cartItemsContainer.addEventListener('DOMSubtreeModified', updateTotal);
+
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
             });
         });
     </script>
