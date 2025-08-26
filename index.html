@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pau Tacos - Nigerian Tacos & More</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-teko {
+            font-family: 'Teko', sans-serif;
+        }
+        .hero-bg-gradient {
+            background: linear-gradient(to right, #4a00e0, #8e2de2);
+        }
+        .menu-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="logo.png" alt="Pau Tacos Logo" class="h-14 w-14 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/56x56/8e2de2/ffffff?text=PT';">
+                <span class="font-teko text-4xl tracking-wider font-bold text-purple-700">PAU TACOS</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-600 hover:text-purple-600 font-semibold">Home</a>
+                <a href="#menu" class="text-gray-600 hover:text-purple-600 font-semibold">Menu</a>
+                <a href="#locations" class="text-gray-600 hover:text-purple-600 font-semibold">Locations</a>
+                <a href="#contact" class="text-gray-600 hover:text-purple-600 font-semibold">Contact</a>
+            </div>
+            <a href="#" class="hidden md:block bg-yellow-400 text-gray-900 font-bold py-3 px-6 rounded-full hover:bg-yellow-500 cta-button">ORDER NOW</a>
+             <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#home" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Home</a>
+            <a href="#menu" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Menu</a>
+            <a href="#locations" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Locations</a>
+            <a href="#contact" class="block text-gray-600 hover:text-purple-600 font-semibold py-2">Contact</a>
+            <a href="#" class="mt-2 block bg-yellow-400 text-gray-900 text-center font-bold py-3 px-6 rounded-full hover:bg-yellow-500 cta-button">ORDER NOW</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg-gradient text-white">
+        <div class="container mx-auto px-6 py-12 md:py-24 grid md:grid-cols-2 items-center gap-8">
+            <div class="text-center md:text-left">
+                <h1 class="font-teko text-6xl md:text-8xl font-bold mb-4 leading-tight">NAIJA FLAVOR, TACO FEVER.</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-lg mx-auto md:mx-0">The ultimate fusion of bold Nigerian spices and classic Mexican street food. Your campus cravings just got an upgrade.</p>
+                <a href="#menu" class="bg-yellow-400 text-gray-900 font-bold py-4 px-10 rounded-full hover:bg-yellow-500 cta-button text-lg inline-block">SEE THE MENU</a>
+            </div>
+            <div>
+                <img src="https://placehold.co/800x600/ffffff/4a00e0?text=Awesome+Taco" alt="Delicious Taco" class="rounded-lg shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="font-teko text-6xl font-bold text-center mb-12">EXPLORE THE <span class="text-purple-600">CRAVE</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Menu Items -->
+                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/f8c291/4a4a4a?text=Tacos" alt="Tacos" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Taco</h3>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦500</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦2,500</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦3,500</span></li>
+                            <li class="flex justify-between"><span>Biggest</span> <span>₦4,500</span></li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/e0aaff/4a4a4a?text=Milkshake" alt="Milkshake" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Milkshake</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦300</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦2,000</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦2,800</span></li>
+                            <li class="flex justify-between"><span>Biggest</span> <span>₦3,500</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/b8e994/4a4a4a?text=Burrito" alt="Burrito" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Burrito</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦600</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦3,000</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦4,000</span></li>
+                            <li class="flex justify-between"><span>Biggest</span> <span>₦5,000</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/ff7675/4a4a4a?text=Sushi" alt="Sushi" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Sushi</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦800</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦4,000</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦5,500</span></li>
+                            <li class="flex justify-between"><span>Biggest</span> <span>₦7,000</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/74b9ff/4a4a4a?text=Boba" alt="Boba" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Boba</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦400</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦2,200</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦3,000</span></li>
+                            <li class="flex justify-between"><span>Biggest</span> <span>₦3,800</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/d35400/4a4a4a?text=Poutine" alt="Poutine" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Poutine</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦700</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Big</span> <span>₦3,500</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Bigger</span> <span>₦4,500</span></li>
+                            <li class="flex justify-between"><span>Biggest</span> <span>₦5,500</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-card bg-gray-50 rounded-xl shadow-lg overflow-hidden md:col-span-2 lg:col-span-3">
+                    <img src="https://placehold.co/1200x400/c0392b/ffffff?text=Exotic+Pepper+Soup" alt="Exotic Pepper Soup" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-4">Exotic Pepper Soup</h3>
+                        <ul class="space-y-2 text-gray-600 grid md:grid-cols-2 gap-x-8">
+                            <li class="flex justify-between border-b pb-2"><span>Toppings</span> <span>₦1,000</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Snake</span> <span>₦8,000</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Crocodile</span> <span>₦12,000</span></li>
+                            <li class="flex justify-between border-b pb-2"><span>Snail</span> <span>₦6,000</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="bg-gray-100 py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="font-teko text-6xl font-bold text-center mb-12">FIND US ON <span class="text-purple-600">CAMPUS</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-2xl font-bold mb-2">Lagos Campuses</h3>
+                    <p class="text-gray-600">UNILAG, LASU, & YABATECH.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-2xl font-bold mb-2">Port Harcourt Campuses</h3>
+                    <p class="text-gray-600">UNIPORT & RSU.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-2xl font-bold mb-2">Abuja Campuses</h3>
+                    <p class="text-gray-600">UNIABUJA & Baze University.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <a href="#" class="flex items-center justify-center mb-6">
+                <img src="logo.png" alt="Pau Tacos Logo" class="h-12 w-12 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/48x48/8e2de2/ffffff?text=PT';">
+                <span class="font-teko text-4xl tracking-wider font-bold">PAU TACOS</span>
+            </a>
+            <p class="mb-6">pautacos.com</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-white hover:text-yellow-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 Pau Tacos. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                mobileMenu.classList.add('hidden'); // Close mobile menu on link click
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
