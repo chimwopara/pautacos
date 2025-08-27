@@ -229,6 +229,36 @@ body.modal-open {
     overflow: hidden;
 }
 
+/* Scroll delegation from delivery section to cart items */
+.cart-modal-content {
+    overflow: hidden;
+}
+
+#cart-items-container {
+    overflow-y: auto;
+    max-height: none;
+}
+
+/* On mobile, make delivery section delegate scroll to cart items */
+@media (max-width: 768px) {
+    .cart-modal-content > div:last-child {
+        overflow: hidden;
+    }
+}
+/* Cart item hover effect only */
+.cart-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cart-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.light-mode .cart-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 /* Light mode section backgrounds */
 body.light-mode #menu {
     background-color: #ffffff;
@@ -499,6 +529,33 @@ body.light-mode #draft-email-btn:hover {
     color: #ffffff;
 }
 
+/* Light mode campus selector styles */
+body.light-mode #campus-list-container h3 {
+    color: #DC2626 !important; /* Keep city headers red */
+}
+
+body.light-mode #campus-list-container .text-gray-300 {
+    color: #333 !important;
+}
+
+body.light-mode #campus-list-container div[data-campus] {
+    color: #333 !important;
+}
+
+body.light-mode #campus-list-container div[data-campus]:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: #000 !important;
+}
+
+body.light-mode #campus-modal .modal-content {
+    background-color: #ffffff;
+    color: #333;
+}
+
+body.light-mode #campus-modal .modal-content h2 {
+    color: #000 !important;
+}
+
     </style>
 </head>
 <body>
@@ -637,39 +694,40 @@ body.light-mode #draft-email-btn:hover {
     <div id="cart-modal" class="fixed inset-0 z-50 flex items-start justify-end hidden p-4 md:p-8 cart-modal-container">
         <div class="modal-backdrop absolute inset-0"></div>
         <div class="cart-modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-full max-w-md relative h-full flex flex-col">
-             <div class="p-6 flex justify-between items-center border-b border-gray-700">
-                <h2 class="font-playfair text-2xl text-white">Your Box</h2>
-                <button id="close-cart-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
-             </div>
-             <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto">
-                <!-- Cart items will be here -->
-             </div>
-             <div class="p-6 border-t border-gray-700">
-                <div class="space-y-4">
-                    <div>
-                        <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
-                        <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
-                    </div>
-                    <div>
-                        <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
-                        <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
-                    </div>
-                    <div>
-                        <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
-                        <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
-                            <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                        <input type="hidden" id="campus-select-input" name="campus">
-                    </div>
-                    <div>
-                        <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
-                        <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
-                    </div>
+     <div class="p-6 flex justify-between items-center border-b border-gray-700">
+        <h2 class="font-playfair text-2xl text-white">Your Box</h2>
+        <button id="close-cart-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+     </div>
+     <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto">
+        <!-- Cart items will be here -->
+     </div>
+     <div class="p-6 border-t border-gray-700">
+        <div class="space-y-4">
+            <div>
+                <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
+                <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
+            </div>
+            <div>
+                <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
+                <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
+            </div>
+            <div>
+                <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
+                <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
+                    <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-                <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
-             </div>
+                <input type="hidden" id="campus-select-input" name="campus">
+            </div>
+            <div>
+                <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
+                <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
+            </div>
         </div>
+        <button id="clear-cart-button" class="w-full font-medium py-2 mt-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">Clear All Items</button>
+        <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
+     </div>
+</div>
     </div>
 
     <!-- Campus Selector Modal -->
@@ -933,7 +991,7 @@ body.light-mode #draft-email-btn:hover {
                         <p class="mb-4">The river hunt was a success. The ancient specimen we sought, the one they call the "River Guardian," put up a legendary fight, but our efforts paid off. Its primal heat will make for a pepper soup of unparalleled potency.</p>
                         <p class="mb-4">We're moving under the cover of night, the cargo is secure. The whispers of the mangrove are behind us. Expect our arrival soon, but you know how this goes... only when the stars align.</p>
                         <p>Prepare the sacred spices. This feast will be one for the ages.</p>
-                        <p class="text-right mt-6">- The Huntsman</p>{{SIGNATURE}}`
+                        <p class="text-right mt-6">- The Huntsman</p>`
                 },
                 sushi: {
                     name: 'Fusion Sushi',
@@ -945,7 +1003,7 @@ body.light-mode #draft-email-btn:hover {
                         <p class="mb-4">The old master in Kyoto finally relented. He has shared the secret techniques, the precise art of the blade and rice. I have paired his ancient wisdom with the fiery spirit of our local spice routes.</p>
                         <p class="mb-4">The result is... something new. A pact between two worlds on a single plate. I am bringing back a very limited quantity of the key ingredients. This cannot be replicated easily.</p>
                         <p>Tell our patrons to prepare their palates for a journey they have never experienced. The consignment is small and will not last.</p>
-                        <p class="text-right mt-6">- The Voyager</p>{{SIGNATURE}}`
+                        <p class="text-right mt-6">- The Voyager</p>`
                 }
             };
 
@@ -1163,7 +1221,7 @@ initializeDraftEmailModal();
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">${toppingsHtml}</div>
                     </div>
 
-                    <button id="add-to-cart-button" class="cta-button w-full font-bold py-4 mt-8 rounded-full text-lg" data-item="${itemKey}">Add to Box</button>
+                    <button id="add-to-cart-button" class="cta-button w-full font-bold py-4 mt-8 rounded-full text-lg" data-item="${itemKey}">${typeof window.editingCartIndex !== 'undefined' ? 'Update Box' : 'Add to Box'}</button>
                 `;
                 orderModal.style.display = 'flex';
                 body.classList.add('modal-open');
@@ -1175,52 +1233,178 @@ initializeDraftEmailModal();
             }
 
             function addToCart(itemKey) {
-                const size = document.querySelector('input[name="size"]:checked').value;
-                const selectedToppings = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-                
-                cart.push({
-                    id: Date.now(),
-                    key: itemKey,
-                    name: menuData[itemKey].name,
-                    size: size,
-                    toppings: selectedToppings
-                });
+    const size = document.querySelector('input[name="size"]:checked').value;
+    const selectedToppings = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+    
+    const newItem = {
+        id: Date.now(),
+        key: itemKey,
+        name: menuData[itemKey].name,
+        size: size,
+        toppings: selectedToppings
+    };
+    
+    const wasEditing = typeof window.editingCartIndex !== 'undefined';
+    
+    // Check if we're editing an existing item
+    if (wasEditing) {
+        cart[window.editingCartIndex] = newItem;
+        delete window.editingCartIndex;
+    } else {
+        cart.push(newItem);
+    }
 
-                updateCart();
-                closeModal(orderModal);
-            }
+    updateCart();
+    closeModal(orderModal);
+    
+    // If we were editing, reopen the cart
+    if (wasEditing) {
+        setTimeout(() => {
+            cartModal.style.display = 'flex';
+            setTimeout(() => cartModal.classList.add('active'), 10);
+            renderCartItems();
+            loadDeliveryInfo();
+            body.classList.add('modal-open');
+        }, 300);
+    }
+}
 
             function updateCart() {
-                cartCount.textContent = cart.length;
-                renderCartItems();
-            }
+    cartCount.textContent = cart.length;
+    renderCartItems();
+    saveDeliveryInfo();
+    saveCart(); // Save cart to localStorage
+}
 
-            function renderCartItems() {
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center">Your cart is empty.</p>`;
-                    buyNowButton.textContent = 'BUY NOW';
-                    buyNowButton.disabled = true;
-                    return;
-                }
+   function renderCartItems() {
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center">Your cart is empty.</p>`;
+        buyNowButton.textContent = 'BUY NOW';
+        buyNowButton.disabled = true;
+        return;
+    }
 
-                cartItemsContainer.innerHTML = cart.map((item, index) => `
-                    <div class="flex justify-between items-start py-4 border-b border-gray-700">
-                        <div>
-                            <h4 class="font-bold text-lg text-white">${item.name} <span class="text-sm capitalize text-gray-400">(${item.size})</span></h4>
-                            <p class="text-gray-500 text-sm">${item.toppings.join(', ') || 'No extra additions'}</p>
-                        </div>
-                        <button class="text-gray-500 hover:text-red-500 remove-item-button" data-index="${index}">&times;</button>
-                    </div>
-                `).join('');
-                
-                buyNowButton.disabled = false;
-                updateTotal();
-            }
+    cartItemsContainer.innerHTML = cart.map((item, index) => `
+        <div class="cart-item flex justify-between items-start py-4 border-b border-gray-700" data-index="${index}">
+            <div class="flex-grow cursor-pointer">
+                <h4 class="font-bold text-lg text-white">${item.name} <span class="text-sm capitalize text-gray-400">(${item.size})</span></h4>
+                <p class="text-gray-500 text-sm">${item.toppings.join(', ') || 'No extra additions'}</p>
+                <p class="text-xs text-gray-600 mt-1">Tap to edit</p>
+            </div>
+            <button class="text-gray-500 hover:text-red-500 remove-item-button" data-index="${index}">&times;</button>
+        </div>
+    `).join('');
+    
+    buyNowButton.disabled = false;
+    updateTotal();
+}
+// Save and load delivery info
+function saveDeliveryInfo() {
+    const deliveryInfo = {
+        name: document.getElementById('customer-name').value,
+        phone: document.getElementById('customer-phone').value,
+        campus: document.getElementById('campus-select-input').value,
+        campusText: document.getElementById('selected-campus-text').textContent,
+        pickupSpot: document.getElementById('pickup-spot').value
+    };
+    localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
+}
+
+function loadDeliveryInfo() {
+    const saved = localStorage.getItem('pautacos-delivery-info');
+    if (saved) {
+        const deliveryInfo = JSON.parse(saved);
+        document.getElementById('customer-name').value = deliveryInfo.name || '';
+        document.getElementById('customer-phone').value = deliveryInfo.phone || '';
+        document.getElementById('campus-select-input').value = deliveryInfo.campus || '';
+        document.getElementById('pickup-spot').value = deliveryInfo.pickupSpot || '';
+        
+        if (deliveryInfo.campusText && deliveryInfo.campusText !== '-- Please select a campus --') {
+            document.getElementById('selected-campus-text').textContent = deliveryInfo.campusText;
+            document.getElementById('selected-campus-text').classList.remove('text-gray-400');
+            document.getElementById('selected-campus-text').classList.add('text-white');
+        }
+    }
+}
+// Enhanced save functions with error handling
+function saveCart() {
+    try {
+        localStorage.setItem('pautacos-cart', JSON.stringify(cart));
+    } catch (e) {
+        console.warn('Could not save cart to localStorage:', e);
+    }
+}
+
+function saveDeliveryInfo() {
+    try {
+        const deliveryInfo = {
+            name: document.getElementById('customer-name').value,
+            phone: document.getElementById('customer-phone').value,
+            campus: document.getElementById('campus-select-input').value,
+            campusText: document.getElementById('selected-campus-text').textContent,
+            pickupSpot: document.getElementById('pickup-spot').value
+        };
+        localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
+    } catch (e) {
+        console.warn('Could not save delivery info to localStorage:', e);
+    }
+}
+
+// Load cart from localStorage
+function loadCart() {
+    const savedCart = localStorage.getItem('pautacos-cart');
+    if (savedCart) {
+        try {
+            cart = JSON.parse(savedCart);
+            updateCart();
+        } catch (e) {
+            console.error('Error loading cart from localStorage:', e);
+            cart = [];
+        }
+    }
+}
+
+// Clear cart from localStorage
+function clearCart() {
+    cart = [];
+    localStorage.removeItem('pautacos-cart');
+    updateCart();
+}
+// Edit cart item function
+function editCartItem(index) {
+    const item = cart[index];
+    window.editingCartIndex = index;
+    
+    // Close cart modal first
+    saveDeliveryInfo();
+    cartModal.classList.remove('active');
+    setTimeout(() => {
+        closeModal(cartModal);
+        body.classList.remove('cart-open');
+    }, 300);
+    
+    // Open order modal after cart closes
+    setTimeout(() => {
+        openOrderModal(item.key);
+        
+        // Pre-select size and toppings after modal opens
+        setTimeout(() => {
+            const sizeRadio = document.querySelector(`input[name="size"][value="${item.size}"]`);
+            if (sizeRadio) sizeRadio.checked = true;
+            
+            item.toppings.forEach(topping => {
+                const toppingCheckbox = document.querySelector(`input[type="checkbox"][value="${topping}"]`);
+                if (toppingCheckbox) toppingCheckbox.checked = true;
+            });
+        }, 100);
+    }, 400);
+}
             
             function removeFromCart(index) {
-                cart.splice(index, 1);
-                updateCart();
-            }
+    cart.splice(index, 1);
+    updateCart();
+    saveCart(); // Save after removal
+}
 
             function updateTotal() {
                 let total = 0;
@@ -1382,6 +1566,7 @@ function initializeDraftEmailModal() {
             renderLocations();
             renderCampusList();
             applyTheme();
+            loadCart(); // Load saved cart on page load
 
             menuContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.menu-card');
@@ -1406,22 +1591,47 @@ function initializeDraftEmailModal() {
                 }
             });
 
-            cartButton.addEventListener('click', () => {
-                cartModal.style.display = 'flex';
-                setTimeout(() => cartModal.classList.add('active'), 10);
-                renderCartItems();
-                body.classList.add('modal-open');
-            });
+cartButton.addEventListener('click', () => {
+    cartModal.style.display = 'flex';
+    setTimeout(() => cartModal.classList.add('active'), 10);
+    renderCartItems();
+    loadDeliveryInfo(); // Add this line
+    body.classList.add('modal-open');
+});
 
-            cartModal.addEventListener('click', (e) => {
-                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
-                    cartModal.classList.remove('active');
-                    setTimeout(() => closeModal(cartModal), 300);
-                }
-                if (e.target.matches('.remove-item-button')) {
-                    removeFromCart(e.target.dataset.index);
-                }
-            });
+    cartModal.addEventListener('click', (e) => {
+    if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
+        saveDeliveryInfo();
+        cartModal.classList.remove('active');
+        setTimeout(() => closeModal(cartModal), 300);
+    }
+    if (e.target.matches('.remove-item-button')) {
+        e.stopPropagation();
+        removeFromCart(e.target.dataset.index);
+    }
+    // Add cart item editing
+    if (e.target.closest('.cart-item') && !e.target.matches('.remove-item-button')) {
+        const index = parseInt(e.target.closest('.cart-item').dataset.index);
+        editCartItem(index);
+    }
+});
+
+// Clear cart button functionality
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'clear-cart-button') {
+        if (confirm('Are you sure you want to clear all items from your cart?')) {
+            clearCart();
+        }
+    }
+});
+
+// Save delivery info on input change
+['customer-name', 'customer-phone', 'pickup-spot'].forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.addEventListener('input', saveDeliveryInfo);
+    }
+});
             
             campusSelectorTrigger.addEventListener('click', () => {
                 campusModal.style.display = 'flex';
@@ -1461,8 +1671,65 @@ function initializeDraftEmailModal() {
                     openOrderModal(e.target.dataset.item);
                 }
                 if(e.target.id === 'update-letter-button') {
-                    closeModal(noteModal);
-                }
+    closeModal(noteModal);
+    // Scroll delegation: delivery section scrolls cart items on mobile
+if (window.innerWidth <= 768) {
+    const deliverySection = document.querySelector('.cart-modal-content > div:last-child');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    
+    if (deliverySection && cartItemsContainer) {
+        deliverySection.addEventListener('wheel', (e) => {
+            // If cart items can scroll, delegate the scroll there
+            if (cartItemsContainer.scrollHeight > cartItemsContainer.clientHeight) {
+                e.preventDefault();
+                cartItemsContainer.scrollTop += e.deltaY;
+            }
+        }, { passive: false });
+        
+        // Handle touch scrolling on mobile
+        let startY = 0;
+        deliverySection.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+        
+        deliverySection.addEventListener('touchmove', (e) => {
+            const currentY = e.touches[0].clientY;
+            const diff = startY - currentY;
+            
+            if (cartItemsContainer.scrollHeight > cartItemsContainer.clientHeight) {
+                e.preventDefault();
+                cartItemsContainer.scrollTop += diff;
+                startY = currentY;
+            }
+        }, { passive: false });
+    }
+}
+    // Scroll to newsletter section
+    const newsletterSection = document.querySelector('footer');
+    if (newsletterSection) {
+        newsletterSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+    
+    // Wait a bit for scroll and form to load, then focus first input
+    setTimeout(() => {
+        // Try to find the Sender form input field
+        const senderInput = document.querySelector('.sender-form-field input[type="email"], .sender-form-field input[type="text"]');
+        if (senderInput) {
+            senderInput.focus();
+            senderInput.select(); // This will also select any existing text
+        } else {
+            // Fallback: try to find any input in the newsletter area
+            const fallbackInput = document.querySelector('footer input[type="email"], footer input[type="text"]');
+            if (fallbackInput) {
+                fallbackInput.focus();
+                fallbackInput.select();
+            }
+        }
+    }, 1000); // Wait 1 second for the Sender widget to fully load
+}
             });
 
             themeToggle.addEventListener('click', () => {
