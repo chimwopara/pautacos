@@ -23,307 +23,482 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&family=Kalam:wght@400&display=swap" rel="stylesheet">
     <style>
         html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #121212;
-            color: #E0E0E0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        body.light-mode {
-            background-color: #fdf6e4;
-            color: #333;
-        }
-        .font-playfair {
-            font-family: 'Playfair Display', serif;
-        }
-        .font-kalam {
-            font-family: 'Kalam', cursive;
-        }
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            overflow: hidden;
-        }
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: -2;
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 18, 0.8);
-            z-index: -1;
-        }
-        .menu-card {
-            background-color: rgba(26, 26, 26, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        body.light-mode .menu-card {
-            background-color: rgba(255, 255, 255, 0.5);
-            border-color: rgba(0,0,0,0.1);
-        }
-        .menu-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.2);
-        }
-        .location-card {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .location-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1));
-            transition: background 0.3s ease;
-        }
-        .exotics-section-bg {
-            background-color: rgba(69, 10, 10, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        body.light-mode .exotics-section-bg {
-            background-color: rgba(255, 235, 238, 0.5);
-            border-color: rgba(220, 38, 38, 0.3);
-        }
-        .cta-button {
-            transition: all 0.3s ease;
-            background-color: #DC2626; /* Red color */
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-        .cta-button:hover {
-            background-color: #EF4444;
-            box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.3);
-        }
-        .blur-button {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            font-weight: bold;
-            display: inline-block;
-            color: #ffffff;
-        }
-        .blur-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        .letter-modal-content.light .blur-button {
-             background-color: rgba(0, 0, 0, 0.1);
-             border-color: rgba(0, 0, 0, 0.2);
-             color: #333;
-        }
-        .letter-modal-content.light .blur-button:hover {
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-        .text-brand-red {
-            color: #DC2626;
-        }
-        header {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        header.scrolled {
-            background-color: rgba(18, 18, 18, 0.95);
-        }
-        body.light-mode header.scrolled {
-             background-color: rgba(253, 246, 228, 0.95);
-        }
-        .modal-backdrop {
-            background-color: rgba(0,0,0,0.7);
-        }
-        .modal-content {
-            max-height: 90vh;
-        }
-        .cart-modal-container {
-            justify-content: flex-end;
-        }
-        .cart-modal-content {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
-        }
-        .cart-modal-container.active .cart-modal-content {
-            transform: translateX(0);
-        }
-        .letter-modal-content {
-            background-color: #fdf6e4; /* Parchment color */
-            color: #333;
-            border: 10px solid #c8bda8;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-        .letter-modal-content.dark {
-            background-color: #1a1a1a;
-            color: #E0E0E0;
-            border-color: #333;
-        }
-        .aspect-2-3 {
-            position: relative;
-            width: 100%;
-            padding-bottom: 150%; /* 3 / 2 = 1.5 */
-        }
-        .aspect-2-3 img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .scroll-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-20px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-        }
-        body.modal-open {
-            overflow: hidden;
-        }
-        
-        /* Light mode section backgrounds */
-        body.light-mode #menu {
-            background-color: #ffffff;
-        }
-        
-        body.light-mode #locations {
-            background-color: #f8f9fa;
-        }
-        
-        body.light-mode #newsletter {
-            background-color: #e9ecef;
-        }
-        
-        body.light-mode #contact {
-            background-color: #d6dbdf;
-        }
-        
-        /* Light mode cart modal styles */
-        body.light-mode .cart-modal-content {
-            background-color: #ffffff;
-            color: #333;
-        }
-        
-        body.light-mode .cart-modal-content .border-gray-700 {
-            border-color: #e5e7eb;
-        }
-        
-        body.light-mode #cart-items-container {
-            color: #333;
-        }
-        
-        body.light-mode #customer-name,
-        body.light-mode #customer-phone,
-        body.light-mode #pickup-spot,
-        body.light-mode #campus-selector-trigger {
-            background-color: #f8f9fa;
-            color: #333;
-            border-color: #d1d5db;
-        }
-        
-        /* Light mode order modal styles */
-        body.light-mode .modal-content {
-            background-color: #ffffff;
-            color: #333;
-        }
-        
-        body.light-mode .modal-content input[type="checkbox"],
-        body.light-mode .modal-content input[type="radio"] {
-            background-color: #f8f9fa;
-            border-color: #d1d5db;
-        }
-        
-        body.light-mode .modal-content label span {
-            color: #333;
-        }
-        
-        /* Light mode addition labels */
-        body.light-mode .modal-content label {
-            background-color: #f8f9fa !important;
-            border-color: #d1d5db !important;
-        }
-        
-        body.light-mode .modal-content label span {
-            color: #333 !important;
-        }
-        
-        /* Red checkboxes for both modes */
-        .modal-content input[type="checkbox"]:checked {
-            background-color: #DC2626 !important;
-            border-color: #DC2626 !important;
-        }
-        
-        .modal-content input[type="checkbox"]:focus {
-            ring-color: #DC2626 !important;
-            border-color: #DC2626 !important;
-        }
-        
-        /* Light mode product titles */
-        body.light-mode .menu-card h3 {
-            color: #000 !important;
-        }
-        
-        body.light-mode .exotic-card h3 {
-            color: #000 !important;
-        }
-        
-        body.light-mode .exotics-section-bg h2 {
-            color: #000 !important;
-        }
-        
-        /* Light mode header icons */
-        body.light-mode #cart-button,
-        body.light-mode #theme-toggle {
-            color: #000 !important;
-        }
-        
-        /* Light mode exotic descriptions */
-        body.light-mode .exotic-card p {
-            color: #374151 !important;
-        }
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
+    transition: background-color 0.3s, color 0.3s;
+}
+body.light-mode {
+    background-color: #fdf6e4;
+    color: #333;
+}
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+.font-kalam {
+    font-family: 'Kalam', cursive;
+}
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.8);
+    z-index: -1;
+}
+.menu-card {
+    background-color: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+body.light-mode .menu-card {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(0,0,0,0.1);
+}
+.menu-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.2);
+}
+.location-card {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+.location-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.1));
+    transition: background 0.3s ease;
+}
+.exotics-section-bg {
+    background-color: rgba(69, 10, 10, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+body.light-mode .exotics-section-bg {
+    background-color: rgba(255, 235, 238, 0.5);
+    border-color: rgba(220, 38, 38, 0.3);
+}
+.cta-button {
+    transition: all 0.3s ease;
+    background-color: #DC2626;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+.cta-button:hover {
+    background-color: #EF4444;
+    box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.3);
+}
+.blur-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    display: inline-block;
+    color: #ffffff;
+}
+.blur-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.letter-modal-content.light .blur-button {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+.letter-modal-content.light .blur-button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.text-brand-red {
+    color: #DC2626;
+}
+header {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+header.scrolled {
+    background-color: rgba(18, 18, 18, 0.95);
+}
+body.light-mode header.scrolled {
+    background-color: rgba(253, 246, 228, 0.95);
+}
+.modal-backdrop {
+    background-color: rgba(0,0,0,0.7);
+}
+.modal-content {
+    max-height: 90vh;
+}
+.cart-modal-container {
+    justify-content: flex-end;
+}
+.cart-modal-content {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+}
+.cart-modal-container.active .cart-modal-content {
+    transform: translateX(0);
+}
+.letter-modal-content {
+    background-color: #fdf6e4;
+    color: #333;
+    border: 10px solid #c8bda8;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.letter-modal-content.dark {
+    background-color: #1a1a1a;
+    color: #E0E0E0;
+    border-color: #333;
+}
+.aspect-2-3 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 150%;
+}
+.aspect-2-3 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+@media (max-width: 768px) {
+    .scroll-hint {
+        bottom: 6rem;
+    }
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Light mode section backgrounds */
+body.light-mode #menu {
+    background-color: #ffffff;
+}
+body.light-mode #locations {
+    background-color: #f8f9fa;
+}
+body.light-mode #newsletter {
+    background-color: #e9ecef;
+}
+body.light-mode #contact {
+    background-color: #d6dbdf;
+}
+
+/* Light mode cart modal styles */
+body.light-mode .cart-modal-content {
+    background-color: #ffffff;
+    color: #333;
+}
+body.light-mode .cart-modal-content h2 {
+    color: #000 !important;
+}
+body.light-mode .cart-modal-content .border-gray-700 {
+    border-color: #e5e7eb;
+}
+body.light-mode #cart-items-container {
+    color: #333;
+}
+body.light-mode #cart-items-container h4 {
+    color: #000 !important;
+}
+body.light-mode #customer-name,
+body.light-mode #customer-phone,
+body.light-mode #pickup-spot,
+body.light-mode #campus-selector-trigger {
+    background-color: #f8f9fa;
+    color: #333;
+    border-color: #d1d5db;
+}
+body.light-mode .cart-modal-content label {
+    color: #000 !important;
+}
+
+/* Light mode order modal styles */
+body.light-mode .modal-content {
+    background-color: #ffffff;
+    color: #333;
+}
+body.light-mode .modal-content input[type="checkbox"],
+body.light-mode .modal-content input[type="radio"] {
+    background-color: #f8f9fa;
+    border-color: #d1d5db;
+}
+body.light-mode .modal-content label {
+    background-color: #f8f9fa !important;
+    border-color: #d1d5db !important;
+}
+body.light-mode .modal-content label span {
+    color: #333 !important;
+}
+body.light-mode .modal-content h2 {
+    color: #000 !important;
+}
+body.light-mode .modal-content h3 {
+    color: #DC2626 !important;
+}
+
+/* Red checkboxes for both modes */
+.modal-content input[type="checkbox"] {
+    accent-color: #DC2626 !important;
+}
+.modal-content input[type="checkbox"]:checked {
+    background-color: #DC2626 !important;
+    border-color: #DC2626 !important;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e") !important;
+}
+.modal-content input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important;
+    border-color: #DC2626 !important;
+}
+.modal-content .form-checkbox:checked {
+    background-color: #DC2626 !important;
+    border-color: #DC2626 !important;
+}
+
+/* Light mode product titles */
+body.light-mode .menu-card h3 {
+    color: #000 !important;
+}
+body.light-mode .exotic-card h3 {
+    color: #000 !important;
+}
+body.light-mode .exotics-section-bg h2 {
+    color: #000 !important;
+}
+body.light-mode .exotic-card p {
+    color: #374151 !important;
+}
+body.light-mode .exotics-section-bg p {
+    color: #374151 !important;
+}
+
+/* Light mode header icons */
+body.light-mode #cart-button,
+body.light-mode #theme-toggle {
+    color: #fff;
+}
+body.light-mode header.scrolled #cart-button,
+body.light-mode header.scrolled #theme-toggle {
+    color: #000 !important;
+}
+
+/* Force location names to stay white in both modes */
+body.light-mode .location-card h3 {
+    color: #fff !important;
+}
+
+/* Light mode newsletter section */
+body.light-mode #newsletter h2 {
+    color: #000 !important;
+}
+body.light-mode #newsletter p {
+    color: #374151 !important;
+}
+
+/* Draft Email Modal Styles */
+.form-input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #6B7280;
+    border-radius: 0;
+    padding: 1rem 0;
+    font-size: 1.125rem;
+    transition: border-color 0.3s;
+}
+.form-input:focus {
+    background-color: transparent;
+    border-color: #FFFFFF;
+    outline: none;
+}
+.form-input::placeholder { 
+    color: #9CA3AF; 
+}
+.btn-primary {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    transition: all 0.3s;
+}
+.btn-primary:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+#draft-email-modal { 
+    backdrop-filter: blur(8px); 
+}
+.form-field {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    transform: translateY(-10px);
+    margin-bottom: 0;
+    padding: 0;
+}
+.form-field.active {
+    opacity: 1;
+    max-height: 100px;
+    transform: translateY(0);
+    margin-bottom: 1.5rem;
+    padding: 0;
+}
+#email-message-field.active { 
+    max-height: 140px; 
+}
+#email-urgency-field.active { 
+    max-height: 180px; 
+}
+#email-submit-field.active { 
+    max-height: 80px; 
+}
+
+/* Light mode draft email modal */
+body.light-mode #draft-email-container {
+    background-color: #ffffff;
+    border-color: #e5e7eb;
+}
+body.light-mode #draft-email-container h2 {
+    color: #000 !important;
+}
+body.light-mode #draft-email-container .text-white {
+    color: #333 !important;
+}
+body.light-mode .form-input {
+    color: #333;
+    border-color: #9CA3AF;
+}
+body.light-mode .form-input:focus {
+    border-color: #000000;
+}
+body.light-mode .form-input::placeholder {
+    color: #6B7280;
+}
+body.light-mode .btn-primary {
+    color: #000000;
+    border-color: #000000;
+}
+body.light-mode .btn-primary:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+body.light-mode .urgency-option {
+    border-color: #d1d5db;
+    color: #333;
+}
+body.light-mode .urgency-option:hover {
+    border-color: #000000;
+}
+body.light-mode .urgency-option.border-white {
+    border-color: #000000 !important;
+    background-color: #f3f4f6 !important;
+}
+body.light-mode .urgency-option .text-white {
+    color: #333 !important;
+}
+body.light-mode #phone-error {
+    color: #dc2626;
+}
+body.light-mode #close-draft-modal-btn {
+    color: #6B7280;
+}
+body.light-mode #close-draft-modal-btn:hover {
+    color: #000000;
+}
+
+/* Light mode footer styles */
+body.light-mode footer {
+    background-color: #f8f9fa;
+    border-color: #e5e7eb;
+}
+body.light-mode footer .backdrop-blur-lg {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-mode footer h2 {
+    color: #000 !important;
+}
+body.light-mode footer p:not(.text-gray-500) {
+    color: #374151 !important;
+}
+body.light-mode footer .text-white {
+    color: #000 !important;
+}
+body.light-mode footer .w-12.h-12 {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-mode footer .w-12.h-12:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    background-color: rgba(220, 38, 38, 0.1);
+}
+body.light-mode #draft-email-btn {
+    border-color: #000000;
+    color: #000000;
+}
+body.light-mode #draft-email-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
     </style>
 </head>
 <body>
@@ -355,7 +530,7 @@
         </video>
         <div class="container mx-auto px-6 relative">
             <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 leading-tight">A Symphony of Spice & Tradition</h1>
-            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-300">Discover an elevated dining experience where authentic Nigerian flavors are masterfully fused with global culinary artistry.</p>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-300">Chim's Curated Collection of Sophisticated Culinary Artistry, Unprecedented in Nigeria.</p>
         </div>
         <a href="#menu" class="scroll-hint">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -391,44 +566,64 @@
         </div>
     </section>
     
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="bg-black py-20 transition-colors duration-300">
-        <div class="container mx-auto px-6">
-            <div class="md:flex md:items-center md:justify-between">
-                <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
-                    <h2 class="font-playfair text-4xl font-bold text-white mb-4">Receive the Huntsman's Letters</h2>
-                    <p class="text-gray-400 max-w-md">Be the first to know when our Exotic selections arrive. Subscribe for exclusive updates and tales from the wild.</p>
+<!-- Unified Footer Section -->
+<footer class="bg-[#0a0a0a] border-t border-gray-800 py-20 transition-colors duration-300">
+    <div class="container mx-auto px-6">
+        <!-- Main Footer Content -->
+        <div class="backdrop-blur-lg bg-black/20 border border-gray-800/50 rounded-3xl p-12">
+            <!-- Newsletter Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="font-playfair text-4xl lg:text-5xl font-bold text-white mb-6">
+                        Receive the <span class="text-brand-red">Huntsman's</span> Letters
+                    </h2>
+                    <p class="text-gray-500 text-sm mb-8">
+                        A <a href="https://fromsupply.com" target="_blank" class="text-brand-red hover:text-red-400 transition-colors font-medium">fromsupply Mall</a> brand, 
+                        In <a href="https://chimwopara.com" target="_blank" class="text-brand-red hover:text-red-400 transition-colors font-medium">Chim Wopara Enterprises</a>
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Be the first to know when our Exotic selections arrive. Subscribe for exclusive updates and tales from the wild.
+                    </p>
+                    
+                    <!-- Website Info -->
+                    <div class="mb-6">
+                        <p class="text-xl font-playfair text-white mb-2">pautacos.com</p>
+                        <p class="text-gray-500 text-sm mb-2">Pautacos may outsource recipes or meals to deliver with speed.</p>
+                        <p class="text-gray-500 text-sm mb-6">&copy; 2025 Pau Tacos. All Rights Reserved.</p>
+                    </div>
+                    
+                    <!-- Draft Email Button with Social Media inline -->
+                    <div class="flex items-center space-x-4">
+                        <button id="draft-email-btn" class="bg-transparent border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-all duration-300">
+                            Draft Email
+                        </button>
+                        
+                        <!-- Social Media Icons - Natural shapes -->
+                        <a href="https://www.tiktok.com/@fromsupply" target="_blank" class="group">
+                            <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+                                <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.instagram.com/fromsupply" target="_blank" class="group">
+    <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"/>
+        </svg>
+    </div>
+</a>
+                    </div>
                 </div>
-                <div class="md:w-1/2">
-                     <div class="sender-form-field" data-sender-form-id="b68xOn"></div>
+                
+                <div class="flex flex-col justify-start items-end">
+                    <div class="sender-form-field w-full" data-sender-form-id="b68xOn"></div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="bg-black text-white pt-10 pb-20 border-t border-gray-800 transition-colors duration-300">
-        <div class="container mx-auto px-6 text-center">
-            <a href="#" class="flex items-center justify-center mb-6">
-                <img src="logo.png" alt="Pau Tacos Logo" class="h-20 w-20" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DC2626/ffffff?text=PT';">
-            </a>
-            <p class="mb-8 text-gray-400">pautacos.com</p>
-            <div class="flex justify-center space-x-6 mb-8">
-                 <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
-                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd" /></svg>
-                </a>
-            </div>
-            <p class="text-gray-500 text-sm">A <a href="https://fromsupply.com" target="_blank" class="underline hover:text-red-500">fromsupply Mall</a> brand, In <a href="https://chimwopara.com" target="_blank" class="underline hover:text-red-500">Chim Wopara Enterprises</a></p>
-            <p class="text-gray-500 text-sm mt-2">Pautacos may outsource recipes or meals to deliver on speed.</p>
-            <p class="text-gray-500 text-sm mt-2">&copy; 2025 Pau Tacos. All Rights Reserved.</p>
-        </div>
-    </footer>
+    </div>
+</footer>
 
     <!-- Order Modal -->
     <div id="order-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
@@ -496,6 +691,52 @@
             <!-- Letter content will be injected here -->
         </div>
     </div>
+    <!-- Draft Email Modal -->
+<div id="draft-email-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[70] flex items-center justify-center p-4">
+    <div id="draft-email-container" class="bg-[#1a1a1a] border border-gray-700 rounded-xl p-6 max-w-3xl w-full relative">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-white">Draft Email</h2>
+            <button id="close-draft-modal-btn" class="text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <form id="email-draft-form" class="max-w-2xl mx-auto">
+            <div id="email-form-success" class="hidden text-white p-4 rounded-lg mb-6 text-center"></div>
+            <div class="form-field active" id="email-name-field">
+                <input type="text" id="email-name" name="name" placeholder="What's your full name?" class="form-input w-full text-white" required>
+            </div>
+            <div class="form-field" id="email-email-field">
+                <input type="email" id="email-email" name="email" placeholder="What's your email address?" class="form-input w-full text-white" required>
+            </div>
+            <div class="form-field" id="email-phone-field">
+                <input type="tel" id="email-phone" name="phone" placeholder="Enter phone number" class="form-input w-full text-white" required>
+                <div id="phone-error" class="hidden text-red-400 text-sm mt-1">Please enter at least 10 digits</div>
+            </div>
+            <div class="form-field" id="email-message-field">
+                <textarea id="email-message" name="message" rows="4" placeholder="How can we help you?" class="form-input w-full text-white resize-none" required></textarea>
+            </div>
+            <div class="form-field" id="email-urgency-field">
+                <div class="mb-4">
+                    <label class="text-white text-sm mb-3 block">What is the nature of this email?</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button type="button" class="urgency-option p-3 border border-gray-600 rounded-lg text-center transition-all hover:border-white" data-urgency="Gratitude">
+                            <div class="text-sm font-medium text-white">Gratitude</div>
+                        </button>
+                        <button type="button" class="urgency-option p-3 border border-gray-600 rounded-lg text-center transition-all hover:border-white" data-urgency="Suggestion">
+                            <div class="text-sm font-medium text-white">Suggestion</div>
+                        </button>
+                        <button type="button" class="urgency-option p-3 border border-gray-600 rounded-lg text-center transition-all hover:border-white" data-urgency="Complaint">
+                            <div class="text-sm font-medium text-white">Complaint</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-field" id="email-submit-field">
+                <button type="button" id="draft-email-submit-btn" class="btn-primary font-medium py-3 px-8 rounded-lg mt-6 w-full">Open in Mail App</button>
+            </div>
+        </form>
+    </div>
+</div>
 
     <script>
       (function (s, e, n, d, er) {
@@ -678,6 +919,8 @@
                     letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients, a cool whisper on a hot day.</p><p class="text-right mt-6">Chim</p><img src="signature.png" class="h-5 ml-auto" alt="Signature">`
                 }
             };
+
+            
             
             const exoticsData = {
                 peppersoup: {
@@ -731,12 +974,13 @@
                         <p class="mb-4">I arrived in the nation's capital, a city of wide roads and grand ambitions. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Abuja, a place of power and potential. The future leaders at Baze University, Nile University, the African University of Science & Tech, and the National Open University all shared in the experience. This city is a center of influence, and its influence will soon carry the taste of our craft far and wide. I will continue mapping its boulevards to bring the magic to more people.</p>
                         <p class="text-right mt-6">- The Cartographer</p>`
                 }
+                
             };
             
             const toppingPrice = 1000;
             let cart = [];
-            let isSiteDarkMode = localStorage.getItem('siteDarkMode') === 'true';
-
+            let isSiteDarkMode = localStorage.getItem('siteDarkMode') !== 'false';
+initializeDraftEmailModal();
             // --- DOM ELEMENTS ---
             const body = document.body;
             const menuContainer = document.getElementById('menu-items');
@@ -974,8 +1218,130 @@
                     total += menuData[item.key].prices[item.size];
                     total += item.toppings.length * toppingPrice;
                 });
-                buyNowButton.textContent = `BUY NOW (â‚¦${total.toLocaleString()})`;
+                buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
             }
+            // Draft Email Functionality
+function initializeDraftEmailModal() {
+    const draftEmailBtn = document.getElementById('draft-email-btn');
+    const modal = document.getElementById('draft-email-modal');
+    const closeModalBtn = document.getElementById('close-draft-modal-btn');
+    const emailNameField = document.getElementById('email-name');
+    const emailEmailField = document.getElementById('email-email');
+    const emailPhoneField = document.getElementById('email-phone');
+    const emailMessageField = document.getElementById('email-message');
+    const emailNameFieldContainer = document.getElementById('email-name-field');
+    const emailEmailFieldContainer = document.getElementById('email-email-field');
+    const emailPhoneFieldContainer = document.getElementById('email-phone-field');
+    const emailMessageFieldContainer = document.getElementById('email-message-field');
+    const emailUrgencyFieldContainer = document.getElementById('email-urgency-field');
+    const emailSubmitFieldContainer = document.getElementById('email-submit-field');
+    const draftEmailSubmitBtn = document.getElementById('draft-email-submit-btn');
+    const phoneError = document.getElementById('phone-error');
+    const urgencyOptions = document.querySelectorAll('.urgency-option');
+    let selectedUrgency = '';
+
+    if (!draftEmailBtn || !modal || !closeModalBtn) return;
+
+    function showField(fieldContainer) {
+        if (fieldContainer) fieldContainer.classList.add('active');
+    }
+
+    function hideField(fieldContainer) {
+        if (fieldContainer) fieldContainer.classList.remove('active');
+    }
+
+    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+    function isValidPhone(phone) { return phone.replace(/\D/g, '').length >= 10; }
+
+    urgencyOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
+            this.classList.add('border-white', 'bg-gray-800');
+            selectedUrgency = this.getAttribute('data-urgency');
+            checkFormCompletion();
+        });
+    });
+
+    function checkFormCompletion() {
+        if (emailNameField.value.trim().length > 2 &&
+            isValidEmail(emailEmailField.value.trim()) &&
+            isValidPhone(emailPhoneField.value.trim()) &&
+            emailMessageField.value.trim().length > 10 &&
+            selectedUrgency) {
+            showField(emailSubmitFieldContainer);
+        } else {
+            hideField(emailSubmitFieldContainer);
+        }
+    }
+
+    draftEmailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.remove('hidden');
+        body.classList.add('modal-open');
+    });
+
+    function closeModal() {
+        modal.classList.add('hidden');
+        body.classList.remove('modal-open');
+        document.getElementById('email-draft-form').reset();
+        hideField(emailEmailFieldContainer);
+        hideField(emailPhoneFieldContainer);
+        hideField(emailMessageFieldContainer);
+        hideField(emailUrgencyFieldContainer);
+        hideField(emailSubmitFieldContainer);
+        urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
+        selectedUrgency = '';
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => e.target === modal && closeModal());
+
+    function setupFieldListener(field, condition, nextField) {
+        const allNextFields = [emailEmailFieldContainer, emailPhoneFieldContainer, emailMessageFieldContainer, emailUrgencyFieldContainer, emailSubmitFieldContainer];
+        const nextFieldIndex = allNextFields.indexOf(nextField);
+        
+        field.addEventListener('input', () => {
+            if (condition(field.value.trim())) {
+                showField(nextField);
+            } else {
+                for (let i = nextFieldIndex; i < allNextFields.length; i++) {
+                    hideField(allNextFields[i]);
+                    const input = allNextFields[i].querySelector('input, textarea');
+                    if(input) input.value = '';
+                }
+                urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
+                selectedUrgency = '';
+            }
+            checkFormCompletion();
+        });
+    }
+
+    setupFieldListener(emailNameField, val => val.length > 2, emailEmailFieldContainer);
+    setupFieldListener(emailEmailField, val => isValidEmail(val), emailPhoneFieldContainer);
+    setupFieldListener(emailPhoneField, val => isValidPhone(val), emailMessageFieldContainer);
+    setupFieldListener(emailMessageField, val => val.length > 10, emailUrgencyFieldContainer);
+    
+    emailPhoneField.addEventListener('input', () => {
+        const isValid = isValidPhone(emailPhoneField.value.trim());
+        phoneError.classList.toggle('hidden', isValid || emailPhoneField.value.trim().length === 0);
+    });
+
+    if (draftEmailSubmitBtn) {
+        draftEmailSubmitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            checkFormCompletion();
+            if(emailSubmitFieldContainer.classList.contains('active') === false) return;
+
+            const subject = `${selectedUrgency} from ${emailNameField.value.trim()}`;
+            const body = `Hello,\n\nI am writing to you with the following message:\n\n${emailMessageField.value.trim()}\n\nPlease feel free to contact me:\nEmail: ${emailEmailField.value.trim()}\nPhone: ${emailPhoneField.value.trim()}\n\nNature of this email: ${selectedUrgency}\n\nBest regards,\n${emailNameField.value.trim()}`;
+            const mailtoLink = `mailto:frontman@pautacos.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            window.open(mailtoLink, '_self');
+            setTimeout(closeModal, 500);
+        });
+    }
+}
 
             function renderCampusList() {
                 campusListContainer.innerHTML = '';
