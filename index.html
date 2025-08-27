@@ -555,7 +555,75 @@ body.light-mode #campus-modal .modal-content {
 body.light-mode #campus-modal .modal-content h2 {
     color: #000 !important;
 }
+/* Campus selector text colors */
+body.light-mode #selected-campus-text {
+    color: #000 !important;
+}
 
+body.light-mode #selected-campus-text.text-black {
+    color: #000 !important;
+}
+
+#selected-campus-text.text-white {
+    color: #fff !important;
+}
+.step-container {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.step-container.visible {
+    opacity: 1;
+    max-height: 200px;
+    margin-bottom: 1rem;
+}
+
+.step-container.active input,
+.step-container.active textarea {
+    border-color: #DC2626;
+}
+
+.step-container.completed input,
+.step-container.completed textarea {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.step-container.completed label {
+    color: #DC2626 !important;
+}
+
+.step-container.completed .text-gray-500 {
+    display: none;
+}
+
+/* Light mode support for completed fields */
+body.light-mode .step-container.completed input,
+body.light-mode .step-container.completed textarea {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+    color: #333;
+}
+
+body.light-mode .step-container.completed label {
+    color: #DC2626 !important;
+}
+
+/* Make completed steps clickable */
+.step-container.completed {
+    cursor: pointer;
+}
+
+.step-container.completed:hover {
+    background-color: rgba(220, 38, 38, 0.05);
+}
+
+body.light-mode .step-container.completed:hover {
+    background-color: rgba(220, 38, 38, 0.05);
+}
     </style>
 </head>
 <body>
@@ -702,31 +770,40 @@ body.light-mode #campus-modal .modal-content h2 {
         <!-- Cart items will be here -->
      </div>
      <div class="p-6 border-t border-gray-700">
-        <div class="space-y-4">
-            <div>
-                <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
-                <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
-            </div>
-            <div>
-                <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
-                <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
-            </div>
-            <div>
-                <label class="block mb-2 font-semibold text-gray-300">Select Your Campus</label>
-                <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
-                    <span id="selected-campus-text" class="text-gray-400">-- Please select a campus --</span>
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </div>
-                <input type="hidden" id="campus-select-input" name="campus">
-            </div>
-            <div>
-                <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
-                <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
-            </div>
+    <div class="space-y-4">
+        <!-- Step 1: Name -->
+        <div id="name-step" class="step-container visible active">
+            <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
+            <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
+            <p class="text-xs text-gray-500 mt-1">Press Enter to continue</p>
         </div>
-        <button id="clear-cart-button" class="w-full font-medium py-2 mt-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">Clear All Items</button>
-        <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg">BUY NOW</button>
-     </div>
+        
+        <!-- Step 2: Phone -->
+        <div id="phone-step" class="step-container">
+            <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
+            <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
+            <p class="text-xs text-gray-500 mt-1">Press Enter to continue</p>
+        </div>
+        
+        <!-- Step 3: Pickup Spot -->
+        <div id="pickup-step" class="step-container">
+            <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
+            <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
+            <p class="text-xs text-gray-500 mt-1">Press Enter to continue (optional)</p>
+        </div>
+        
+        <!-- Step 4: Campus (Optional) -->
+        <div id="campus-step" class="step-container">
+            <label class="block mb-2 font-semibold text-gray-300">Select Your Campus (Optional)</label>
+            <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
+                <span id="selected-campus-text" class="text-gray-400">No Campus</span>
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+            <input type="hidden" id="campus-select-input" name="campus" value="No Campus">
+        </div>
+    </div>
+    <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg hidden">BUY NOW</button>
+</div>
 </div>
     </div>
 
@@ -1066,6 +1143,25 @@ initializeDraftEmailModal();
                 return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
             }
 
+            function checkFormCompletion() {
+    const nameField = document.getElementById('customer-name');
+    const phoneField = document.getElementById('customer-phone');
+    const pickupField = document.getElementById('pickup-spot');
+    const buyNowButton = document.getElementById('buy-now-button');
+    
+    const hasName = nameField && nameField.value.trim().length > 0;
+    const hasPhone = phoneField && phoneField.value.trim().length > 0;
+    const hasPickup = pickupField && pickupField.value.trim().length > 0;
+    
+    // Show buy now button only if all required fields are filled
+    if (hasName && hasPhone && hasPickup && buyNowButton) {
+        buyNowButton.classList.remove('hidden');
+        updateTotal(); // Update the total when showing the button
+    } else if (buyNowButton) {
+        buyNowButton.classList.add('hidden');
+    }
+}
+
             function renderMenu() {
                 menuContainer.innerHTML = '';
                 for (const key in menuData) {
@@ -1232,7 +1328,7 @@ initializeDraftEmailModal();
                 body.classList.remove('modal-open');
             }
 
-            function addToCart(itemKey) {
+function addToCart(itemKey) {
     const size = document.querySelector('input[name="size"]:checked').value;
     const selectedToppings = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
     
@@ -1264,6 +1360,7 @@ initializeDraftEmailModal();
             setTimeout(() => cartModal.classList.add('active'), 10);
             renderCartItems();
             loadDeliveryInfo();
+            setupStepByStepForm(); // Add this missing line
             body.classList.add('modal-open');
         }, 300);
     }
@@ -1276,15 +1373,15 @@ initializeDraftEmailModal();
     saveCart(); // Save cart to localStorage
 }
 
-   function renderCartItems() {
+  function renderCartItems() {
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center">Your cart is empty.</p>`;
+        cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your cart is empty.</p>`;
         buyNowButton.textContent = 'BUY NOW';
         buyNowButton.disabled = true;
         return;
     }
 
-    cartItemsContainer.innerHTML = cart.map((item, index) => `
+    const cartItemsHtml = cart.map((item, index) => `
         <div class="cart-item flex justify-between items-start py-4 border-b border-gray-700" data-index="${index}">
             <div class="flex-grow cursor-pointer">
                 <h4 class="font-bold text-lg text-white">${item.name} <span class="text-sm capitalize text-gray-400">(${item.size})</span></h4>
@@ -1295,37 +1392,155 @@ initializeDraftEmailModal();
         </div>
     `).join('');
     
-    buyNowButton.disabled = false;
-    updateTotal();
+    const clearButtonHtml = `
+        <div class="pt-4 border-t border-gray-600 mt-4">
+            <button id="clear-cart-button" class="w-full font-medium py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors text-sm">Clear All Items</button>
+        </div>
+    `;
+    
+    cartItemsContainer.innerHTML = cartItemsHtml + clearButtonHtml;
+    
+    // Don't enable button here - let checkFormCompletion handle it
+checkFormCompletion();
 }
-// Save and load delivery info
 function saveDeliveryInfo() {
-    const deliveryInfo = {
-        name: document.getElementById('customer-name').value,
-        phone: document.getElementById('customer-phone').value,
-        campus: document.getElementById('campus-select-input').value,
-        campusText: document.getElementById('selected-campus-text').textContent,
-        pickupSpot: document.getElementById('pickup-spot').value
-    };
-    localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
+    try {
+        const nameField = document.getElementById('customer-name');
+        const phoneField = document.getElementById('customer-phone');
+        const campusField = document.getElementById('campus-select-input');
+        const campusTextElement = document.getElementById('selected-campus-text');
+        const pickupField = document.getElementById('pickup-spot');
+
+        const deliveryInfo = {
+            name: nameField ? nameField.value : '',
+            phone: phoneField ? phoneField.value : '',
+            campus: campusField ? campusField.value : '',
+            campusText: campusTextElement ? campusTextElement.textContent : '',
+            pickupSpot: pickupField ? pickupField.value : ''
+        };
+        
+        localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
+        console.log('✅ Saved delivery info:', deliveryInfo); // Remove after testing
+    } catch (e) {
+        console.warn('❌ Could not save delivery info to localStorage:', e);
+    }
 }
 
 function loadDeliveryInfo() {
     const saved = localStorage.getItem('pautacos-delivery-info');
     if (saved) {
         const deliveryInfo = JSON.parse(saved);
+        
+        // Load values
         document.getElementById('customer-name').value = deliveryInfo.name || '';
         document.getElementById('customer-phone').value = deliveryInfo.phone || '';
-        document.getElementById('campus-select-input').value = deliveryInfo.campus || '';
+        document.getElementById('campus-select-input').value = deliveryInfo.campus || 'No Campus';
         document.getElementById('pickup-spot').value = deliveryInfo.pickupSpot || '';
         
-        if (deliveryInfo.campusText && deliveryInfo.campusText !== '-- Please select a campus --') {
-            document.getElementById('selected-campus-text').textContent = deliveryInfo.campusText;
-            document.getElementById('selected-campus-text').classList.remove('text-gray-400');
-            document.getElementById('selected-campus-text').classList.add('text-white');
+        // Update campus display
+        const campusText = deliveryInfo.campusText || 'No Campus';
+        const campusTextElement = document.getElementById('selected-campus-text');
+        campusTextElement.textContent = campusText;
+        
+        if (campusText !== '-- Please select a campus --') {
+            campusTextElement.classList.remove('text-gray-400');
+            if (body.classList.contains('light-mode')) {
+                campusTextElement.classList.add('text-black');
+            } else {
+                campusTextElement.classList.add('text-white');
+            }
+        }
+        
+        // Show and complete steps based on filled data
+        const nameStep = document.getElementById('name-step');
+        const phoneStep = document.getElementById('phone-step');
+        const pickupStep = document.getElementById('pickup-step');
+        const campusStep = document.getElementById('campus-step');
+        
+        if (deliveryInfo.name) {
+            nameStep.classList.add('completed');
+            nameStep.classList.remove('active');
+            phoneStep.classList.add('visible');
+            
+            if (deliveryInfo.phone) {
+                phoneStep.classList.add('completed');
+                phoneStep.classList.remove('active');
+                pickupStep.classList.add('visible');
+                
+                if (deliveryInfo.pickupSpot) {
+                    pickupStep.classList.add('completed');
+                    pickupStep.classList.remove('active');
+                    campusStep.classList.add('visible');
+                    campusStep.classList.add('active');
+                } else {
+                    pickupStep.classList.add('active');
+                }
+            } else {
+                phoneStep.classList.add('active');
+            }
         }
     }
 }
+
+function loadDeliveryInfo() {
+    const saved = localStorage.getItem('pautacos-delivery-info');
+    if (saved) {
+        const deliveryInfo = JSON.parse(saved);
+        
+        // Load values
+        document.getElementById('customer-name').value = deliveryInfo.name || '';
+        document.getElementById('customer-phone').value = deliveryInfo.phone || '';
+        document.getElementById('campus-select-input').value = deliveryInfo.campus || 'No Campus';
+        document.getElementById('pickup-spot').value = deliveryInfo.pickupSpot || '';
+        
+        // Update campus display
+        const campusText = deliveryInfo.campusText || 'No Campus';
+        const campusTextElement = document.getElementById('selected-campus-text');
+        campusTextElement.textContent = campusText;
+        
+        if (campusText !== '-- Please select a campus --') {
+            campusTextElement.classList.remove('text-gray-400');
+            if (body.classList.contains('light-mode')) {
+                campusTextElement.classList.add('text-black');
+            } else {
+                campusTextElement.classList.add('text-white');
+            }
+        }
+        
+        // Show and complete steps based on filled data
+        const nameStep = document.getElementById('name-step');
+        const phoneStep = document.getElementById('phone-step');
+        const pickupStep = document.getElementById('pickup-step');
+        const campusStep = document.getElementById('campus-step');
+        
+        if (deliveryInfo.name) {
+            nameStep.classList.add('completed');
+            nameStep.classList.remove('active');
+            phoneStep.classList.add('visible');
+            
+            if (deliveryInfo.phone) {
+                phoneStep.classList.add('completed');
+                phoneStep.classList.remove('active');
+                pickupStep.classList.add('visible');
+                
+                if (deliveryInfo.pickupSpot) {
+                    pickupStep.classList.add('completed');
+                    pickupStep.classList.remove('active');
+                    campusStep.classList.add('visible');
+                    campusStep.classList.add('active');
+                } else {
+                    pickupStep.classList.add('active');
+                }
+            } else {
+                phoneStep.classList.add('active');
+            }
+        }
+    }
+    
+    // Check if form is complete after loading
+    setTimeout(checkFormCompletion, 100);
+}
+
 // Enhanced save functions with error handling
 function saveCart() {
     try {
@@ -1335,15 +1550,23 @@ function saveCart() {
     }
 }
 
+// Enhanced save delivery info with real-time updates
 function saveDeliveryInfo() {
     try {
+        const nameField = document.getElementById('customer-name');
+        const phoneField = document.getElementById('customer-phone');
+        const campusField = document.getElementById('campus-select-input');
+        const campusTextElement = document.getElementById('selected-campus-text');
+        const pickupField = document.getElementById('pickup-spot');
+
         const deliveryInfo = {
-            name: document.getElementById('customer-name').value,
-            phone: document.getElementById('customer-phone').value,
-            campus: document.getElementById('campus-select-input').value,
-            campusText: document.getElementById('selected-campus-text').textContent,
-            pickupSpot: document.getElementById('pickup-spot').value
+            name: nameField ? nameField.value : '',
+            phone: phoneField ? phoneField.value : '',
+            campus: campusField ? campusField.value : '',
+            campusText: campusTextElement ? campusTextElement.textContent : '',
+            pickupSpot: pickupField ? pickupField.value : ''
         };
+        
         localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
     } catch (e) {
         console.warn('Could not save delivery info to localStorage:', e);
@@ -1406,14 +1629,18 @@ function editCartItem(index) {
     saveCart(); // Save after removal
 }
 
-            function updateTotal() {
-                let total = 0;
-                cart.forEach(item => {
-                    total += menuData[item.key].prices[item.size];
-                    total += item.toppings.length * toppingPrice;
-                });
-                buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
-            }
+function updateTotal() {
+    let total = 0;
+    cart.forEach(item => {
+        total += menuData[item.key].prices[item.size];
+        total += item.toppings.length * toppingPrice;
+    });
+    
+    const buyNowButton = document.getElementById('buy-now-button');
+    if (buyNowButton && !buyNowButton.classList.contains('hidden')) {
+        buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
+    }
+}
             // Draft Email Functionality
 function initializeDraftEmailModal() {
     const draftEmailBtn = document.getElementById('draft-email-btn');
@@ -1538,27 +1765,129 @@ function initializeDraftEmailModal() {
 }
 
             function renderCampusList() {
-                campusListContainer.innerHTML = '';
-                for (const key in locationsData) {
-                    const location = locationsData[key];
-                    const cityHeader = document.createElement('h3');
-                    cityHeader.className = 'font-bold text-xl text-brand-red mt-4 first:mt-0';
-                    cityHeader.textContent = location.name;
-                    campusListContainer.appendChild(cityHeader);
+    campusListContainer.innerHTML = '';
+    
+    // Add "No Campus" option first
+    const noCampusHeader = document.createElement('h3');
+    noCampusHeader.className = 'font-bold text-xl text-brand-red mt-0';
+    noCampusHeader.textContent = 'General';
+    campusListContainer.appendChild(noCampusHeader);
+    
+    const noCampusItem = document.createElement('div');
+    noCampusItem.className = 'p-3 rounded-lg hover:bg-[#2a2a2a] cursor-pointer text-gray-300';
+    noCampusItem.textContent = 'No Campus';
+    noCampusItem.dataset.campus = 'No Campus';
+    campusListContainer.appendChild(noCampusItem);
+    
+    // Add existing locations
+    for (const key in locationsData) {
+        const location = locationsData[key];
+        const cityHeader = document.createElement('h3');
+        cityHeader.className = 'font-bold text-xl text-brand-red mt-4';
+        cityHeader.textContent = location.name;
+        campusListContainer.appendChild(cityHeader);
 
-                    const cityList = document.createElement('div');
-                    cityList.className = 'grid grid-cols-1 gap-2 mt-2';
-                    
-                    location.universities.forEach(campus => {
-                        const campusItem = document.createElement('div');
-                        campusItem.className = 'p-3 rounded-lg hover:bg-[#2a2a2a] cursor-pointer text-gray-300';
-                        campusItem.textContent = campus;
-                        campusItem.dataset.campus = campus;
-                        cityList.appendChild(campusItem);
-                    });
-                    campusListContainer.appendChild(cityList);
-                }
+        const cityList = document.createElement('div');
+        cityList.className = 'grid grid-cols-1 gap-2 mt-2';
+        
+        location.universities.forEach(campus => {
+            const campusItem = document.createElement('div');
+            campusItem.className = 'p-3 rounded-lg hover:bg-[#2a2a2a] cursor-pointer text-gray-300';
+            campusItem.textContent = campus;
+            campusItem.dataset.campus = campus;
+            cityList.appendChild(campusItem);
+        });
+        campusListContainer.appendChild(cityList);
+    }
+}
+
+function setupStepByStepForm() {
+    const nameInput = document.getElementById('customer-name');
+    const phoneInput = document.getElementById('customer-phone');
+    const pickupInput = document.getElementById('pickup-spot');
+    
+    const nameStep = document.getElementById('name-step');
+    const phoneStep = document.getElementById('phone-step');
+    const pickupStep = document.getElementById('pickup-step');
+    const campusStep = document.getElementById('campus-step');
+    
+    function showNextStep(currentStep, nextStep, currentInput) {
+        // Mark current step as completed
+        currentStep.classList.remove('active');
+        currentStep.classList.add('completed');
+        
+        // Show and activate next step
+        setTimeout(() => {
+            nextStep.classList.add('visible');
+            setTimeout(() => {
+                nextStep.classList.add('active');
+                const input = nextStep.querySelector('input, textarea');
+                if (input) input.focus();
+                checkFormCompletion(); // Check if form is complete
+            }, 150);
+        }, 100);
+    }
+    
+    nameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && nameInput.value.trim().length > 0) {
+            saveDeliveryInfo();
+            showNextStep(nameStep, phoneStep, nameInput);
+        }
+    });
+    
+    phoneInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && phoneInput.value.trim().length > 0) {
+            saveDeliveryInfo();
+            showNextStep(phoneStep, pickupStep, phoneInput);
+        }
+    });
+    
+    pickupInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            saveDeliveryInfo();
+            checkFormCompletion(); // Check completion after pickup is entered
+            showNextStep(pickupStep, campusStep, pickupInput);
+        }
+    });
+    
+    // Allow clicking on completed fields to reactivate them
+    [nameStep, phoneStep, pickupStep].forEach((step, index) => {
+        step.addEventListener('click', (e) => {
+            if (step.classList.contains('completed')) {
+                // Remove active from all steps
+                [nameStep, phoneStep, pickupStep, campusStep].forEach(s => s.classList.remove('active'));
+                // Activate clicked step
+                step.classList.remove('completed');
+                step.classList.add('active');
+                const input = step.querySelector('input, textarea');
+                if (input) input.focus();
             }
+        });
+    });
+    
+    // Auto-save and check completion on input changes
+    [nameInput, phoneInput, pickupInput].forEach(input => {
+        if (input) {
+            // Remove existing listeners to prevent duplicates
+            input.removeEventListener('input', handleInputChange);
+            input.removeEventListener('blur', handleInputChange);
+            input.removeEventListener('change', handleInputChange);
+            
+            // Add comprehensive listeners
+            input.addEventListener('input', handleInputChange);
+            input.addEventListener('blur', handleInputChange);
+            input.addEventListener('change', handleInputChange);
+        }
+    });
+    
+    function handleInputChange() {
+        saveDeliveryInfo();
+        checkFormCompletion();
+    }
+    
+    // Initial check when form is set up
+    checkFormCompletion();
+}
             
             // --- EVENT LISTENERS ---
             renderMenu();
@@ -1595,7 +1924,8 @@ cartButton.addEventListener('click', () => {
     cartModal.style.display = 'flex';
     setTimeout(() => cartModal.classList.add('active'), 10);
     renderCartItems();
-    loadDeliveryInfo(); // Add this line
+    loadDeliveryInfo();
+    setupStepByStepForm();
     body.classList.add('modal-open');
 });
 
@@ -1625,13 +1955,23 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Save delivery info on input change
-['customer-name', 'customer-phone', 'pickup-spot'].forEach(id => {
-    const element = document.getElementById(id);
-    if (element) {
-        element.addEventListener('input', saveDeliveryInfo);
-    }
-});
+// Setup delivery info auto-save - call this every time cart opens
+function setupDeliveryInfoSaving() {
+    const fields = ['customer-name', 'customer-phone', 'pickup-spot'];
+    
+    fields.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            // Remove any existing listeners to prevent duplicates
+            element.removeEventListener('input', saveDeliveryInfo);
+            element.removeEventListener('blur', saveDeliveryInfo);
+            
+            // Add new listeners for real-time saving
+            element.addEventListener('input', saveDeliveryInfo);
+            element.addEventListener('blur', saveDeliveryInfo);
+        }
+    });
+}
             
             campusSelectorTrigger.addEventListener('click', () => {
                 campusModal.style.display = 'flex';
@@ -1645,15 +1985,25 @@ document.addEventListener('click', (e) => {
             });
 
             campusListContainer.addEventListener('click', (e) => {
-                if (e.target.dataset.campus) {
-                    const campusName = e.target.dataset.campus;
-                    selectedCampusText.textContent = campusName;
-                    selectedCampusText.classList.remove('text-gray-400');
-                    selectedCampusText.classList.add('text-white');
-                    campusSelectInput.value = campusName;
-                    closeModal(campusModal);
-                }
-            });
+    if (e.target.dataset.campus) {
+        const campusName = e.target.dataset.campus;
+        selectedCampusText.textContent = campusName;
+        selectedCampusText.classList.remove('text-gray-400');
+        
+        // Add appropriate text color based on current theme
+        if (body.classList.contains('light-mode')) {
+            selectedCampusText.classList.remove('text-white');
+            selectedCampusText.classList.add('text-black');
+        } else {
+            selectedCampusText.classList.remove('text-black');
+            selectedCampusText.classList.add('text-white');
+        }
+        
+        campusSelectInput.value = campusName;
+        saveDeliveryInfo();
+        closeModal(campusModal);
+    }
+});
 
             exoticsContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.exotic-card');
