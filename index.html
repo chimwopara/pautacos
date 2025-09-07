@@ -240,22 +240,6 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* Scroll delegation from delivery section to cart items */
-.cart-modal-content {
-    overflow: hidden;
-}
-
-#cart-items-container {
-    overflow-y: auto;
-    max-height: none;
-}
-
-/* On mobile, make delivery section delegate scroll to cart items */
-@media (max-width: 768px) {
-    .cart-modal-content > div:last-child {
-        overflow: hidden;
-    }
-}
 /* Cart item hover effect only */
 .cart-item {
     cursor: pointer;
@@ -303,8 +287,7 @@ body.light-mode #cart-items-container h4 {
 }
 body.light-mode #customer-name,
 body.light-mode #customer-phone,
-body.light-mode #pickup-spot,
-body.light-mode #campus-selector-trigger {
+body.light-mode #pickup-spot {
     background-color: #f8f9fa;
     color: #333;
     border-color: #d1d5db;
@@ -374,10 +357,14 @@ body.light-mode .exotics-section-bg p {
 
 /* Light mode header icons */
 body.light-mode #cart-button,
+body.light-mode #search-button,
+body.light-mode #gift-button,
 body.light-mode #theme-toggle {
     color: #fff;
 }
 body.light-mode header.scrolled #cart-button,
+body.light-mode header.scrolled #search-button,
+body.light-mode header.scrolled #gift-button,
 body.light-mode header.scrolled #theme-toggle {
     color: #000 !important;
 }
@@ -540,44 +527,6 @@ body.light-mode #draft-email-btn:hover {
     color: #ffffff;
 }
 
-/* Light mode campus selector styles */
-body.light-mode #campus-list-container h3 {
-    color: #DC2626 !important; /* Keep city headers red */
-}
-
-body.light-mode #campus-list-container .text-gray-300 {
-    color: #333 !important;
-}
-
-body.light-mode #campus-list-container div[data-campus] {
-    color: #333 !important;
-}
-
-body.light-mode #campus-list-container div[data-campus]:hover {
-    background-color: rgba(0, 0, 0, 0.05) !important;
-    color: #000 !important;
-}
-
-body.light-mode #campus-modal .modal-content {
-    background-color: #ffffff;
-    color: #333;
-}
-
-body.light-mode #campus-modal .modal-content h2 {
-    color: #000 !important;
-}
-/* Campus selector text colors */
-body.light-mode #selected-campus-text {
-    color: #000 !important;
-}
-
-body.light-mode #selected-campus-text.text-black {
-    color: #000 !important;
-}
-
-#selected-campus-text.text-white {
-    color: #fff !important;
-}
 .step-container {
     opacity: 0;
     max-height: 0;
@@ -635,6 +584,132 @@ body.light-mode .step-container.completed label {
 body.light-mode .step-container.completed:hover {
     background-color: rgba(220, 38, 38, 0.05);
 }
+
+/* Search Modal Styles */
+.search-modal-content {
+    background-color: #1a1a1a;
+    color: #E0E0E0;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+body.light-mode .search-modal-content {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.search-result-item {
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+/* Gift Modal Styles */
+.gift-modal-content {
+    background-color: #1a1a1a;
+    color: #E0E0E0;
+}
+
+body.light-mode .gift-modal-content {
+    background-color: #ffffff;
+    color: #333;
+}
+
+body.light-mode .gift-modal-content h2 {
+    color: #000 !important;
+}
+
+body.light-mode .gift-modal-content label {
+    color: #333 !important;
+}
+
+.gift-limit-option {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gift-limit-option:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.gift-limit-option.selected {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.2);
+}
+
+/* Mobile navigation buttons */
+.mobile-nav-button {
+    background-color: #DC2626;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.mobile-nav-button:hover {
+    background-color: #EF4444;
+}
+
+.mobile-nav-button:disabled {
+    background-color: #6b7280;
+    cursor: not-allowed;
+}
+
+/* Mobile newsletter button alignment */
+@media (max-width: 768px) {
+    .mobile-newsletter-left {
+        justify-content: flex-start !important;
+    }
+    
+    .mobile-newsletter-left .sender-form-field {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Approval Modal Styles */
+.approval-modal-content {
+    background-color: #1a1a1a;
+    color: #E0E0E0;
+}
+
+body.light-mode .approval-modal-content {
+    background-color: #ffffff;
+    color: #333;
+}
+
+body.light-mode .approval-modal-content h2 {
+    color: #000 !important;
+}
+
+/* Gift Link Display */
+.gift-link-display {
+    background-color: rgba(220, 38, 38, 0.1);
+    border: 2px solid #DC2626;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.gift-link-text {
+    font-family: monospace;
+    font-size: 0.875rem;
+    word-break: break-all;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    margin: 0.5rem 0;
+}
+
+body.light-mode .gift-link-text {
+    background-color: rgba(0, 0, 0, 0.1);
+}
     </style>
 </head>
 <body>
@@ -646,11 +721,26 @@ body.light-mode .step-container.completed:hover {
                 <img src="logo.png" alt="Pau Tacos Logo - Artisanal Nigerian Tacos" class="h-20 w-20" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DC2626/ffffff?text=PT';">
             </a>
             <div class="flex items-center space-x-4">
+                <!-- Search Icon -->
+                <button id="search-button" class="relative text-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+                
+                <!-- Gift Icon -->
+                <button id="gift-button" class="relative text-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                    </svg>
+                </button>
+                
                  <!-- Cart Icon -->
                 <button id="cart-button" class="relative text-white">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
                 </button>
+                
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" class="text-white"></button>
             </div>
@@ -729,27 +819,29 @@ body.light-mode .step-container.completed:hover {
                     </div>
                     
                     <!-- Draft Email Button with Social Media inline -->
-                    <div class="flex items-center space-x-4">
+                    <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 mobile-newsletter-left">
                         <button id="draft-email-btn" class="bg-transparent border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-all duration-300">
                             Draft Email
                         </button>
                         
                         <!-- Social Media Icons - Natural shapes -->
-                        <a href="https://www.tiktok.com/@fromsupply" target="_blank" class="group">
-                            <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
-                                <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                                </svg>
-                            </div>
-                        </a>
-                        
-                        <a href="https://www.instagram.com/fromsupply" target="_blank" class="group">
-    <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
-        <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"/>
-        </svg>
-    </div>
-</a>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://www.tiktok.com/@fromsupply" target="_blank" class="group">
+                                <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+                                    <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                    </svg>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.instagram.com/fromsupply" target="_blank" class="group">
+                                <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+                                    <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -760,6 +852,89 @@ body.light-mode .step-container.completed:hover {
         </div>
     </div>
 </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="search-modal-content rounded-lg shadow-xl w-11/12 md:max-w-2xl mx-auto relative p-8">
+            <button id="close-search-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Search Menu</h2>
+            <input type="text" id="search-input" class="w-full bg-[#2a2a2a] text-white p-4 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500 mb-6" placeholder="Search for items or toppings...">
+            <div id="search-results" class="space-y-4 max-h-96 overflow-y-auto">
+                <!-- Search results will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Modal -->
+    <div id="gift-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="gift-modal-content rounded-lg shadow-xl w-11/12 md:max-w-xl mx-auto relative p-8">
+            <button id="close-gift-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Create Gift Link</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block mb-3 text-lg font-semibold text-white">Gift Amount Limit</label>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="gift-limit-option border-2 border-gray-600 rounded-lg p-4 text-center" data-limit="25000">
+                            <div class="text-xl font-bold">₦25,000</div>
+                            <div class="text-sm text-gray-400">Perfect for a nice meal</div>
+                        </div>
+                        <div class="gift-limit-option border-2 border-gray-600 rounded-lg p-4 text-center" data-limit="50000">
+                            <div class="text-xl font-bold">₦50,000</div>
+                            <div class="text-sm text-gray-400">Great for a feast</div>
+                        </div>
+                        <div class="gift-limit-option border-2 border-gray-600 rounded-lg p-4 text-center" data-limit="unlimited">
+                            <div class="text-xl font-bold">♾️ Unlimited</div>
+                            <div class="text-sm text-gray-400">Requires SMS approval for each order</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="gift-uses" class="block mb-2 text-lg font-semibold text-white">Number of Uses</label>
+                    <input type="number" id="gift-uses" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" min="1" max="10" value="1" placeholder="How many times can this link be used?">
+                </div>
+
+                <button id="create-gift-link" class="cta-button w-full font-bold py-4 rounded-full text-lg">Create Gift Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Link Display Modal -->
+    <div id="gift-link-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="gift-modal-content rounded-lg shadow-xl w-11/12 md:max-w-xl mx-auto relative p-8">
+            <button id="close-gift-link-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Gift Link Created!</h2>
+            
+            <div id="gift-link-content" class="space-y-4">
+                <!-- Gift link details will be populated here -->
+            </div>
+            
+            <div class="flex space-x-4 mt-6">
+                <button id="copy-gift-link" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors">Copy Link</button>
+                <button id="share-gift-link" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors">Share</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Approval Modal -->
+    <div id="sms-approval-modal" class="fixed inset-0 z-[60] items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="approval-modal-content rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto relative p-8">
+            <h2 class="font-playfair text-2xl text-white mb-4">SMS Approval Required</h2>
+            <p class="text-gray-300 mb-6">An SMS has been sent to your phone for approval of this unlimited gift order.</p>
+            <div id="sms-approval-details" class="bg-[#2a2a2a] p-4 rounded-lg mb-6">
+                <!-- Approval details will be populated here -->
+            </div>
+            <div class="flex space-x-4">
+                <button id="approve-unlimited-order" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors">Approve (Yes)</button>
+                <button id="deny-unlimited-order" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-colors">Deny (No)</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Order Modal -->
     <div id="order-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
@@ -786,48 +961,39 @@ body.light-mode .step-container.completed:hover {
         <div id="name-step" class="step-container visible active">
             <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
             <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
-            <p class="text-xs text-gray-500 mt-1">Press Enter to continue</p>
+            <div class="flex justify-between items-center mt-2">
+                <p class="text-xs text-gray-500">Enter your name</p>
+                <button id="name-next-btn" class="mobile-nav-button md:hidden text-sm px-3 py-1">Next</button>
+            </div>
         </div>
         
         <!-- Step 2: Phone -->
         <div id="phone-step" class="step-container">
             <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
             <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
-            <p class="text-xs text-gray-500 mt-1">Press Enter to continue</p>
+            <div class="flex justify-between items-center mt-2">
+                <p class="text-xs text-gray-500">Enter your phone number</p>
+                <button id="phone-next-btn" class="mobile-nav-button md:hidden text-sm px-3 py-1">Next</button>
+            </div>
         </div>
         
         <!-- Step 3: Pickup Spot -->
         <div id="pickup-step" class="step-container">
             <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
             <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
-            <p class="text-xs text-gray-500 mt-1">Press Enter to continue (optional)</p>
-        </div>
-        
-        <!-- Step 4: Campus (Optional) -->
-        <div id="campus-step" class="step-container">
-            <label class="block mb-2 font-semibold text-gray-300">Select Your Campus (Optional)</label>
-            <div id="campus-selector-trigger" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 cursor-pointer flex justify-between items-center">
-                <span id="selected-campus-text" class="text-gray-400">No Campus</span>
-                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <div class="flex justify-between items-center mt-2">
+                <p class="text-xs text-gray-500">Enter pickup location</p>
+                <button id="pickup-done-btn" class="mobile-nav-button md:hidden text-sm px-3 py-1">Done</button>
             </div>
-            <input type="hidden" id="campus-select-input" name="campus" value="No Campus">
         </div>
+    </div>
+    <div id="gift-info-container" class="hidden mt-4 p-4 bg-green-900 bg-opacity-30 border border-green-500 rounded-lg">
+        <p class="text-green-400 font-medium text-sm mb-2">🎁 Gift Applied</p>
+        <p id="gift-info-text" class="text-green-300 text-sm"></p>
     </div>
     <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg hidden">BUY NOW</button>
 </div>
 </div>
-    </div>
-
-    <!-- Campus Selector Modal -->
-    <div id="campus-modal" class="fixed inset-0 z-[60] items-center justify-center hidden">
-        <div class="modal-backdrop absolute inset-0"></div>
-        <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-xl mx-auto relative p-8 overflow-y-auto">
-            <button id="close-campus-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
-            <h2 class="font-playfair text-3xl text-white mb-6">Select a Campus</h2>
-            <div id="campus-list-container" class="space-y-4">
-                <!-- Campuses will be injected here -->
-            </div>
-        </div>
     </div>
     
     <!-- Note/Lure Modal -->
@@ -1039,7 +1205,7 @@ body.light-mode .step-container.completed:hover {
                 coffee: {
                     name: 'The Jos Plateau Coffee',
                     image: 'coffee.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    prices: { big: 2000, bigger: 3000, bigger: 4000 },
                     toppings: sweetToppings,
                     letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul to the beauty of the morning.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
                 },
@@ -1063,6 +1229,77 @@ body.light-mode .step-container.completed:hover {
                     prices: { big: 2500, bigger: 4000, biggest: 5500 },
                     toppings: sweetToppings,
                     letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients, a cool whisper on a hot day.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                // New items
+                wrap: {
+                    name: 'The Lagos Wrap',
+                    image: 'wrap.png',
+                    prices: { big: 3500, bigger: 5000, biggest: 6500 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Born in the heart of Lagos traffic, this wrap was designed for those who refuse to compromise between speed and flavor. Every ingredient is carefully layered to create a perfect bite every time, wrapped tight enough to survive the chaos of city life. It's fast food that respects your time and your taste buds.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                sandwich: {
+                    name: 'The Gentleman\'s Club Sandwich',
+                    image: 'sandwich.png',
+                    prices: { big: 4000, bigger: 6000, biggest: 8000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This sandwich wears a three-piece suit to work. Layer upon layer of carefully selected ingredients, stacked with architectural precision. It's the kind of sandwich that commands respect in any room, whether that's a boardroom or your backyard. Every bite is a statement of sophistication.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                salad: {
+                    name: 'The Garden Symphony Salad',
+                    image: 'salad.png',
+                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This isn't just a salad, it's a celebration of everything that grows under the Nigerian sun. We source our greens from secret gardens where the soil whispers ancient secrets to the roots. Each leaf is chosen for its character, its crunch, its contribution to the symphony of flavors dancing in your bowl.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                frittata: {
+                    name: 'The Lagos Morning Frittata',
+                    image: 'frittata.png',
+                    prices: { big: 3500, bigger: 5000, biggest: 6500 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Born in the bustling morning markets of Lagos, where vendors call out their wares and the air is thick with possibility. This frittata captures the energy of a new day—eggs whisked with the dreams of ambitious souls, folded with ingredients that tell stories of hustle and hope. It's breakfast poetry, written in golden, fluffy verses.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                parfait: {
+                    name: 'The Layered Dreams Parfait',
+                    image: 'parfait.png',
+                    prices: { big: 2500, bigger: 3500, biggest: 4500 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Like life itself, this parfait is built in layers—each one telling its own story, yet contributing to a greater narrative. Creamy yogurt meets crunchy granola, sweet fruit dances with subtle spice. It's a meditation in a glass, a reminder that the most beautiful things are often the simplest, assembled with intention and love.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                scotchegg: {
+                    name: 'The London-Lagos Scotch Egg',
+                    image: 'scotchegg.png',
+                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A tale of two cities—the foggy streets of London and the vibrant energy of Lagos. We took the British classic and gave it a Nigerian soul, wrapping it in our spiced meat blend and frying it to golden perfection. It's a bridge between worlds, a handshake between cultures, served warm with respect for both traditions.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                springroll: {
+                    name: 'The Crispy Spring Chronicle',
+                    image: 'springroll.png',
+                    prices: { big: 2500, bigger: 3500, biggest: 4500 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Each roll holds secrets—vegetables that crunch with the memory of morning dew, spices that whisper tales of ancient trade routes. Wrapped tight in gossamer thin pastry and fried until they sing. These aren't just spring rolls; they're tiny capsules of joy, delivering bursts of flavor that transport you to bustling Asian markets filtered through a Nigerian lens.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                samosa: {
+                    name: 'The Triangular Treasures',
+                    image: 'samosa.png',
+                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
+                    toppings: savoryToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Geometry has never tasted so good. These golden triangles arrived on the spice route centuries ago and made themselves at home in our hearts. We fill them with stories—spiced potatoes that remember their journey from distant fields, peas that pop with sweetness, all wrapped in pastry that shatters beautifully at first bite. Small packages, infinite possibilities.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                puffpuff: {
+                    name: 'The Cloud Spheres of Joy',
+                    image: 'puffpuff.png',
+                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
+                    toppings: sweetToppings,
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">These are more than just fried dough—they're edible clouds, little spheres of happiness that float on your tongue before dissolving into pure bliss. Made from a recipe that's been passed down through generations of street vendors and loving grandmothers. Each bite is a memory, each sphere a moment of pure, unadulterated joy. Simple magic, profound pleasure.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+                },
+                waffles: {
+                    name: 'The Golden Grid Delights',
+                    image: 'wafles.png',
+                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
+                    toppings: [...pancakeToppings, ...sweetToppings],
+                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Perfection lives in the details—each square pocket designed to hold syrup, each ridge crafted to deliver the perfect ratio of crisp to fluffy. These waffles are architectural marvels, golden grids that transform simple batter into breakfast art. Whether crowned with fruit or drizzled with honey, they're a canvas for your morning dreams.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
                 }
             };
 
@@ -1099,25 +1336,22 @@ body.light-mode .step-container.completed:hover {
                 lagos: {
                     name: 'Lagos',
                     image: 'lagos.png',
-                    universities: ['University of Lagos (UNILAG)', 'Lagos State University (LASU)', 'Yaba College of Technology (YABATECH)', 'Pan-Atlantic University (PAU)', 'Caleb University', 'National Open University (Lagos)', 'Federal College of Education (Akoka)'],
                     letter: `
-                        <p class="mb-4">My journey began in the concrete jungle, a city that never sleeps. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Lagos, its energy a vibrant pulse. I found willing palates at LASU and YABATECH, their hunger for new flavors insatiable. The scholars at Pan-Atlantic University, Caleb, the National Open University, and the Federal College of Education all welcomed the craft. The city is vast, a sprawling map of taste, and I will continue mapping it to bring this magic to more people.</p>
+                        <p class="mb-4">My journey began in the concrete jungle, a city that never sleeps. I wandered amongst the lands to sneak in the best from the four corners of the earth. The city is vast, a sprawling map of taste, and I continue mapping it to bring this magic to more people.</p>
                         <p class="text-right mt-6">- The Cartographer</p>`
                 },
                 portharcourt: {
                     name: 'Port Harcourt',
                     image: 'portharcourt.png',
-                    universities: ['University of Port Harcourt (UNIPORT)', 'Rivers State University (RSU)', 'Ignatius Ajuru University of Education'],
                     letter: `
-                        <p class="mb-4">The Garden City called. I followed the rivers inland, carrying my secrets. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Port Harcourt, where the air is thick with knowledge and humidity. The bright minds at Rivers State University and the Ignatius Ajuru University of Education proved to be discerning connoisseurs. This city's appetite is strong, and my work here is only just beginning. I will continue mapping this vibrant place to bring the magic to more people.</p>
+                        <p class="mb-4">The Garden City called. I followed the rivers inland, carrying my secrets. I wandered amongst the lands to sneak in the best from the four corners of the earth. This city's appetite is strong, and my work here is only just beginning. I continue mapping this vibrant place to bring the magic to more people.</p>
                         <p class="text-right mt-6">- The Cartographer</p>`
                 },
                 abuja: {
                     name: 'Abuja',
                     image: 'abuja.png',
-                    universities: ['University of Abuja (UNIABUJA)', 'Baze University', 'Nile University of Nigeria', 'African University of Science & Tech', 'National Open University (Abuja)'],
                     letter: `
-                        <p class="mb-4">I arrived in the nation's capital, a city of wide roads and grand ambitions. I wandered amongst the lands to sneak in the best from the four corners of the earth. My first stop was the University of Abuja, a place of power and potential. The future leaders at Baze University, Nile University, the African University of Science & Tech, and the National Open University all shared in the experience. This city is a center of influence, and its influence will soon carry the taste of our craft far and wide. I will continue mapping its boulevards to bring the magic to more people.</p>
+                        <p class="mb-4">I arrived in the nation's capital, a city of wide roads and grand ambitions. I wandered amongst the lands to sneak in the best from the four corners of the earth. This city is a center of influence, and its influence will soon carry the taste of our craft far and wide. I continue mapping its boulevards to bring the magic to more people.</p>
                         <p class="text-right mt-6">- The Cartographer</p>`
                 }
                 
@@ -1126,7 +1360,11 @@ body.light-mode .step-container.completed:hover {
             const toppingPrice = 1000;
             let cart = [];
             let isSiteDarkMode = localStorage.getItem('siteDarkMode') !== 'false';
-initializeDraftEmailModal();
+            let currentGiftInfo = null;
+            let giftLinks = JSON.parse(localStorage.getItem('pautacos-gift-links') || '[]');
+
+            initializeDraftEmailModal();
+            
             // --- DOM ELEMENTS ---
             const body = document.body;
             const menuContainer = document.getElementById('menu-items');
@@ -1134,16 +1372,17 @@ initializeDraftEmailModal();
             const locationsContainer = document.getElementById('locations-container');
             const orderModal = document.getElementById('order-modal');
             const cartModal = document.getElementById('cart-modal');
-            const campusModal = document.getElementById('campus-modal');
             const noteModal = document.getElementById('note-modal');
             const noteContent = document.getElementById('note-content');
+            const searchModal = document.getElementById('search-modal');
+            const giftModal = document.getElementById('gift-modal');
+            const giftLinkModal = document.getElementById('gift-link-modal');
+            const smsApprovalModal = document.getElementById('sms-approval-modal');
             const cartButton = document.getElementById('cart-button');
+            const searchButton = document.getElementById('search-button');
+            const giftButton = document.getElementById('gift-button');
             const cartCount = document.getElementById('cart-count');
             const cartItemsContainer = document.getElementById('cart-items-container');
-            const campusSelectorTrigger = document.getElementById('campus-selector-trigger');
-            const selectedCampusText = document.getElementById('selected-campus-text');
-            const campusSelectInput = document.getElementById('campus-select-input');
-            const campusListContainer = document.getElementById('campus-list-container');
             const buyNowButton = document.getElementById('buy-now-button');
             const header = document.getElementById('header');
             const themeToggle = document.getElementById('theme-toggle');
@@ -1155,23 +1394,23 @@ initializeDraftEmailModal();
             }
 
             function checkFormCompletion() {
-    const nameField = document.getElementById('customer-name');
-    const phoneField = document.getElementById('customer-phone');
-    const pickupField = document.getElementById('pickup-spot');
-    const buyNowButton = document.getElementById('buy-now-button');
-    
-    const hasName = nameField && nameField.value.trim().length > 0;
-    const hasPhone = phoneField && phoneField.value.trim().length > 0;
-    const hasPickup = pickupField && pickupField.value.trim().length > 0;
-    
-    // Show buy now button only if all required fields are filled
-    if (hasName && hasPhone && hasPickup && buyNowButton) {
-        buyNowButton.classList.remove('hidden');
-        updateTotal(); // Update the total when showing the button
-    } else if (buyNowButton) {
-        buyNowButton.classList.add('hidden');
-    }
-}
+                const nameField = document.getElementById('customer-name');
+                const phoneField = document.getElementById('customer-phone');
+                const pickupField = document.getElementById('pickup-spot');
+                const buyNowButton = document.getElementById('buy-now-button');
+                
+                const hasName = nameField && nameField.value.trim().length > 0;
+                const hasPhone = phoneField && phoneField.value.trim().length > 0;
+                const hasPickup = pickupField && pickupField.value.trim().length > 0;
+                
+                // Show buy now button only if all required fields are filled
+                if (hasName && hasPhone && hasPickup && buyNowButton) {
+                    buyNowButton.classList.remove('hidden');
+                    updateTotal(); // Update the total when showing the button
+                } else if (buyNowButton) {
+                    buyNowButton.classList.add('hidden');
+                }
+            }
 
             function renderMenu() {
                 menuContainer.innerHTML = '';
@@ -1230,29 +1469,29 @@ initializeDraftEmailModal();
             }
 
             function applyTheme() {
-            const headerLogo = document.querySelector('header img');
-            const footerLogo = document.querySelector('footer img');
-            const signatureImages = document.querySelectorAll('.signature-image'); // Get all signature images
-            
-            if (isSiteDarkMode) {
-                body.classList.remove('light-mode');
-                themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`; // Sun icon
+                const headerLogo = document.querySelector('header img');
+                const footerLogo = document.querySelector('footer img');
+                const signatureImages = document.querySelectorAll('.signature-image'); // Get all signature images
                 
-                // Set dark mode images
-                if (headerLogo) headerLogo.src = 'logo.png';
-                if (footerLogo) footerLogo.src = 'logo.png';
-                signatureImages.forEach(img => img.src = 'whitesig.png'); // ** NEW **
+                if (isSiteDarkMode) {
+                    body.classList.remove('light-mode');
+                    themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`; // Sun icon
+                    
+                    // Set dark mode images
+                    if (headerLogo) headerLogo.src = 'logo.png';
+                    if (footerLogo) footerLogo.src = 'logo.png';
+                    signatureImages.forEach(img => img.src = 'whitesig.png'); // ** NEW **
 
-            } else {
-                body.classList.add('light-mode');
-                themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`; // Moon icon
-                
-                // Set light mode images
-                if (headerLogo) headerLogo.src = 'darklogo.png';
-                if (footerLogo) footerLogo.src = 'darklogo.png';
-                signatureImages.forEach(img => img.src = 'signature.png'); // ** NEW **
+                } else {
+                    body.classList.add('light-mode');
+                    themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`; // Moon icon
+                    
+                    // Set light mode images
+                    if (headerLogo) headerLogo.src = 'darklogo.png';
+                    if (footerLogo) footerLogo.src = 'darklogo.png';
+                    signatureImages.forEach(img => img.src = 'signature.png'); // ** NEW **
+                }
             }
-        }
             
             function applyNoteTheme() {
                 if (isSiteDarkMode) {
@@ -1264,42 +1503,198 @@ initializeDraftEmailModal();
                 }
             }
 
-            function openNoteModal(itemKey, type = 'menu') {
-            const item = type === 'menu' ? menuData[itemKey] : (type === 'exotic' ? exoticsData[itemKey] : locationsData[itemKey]);
-            let buttonHtml = '';
+            // Search functionality
+            function performSearch(query) {
+                const results = [];
+                const searchTerm = query.toLowerCase().trim();
+                
+                if (!searchTerm) return results;
 
-            // ** NEW: Determine which signature to use based on the theme **
-            const signatureSrc = isSiteDarkMode ? 'whitesig.png' : 'signature.png';
-            const signatureHtml = `<img src="${signatureSrc}" class="h-5 ml-auto" alt="Signature">`;
+                // Search menu items
+                Object.keys(menuData).forEach(key => {
+                    const item = menuData[key];
+                    if (item.name.toLowerCase().includes(searchTerm)) {
+                        results.push({
+                            type: 'item',
+                            key: key,
+                            name: item.name,
+                            match: 'Product name'
+                        });
+                    }
+                    
+                    // Search toppings for this item
+                    item.toppings.forEach(topping => {
+                        if (topping.toLowerCase().includes(searchTerm)) {
+                            results.push({
+                                type: 'topping',
+                                key: key,
+                                name: item.name,
+                                topping: topping,
+                                match: `Topping: ${topping}`
+                            });
+                        }
+                    });
+                });
 
-            if (type === 'menu') {
-                buttonHtml = `<button id="experience-now-button" class="blur-button mt-6" data-item="${itemKey}">Experience at Home</button>`;
-            } else if (type === 'exotic') {
-                buttonHtml = `<a href="#newsletter" id="update-letter-button" class="blur-button mt-6">${isTouchDevice() ? 'Tap' : 'Click'} to Intercept Future Updates</a>`;
+                return results;
             }
 
-            noteContent.innerHTML = `
-                <div class="absolute top-2 right-4 flex items-center space-x-2">
-                    <button id="close-note-modal" class="text-gray-500 hover:text-black text-3xl">&times;</button>
-                </div>
-                <div class="font-kalam text-lg leading-relaxed mt-8">${item.letter.replace('{{SIGNATURE}}', signatureHtml)}</div>
-                <div class="text-center">${buttonHtml}</div>
-            `;
-            noteModal.style.display = 'flex';
-            applyNoteTheme();
-            body.classList.add('modal-open');
-        }
+            function displaySearchResults(results) {
+                const searchResults = document.getElementById('search-results');
+                
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<p class="text-gray-400 text-center py-8">No results found. Try searching for menu items or toppings.</p>';
+                    return;
+                }
 
-            function openOrderModal(itemKey) {
+                const resultsHtml = results.map(result => `
+                    <div class="search-result-item p-4 border border-gray-600 rounded-lg" data-item="${result.key}" data-type="${result.type}" ${result.topping ? `data-topping="${result.topping}"` : ''}>
+                        <h4 class="font-bold text-lg">${result.name}</h4>
+                        <p class="text-sm text-gray-400">${result.match}</p>
+                    </div>
+                `).join('');
+
+                searchResults.innerHTML = resultsHtml;
+            }
+
+            // Gift link functionality
+            function generateGiftId() {
+                return Date.now().toString(36) + Math.random().toString(36).substr(2);
+            }
+
+            function createGiftLink(limit, uses) {
+                const giftId = generateGiftId();
+                const expiresAt = Date.now() + (60 * 60 * 1000); // 1 hour from now
+                
+                const giftLink = {
+                    id: giftId,
+                    limit: limit,
+                    usesLeft: parseInt(uses),
+                    originalUses: parseInt(uses),
+                    expiresAt: expiresAt,
+                    createdAt: Date.now()
+                };
+                
+                giftLinks.push(giftLink);
+                localStorage.setItem('pautacos-gift-links', JSON.stringify(giftLinks));
+                
+                return giftLink;
+            }
+
+            function validateGiftLink(giftId) {
+                const giftLink = giftLinks.find(link => link.id === giftId);
+                
+                if (!giftLink) return { valid: false, reason: 'Gift link not found' };
+                if (Date.now() > giftLink.expiresAt) return { valid: false, reason: 'Gift link has expired' };
+                if (giftLink.usesLeft <= 0) return { valid: false, reason: 'Gift link has been fully used' };
+                
+                return { valid: true, giftLink: giftLink };
+            }
+
+            function applyGiftToCart(giftLink) {
+                currentGiftInfo = giftLink;
+                updateGiftDisplay();
+                updateTotal();
+            }
+
+            function updateGiftDisplay() {
+                const giftContainer = document.getElementById('gift-info-container');
+                const giftText = document.getElementById('gift-info-text');
+                
+                if (currentGiftInfo) {
+                    giftContainer.classList.remove('hidden');
+                    const limitText = currentGiftInfo.limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(currentGiftInfo.limit).toLocaleString()}`;
+                    giftText.textContent = `Chim's ${limitText} gift (${currentGiftInfo.usesLeft} uses left)`;
+                } else {
+                    giftContainer.classList.add('hidden');
+                }
+            }
+
+            function consumeGiftLink(giftId) {
+                const giftIndex = giftLinks.findIndex(link => link.id === giftId);
+                if (giftIndex !== -1) {
+                    giftLinks[giftIndex].usesLeft--;
+                    localStorage.setItem('pautacos-gift-links', JSON.stringify(giftLinks));
+                }
+            }
+
+            function simulateSMSApproval(orderTotal, giftId) {
+                const modal = document.getElementById('sms-approval-modal');
+                const detailsDiv = document.getElementById('sms-approval-details');
+                
+                detailsDiv.innerHTML = `
+                    <p class="text-white mb-2"><strong>Order Total:</strong> ₦${orderTotal.toLocaleString()}</p>
+                    <p class="text-white mb-2"><strong>Gift ID:</strong> ${giftId}</p>
+                    <p class="text-gray-300 text-sm">Approve this unlimited gift order?</p>
+                `;
+                
+                modal.style.display = 'flex';
+                body.classList.add('modal-open');
+                
+                return new Promise((resolve) => {
+                    const approveBtn = document.getElementById('approve-unlimited-order');
+                    const denyBtn = document.getElementById('deny-unlimited-order');
+                    
+                    const handleApprove = () => {
+                        cleanup();
+                        resolve(true);
+                    };
+                    
+                    const handleDeny = () => {
+                        cleanup();
+                        resolve(false);
+                    };
+                    
+                    const cleanup = () => {
+                        approveBtn.removeEventListener('click', handleApprove);
+                        denyBtn.removeEventListener('click', handleDeny);
+                        closeModal(modal);
+                    };
+                    
+                    approveBtn.addEventListener('click', handleApprove);
+                    denyBtn.addEventListener('click', handleDeny);
+                });
+            }
+
+            function openNoteModal(itemKey, type = 'menu') {
+                const item = type === 'menu' ? menuData[itemKey] : (type === 'exotic' ? exoticsData[itemKey] : locationsData[itemKey]);
+                let buttonHtml = '';
+
+                // ** NEW: Determine which signature to use based on the theme **
+                const signatureSrc = isSiteDarkMode ? 'whitesig.png' : 'signature.png';
+                const signatureHtml = `<img src="${signatureSrc}" class="h-5 ml-auto signature-image" alt="Signature">`;
+
+                if (type === 'menu') {
+                    buttonHtml = `<button id="experience-now-button" class="blur-button mt-6" data-item="${itemKey}">Experience at Home</button>`;
+                } else if (type === 'exotic') {
+                    buttonHtml = `<a href="#newsletter" id="update-letter-button" class="blur-button mt-6">${isTouchDevice() ? 'Tap' : 'Click'} to Intercept Future Updates</a>`;
+                }
+
+                noteContent.innerHTML = `
+                    <div class="absolute top-2 right-4 flex items-center space-x-2">
+                        <button id="close-note-modal" class="text-gray-500 hover:text-black text-3xl">&times;</button>
+                    </div>
+                    <div class="font-kalam text-lg leading-relaxed mt-8">${item.letter.replace('{{SIGNATURE}}', signatureHtml)}</div>
+                    <div class="text-center">${buttonHtml}</div>
+                `;
+                noteModal.style.display = 'flex';
+                applyNoteTheme();
+                body.classList.add('modal-open');
+            }
+
+            function openOrderModal(itemKey, searchTopping = null) {
                 const item = menuData[itemKey];
                 const modalContent = orderModal.querySelector('.modal-content');
                 
-                let toppingsHtml = item.toppings.length > 0 ? item.toppings.map(topping => `
-                    <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-lg">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600 bg-gray-800 border-gray-600 rounded focus:ring-red-500" value="${topping}">
-                        <span class="text-gray-300">${topping}</span>
-                    </label>
-                `).join('') : '<p class="text-gray-400 col-span-2 md:col-span-3">This item is perfect as it is.</p>';
+                let toppingsHtml = item.toppings.length > 0 ? item.toppings.map(topping => {
+                    const isPreselected = searchTopping && topping === searchTopping;
+                    return `
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-lg">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600 bg-gray-800 border-gray-600 rounded focus:ring-red-500" value="${topping}" ${isPreselected ? 'checked' : ''}>
+                            <span class="text-gray-300">${topping}</span>
+                        </label>
+                    `;
+                }).join('') : '<p class="text-gray-400 col-span-2 md:col-span-3">This item is perfect as it is.</p>';
 
                 modalContent.innerHTML = `
                     <button id="close-order-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
@@ -1331,6 +1726,10 @@ initializeDraftEmailModal();
                     <button id="add-to-cart-button" class="cta-button w-full font-bold py-4 mt-8 rounded-full text-lg" data-item="${itemKey}">${typeof window.editingCartIndex !== 'undefined' ? 'Update Box' : 'Add to Box'}</button>
                 `;
                 orderModal.style.display = 'flex';
+                
+                // Scroll to top of modal
+                modalContent.scrollTop = 0;
+                
                 body.classList.add('modal-open');
             }
 
@@ -1339,574 +1738,511 @@ initializeDraftEmailModal();
                 body.classList.remove('modal-open');
             }
 
-function addToCart(itemKey) {
-    const size = document.querySelector('input[name="size"]:checked').value;
-    const selectedToppings = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-    
-    const newItem = {
-        id: Date.now(),
-        key: itemKey,
-        name: menuData[itemKey].name,
-        size: size,
-        toppings: selectedToppings
-    };
-    
-    const wasEditing = typeof window.editingCartIndex !== 'undefined';
-    
-    // Check if we're editing an existing item
-    if (wasEditing) {
-        cart[window.editingCartIndex] = newItem;
-        delete window.editingCartIndex;
-    } else {
-        cart.push(newItem);
-    }
+            function addToCart(itemKey) {
+                const size = document.querySelector('input[name="size"]:checked').value;
+                const selectedToppings = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+                
+                const newItem = {
+                    id: Date.now(),
+                    key: itemKey,
+                    name: menuData[itemKey].name,
+                    size: size,
+                    toppings: selectedToppings
+                };
+                
+                const wasEditing = typeof window.editingCartIndex !== 'undefined';
+                
+                // Check if we're editing an existing item
+                if (wasEditing) {
+                    cart[window.editingCartIndex] = newItem;
+                    delete window.editingCartIndex;
+                } else {
+                    cart.push(newItem);
+                }
 
-    updateCart();
-    closeModal(orderModal);
-    
-    // If we were editing, reopen the cart
-    if (wasEditing) {
-        setTimeout(() => {
-            cartModal.style.display = 'flex';
-            setTimeout(() => cartModal.classList.add('active'), 10);
-            renderCartItems();
-            loadDeliveryInfo();
-            setupStepByStepForm(); // Add this missing line
-            body.classList.add('modal-open');
-        }, 300);
-    }
-}
+                updateCart();
+                closeModal(orderModal);
+                
+                // If we were editing, reopen the cart
+                if (wasEditing) {
+                    setTimeout(() => {
+                        cartModal.style.display = 'flex';
+                        setTimeout(() => cartModal.classList.add('active'), 10);
+                        renderCartItems();
+                        loadDeliveryInfo();
+                        setupStepByStepForm();
+                        body.classList.add('modal-open');
+                    }, 300);
+                }
+            }
 
             function updateCart() {
-    cartCount.textContent = cart.length;
-    renderCartItems();
-    saveDeliveryInfo();
-    saveCart(); // Save cart to localStorage
-}
-
-  function renderCartItems() {
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your cart is empty.</p>`;
-        buyNowButton.textContent = 'BUY NOW';
-        buyNowButton.disabled = true;
-        return;
-    }
-
-    const cartItemsHtml = cart.map((item, index) => `
-        <div class="cart-item flex justify-between items-start py-4 border-b border-gray-700" data-index="${index}">
-            <div class="flex-grow cursor-pointer">
-                <h4 class="font-bold text-lg text-white">${item.name} <span class="text-sm capitalize text-gray-400">(${item.size})</span></h4>
-                <p class="text-gray-500 text-sm">${item.toppings.join(', ') || 'No extra additions'}</p>
-                <p class="text-xs text-gray-600 mt-1">Tap to edit</p>
-            </div>
-            <button class="text-gray-500 hover:text-red-500 remove-item-button" data-index="${index}">&times;</button>
-        </div>
-    `).join('');
-    
-    const clearButtonHtml = `
-        <div class="pt-4 border-t border-gray-600 mt-4">
-            <button id="clear-cart-button" class="w-full font-medium py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors text-sm">Clear All Items</button>
-        </div>
-    `;
-    
-    cartItemsContainer.innerHTML = cartItemsHtml + clearButtonHtml;
-    
-    // Don't enable button here - let checkFormCompletion handle it
-checkFormCompletion();
-}
-function saveDeliveryInfo() {
-    try {
-        const nameField = document.getElementById('customer-name');
-        const phoneField = document.getElementById('customer-phone');
-        const campusField = document.getElementById('campus-select-input');
-        const campusTextElement = document.getElementById('selected-campus-text');
-        const pickupField = document.getElementById('pickup-spot');
-
-        const deliveryInfo = {
-            name: nameField ? nameField.value : '',
-            phone: phoneField ? phoneField.value : '',
-            campus: campusField ? campusField.value : '',
-            campusText: campusTextElement ? campusTextElement.textContent : '',
-            pickupSpot: pickupField ? pickupField.value : ''
-        };
-        
-        localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
-        console.log('✅ Saved delivery info:', deliveryInfo); // Remove after testing
-    } catch (e) {
-        console.warn('❌ Could not save delivery info to localStorage:', e);
-    }
-}
-
-function loadDeliveryInfo() {
-    const saved = localStorage.getItem('pautacos-delivery-info');
-    if (saved) {
-        const deliveryInfo = JSON.parse(saved);
-        
-        // Load values
-        document.getElementById('customer-name').value = deliveryInfo.name || '';
-        document.getElementById('customer-phone').value = deliveryInfo.phone || '';
-        document.getElementById('campus-select-input').value = deliveryInfo.campus || 'No Campus';
-        document.getElementById('pickup-spot').value = deliveryInfo.pickupSpot || '';
-        
-        // Update campus display
-        const campusText = deliveryInfo.campusText || 'No Campus';
-        const campusTextElement = document.getElementById('selected-campus-text');
-        campusTextElement.textContent = campusText;
-        
-        if (campusText !== '-- Please select a campus --') {
-            campusTextElement.classList.remove('text-gray-400');
-            if (body.classList.contains('light-mode')) {
-                campusTextElement.classList.add('text-black');
-            } else {
-                campusTextElement.classList.add('text-white');
+                cartCount.textContent = cart.length;
+                renderCartItems();
+                saveDeliveryInfo();
+                saveCart();
             }
-        }
-        
-        // Show and complete steps based on filled data
-        const nameStep = document.getElementById('name-step');
-        const phoneStep = document.getElementById('phone-step');
-        const pickupStep = document.getElementById('pickup-step');
-        const campusStep = document.getElementById('campus-step');
-        
-        if (deliveryInfo.name) {
-            nameStep.classList.add('completed');
-            nameStep.classList.remove('active');
-            phoneStep.classList.add('visible');
-            
-            if (deliveryInfo.phone) {
-                phoneStep.classList.add('completed');
-                phoneStep.classList.remove('active');
-                pickupStep.classList.add('visible');
-                
-                if (deliveryInfo.pickupSpot) {
-                    pickupStep.classList.add('completed');
-                    pickupStep.classList.remove('active');
-                    campusStep.classList.add('visible');
-                    campusStep.classList.add('active');
-                } else {
-                    pickupStep.classList.add('active');
+
+            function renderCartItems() {
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your cart is empty.</p>`;
+                    buyNowButton.textContent = 'BUY NOW';
+                    buyNowButton.disabled = true;
+                    return;
                 }
-            } else {
-                phoneStep.classList.add('active');
-            }
-        }
-    }
-}
 
-function loadDeliveryInfo() {
-    const saved = localStorage.getItem('pautacos-delivery-info');
-    if (saved) {
-        const deliveryInfo = JSON.parse(saved);
-        
-        // Load values
-        document.getElementById('customer-name').value = deliveryInfo.name || '';
-        document.getElementById('customer-phone').value = deliveryInfo.phone || '';
-        document.getElementById('campus-select-input').value = deliveryInfo.campus || 'No Campus';
-        document.getElementById('pickup-spot').value = deliveryInfo.pickupSpot || '';
-        
-        // Update campus display
-        const campusText = deliveryInfo.campusText || 'No Campus';
-        const campusTextElement = document.getElementById('selected-campus-text');
-        campusTextElement.textContent = campusText;
-        
-        if (campusText !== '-- Please select a campus --') {
-            campusTextElement.classList.remove('text-gray-400');
-            if (body.classList.contains('light-mode')) {
-                campusTextElement.classList.add('text-black');
-            } else {
-                campusTextElement.classList.add('text-white');
-            }
-        }
-        
-        // Show and complete steps based on filled data
-        const nameStep = document.getElementById('name-step');
-        const phoneStep = document.getElementById('phone-step');
-        const pickupStep = document.getElementById('pickup-step');
-        const campusStep = document.getElementById('campus-step');
-        
-        if (deliveryInfo.name) {
-            nameStep.classList.add('completed');
-            nameStep.classList.remove('active');
-            phoneStep.classList.add('visible');
-            
-            if (deliveryInfo.phone) {
-                phoneStep.classList.add('completed');
-                phoneStep.classList.remove('active');
-                pickupStep.classList.add('visible');
+                const cartItemsHtml = cart.map((item, index) => `
+                    <div class="cart-item flex justify-between items-start py-4 border-b border-gray-700" data-index="${index}">
+                        <div class="flex-grow cursor-pointer">
+                            <h4 class="font-bold text-lg text-white">${item.name} <span class="text-sm capitalize text-gray-400">(${item.size})</span></h4>
+                            <p class="text-gray-500 text-sm">${item.toppings.join(', ') || 'No extra additions'}</p>
+                            <p class="text-xs text-gray-600 mt-1">Tap to edit</p>
+                        </div>
+                        <button class="text-gray-500 hover:text-red-500 remove-item-button" data-index="${index}">&times;</button>
+                    </div>
+                `).join('');
                 
-                if (deliveryInfo.pickupSpot) {
-                    pickupStep.classList.add('completed');
-                    pickupStep.classList.remove('active');
-                    campusStep.classList.add('visible');
-                    campusStep.classList.add('active');
-                } else {
-                    pickupStep.classList.add('active');
-                }
-            } else {
-                phoneStep.classList.add('active');
+                const clearButtonHtml = `
+                    <div class="pt-4 border-t border-gray-600 mt-4">
+                        <button id="clear-cart-button" class="w-full font-medium py-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors text-sm">Clear All Items</button>
+                    </div>
+                `;
+                
+                cartItemsContainer.innerHTML = cartItemsHtml + clearButtonHtml;
+                
+                checkFormCompletion();
             }
-        }
-    }
-    
-    // Check if form is complete after loading
-    setTimeout(checkFormCompletion, 100);
-}
 
-// Enhanced save functions with error handling
-function saveCart() {
-    try {
-        localStorage.setItem('pautacos-cart', JSON.stringify(cart));
-    } catch (e) {
-        console.warn('Could not save cart to localStorage:', e);
-    }
-}
+            function saveDeliveryInfo() {
+                try {
+                    const nameField = document.getElementById('customer-name');
+                    const phoneField = document.getElementById('customer-phone');
+                    const pickupField = document.getElementById('pickup-spot');
 
-// Enhanced save delivery info with real-time updates
-function saveDeliveryInfo() {
-    try {
-        const nameField = document.getElementById('customer-name');
-        const phoneField = document.getElementById('customer-phone');
-        const campusField = document.getElementById('campus-select-input');
-        const campusTextElement = document.getElementById('selected-campus-text');
-        const pickupField = document.getElementById('pickup-spot');
+                    const deliveryInfo = {
+                        name: nameField ? nameField.value : '',
+                        phone: phoneField ? phoneField.value : '',
+                        pickupSpot: pickupField ? pickupField.value : ''
+                    };
+                    
+                    localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
+                } catch (e) {
+                    console.warn('Could not save delivery info to localStorage:', e);
+                }
+            }
 
-        const deliveryInfo = {
-            name: nameField ? nameField.value : '',
-            phone: phoneField ? phoneField.value : '',
-            campus: campusField ? campusField.value : '',
-            campusText: campusTextElement ? campusTextElement.textContent : '',
-            pickupSpot: pickupField ? pickupField.value : ''
-        };
-        
-        localStorage.setItem('pautacos-delivery-info', JSON.stringify(deliveryInfo));
-    } catch (e) {
-        console.warn('Could not save delivery info to localStorage:', e);
-    }
-}
+            function loadDeliveryInfo() {
+                const saved = localStorage.getItem('pautacos-delivery-info');
+                if (saved) {
+                    const deliveryInfo = JSON.parse(saved);
+                    
+                    // Load values
+                    document.getElementById('customer-name').value = deliveryInfo.name || '';
+                    document.getElementById('customer-phone').value = deliveryInfo.phone || '';
+                    document.getElementById('pickup-spot').value = deliveryInfo.pickupSpot || '';
+                    
+                    // Show and complete steps based on filled data
+                    const nameStep = document.getElementById('name-step');
+                    const phoneStep = document.getElementById('phone-step');
+                    const pickupStep = document.getElementById('pickup-step');
+                    
+                    if (deliveryInfo.name) {
+                        nameStep.classList.add('completed');
+                        nameStep.classList.remove('active');
+                        phoneStep.classList.add('visible');
+                        
+                        if (deliveryInfo.phone) {
+                            phoneStep.classList.add('completed');
+                            phoneStep.classList.remove('active');
+                            pickupStep.classList.add('visible');
+                            
+                            if (deliveryInfo.pickupSpot) {
+                                pickupStep.classList.add('completed');
+                                pickupStep.classList.remove('active');
+                            } else {
+                                pickupStep.classList.add('active');
+                            }
+                        } else {
+                            phoneStep.classList.add('active');
+                        }
+                    }
+                }
+                
+                // Check if form is complete after loading
+                setTimeout(checkFormCompletion, 100);
+            }
 
-// Load cart from localStorage
-function loadCart() {
-    const savedCart = localStorage.getItem('pautacos-cart');
-    if (savedCart) {
-        try {
-            cart = JSON.parse(savedCart);
-            updateCart();
-        } catch (e) {
-            console.error('Error loading cart from localStorage:', e);
-            cart = [];
-        }
-    }
-}
+            function saveCart() {
+                try {
+                    localStorage.setItem('pautacos-cart', JSON.stringify(cart));
+                } catch (e) {
+                    console.warn('Could not save cart to localStorage:', e);
+                }
+            }
 
-// Clear cart from localStorage
-function clearCart() {
-    cart = [];
-    localStorage.removeItem('pautacos-cart');
-    updateCart();
-}
-// Edit cart item function
-function editCartItem(index) {
-    const item = cart[index];
-    window.editingCartIndex = index;
-    
-    // Close cart modal first
-    saveDeliveryInfo();
-    cartModal.classList.remove('active');
-    setTimeout(() => {
-        closeModal(cartModal);
-        body.classList.remove('cart-open');
-    }, 300);
-    
-    // Open order modal after cart closes
-    setTimeout(() => {
-        openOrderModal(item.key);
-        
-        // Pre-select size and toppings after modal opens
-        setTimeout(() => {
-            const sizeRadio = document.querySelector(`input[name="size"][value="${item.size}"]`);
-            if (sizeRadio) sizeRadio.checked = true;
-            
-            item.toppings.forEach(topping => {
-                const toppingCheckbox = document.querySelector(`input[type="checkbox"][value="${topping}"]`);
-                if (toppingCheckbox) toppingCheckbox.checked = true;
-            });
-        }, 100);
-    }, 400);
-}
-            
+            function loadCart() {
+                const savedCart = localStorage.getItem('pautacos-cart');
+                if (savedCart) {
+                    try {
+                        cart = JSON.parse(savedCart);
+                        updateCart();
+                    } catch (e) {
+                        console.error('Error loading cart from localStorage:', e);
+                        cart = [];
+                    }
+                }
+            }
+
+            function clearCart() {
+                cart = [];
+                localStorage.removeItem('pautacos-cart');
+                currentGiftInfo = null;
+                updateCart();
+                updateGiftDisplay();
+            }
+
+            function editCartItem(index) {
+                const item = cart[index];
+                window.editingCartIndex = index;
+                
+                // Close cart modal first
+                saveDeliveryInfo();
+                cartModal.classList.remove('active');
+                setTimeout(() => {
+                    closeModal(cartModal);
+                    body.classList.remove('cart-open');
+                }, 300);
+                
+                // Open order modal after cart closes
+                setTimeout(() => {
+                    openOrderModal(item.key);
+                    
+                    // Pre-select size and toppings after modal opens
+                    setTimeout(() => {
+                        const sizeRadio = document.querySelector(`input[name="size"][value="${item.size}"]`);
+                        if (sizeRadio) sizeRadio.checked = true;
+                        
+                        item.toppings.forEach(topping => {
+                            const toppingCheckbox = document.querySelector(`input[type="checkbox"][value="${topping}"]`);
+                            if (toppingCheckbox) toppingCheckbox.checked = true;
+                        });
+                    }, 100);
+                }, 400);
+            }
+                    
             function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCart();
-    saveCart(); // Save after removal
-}
+                cart.splice(index, 1);
+                updateCart();
+                saveCart();
+            }
 
-function updateTotal() {
-    let total = 0;
-    cart.forEach(item => {
-        total += menuData[item.key].prices[item.size];
-        total += item.toppings.length * toppingPrice;
-    });
-    
-    const buyNowButton = document.getElementById('buy-now-button');
-    if (buyNowButton && !buyNowButton.classList.contains('hidden')) {
-        buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
-    }
-}
-            // Draft Email Functionality
-function initializeDraftEmailModal() {
-    const draftEmailBtn = document.getElementById('draft-email-btn');
-    const modal = document.getElementById('draft-email-modal');
-    const closeModalBtn = document.getElementById('close-draft-modal-btn');
-    const emailNameField = document.getElementById('email-name');
-    const emailEmailField = document.getElementById('email-email');
-    const emailPhoneField = document.getElementById('email-phone');
-    const emailMessageField = document.getElementById('email-message');
-    const emailNameFieldContainer = document.getElementById('email-name-field');
-    const emailEmailFieldContainer = document.getElementById('email-email-field');
-    const emailPhoneFieldContainer = document.getElementById('email-phone-field');
-    const emailMessageFieldContainer = document.getElementById('email-message-field');
-    const emailUrgencyFieldContainer = document.getElementById('email-urgency-field');
-    const emailSubmitFieldContainer = document.getElementById('email-submit-field');
-    const draftEmailSubmitBtn = document.getElementById('draft-email-submit-btn');
-    const phoneError = document.getElementById('phone-error');
-    const urgencyOptions = document.querySelectorAll('.urgency-option');
-    let selectedUrgency = '';
-
-    if (!draftEmailBtn || !modal || !closeModalBtn) return;
-
-    function showField(fieldContainer) {
-        if (fieldContainer) fieldContainer.classList.add('active');
-    }
-
-    function hideField(fieldContainer) {
-        if (fieldContainer) fieldContainer.classList.remove('active');
-    }
-
-    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
-    function isValidPhone(phone) { return phone.replace(/\D/g, '').length >= 10; }
-
-    urgencyOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
-            this.classList.add('border-white', 'bg-gray-800');
-            selectedUrgency = this.getAttribute('data-urgency');
-            checkFormCompletion();
-        });
-    });
-
-    function checkFormCompletion() {
-        if (emailNameField.value.trim().length > 2 &&
-            isValidEmail(emailEmailField.value.trim()) &&
-            isValidPhone(emailPhoneField.value.trim()) &&
-            emailMessageField.value.trim().length > 10 &&
-            selectedUrgency) {
-            showField(emailSubmitFieldContainer);
-        } else {
-            hideField(emailSubmitFieldContainer);
-        }
-    }
-
-    draftEmailBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal.classList.remove('hidden');
-        body.classList.add('modal-open');
-    });
-
-    function closeModal() {
-        modal.classList.add('hidden');
-        body.classList.remove('modal-open');
-        document.getElementById('email-draft-form').reset();
-        hideField(emailEmailFieldContainer);
-        hideField(emailPhoneFieldContainer);
-        hideField(emailMessageFieldContainer);
-        hideField(emailUrgencyFieldContainer);
-        hideField(emailSubmitFieldContainer);
-        urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
-        selectedUrgency = '';
-    }
-
-    closeModalBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => e.target === modal && closeModal());
-
-    function setupFieldListener(field, condition, nextField) {
-        const allNextFields = [emailEmailFieldContainer, emailPhoneFieldContainer, emailMessageFieldContainer, emailUrgencyFieldContainer, emailSubmitFieldContainer];
-        const nextFieldIndex = allNextFields.indexOf(nextField);
-        
-        field.addEventListener('input', () => {
-            if (condition(field.value.trim())) {
-                showField(nextField);
-            } else {
-                for (let i = nextFieldIndex; i < allNextFields.length; i++) {
-                    hideField(allNextFields[i]);
-                    const input = allNextFields[i].querySelector('input, textarea');
-                    if(input) input.value = '';
+            function updateTotal() {
+                let total = 0;
+                cart.forEach(item => {
+                    total += menuData[item.key].prices[item.size];
+                    total += item.toppings.length * toppingPrice;
+                });
+                
+                let finalTotal = total;
+                let giftApplied = false;
+                
+                if (currentGiftInfo && currentGiftInfo.limit !== 'unlimited') {
+                    const giftLimit = parseInt(currentGiftInfo.limit);
+                    if (total <= giftLimit) {
+                        finalTotal = 0;
+                        giftApplied = true;
+                    } else {
+                        finalTotal = total - giftLimit;
+                        giftApplied = true;
+                    }
+                } else if (currentGiftInfo && currentGiftInfo.limit === 'unlimited') {
+                    finalTotal = 0; // Will require SMS approval
+                    giftApplied = true;
                 }
-                urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
-                selectedUrgency = '';
+                
+                const buyNowButton = document.getElementById('buy-now-button');
+                if (buyNowButton && !buyNowButton.classList.contains('hidden')) {
+                    if (giftApplied && finalTotal === 0) {
+                        buyNowButton.textContent = currentGiftInfo.limit === 'unlimited' ? 
+                            `ORDER NOW (Requires Approval)` : 
+                            `ORDER NOW (Gift Applied)`;
+                    } else if (giftApplied) {
+                        buyNowButton.textContent = `BUY NOW (₦${finalTotal.toLocaleString()} after gift)`;
+                    } else {
+                        buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
+                    }
+                }
             }
-            checkFormCompletion();
-        });
-    }
 
-    setupFieldListener(emailNameField, val => val.length > 2, emailEmailFieldContainer);
-    setupFieldListener(emailEmailField, val => isValidEmail(val), emailPhoneFieldContainer);
-    setupFieldListener(emailPhoneField, val => isValidPhone(val), emailMessageFieldContainer);
-    setupFieldListener(emailMessageField, val => val.length > 10, emailUrgencyFieldContainer);
-    
-    emailPhoneField.addEventListener('input', () => {
-        const isValid = isValidPhone(emailPhoneField.value.trim());
-        phoneError.classList.toggle('hidden', isValid || emailPhoneField.value.trim().length === 0);
-    });
-
-    if (draftEmailSubmitBtn) {
-        draftEmailSubmitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            checkFormCompletion();
-            if(emailSubmitFieldContainer.classList.contains('active') === false) return;
-
-            const subject = `${selectedUrgency} from ${emailNameField.value.trim()}`;
-            const body = `Hello,\n\nI am writing to you with the following message:\n\n${emailMessageField.value.trim()}\n\nPlease feel free to contact me:\nEmail: ${emailEmailField.value.trim()}\nPhone: ${emailPhoneField.value.trim()}\n\nNature of this email: ${selectedUrgency}\n\nBest regards,\n${emailNameField.value.trim()}`;
-            const mailtoLink = `mailto:frontman@pautacos.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            window.open(mailtoLink, '_self');
-            setTimeout(closeModal, 500);
-        });
-    }
-}
-
-            function renderCampusList() {
-    campusListContainer.innerHTML = '';
-    
-    // Add "No Campus" option first
-    const noCampusHeader = document.createElement('h3');
-    noCampusHeader.className = 'font-bold text-xl text-brand-red mt-0';
-    noCampusHeader.textContent = 'General';
-    campusListContainer.appendChild(noCampusHeader);
-    
-    const noCampusItem = document.createElement('div');
-    noCampusItem.className = 'p-3 rounded-lg hover:bg-[#2a2a2a] cursor-pointer text-gray-300';
-    noCampusItem.textContent = 'No Campus';
-    noCampusItem.dataset.campus = 'No Campus';
-    campusListContainer.appendChild(noCampusItem);
-    
-    // Add existing locations
-    for (const key in locationsData) {
-        const location = locationsData[key];
-        const cityHeader = document.createElement('h3');
-        cityHeader.className = 'font-bold text-xl text-brand-red mt-4';
-        cityHeader.textContent = location.name;
-        campusListContainer.appendChild(cityHeader);
-
-        const cityList = document.createElement('div');
-        cityList.className = 'grid grid-cols-1 gap-2 mt-2';
-        
-        location.universities.forEach(campus => {
-            const campusItem = document.createElement('div');
-            campusItem.className = 'p-3 rounded-lg hover:bg-[#2a2a2a] cursor-pointer text-gray-300';
-            campusItem.textContent = campus;
-            campusItem.dataset.campus = campus;
-            cityList.appendChild(campusItem);
-        });
-        campusListContainer.appendChild(cityList);
-    }
-}
-
-function setupStepByStepForm() {
-    const nameInput = document.getElementById('customer-name');
-    const phoneInput = document.getElementById('customer-phone');
-    const pickupInput = document.getElementById('pickup-spot');
-    
-    const nameStep = document.getElementById('name-step');
-    const phoneStep = document.getElementById('phone-step');
-    const pickupStep = document.getElementById('pickup-step');
-    const campusStep = document.getElementById('campus-step');
-    
-    function showNextStep(currentStep, nextStep, currentInput) {
-        // Mark current step as completed
-        currentStep.classList.remove('active');
-        currentStep.classList.add('completed');
-        
-        // Show and activate next step
-        setTimeout(() => {
-            nextStep.classList.add('visible');
-            setTimeout(() => {
-                nextStep.classList.add('active');
-                const input = nextStep.querySelector('input, textarea');
-                if (input) input.focus();
-                checkFormCompletion(); // Check if form is complete
-            }, 150);
-        }, 100);
-    }
-    
-    nameInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && nameInput.value.trim().length > 0) {
-            saveDeliveryInfo();
-            showNextStep(nameStep, phoneStep, nameInput);
-        }
-    });
-    
-    phoneInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && phoneInput.value.trim().length > 0) {
-            saveDeliveryInfo();
-            showNextStep(phoneStep, pickupStep, phoneInput);
-        }
-    });
-    
-    pickupInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            saveDeliveryInfo();
-            checkFormCompletion(); // Check completion after pickup is entered
-            showNextStep(pickupStep, campusStep, pickupInput);
-        }
-    });
-    
-    // Allow clicking on completed fields to reactivate them
-    [nameStep, phoneStep, pickupStep].forEach((step, index) => {
-        step.addEventListener('click', (e) => {
-            if (step.classList.contains('completed')) {
-                // Remove active from all steps
-                [nameStep, phoneStep, pickupStep, campusStep].forEach(s => s.classList.remove('active'));
-                // Activate clicked step
-                step.classList.remove('completed');
-                step.classList.add('active');
-                const input = step.querySelector('input, textarea');
-                if (input) input.focus();
+            function setupStepByStepForm() {
+                const nameInput = document.getElementById('customer-name');
+                const phoneInput = document.getElementById('customer-phone');
+                const pickupInput = document.getElementById('pickup-spot');
+                
+                const nameStep = document.getElementById('name-step');
+                const phoneStep = document.getElementById('phone-step');
+                const pickupStep = document.getElementById('pickup-step');
+                
+                // Mobile navigation buttons
+                const nameNextBtn = document.getElementById('name-next-btn');
+                const phoneNextBtn = document.getElementById('phone-next-btn');
+                const pickupDoneBtn = document.getElementById('pickup-done-btn');
+                
+                function showNextStep(currentStep, nextStep, currentInput) {
+                    // Mark current step as completed
+                    currentStep.classList.remove('active');
+                    currentStep.classList.add('completed');
+                    
+                    // Show and activate next step
+                    setTimeout(() => {
+                        if (nextStep) {
+                            nextStep.classList.add('visible');
+                            setTimeout(() => {
+                                nextStep.classList.add('active');
+                                const input = nextStep.querySelector('input, textarea');
+                                if (input) input.focus();
+                            }, 150);
+                        }
+                        checkFormCompletion();
+                    }, 100);
+                }
+                
+                // Desktop Enter key handlers
+                nameInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && nameInput.value.trim().length > 0) {
+                        saveDeliveryInfo();
+                        showNextStep(nameStep, phoneStep, nameInput);
+                    }
+                });
+                
+                phoneInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && phoneInput.value.trim().length > 0) {
+                        saveDeliveryInfo();
+                        showNextStep(phoneStep, pickupStep, phoneInput);
+                    }
+                });
+                
+                pickupInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        saveDeliveryInfo();
+                        showNextStep(pickupStep, null, pickupInput);
+                    }
+                });
+                
+                // Mobile button handlers
+                if (nameNextBtn) {
+                    nameNextBtn.addEventListener('click', () => {
+                        if (nameInput.value.trim().length > 0) {
+                            saveDeliveryInfo();
+                            showNextStep(nameStep, phoneStep, nameInput);
+                        }
+                    });
+                }
+                
+                if (phoneNextBtn) {
+                    phoneNextBtn.addEventListener('click', () => {
+                        if (phoneInput.value.trim().length > 0) {
+                            saveDeliveryInfo();
+                            showNextStep(phoneStep, pickupStep, phoneInput);
+                        }
+                    });
+                }
+                
+                if (pickupDoneBtn) {
+                    pickupDoneBtn.addEventListener('click', () => {
+                        saveDeliveryInfo();
+                        showNextStep(pickupStep, null, pickupInput);
+                    });
+                }
+                
+                // Allow clicking on completed fields to reactivate them
+                [nameStep, phoneStep, pickupStep].forEach((step, index) => {
+                    step.addEventListener('click', (e) => {
+                        if (step.classList.contains('completed')) {
+                            // Remove active from all steps
+                            [nameStep, phoneStep, pickupStep].forEach(s => s.classList.remove('active'));
+                            // Activate clicked step
+                            step.classList.remove('completed');
+                            step.classList.add('active');
+                            const input = step.querySelector('input, textarea');
+                            if (input) input.focus();
+                        }
+                    });
+                });
+                
+                // Auto-save and check completion on input changes
+                [nameInput, phoneInput, pickupInput].forEach(input => {
+                    if (input) {
+                        // Remove existing listeners to prevent duplicates
+                        input.removeEventListener('input', handleInputChange);
+                        input.removeEventListener('blur', handleInputChange);
+                        input.removeEventListener('change', handleInputChange);
+                        
+                        // Add comprehensive listeners
+                        input.addEventListener('input', handleInputChange);
+                        input.addEventListener('blur', handleInputChange);
+                        input.addEventListener('change', handleInputChange);
+                    }
+                });
+                
+                function handleInputChange() {
+                    saveDeliveryInfo();
+                    checkFormCompletion();
+                }
+                
+                // Initial check when form is set up
+                checkFormCompletion();
             }
-        });
-    });
-    
-    // Auto-save and check completion on input changes
-    [nameInput, phoneInput, pickupInput].forEach(input => {
-        if (input) {
-            // Remove existing listeners to prevent duplicates
-            input.removeEventListener('input', handleInputChange);
-            input.removeEventListener('blur', handleInputChange);
-            input.removeEventListener('change', handleInputChange);
-            
-            // Add comprehensive listeners
-            input.addEventListener('input', handleInputChange);
-            input.addEventListener('blur', handleInputChange);
-            input.addEventListener('change', handleInputChange);
-        }
-    });
-    
-    function handleInputChange() {
-        saveDeliveryInfo();
-        checkFormCompletion();
-    }
-    
-    // Initial check when form is set up
-    checkFormCompletion();
-}
-            
+
+            // Draft Email Functionality
+            function initializeDraftEmailModal() {
+                const draftEmailBtn = document.getElementById('draft-email-btn');
+                const modal = document.getElementById('draft-email-modal');
+                const closeModalBtn = document.getElementById('close-draft-modal-btn');
+                const emailNameField = document.getElementById('email-name');
+                const emailEmailField = document.getElementById('email-email');
+                const emailPhoneField = document.getElementById('email-phone');
+                const emailMessageField = document.getElementById('email-message');
+                const emailNameFieldContainer = document.getElementById('email-name-field');
+                const emailEmailFieldContainer = document.getElementById('email-email-field');
+                const emailPhoneFieldContainer = document.getElementById('email-phone-field');
+                const emailMessageFieldContainer = document.getElementById('email-message-field');
+                const emailUrgencyFieldContainer = document.getElementById('email-urgency-field');
+                const emailSubmitFieldContainer = document.getElementById('email-submit-field');
+                const draftEmailSubmitBtn = document.getElementById('draft-email-submit-btn');
+                const phoneError = document.getElementById('phone-error');
+                const urgencyOptions = document.querySelectorAll('.urgency-option');
+                let selectedUrgency = '';
+
+                if (!draftEmailBtn || !modal || !closeModalBtn) return;
+
+                function showField(fieldContainer) {
+                    if (fieldContainer) fieldContainer.classList.add('active');
+                }
+
+                function hideField(fieldContainer) {
+                    if (fieldContainer) fieldContainer.classList.remove('active');
+                }
+
+                function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+                function isValidPhone(phone) { return phone.replace(/\D/g, '').length >= 10; }
+
+                urgencyOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
+                        this.classList.add('border-white', 'bg-gray-800');
+                        selectedUrgency = this.getAttribute('data-urgency');
+                        checkFormCompletion();
+                    });
+                });
+
+                function checkFormCompletion() {
+                    if (emailNameField.value.trim().length > 2 &&
+                        isValidEmail(emailEmailField.value.trim()) &&
+                        isValidPhone(emailPhoneField.value.trim()) &&
+                        emailMessageField.value.trim().length > 10 &&
+                        selectedUrgency) {
+                        showField(emailSubmitFieldContainer);
+                    } else {
+                        hideField(emailSubmitFieldContainer);
+                    }
+                }
+
+                draftEmailBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.remove('hidden');
+                    body.classList.add('modal-open');
+                });
+
+                function closeModal() {
+                    modal.classList.add('hidden');
+                    body.classList.remove('modal-open');
+                    document.getElementById('email-draft-form').reset();
+                    hideField(emailEmailFieldContainer);
+                    hideField(emailPhoneFieldContainer);
+                    hideField(emailMessageFieldContainer);
+                    hideField(emailUrgencyFieldContainer);
+                    hideField(emailSubmitFieldContainer);
+                    urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
+                    selectedUrgency = '';
+                }
+
+                closeModalBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => e.target === modal && closeModal());
+
+                function setupFieldListener(field, condition, nextField) {
+                    const allNextFields = [emailEmailFieldContainer, emailPhoneFieldContainer, emailMessageFieldContainer, emailUrgencyFieldContainer, emailSubmitFieldContainer];
+                    const nextFieldIndex = allNextFields.indexOf(nextField);
+                    
+                    field.addEventListener('input', () => {
+                        if (condition(field.value.trim())) {
+                            showField(nextField);
+                        } else {
+                            for (let i = nextFieldIndex; i < allNextFields.length; i++) {
+                                hideField(allNextFields[i]);
+                                const input = allNextFields[i].querySelector('input, textarea');
+                                if(input) input.value = '';
+                            }
+                            urgencyOptions.forEach(opt => opt.classList.remove('border-white', 'bg-gray-800'));
+                            selectedUrgency = '';
+                        }
+                        checkFormCompletion();
+                    });
+                }
+
+                setupFieldListener(emailNameField, val => val.length > 2, emailEmailFieldContainer);
+                setupFieldListener(emailEmailField, val => isValidEmail(val), emailPhoneFieldContainer);
+                setupFieldListener(emailPhoneField, val => isValidPhone(val), emailMessageFieldContainer);
+                setupFieldListener(emailMessageField, val => val.length > 10, emailUrgencyFieldContainer);
+                
+                emailPhoneField.addEventListener('input', () => {
+                    const isValid = isValidPhone(emailPhoneField.value.trim());
+                    phoneError.classList.toggle('hidden', isValid || emailPhoneField.value.trim().length === 0);
+                });
+
+                if (draftEmailSubmitBtn) {
+                    draftEmailSubmitBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        checkFormCompletion();
+                        if(emailSubmitFieldContainer.classList.contains('active') === false) return;
+
+                        const subject = `${selectedUrgency} from ${emailNameField.value.trim()}`;
+                        const body = `Hello,\n\nI am writing to you with the following message:\n\n${emailMessageField.value.trim()}\n\nPlease feel free to contact me:\nEmail: ${emailEmailField.value.trim()}\nPhone: ${emailPhoneField.value.trim()}\n\nNature of this email: ${selectedUrgency}\n\nBest regards,\n${emailNameField.value.trim()}`;
+                        const mailtoLink = `mailto:frontman@pautacos.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                        
+                        window.open(mailtoLink, '_self');
+                        setTimeout(closeModal, 500);
+                    });
+                }
+            }
+
+            // Check for gift link in URL
+            function checkForGiftLink() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const giftId = urlParams.get('gift');
+                
+                if (giftId) {
+                    const validation = validateGiftLink(giftId);
+                    if (validation.valid) {
+                        applyGiftToCart(validation.giftLink);
+                        // Remove gift parameter from URL without refresh
+                        const newURL = new URL(window.location);
+                        newURL.searchParams.delete('gift');
+                        window.history.replaceState({}, document.title, newURL.pathname + newURL.hash);
+                    } else {
+                        alert(`Gift link error: ${validation.reason}`);
+                    }
+                }
+            }
+
             // --- EVENT LISTENERS ---
             renderMenu();
             renderExotics();
             renderLocations();
-            renderCampusList();
             applyTheme();
-            loadCart(); // Load saved cart on page load
+            loadCart();
+            checkForGiftLink();
 
             menuContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.menu-card');
@@ -1922,6 +2258,134 @@ function setupStepByStepForm() {
                 }
             });
 
+            // Search functionality
+            searchButton.addEventListener('click', () => {
+                searchModal.style.display = 'flex';
+                body.classList.add('modal-open');
+                document.getElementById('search-input').focus();
+            });
+
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                const query = e.target.value;
+                const results = performSearch(query);
+                displaySearchResults(results);
+            });
+
+            document.getElementById('search-results').addEventListener('click', (e) => {
+                const resultItem = e.target.closest('.search-result-item');
+                if (resultItem) {
+                    const itemKey = resultItem.dataset.item;
+                    const type = resultItem.dataset.type;
+                    const topping = resultItem.dataset.topping;
+                    
+                    closeModal(searchModal);
+                    
+                    if (type === 'item') {
+                        openOrderModal(itemKey);
+                    } else if (type === 'topping') {
+                        openOrderModal(itemKey, topping);
+                    }
+                }
+            });
+
+            searchModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-search-modal') {
+                    closeModal(searchModal);
+                }
+            });
+
+            // Gift functionality
+            giftButton.addEventListener('click', () => {
+                giftModal.style.display = 'flex';
+                body.classList.add('modal-open');
+            });
+
+            document.querySelectorAll('.gift-limit-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.gift-limit-option').forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                });
+            });
+
+            document.getElementById('create-gift-link').addEventListener('click', () => {
+                const selectedOption = document.querySelector('.gift-limit-option.selected');
+                const usesInput = document.getElementById('gift-uses');
+                
+                if (!selectedOption) {
+                    alert('Please select a gift limit');
+                    return;
+                }
+                
+                const limit = selectedOption.dataset.limit;
+                const uses = usesInput.value;
+                
+                if (!uses || uses < 1) {
+                    alert('Please enter a valid number of uses');
+                    return;
+                }
+                
+                const giftLink = createGiftLink(limit, uses);
+                const baseUrl = window.location.origin + window.location.pathname;
+                const fullGiftLink = `${baseUrl}?gift=${giftLink.id}`;
+                
+                closeModal(giftModal);
+                
+                const giftLinkContent = document.getElementById('gift-link-content');
+                const limitText = limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(limit).toLocaleString()}`;
+                
+                giftLinkContent.innerHTML = `
+                    <div class="gift-link-display">
+                        <h3 class="font-bold text-lg mb-2">Your Gift Link</h3>
+                        <p class="text-sm text-gray-300 mb-3">Chim's ${limitText} gift • ${uses} uses • Expires in 1 hour</p>
+                        <div class="gift-link-text">${fullGiftLink}</div>
+                    </div>
+                `;
+                
+                // Store current gift link for copying/sharing
+                window.currentGiftLinkUrl = fullGiftLink;
+                
+                giftLinkModal.style.display = 'flex';
+                body.classList.add('modal-open');
+            });
+
+            document.getElementById('copy-gift-link').addEventListener('click', () => {
+                if (window.currentGiftLinkUrl) {
+                    navigator.clipboard.writeText(window.currentGiftLinkUrl).then(() => {
+                        alert('Gift link copied to clipboard!');
+                    }).catch(() => {
+                        alert('Could not copy link. Please copy manually.');
+                    });
+                }
+            });
+
+            document.getElementById('share-gift-link').addEventListener('click', () => {
+                if (window.currentGiftLinkUrl && navigator.share) {
+                    navigator.share({
+                        title: 'Pautacos Gift Link',
+                        text: 'I\'ve sent you a gift link for Pautacos!',
+                        url: window.currentGiftLinkUrl
+                    });
+                } else if (window.currentGiftLinkUrl) {
+                    // Fallback for browsers without native sharing
+                    const shareText = `I've sent you a gift link for Pautacos! ${window.currentGiftLinkUrl}`;
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        alert('Gift link copied to clipboard for sharing!');
+                    });
+                }
+            });
+
+            giftModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-modal') {
+                    closeModal(giftModal);
+                }
+            });
+
+            giftLinkModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-link-modal') {
+                    closeModal(giftLinkModal);
+                }
+            });
+
             orderModal.addEventListener('click', (e) => {
                 if (e.target.matches('.modal-backdrop') || e.target.id === 'close-order-modal') {
                     closeModal(orderModal);
@@ -1931,90 +2395,99 @@ function setupStepByStepForm() {
                 }
             });
 
-cartButton.addEventListener('click', () => {
-    cartModal.style.display = 'flex';
-    setTimeout(() => cartModal.classList.add('active'), 10);
-    renderCartItems();
-    loadDeliveryInfo();
-    setupStepByStepForm();
-    body.classList.add('modal-open');
-});
-
-    cartModal.addEventListener('click', (e) => {
-    if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
-        saveDeliveryInfo();
-        cartModal.classList.remove('active');
-        setTimeout(() => closeModal(cartModal), 300);
-    }
-    if (e.target.matches('.remove-item-button')) {
-        e.stopPropagation();
-        removeFromCart(e.target.dataset.index);
-    }
-    // Add cart item editing
-    if (e.target.closest('.cart-item') && !e.target.matches('.remove-item-button')) {
-        const index = parseInt(e.target.closest('.cart-item').dataset.index);
-        editCartItem(index);
-    }
-});
-
-// Clear cart button functionality
-document.addEventListener('click', (e) => {
-    if (e.target.id === 'clear-cart-button') {
-        if (confirm('Are you sure you want to clear all items from your cart?')) {
-            clearCart();
-        }
-    }
-});
-
-// Setup delivery info auto-save - call this every time cart opens
-function setupDeliveryInfoSaving() {
-    const fields = ['customer-name', 'customer-phone', 'pickup-spot'];
-    
-    fields.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            // Remove any existing listeners to prevent duplicates
-            element.removeEventListener('input', saveDeliveryInfo);
-            element.removeEventListener('blur', saveDeliveryInfo);
-            
-            // Add new listeners for real-time saving
-            element.addEventListener('input', saveDeliveryInfo);
-            element.addEventListener('blur', saveDeliveryInfo);
-        }
-    });
-}
-            
-            campusSelectorTrigger.addEventListener('click', () => {
-                campusModal.style.display = 'flex';
+            cartButton.addEventListener('click', () => {
+                cartModal.style.display = 'flex';
+                setTimeout(() => cartModal.classList.add('active'), 10);
+                renderCartItems();
+                loadDeliveryInfo();
+                setupStepByStepForm();
+                updateGiftDisplay();
                 body.classList.add('modal-open');
             });
 
-            campusModal.addEventListener('click', (e) => {
-                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-campus-modal') {
-                    closeModal(campusModal);
+            cartModal.addEventListener('click', (e) => {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
+                    saveDeliveryInfo();
+                    cartModal.classList.remove('active');
+                    setTimeout(() => closeModal(cartModal), 300);
+                }
+                if (e.target.matches('.remove-item-button')) {
+                    e.stopPropagation();
+                    removeFromCart(e.target.dataset.index);
+                }
+                // Add cart item editing
+                if (e.target.closest('.cart-item') && !e.target.matches('.remove-item-button')) {
+                    const index = parseInt(e.target.closest('.cart-item').dataset.index);
+                    editCartItem(index);
                 }
             });
 
-            campusListContainer.addEventListener('click', (e) => {
-    if (e.target.dataset.campus) {
-        const campusName = e.target.dataset.campus;
-        selectedCampusText.textContent = campusName;
-        selectedCampusText.classList.remove('text-gray-400');
-        
-        // Add appropriate text color based on current theme
-        if (body.classList.contains('light-mode')) {
-            selectedCampusText.classList.remove('text-white');
-            selectedCampusText.classList.add('text-black');
-        } else {
-            selectedCampusText.classList.remove('text-black');
-            selectedCampusText.classList.add('text-white');
-        }
-        
-        campusSelectInput.value = campusName;
-        saveDeliveryInfo();
-        closeModal(campusModal);
-    }
-});
+            // Clear cart button functionality
+            document.addEventListener('click', (e) => {
+                if (e.target.id === 'clear-cart-button') {
+                    if (confirm('Are you sure you want to clear all items from your cart?')) {
+                        clearCart();
+                    }
+                }
+            });
+
+            // Buy now button functionality
+            document.addEventListener('click', async (e) => {
+                if (e.target.id === 'buy-now-button') {
+                    const nameField = document.getElementById('customer-name');
+                    const phoneField = document.getElementById('customer-phone');
+                    const pickupField = document.getElementById('pickup-spot');
+                    
+                    if (!nameField.value.trim() || !phoneField.value.trim() || !pickupField.value.trim()) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    let total = 0;
+                    cart.forEach(item => {
+                        total += menuData[item.key].prices[item.size];
+                        total += item.toppings.length * toppingPrice;
+                    });
+                    
+                    // Handle unlimited gift approval
+                    if (currentGiftInfo && currentGiftInfo.limit === 'unlimited') {
+                        saveDeliveryInfo();
+                        cartModal.classList.remove('active');
+                        setTimeout(() => closeModal(cartModal), 300);
+                        
+                        const approved = await simulateSMSApproval(total, currentGiftInfo.id);
+                        if (!approved) {
+                            alert('Order cancelled. Please set a new limit or try again.');
+                            return;
+                        }
+                    }
+                    
+                    // Consume gift link if applicable
+                    if (currentGiftInfo) {
+                        consumeGiftLink(currentGiftInfo.id);
+                        currentGiftInfo = null;
+                    }
+                    
+                    // Create order summary
+                    const orderSummary = cart.map(item => 
+                        `${item.name} (${item.size})${item.toppings.length > 0 ? ' + ' + item.toppings.join(', ') : ''}`
+                    ).join('\n');
+                    
+                    const finalTotal = currentGiftInfo ? 0 : total;
+                    
+                    const whatsappMessage = `New Pautacos Order!\n\nCustomer: ${nameField.value}\nPhone: ${phoneField.value}\nPickup: ${pickupField.value}\n\nOrder:\n${orderSummary}\n\nTotal: ₦${finalTotal.toLocaleString()}${currentGiftInfo ? ' (Gift Applied)' : ''}`;
+                    
+                    const whatsappUrl = `https://wa.me/2348012345678?text=${encodeURIComponent(whatsappMessage)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Clear cart after successful order
+                    clearCart();
+                    
+                    saveDeliveryInfo();
+                    cartModal.classList.remove('active');
+                    setTimeout(() => closeModal(cartModal), 300);
+                }
+            });
 
             exoticsContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.exotic-card');
@@ -2024,7 +2497,7 @@ function setupDeliveryInfoSaving() {
             });
             
             noteModal.addEventListener('click', (e) => {
-                 if (e.target.matches('.modal-backdrop') || e.target.id === 'close-note-modal') {
+                if (e.target.matches('.modal-backdrop') || e.target.id === 'close-note-modal') {
                     closeModal(noteModal);
                 }
                 if(e.target.id === 'experience-now-button') {
@@ -2032,65 +2505,29 @@ function setupDeliveryInfoSaving() {
                     openOrderModal(e.target.dataset.item);
                 }
                 if(e.target.id === 'update-letter-button') {
-    closeModal(noteModal);
-    // Scroll delegation: delivery section scrolls cart items on mobile
-if (window.innerWidth <= 768) {
-    const deliverySection = document.querySelector('.cart-modal-content > div:last-child');
-    const cartItemsContainer = document.getElementById('cart-items-container');
-    
-    if (deliverySection && cartItemsContainer) {
-        deliverySection.addEventListener('wheel', (e) => {
-            // If cart items can scroll, delegate the scroll there
-            if (cartItemsContainer.scrollHeight > cartItemsContainer.clientHeight) {
-                e.preventDefault();
-                cartItemsContainer.scrollTop += e.deltaY;
-            }
-        }, { passive: false });
-        
-        // Handle touch scrolling on mobile
-        let startY = 0;
-        deliverySection.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-        });
-        
-        deliverySection.addEventListener('touchmove', (e) => {
-            const currentY = e.touches[0].clientY;
-            const diff = startY - currentY;
-            
-            if (cartItemsContainer.scrollHeight > cartItemsContainer.clientHeight) {
-                e.preventDefault();
-                cartItemsContainer.scrollTop += diff;
-                startY = currentY;
-            }
-        }, { passive: false });
-    }
-}
-    // Scroll to newsletter section
-    const newsletterSection = document.querySelector('footer');
-    if (newsletterSection) {
-        newsletterSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'center'
-        });
-    }
-    
-    // Wait a bit for scroll and form to load, then focus first input
-    setTimeout(() => {
-        // Try to find the Sender form input field
-        const senderInput = document.querySelector('.sender-form-field input[type="email"], .sender-form-field input[type="text"]');
-        if (senderInput) {
-            senderInput.focus();
-            senderInput.select(); // This will also select any existing text
-        } else {
-            // Fallback: try to find any input in the newsletter area
-            const fallbackInput = document.querySelector('footer input[type="email"], footer input[type="text"]');
-            if (fallbackInput) {
-                fallbackInput.focus();
-                fallbackInput.select();
-            }
-        }
-    }, 1000); // Wait 1 second for the Sender widget to fully load
-}
+                    closeModal(noteModal);
+                    const newsletterSection = document.querySelector('footer');
+                    if (newsletterSection) {
+                        newsletterSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        const senderInput = document.querySelector('.sender-form-field input[type="email"], .sender-form-field input[type="text"]');
+                        if (senderInput) {
+                            senderInput.focus();
+                            senderInput.select();
+                        } else {
+                            const fallbackInput = document.querySelector('footer input[type="email"], footer input[type="text"]');
+                            if (fallbackInput) {
+                                fallbackInput.focus();
+                                fallbackInput.select();
+                            }
+                        }
+                    }, 1000);
+                }
             });
 
             themeToggle.addEventListener('click', () => {
@@ -2098,8 +2535,6 @@ if (window.innerWidth <= 768) {
                 localStorage.setItem('siteDarkMode', isSiteDarkMode);
                 applyTheme();
             });
-
-            cartItemsContainer.addEventListener('DOMSubtreeModified', updateTotal);
             
             window.addEventListener('scroll', () => {
                 if (header) {
