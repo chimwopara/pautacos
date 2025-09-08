@@ -365,12 +365,14 @@ body.light-mode .exotics-section-bg p {
 body.light-mode #cart-button,
 body.light-mode #search-button,
 body.light-mode #gift-button,
+body.light-mode #profile-button,
 body.light-mode #theme-toggle {
     color: #fff;
 }
 body.light-mode header.scrolled #cart-button,
 body.light-mode header.scrolled #search-button,
 body.light-mode header.scrolled #gift-button,
+body.light-mode header.scrolled #profile-button,
 body.light-mode header.scrolled #theme-toggle {
     color: #000 !important;
 }
@@ -781,6 +783,42 @@ body.light-mode .category-filter-btn.active {
     color: #ffffff;
 }
 
+/* Profile Dropdown Styles */
+#profile-dropdown {
+    background-color: #1a1a1a;
+    color: #E0E0E0;
+}
+
+body.light-mode #profile-dropdown {
+    background-color: #ffffff;
+    color: #333;
+    border-color: #e5e7eb;
+}
+
+body.light-mode #profile-dropdown .border-gray-700 {
+    border-color: #e5e7eb;
+}
+
+body.light-mode #profile-dropdown .text-white {
+    color: #333;
+}
+
+body.light-mode #profile-dropdown .text-gray-400 {
+    color: #6b7280;
+}
+
+body.light-mode #profile-dropdown .text-gray-300 {
+    color: #374151;
+}
+
+body.light-mode #profile-dropdown .hover\:bg-gray-800:hover {
+    background-color: #f3f4f6;
+}
+
+body.light-mode #profile-dropdown .text-gray-500 {
+    color: #6b7280;
+}
+
 /* Prevent mobile zoom on input focus */
 @media screen and (max-width: 768px) {
     input[type="text"],
@@ -859,33 +897,6 @@ body.light-mode .category-filter-btn.active {
     animation-play-state: paused;
 }
 
-/* Profile dropdown light mode styles */
-body.light-mode #profile-dropdown {
-    background-color: #ffffff;
-    border-color: #e5e7eb;
-    color: #333;
-}
-
-body.light-mode #profile-dropdown .text-white {
-    color: #000 !important;
-}
-
-body.light-mode #profile-dropdown .text-gray-300 {
-    color: #6b7280 !important;
-}
-
-body.light-mode #profile-dropdown .text-gray-400 {
-    color: #9ca3af !important;
-}
-
-body.light-mode #profile-dropdown .border-gray-600 {
-    border-color: #e5e7eb !important;
-}
-
-body.light-mode #profile-dropdown .hover\:bg-gray-700:hover {
-    background-color: #f3f4f6 !important;
-}
-
     </style>
 </head>
 <body>
@@ -918,50 +929,63 @@ body.light-mode #profile-dropdown .hover\:bg-gray-700:hover {
 </button>
                 
                 <!-- Profile Menu -->
-<div class="relative">
-    <button id="profile-button" class="text-white">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-        </svg>
-    </button>
-    
-    <!-- Profile Dropdown -->
-    <div id="profile-dropdown" class="absolute right-0 top-12 w-64 bg-[#1a1a1a] border border-gray-600 rounded-lg shadow-xl hidden z-50">
-        <div class="p-4">
-            <!-- User Info Section (shown when signed in) -->
-            <div id="user-info-section" class="hidden border-b border-gray-600 pb-4 mb-4">
-                <div class="flex items-center space-x-3">
-                    <img id="user-avatar" class="w-10 h-10 rounded-full" src="" alt="User avatar">
-                    <div>
-                        <p id="user-name" class="text-white font-medium text-sm"></p>
-                        <p id="user-email" class="text-gray-400 text-xs"></p>
+                <div class="relative">
+                    <button id="profile-button" class="text-white">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Profile Dropdown -->
+                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-64 bg-[#1a1a1a] border border-gray-700 rounded-lg shadow-xl z-50">
+                        <div class="p-4">
+                            <!-- User Info Section -->
+                            <div id="user-info-section" class="hidden border-b border-gray-700 pb-4 mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <img id="user-avatar" class="w-10 h-10 rounded-full" src="" alt="Profile">
+                                    <div>
+                                        <p id="user-name" class="text-white font-medium text-sm"></p>
+                                        <p id="user-email" class="text-gray-400 text-xs"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sign In Section -->
+                            <div id="sign-in-section" class="border-b border-gray-700 pb-4 mb-4">
+                                <button id="sign-in-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm">
+                                    Sign in with Google
+                                </button>
+                            </div>
+                            
+                            <!-- Menu Items -->
+                            <div class="space-y-2">
+                                <button id="receipts-button" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors text-sm flex items-center space-x-3">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    <span>My Receipts</span>
+                                </button>
+                                
+                                <button id="theme-toggle" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors text-sm flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                        </svg>
+                                        <span>Theme</span>
+                                    </div>
+                                    <span id="theme-indicator" class="text-xs text-gray-500">Dark</span>
+                                </button>
+                                
+                                <button id="sign-out-button" class="hidden w-full text-left px-3 py-2 text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-lg transition-colors text-sm flex items-center space-x-3">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                    </svg>
+                                    <span>Sign Out</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Sign In Button (shown when not signed in) -->
-            <button id="profile-signin-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg mb-4 transition-colors">
-                Sign in with Google
-            </button>
-            
-            <!-- Menu Items -->
-            <div class="space-y-2">
-                <button id="receipts-btn" class="w-full text-left text-gray-300 hover:text-white py-2 px-3 rounded hover:bg-gray-700 transition-colors hidden">
-                    📄 My Receipts
-                </button>
-                
-                <button id="theme-toggle-dropdown" class="w-full text-left text-gray-300 hover:text-white py-2 px-3 rounded hover:bg-gray-700 transition-colors flex items-center justify-between">
-                    <span>🌙 Theme</span>
-                    <span id="theme-indicator">Dark</span>
-                </button>
-                
-                <button id="profile-signout-btn" class="w-full text-left text-red-400 hover:text-red-300 py-2 px-3 rounded hover:bg-gray-700 transition-colors hidden">
-                    🚪 Sign Out
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
             </div>
         </nav>
     </header>
@@ -1131,14 +1155,21 @@ body.light-mode #profile-dropdown .hover\:bg-gray-700:hover {
                 </div>
 
                 <div>
-    <label for="gift-uses" class="block mb-2 text-lg font-semibold text-white">Number of Uses</label>
-    <input type="number" id="gift-uses" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" min="1" max="10" value="1" placeholder="How many times can this link be used?">
-</div>
+                    <label for="gift-uses" class="block mb-2 text-lg font-semibold text-white">Number of Uses</label>
+                    <input type="number" id="gift-uses" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" min="1" max="10" value="1" placeholder="How many times can this link be used?">
+                </div>
 
-<div>
-    <label for="gift-hours" class="block mb-2 text-lg font-semibold text-white">Expires in (hours)</label>
-    <input type="number" id="gift-hours" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" min="1" max="24" value="1" placeholder="Hours until expiration (1-24)">
-</div>
+                <div>
+                    <label for="gift-hours" class="block mb-2 text-lg font-semibold text-white">Expires After (Hours)</label>
+                    <select id="gift-hours" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500">
+                        <option value="1">1 Hour</option>
+                        <option value="2">2 Hours</option>
+                        <option value="3">3 Hours</option>
+                        <option value="6">6 Hours</option>
+                        <option value="12">12 Hours</option>
+                        <option value="24">24 Hours</option>
+                    </select>
+                </div>
 
                 <button id="create-gift-link" class="cta-button w-full font-bold py-4 rounded-full text-lg">Create Gift Link</button>
             </div>
@@ -1274,18 +1305,6 @@ body.light-mode #profile-dropdown .hover\:bg-gray-700:hover {
             <h3 class="text-white font-bold mb-2">Order Summary</h3>
             <div id="signin-cart-items" class="text-gray-300 text-sm"></div>
             <div id="signin-total" class="text-white font-bold mt-2 pt-2 border-t border-gray-600"></div>
-        </div>
-    </div>
-</div>
-
-<!-- Receipts Modal -->
-<div id="receipts-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
-    <div class="modal-backdrop absolute inset-0"></div>
-    <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-2xl mx-auto relative p-8 max-h-[90vh] overflow-y-auto">
-        <button id="close-receipts-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
-        <h2 class="font-playfair text-3xl text-white mb-6">My Receipts</h2>
-        <div id="receipts-container">
-            <p class="text-gray-400 text-center py-8">No receipts found. Complete an order to see your receipts here.</p>
         </div>
     </div>
 </div>
@@ -1896,25 +1915,29 @@ function renderMenu(showAll = false, category = 'all') {
             function applyTheme() {
                 const headerLogo = document.querySelector('header img');
                 const footerLogo = document.querySelector('footer img');
-                const signatureImages = document.querySelectorAll('.signature-image'); // Get all signature images
+                const signatureImages = document.querySelectorAll('.signature-image');
+                const themeIndicator = document.getElementById('theme-indicator');
                 
                 if (isSiteDarkMode) {
                     body.classList.remove('light-mode');
-                    themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`; // Sun icon
                     
                     // Set dark mode images
                     if (headerLogo) headerLogo.src = 'logo.png';
                     if (footerLogo) footerLogo.src = 'logo.png';
-                    signatureImages.forEach(img => img.src = 'whitesig.png'); // ** NEW **
+                    signatureImages.forEach(img => img.src = 'whitesig.png');
 
                 } else {
                     body.classList.add('light-mode');
-                    themeToggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`; // Moon icon
                     
                     // Set light mode images
                     if (headerLogo) headerLogo.src = 'darklogo.png';
                     if (footerLogo) footerLogo.src = 'darklogo.png';
-                    signatureImages.forEach(img => img.src = 'signature.png'); // ** NEW **
+                    signatureImages.forEach(img => img.src = 'signature.png');
+                }
+                
+                // Update theme indicator
+                if (themeIndicator) {
+                    themeIndicator.textContent = isSiteDarkMode ? 'Dark' : 'Light';
                 }
             }
 
@@ -2006,24 +2029,23 @@ function renderMenu(showAll = false, category = 'all') {
             }
 
             function createGiftLink(limit, uses, hours) {
-    const giftId = generateGiftId();
-    const expiresAt = Date.now() + (hours * 60 * 60 * 1000); // Custom hours from now
-    
-    const giftLink = {
-        id: giftId,
-        limit: limit,
-        usesLeft: parseInt(uses),
-        originalUses: parseInt(uses),
-        expiresAt: expiresAt,
-        hoursToExpire: parseInt(hours),
-        createdAt: Date.now()
-    };
-    
-    giftLinks.push(giftLink);
-    localStorage.setItem('pautacos-gift-links', JSON.stringify(giftLinks));
-    
-    return giftLink;
-}
+                const giftId = generateGiftId();
+                const expiresAt = Date.now() + (hours * 60 * 60 * 1000); // hours from now
+                
+                const giftLink = {
+                    id: giftId,
+                    limit: limit,
+                    usesLeft: parseInt(uses),
+                    originalUses: parseInt(uses),
+                    expiresAt: expiresAt,
+                    createdAt: Date.now()
+                };
+                
+                giftLinks.push(giftLink);
+                localStorage.setItem('pautacos-gift-links', JSON.stringify(giftLinks));
+                
+                return giftLink;
+            }
 
             function validateGiftLink(giftId) {
                 const giftLink = giftLinks.find(link => link.id === giftId);
@@ -2421,65 +2443,6 @@ function renderMenu(showAll = false, category = 'all') {
             buyNowButton.textContent = totalInWords;
         }
     }
-}
-
-// Receipts functionality
-function showReceiptsModal() {
-    const modal = document.getElementById('receipts-modal');
-    const container = document.getElementById('receipts-container');
-    
-    // Get receipts from localStorage
-    const receipts = JSON.parse(localStorage.getItem('pautacos-receipts') || '[]');
-    
-    if (receipts.length === 0) {
-        container.innerHTML = '<p class="text-gray-400 text-center py-8">No receipts found. Complete an order to see your receipts here.</p>';
-    } else {
-        container.innerHTML = receipts.map(receipt => `
-            <div class="bg-[#2a2a2a] rounded-lg p-4 mb-4">
-                <div class="flex justify-between items-start mb-2">
-                    <h3 class="text-white font-bold">Order #${receipt.reference}</h3>
-                    <span class="text-green-400 text-sm">${receipt.status}</span>
-                </div>
-                <p class="text-gray-400 text-sm mb-2">${receipt.date}</p>
-                <div class="text-gray-300 text-sm mb-2">
-                    ${receipt.items.map(item => `${item.name} (${item.size})`).join('<br>')}
-                </div>
-                <p class="text-white font-bold">Total: ₦${receipt.total.toLocaleString()}</p>
-            </div>
-        `).join('');
-    }
-    
-    modal.style.display = 'flex';
-    body.classList.add('modal-open');
-}
-
-// Close receipts modal
-document.getElementById('receipts-modal').addEventListener('click', (e) => {
-    if (e.target.matches('.modal-backdrop') || e.target.id === 'close-receipts-modal') {
-        closeModal(document.getElementById('receipts-modal'));
-    }
-});
-
-// Save receipt after successful payment
-function saveReceipt(paymentResponse) {
-    const receipt = {
-        reference: paymentResponse.reference,
-        date: new Date().toLocaleDateString(),
-        items: window.currentOrder.items,
-        total: window.currentOrder.total,
-        status: 'Paid',
-        customerInfo: window.currentOrder.customerInfo
-    };
-    
-    const receipts = JSON.parse(localStorage.getItem('pautacos-receipts') || '[]');
-    receipts.unshift(receipt); // Add to beginning
-    
-    // Keep only last 50 receipts
-    if (receipts.length > 50) {
-        receipts.splice(50);
-    }
-    
-    localStorage.setItem('pautacos-receipts', JSON.stringify(receipts));
 }
 
 function setupStepByStepForm() {
@@ -3047,6 +3010,75 @@ function loadPermanentDeliveryInfo() {
                 }
             }
 
+            // Profile menu functionality
+            function updateProfileUI() {
+                const profileButton = document.getElementById('profile-button');
+                const userInfoSection = document.getElementById('user-info-section');
+                const signInSection = document.getElementById('sign-in-section');
+                const signOutButton = document.getElementById('sign-out-button');
+                const userAvatar = document.getElementById('user-avatar');
+                const userName = document.getElementById('user-name');
+                const userEmail = document.getElementById('user-email');
+                const themeIndicator = document.getElementById('theme-indicator');
+                
+                // Update theme indicator
+                themeIndicator.textContent = isSiteDarkMode ? 'Dark' : 'Light';
+                
+                if (window.currentUser) {
+                    // User is signed in
+                    userInfoSection.classList.remove('hidden');
+                    signInSection.classList.add('hidden');
+                    signOutButton.classList.remove('hidden');
+                    
+                    userAvatar.src = window.currentUser.picture || '';
+                    userName.textContent = window.currentUser.name || '';
+                    userEmail.textContent = window.currentUser.email || '';
+                } else {
+                    // User is not signed in
+                    userInfoSection.classList.add('hidden');
+                    signInSection.classList.remove('hidden');
+                    signOutButton.classList.add('hidden');
+                }
+            }
+            
+            // Profile dropdown toggle
+            document.getElementById('profile-button').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dropdown = document.getElementById('profile-dropdown');
+                dropdown.classList.toggle('hidden');
+                updateProfileUI();
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                const dropdown = document.getElementById('profile-dropdown');
+                const profileButton = document.getElementById('profile-button');
+                if (!dropdown.contains(e.target) && !profileButton.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+            
+            // Sign in button in dropdown
+            document.getElementById('sign-in-button').addEventListener('click', () => {
+                document.getElementById('profile-dropdown').classList.add('hidden');
+                showSignInModal();
+            });
+            
+            // Sign out button
+            document.getElementById('sign-out-button').addEventListener('click', () => {
+                window.currentUser = null;
+                localStorage.removeItem('pautacos-user');
+                document.getElementById('profile-dropdown').classList.add('hidden');
+                updateProfileUI();
+                alert('Signed out successfully');
+            });
+            
+            // Receipts button (placeholder)
+            document.getElementById('receipts-button').addEventListener('click', () => {
+                document.getElementById('profile-dropdown').classList.add('hidden');
+                alert('Receipts feature coming soon!');
+            });
+
             // --- EVENT LISTENERS ---
             renderMenu(false, 'all');
 renderExotics();
@@ -3054,8 +3086,6 @@ renderLocations();
 applyTheme();
 loadCart();
 checkForGiftLink();
-// Initialize profile UI
-updateProfileUI();
 // Initialize location functionality with error handling
 try {
     initializeLocationButton();
@@ -3160,42 +3190,37 @@ document.addEventListener('click', (e) => {
             });
 
             document.getElementById('create-gift-link').addEventListener('click', () => {
-    const selectedOption = document.querySelector('.gift-limit-option.selected');
-    const usesInput = document.getElementById('gift-uses');
-    const hoursInput = document.getElementById('gift-hours');
-    
-    if (!selectedOption) {
-        alert('Please select a gift limit');
-        return;
-    }
-    
-    const limit = selectedOption.dataset.limit;
-    const uses = usesInput.value;
-    const hours = hoursInput.value;
-    
-    if (!uses || uses < 1) {
-        alert('Please enter a valid number of uses');
-        return;
-    }
-    
-    if (!hours || hours < 1 || hours > 24) {
-        alert('Please enter valid hours (1-24)');
-        return;
-    }
-    
-    const giftLink = createGiftLink(limit, uses, hours);
+                const selectedOption = document.querySelector('.gift-limit-option.selected');
+                const usesInput = document.getElementById('gift-uses');
+                const hoursSelect = document.getElementById('gift-hours');
+                
+                if (!selectedOption) {
+                    alert('Please select a gift limit');
+                    return;
+                }
+                
+                const limit = selectedOption.dataset.limit;
+                const uses = usesInput.value;
+                const hours = parseInt(hoursSelect.value);
+                
+                if (!uses || uses < 1) {
+                    alert('Please enter a valid number of uses');
+                    return;
+                }
+                
+                const giftLink = createGiftLink(limit, uses, hours);
                 const baseUrl = window.location.origin + window.location.pathname;
                 const fullGiftLink = `${baseUrl}?gift=${giftLink.id}`;
                 
                 closeModal(giftModal);
                 
-                const giftLinkContent = document.getElementById('gift-link-content');
-                const limitText = limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(limit).toLocaleString()}`;
+               const limitText = limit === 'unlimited' ? '♾️¸ Unlimited' : `₦ ‚¦${parseInt(limit).toLocaleString()}`;
+                const hoursText = hours === 1 ? '1 hour' : `${hours} hours`;
                 
                 giftLinkContent.innerHTML = `
                     <div class="gift-link-display">
                         <h3 class="font-bold text-lg mb-2">Your Gift Link</h3>
-                        <p class="text-sm text-gray-300 mb-3">Chim's ${limitText} gift • ${uses} uses • Expires in 1 hour</p>
+                        <p class="text-sm text-gray-300 mb-3">Chim's ${limitText} gift ♾️ ${uses} uses ♾️ Expires in ${hoursText}</p>
                         <div class="gift-link-text">${fullGiftLink}</div>
                     </div>
                 `;
@@ -3397,94 +3422,11 @@ document.addEventListener('click', async (e) => {
                 }
             });
 
-            // Profile dropdown functionality
-const profileButton = document.getElementById('profile-button');
-const profileDropdown = document.getElementById('profile-dropdown');
-const profileSigninBtn = document.getElementById('profile-signin-btn');
-const profileSignoutBtn = document.getElementById('profile-signout-btn');
-const themeToggleDropdown = document.getElementById('theme-toggle-dropdown');
-const receiptsBtn = document.getElementById('receipts-btn');
-
-// Toggle profile dropdown
-profileButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    profileDropdown.classList.toggle('hidden');
-    updateProfileUI();
-});
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-    if (!profileDropdown.contains(e.target) && !profileButton.contains(e.target)) {
-        profileDropdown.classList.add('hidden');
-    }
-});
-
-// Theme toggle in dropdown
-themeToggleDropdown.addEventListener('click', () => {
-    isSiteDarkMode = !isSiteDarkMode;
-    localStorage.setItem('siteDarkMode', isSiteDarkMode);
-    applyTheme();
-    updateThemeIndicator();
-});
-
-// Profile sign in
-profileSigninBtn.addEventListener('click', () => {
-    profileDropdown.classList.add('hidden');
-    if (window.google && window.google.accounts) {
-        window.google.accounts.id.prompt();
-    } else {
-        alert('Google Sign-In not available. Please reload the page.');
-    }
-});
-
-// Profile sign out
-profileSignoutBtn.addEventListener('click', () => {
-    window.currentUser = null;
-    localStorage.removeItem('pautacos-user');
-    profileDropdown.classList.add('hidden');
-    updateProfileUI();
-    alert('Signed out successfully');
-});
-
-// Receipts
-receiptsBtn.addEventListener('click', () => {
-    profileDropdown.classList.add('hidden');
-    showReceiptsModal();
-});
-
-// Update profile UI based on sign-in status
-function updateProfileUI() {
-    const userInfoSection = document.getElementById('user-info-section');
-    const userAvatar = document.getElementById('user-avatar');
-    const userName = document.getElementById('user-name');
-    const userEmail = document.getElementById('user-email');
-    
-    if (window.currentUser) {
-        // User is signed in
-        userInfoSection.classList.remove('hidden');
-        profileSigninBtn.classList.add('hidden');
-        profileSignoutBtn.classList.remove('hidden');
-        receiptsBtn.classList.remove('hidden');
-        
-        userAvatar.src = window.currentUser.picture || '';
-        userName.textContent = window.currentUser.name || '';
-        userEmail.textContent = window.currentUser.email || '';
-    } else {
-        // User is not signed in
-        userInfoSection.classList.add('hidden');
-        profileSigninBtn.classList.remove('hidden');
-        profileSignoutBtn.classList.add('hidden');
-        receiptsBtn.classList.add('hidden');
-    }
-    
-    updateThemeIndicator();
-}
-
-// Update theme indicator
-function updateThemeIndicator() {
-    const indicator = document.getElementById('theme-indicator');
-    indicator.textContent = isSiteDarkMode ? 'Dark' : 'Light';
-}
+            themeToggle.addEventListener('click', () => {
+                isSiteDarkMode = !isSiteDarkMode;
+                localStorage.setItem('siteDarkMode', isSiteDarkMode);
+                applyTheme();
+            });
             
             window.addEventListener('scroll', () => {
                 if (header) {
@@ -3774,9 +3716,6 @@ window.addEventListener('load', () => {
 // Handle successful payment
 function handlePaymentSuccess(response) {
     console.log('Payment successful:', response);
-    
-    // Save receipt
-    saveReceipt(response);
     
     // Consume gift link if applicable
     if (currentGiftInfo) {
