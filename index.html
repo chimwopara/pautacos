@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pautacos - Artisanal Nigerian Fusion Cuisine</title>
     <meta property="og:image:type" content="image/png" />
+
+    <!-- Google Sign-In -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<!-- Paystack Inline -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
     
     <meta name="description" content="Experience the pinnacle of Nigerian fusion cuisine at Pau Tacos. Serving artisanal tacos, exotic pepper soup, and more in Lagos, Port Harcourt, and Abuja.">
     <meta name="keywords" content="Nigerian Tacos, Fusion Cuisine, Lagos Food, Abuja Restaurants, Port Harcourt Food, Campus Food, Pau Tacos, Artisanal Tacos, Exotic Pepper Soup">
@@ -548,28 +554,24 @@ body.light-mode #draft-email-btn:hover {
 
 .step-container.completed input,
 .step-container.completed textarea {
-    border-color: #DC2626;
-    background-color: rgba(220, 38, 38, 0.1);
+    border-color: #10B981;
+    background-color: rgba(16, 185, 129, 0.1);
 }
 
 .step-container.completed label {
-    color: #DC2626 !important;
-}
-
-.step-container.completed .text-gray-500 {
-    display: none;
+    color: #10B981 !important;
 }
 
 /* Light mode support for completed fields */
 body.light-mode .step-container.completed input,
 body.light-mode .step-container.completed textarea {
-    border-color: #DC2626;
-    background-color: rgba(220, 38, 38, 0.1);
+    border-color: #10B981;
+    background-color: rgba(16, 185, 129, 0.1);
     color: #333;
 }
 
 body.light-mode .step-container.completed label {
-    color: #DC2626 !important;
+    color: #10B981 !important;
 }
 
 /* Make completed steps clickable */
@@ -578,11 +580,11 @@ body.light-mode .step-container.completed label {
 }
 
 .step-container.completed:hover {
-    background-color: rgba(220, 38, 38, 0.05);
+    background-color: rgba(16, 185, 129, 0.05);
 }
 
 body.light-mode .step-container.completed:hover {
-    background-color: rgba(220, 38, 38, 0.05);
+    background-color: rgba(16, 185, 129, 0.05);
 }
 
 /* Search Modal Styles */
@@ -665,10 +667,39 @@ body.light-mode .gift-modal-content label {
 @media (max-width: 768px) {
     .mobile-newsletter-left {
         justify-content: flex-start !important;
+        align-items: flex-start !important;
+        flex-direction: column !important;
     }
     
     .mobile-newsletter-left .sender-form-field {
         width: 100% !important;
+        margin-left: 0 !important;
+        order: 2;
+        align-self: flex-start !important;
+    }
+    
+    .mobile-newsletter-left > div:first-child {
+        order: 1;
+        align-self: flex-start !important;
+        margin-bottom: 1rem;
+    }
+    
+    /* Target the actual sender form */
+    .sender-form-field div {
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+    
+    .sender-form-field form {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+    }
+    
+    .sender-form-field input,
+    .sender-form-field button {
+        align-self: flex-start !important;
         margin-left: 0 !important;
     }
 }
@@ -710,6 +741,124 @@ body.light-mode .approval-modal-content h2 {
 body.light-mode .gift-link-text {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+/* Category Filter Buttons */
+.category-filter-btn {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-filter-btn:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.category-filter-btn.active {
+    background-color: #DC2626;
+    border-color: #DC2626;
+    color: #ffffff;
+}
+
+body.light-mode .category-filter-btn {
+    color: #333;
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .category-filter-btn:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+body.light-mode .category-filter-btn.active {
+    background-color: #DC2626;
+    border-color: #DC2626;
+    color: #ffffff;
+}
+
+/* Prevent mobile zoom on input focus */
+@media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea,
+    select {
+        font-size: 16px !important;
+        transform-origin: left top;
+        transform: scale(1);
+    }
+    
+    /* Specific targeting for form inputs */
+    #customer-name,
+    #customer-phone,
+    #pickup-spot,
+    #search-input,
+    #gift-uses,
+    .form-input {
+        font-size: 16px !important;
+    }
+    
+    /* Draft email modal inputs */
+    #email-name,
+    #email-email,
+    #email-phone,
+    #email-message {
+        font-size: 16px !important;
+    }
+}
+
+/* Maintain visual consistency while preventing zoom */
+@media screen and (max-width: 768px) {
+    .step-container input,
+    .step-container textarea {
+        font-size: 16px !important;
+        line-height: 1.25;
+    }
+    
+    .step-container label {
+        font-size: 14px;
+    }
+}
+/* Location button disabled state */
+#find-location-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#find-location-btn:disabled:hover {
+    color: #6B7280 !important;
+}
+
+/* Buy button blink animation */
+@keyframes gentle-pulse {
+    0%, 70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+    85% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 8px rgba(220, 38, 38, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+}
+
+#buy-now-button.animate-pulse {
+    animation: gentle-pulse 3s infinite;
+}
+
+/* Pause animation on hover to avoid annoyance */
+#buy-now-button.animate-pulse:hover {
+    animation-play-state: paused;
+}
+
     </style>
 </head>
 <body>
@@ -737,9 +886,9 @@ body.light-mode .gift-link-text {
                 
                  <!-- Cart Icon -->
                 <button id="cart-button" class="relative text-white">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
-                </button>
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+</button>
                 
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" class="text-white"></button>
@@ -767,7 +916,18 @@ body.light-mode .gift-link-text {
     <section id="menu" class="py-24 bg-[#121212] transition-colors duration-300">
         <div class="container mx-auto px-6">
             <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">The <span class="text-brand-red">Artisanal</span> Collection</h2>
-            <div id="menu-items" class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-12">
+
+<!-- Category Filter Buttons -->
+<div class="flex flex-wrap justify-center gap-4 mb-12">
+    <button class="category-filter-btn active" data-category="all">All</button>
+    <button class="category-filter-btn" data-category="mains">Mains</button>
+    <button class="category-filter-btn" data-category="sides">Sides</button>
+    <button class="category-filter-btn" data-category="snacks">Snacks</button>
+    <button class="category-filter-btn" data-category="desserts">Desserts</button>
+    <button class="category-filter-btn" data-category="drinks">Drinks</button>
+</div>
+
+<div id="menu-items" class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-12">
                 <!-- Menu items will be dynamically injected here by JavaScript -->
             </div>
             
@@ -835,12 +995,20 @@ body.light-mode .gift-link-text {
                             </a>
                             
                             <a href="https://www.instagram.com/fromsupply" target="_blank" class="group">
-                                <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
-                                    <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"/>
-                                    </svg>
-                                </div>
-                            </a>
+    <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"/>
+        </svg>
+    </div>
+</a>
+
+<a href="https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox" target="_blank" class="group">
+    <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-lg flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.637.637 0 0 0-.83-.22c-.3.16-.42.54-.26.85L6.4 9.48C3.3 11.25 1.28 14.44 1 18h22c-.28-3.56-2.3-6.75-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/>
+        </svg>
+    </div>
+</a>
                         </div>
                     </div>
                 </div>
@@ -978,20 +1146,31 @@ body.light-mode .gift-link-text {
         </div>
         
         <!-- Step 3: Pickup Spot -->
-        <div id="pickup-step" class="step-container">
-            <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
-            <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
-            <div class="flex justify-between items-center mt-2">
-                <p class="text-xs text-gray-500">Enter pickup location</p>
-                <button id="pickup-done-btn" class="mobile-nav-button md:hidden text-sm px-3 py-1">Done</button>
-            </div>
-        </div>
+<div id="pickup-step" class="step-container">
+    <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
+    <div class="relative">
+        <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 pr-12 rounded-lg border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
+        <button id="find-location-btn" type="button" class="absolute right-2 top-2 text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        </button>
+    </div>
+    <div class="flex justify-between items-center mt-2">
+        <p class="text-xs text-gray-500">Enter pickup location</p>
+    </div>
+</div>
+        
     </div>
     <div id="gift-info-container" class="hidden mt-4 p-4 bg-green-900 bg-opacity-30 border border-green-500 rounded-lg">
         <p class="text-green-400 font-medium text-sm mb-2">🎁 Gift Applied</p>
         <p id="gift-info-text" class="text-green-300 text-sm"></p>
     </div>
-    <button id="buy-now-button" class="cta-button w-full font-bold py-4 mt-6 rounded-full text-lg hidden">BUY NOW</button>
+    <div class="mt-6">
+    <button id="buy-now-button" class="cta-button w-full font-bold py-4 rounded-full text-lg hidden">BUY NOW</button>
+    <p id="currency-text" class="text-center text-xs text-gray-500 mt-2 hidden">Nigerian Naira</p>
+</div>
 </div>
 </div>
     </div>
@@ -1003,6 +1182,27 @@ body.light-mode .gift-link-text {
             <!-- Letter content will be injected here -->
         </div>
     </div>
+
+<!-- Sign-In Modal -->
+<div id="signin-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop absolute inset-0"></div>
+    <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto relative p-8">
+        <button id="close-signin-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+        <h2 class="font-playfair text-3xl text-white mb-6 text-center">Sign In to Continue</h2>
+        <p class="text-gray-300 mb-8 text-center">Please sign in with Google to complete your order</p>
+        
+        <!-- Google Sign-In Button Container -->
+        <div id="google-signin-button" class="flex justify-center mb-6"></div>
+        
+        <!-- Order Summary -->
+        <div id="signin-order-summary" class="bg-[#2a2a2a] rounded-lg p-4 mb-6">
+            <h3 class="text-white font-bold mb-2">Order Summary</h3>
+            <div id="signin-cart-items" class="text-gray-300 text-sm"></div>
+            <div id="signin-total" class="text-white font-bold mt-2 pt-2 border-t border-gray-600"></div>
+        </div>
+    </div>
+</div>
+
     <!-- Draft Email Modal -->
 <div id="draft-email-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[70] flex items-center justify-center p-4">
     <div id="draft-email-container" class="bg-[#1a1a1a] border border-gray-700 rounded-xl p-6 max-w-3xl w-full relative">
@@ -1051,6 +1251,7 @@ body.light-mode .gift-link-text {
 </div>
 
     <script>
+
       (function (s, e, n, d, er) {
         s['Sender'] = er;
         s[er] = s[er] || function () {
@@ -1066,6 +1267,14 @@ body.light-mode .gift-link-text {
     </script>
 
     <script>
+
+// Configuration - Replace with your actual keys
+const CONFIG = {
+    GOOGLE_CLIENT_ID: '663687974776-hp2ua2o4u4osnafrerivmippjdn3cvp5.apps.googleusercontent.com',
+    PAYSTACK_PUBLIC_KEY: 'pk_test_d08adaed6145e30243304d0e8db38f6c06db841c', // test public key
+    SITE_URL: 'pautacos.com' // Your GitHub Pages URL
+};
+
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA ---
             const savoryToppings = ['Caramelized Onions', 'Smoked Suya', 'Yaji Spice Dust', 'Kilishi Jerky', 'Crispy Fried Egg', 'Hard-Boiled Egg', 'Sweet Plantain', 'Smoked Sardine', 'Grilled Shrimp', 'Creamy Mayonnaise', 'Classic Ketchup', 'Smoky BBQ Sauce', 'Grilled Steak', 'Suya Chicken', 'Spiced Beef', 'Akara Fritter', 'Roasted Corn', 'Crisp Lettuce', 'Fresh Spinach', 'Shredded Cabbage', 'Julienned Carrot'];
@@ -1075,234 +1284,318 @@ body.light-mode .gift-link-text {
             const moiMoiToppings = ['Smoked Sardine', 'Hard-Boiled Egg', 'Corned Beef'];
             const friesToppings = ['Yaji Spice Dust', 'Ketchup', 'Mayonnaise', 'Smoky BBQ Sauce'];
 
-            const menuData = {
-                taco: { 
-                    name: 'The Beloved Taco',
-                    image: 'taco.png',
-                    prices: { big: 5000, bigger: 8000, biggest: 10000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">They say you can't improve on a classic. I disagree. This recipe was born from a dozen late-night arguments in a Lagos kitchen, a quest to find the perfect balance between the familiar and the divine. Each spice was chosen not just for its taste, but for the story it tells. This isn't just a taco. It's a conversation; a taste of home, whispered in a new language.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                burrito: { 
-                    name: 'The Obese Burrito',
-                    image: 'burrito.png',
-                    prices: { big: 6000, bigger: 9000, biggest: 12000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We were told it was impossible. "Too much," they said. "It cannot be contained." We saw it as a challenge. This burrito is an architectural marvel, a testament to pure ambition. We layered flavors like a master weaver, ensuring every single bite is a journey through a landscape of taste. It is a feast in your hands, an experience that demands your full attention. I dare you to conquer it.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                poutine: { 
-                    name: 'The Montreal Poutine',
-                    image: 'poutine.png',
-                    prices: { big: 10000, bigger: 16000, biggest: 20000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A message arrived on a cold wind from the North, a recipe scrawled on birch bark. It spoke of fries, curds, and gravy. We honored the tradition, but we could not ignore the call of our own spices. We introduced the warmth of the Sahara to the chill of the Canadian winter. The result is a culinary dialogue between two worlds, a comforting dish that tells a story of unexpected friendship.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                pizza: {
-                    name: 'The Italian Special',
-                    image: 'pizza.png',
-                    prices: { big: 7000, bigger: 10000, biggest: 13000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">An Italian classic, kidnapped and brought to a bustling Lagos market. We showed it our spices, our smoke, our fire. It resisted at first, but then it understood. On a bed of hand-stretched dough, Italian tradition and Nigerian audacity dance together. Topped with Suya, Yaji, and our secret sauce, it's a pizza that speaks with a bold new accent.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                 burger: {
-                    name: 'The BBL Burger',
-                    image: 'burger.png',
-                    prices: { big: 6000, bigger: 9000, biggest: 12000 },
-                    toppings: burgerToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This is not a burger. This is architecture. A tower of flavor, engineered for maximum satisfaction. We flame-grill the patty to seal in the juices, then build upon that foundation with layers of texture and taste. It's a handful of happiness, a monument to the art of the grill.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                 spaghetti: {
-                    name: 'The Strands della Foresta',
-                    image: 'spaghetti.png',
-                    prices: { big: 5500, bigger: 8500, biggest: 11000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A recipe found in a journal from a traveler who got lost in the deep woods of Italy, only to be saved by a Nigerian chef. A fusion of rich, slow-cooked tomato sauce and the smoky, spicy notes of the motherland. Each strand tells a story of survival and delicious discovery, a testament to the unexpected bonds forged over a shared meal.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                shawarma: {
-                    name: 'The Midnight Shawarma',
-                    image: 'shawarma.png',
-                    prices: { big: 4500, bigger: 6500, biggest: 8500 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Learned from a master on a bustling street corner, under a sky of a thousand stars. The secret isn't just the spice, but the patience of the flame. Slow-roasted, hand-carved, and wrapped with reverence. This is the taste of a thousand and one late nights, a story of savory satisfaction told in every single bite.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                jollof: {
-                    name: "Chim's Smokey Jollof",
-                    image: 'jollofrice.png',
-                    prices: { big: 4000, bigger: 6000, biggest: 8000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This isn't just rice. It's a statement. It's the heart of the party, the soul of every gathering. My recipe is a closely guarded secret, passed down through generations who understood the sacred geometry of smoke, tomato, and spice. Each grain is infused with history and flavor. To taste it is to understand.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                friedrice: {
-                    name: 'The Chinese Stir Fry Rice',
-                    image: 'friedrice.png',
-                    prices: { big: 4000, bigger: 6000, biggest: 8000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We sought the most vibrant greens, the most crisp vegetables from a hidden market known only to the city's finest chefs. This dish is a celebration of freshness, a festival of color and crunch. Each ingredient is flash-fried in a searing wok to lock in its essence, creating a light yet deeply satisfying experience that dances on the palate.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                pancakes: {
-                    name: 'The Sunrise Pancake Stack',
-                    image: 'pancake.png',
-                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
-                    toppings: pancakeToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Found in a grandmother's faded notebook, the recipe simply said: "Patience, good butter, and a happy heart." We follow it to the letter. These aren't just mixed, they're coaxed. Rested, then griddled until they are impossibly fluffy and golden. They are comfort, pure and simple, a warm hug on a plate.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                moimoi: {
-                    name: 'The Velvet Moi Moi',
-                    image: 'moimoi.png',
-                    prices: { big: 2500, bigger: 4000, biggest: 5500 },
-                    toppings: moiMoiToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The art of Moi Moi is the art of transformation. Taking the humble bean and turning it into something ethereal and smooth. Ours is steamed slowly, patiently, in seasoned leaves that impart a subtle, earthy aroma. It is a delicate process that results in a savory pudding of unparalleled texture. A true taste of Nigerian culinary grace.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                fries: {
-                    name: 'The Perfectly frenched Potatoes',
-                    image: 'fries.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
-                    toppings: friesToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The quest for the perfect fry is a noble one. It led us to fields where the soil is rich and the potatoes are proud. We cut them by hand, blanch them twice for that fluffy interior and shatteringly crisp exterior. A sprinkle of sea salt is all they need to sing. Simple perfection is the ultimate luxury.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                milkshake: { 
-                    name: 'The Perfectly Creamed Milkshake',
-                    image: 'milkshake.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The secret is in the churn. Not too fast, not too slow. A rhythm passed down from a forgotten artisan who believed that texture was a form of magic. We use only the purest cream and the most decadent inclusions, blending them until they reach a state of liquid silk. It is more than a drink; it is a moment of pure, unadulterated bliss.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                boba: { 
-                    name: 'The Taiwanese Original Boba',
-                    image: 'boba.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">From a bustling night market in Taipei, a recipe was carried across oceans. It wasn't written down, but rememberedâ€"a precise balance of tea, milk, and the perfect 'Q' of the pearl. We brew our tea in small, dedicated batches, ensuring every cup carries the authentic, fragrant soul of its origin. The pearls are prepared hourly, their texture a testament to our dedication.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                lassi: { 
-                    name: 'The Famous Indian Yoghurt',
-                    image: 'lassi.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A gift from the kitchens of Rajasthan, where this drink is more than refreshmentâ€"it's a remedy for the desert heat, a balm for the soul. We use a special culture of yoghurt, churned by hand until it reaches a state of impossible smoothness. It is then kissed with fruit and spice, a perfect harmony of tart and sweet.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                coleslaw: {
-                    name: 'The Classic Creamy Slaw',
-                    image: 'coleslaw.png',
-                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
-                    toppings: [],
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A cherished family recipe for sunny days and big gatherings. The secret isn't in what you add, but what you don't. Crisp, fresh vegetables, a dressing that's both creamy and light, with just a hint of tang. It's the perfect, cooling counterpoint to a feast of spice. A moment of pure, crunchy refreshment.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                macaronisalad: {
-                    name: 'The Picnic Macaroni Salad',
-                    image: 'macsalad.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
-                    toppings: [],
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This is the taste of laughter and shared blankets under a shady tree. A simple pleasure, elevated to an art form. Tender pasta, crisp vegetables, and a dressing that sings with a sweet, tangy harmony. It's comfort food that reminds you of the best of days.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                chinchin: {
-                    name: "The Ancestor's Chin Chin",
-                    image: 'chinchin.png',
-                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
-                    toppings: [],
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A recipe whispered by the harmattan wind, a thousand tiny, crunchy pieces of joy. Each one is a memory of celebration, fried to a perfect golden crisp. It's the sound of happiness in a bowl, a taste of pure nostalgia.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                coffee: {
-                    name: 'The Jos Plateau Coffee',
-                    image: 'coffee.png',
-                    prices: { big: 2000, bigger: 3000, bigger: 4000 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul to the beauty of the morning.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                cookie: {
-                    name: "Cookie Monster's Stash",
-                    image: 'cookie.png',
-                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
-                    toppings: [],
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We embarked on a quest for the perfect cookie. It required melting Belgian chocolate under a full moon and using butter churned only to the sound of Afrobeats. The result is a cookie with crisp edges, a gooey center, and a story in every chunk. It's a secret worth keeping.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                cupcake: {
-                    name: 'The Cloud-Kissed Cupcake',
-                    image: 'cupcake.png',
-                    prices: { big: 2000, bigger: 3500, biggest: 5000 },
-                    toppings: [],
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">An architect and a baker fell in love. This was their creation. A foundation of impossibly light cake and a spire of ethereal frosting. It is a tiny tower of sweetness, a testament to the fact that the best things are built with passion and a touch of whimsy.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                icecream: {
-                    name: "Sweet Northern Glacier",
-                    image: 'icecream.png',
-                    prices: { big: 2500, bigger: 4000, biggest: 5500 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients, a cool whisper on a hot day.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                // New items
-                wrap: {
-                    name: 'The Lagos Wrap',
-                    image: 'wrap.png',
-                    prices: { big: 3500, bigger: 5000, biggest: 6500 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Born in the heart of Lagos traffic, this wrap was designed for those who refuse to compromise between speed and flavor. Every ingredient is carefully layered to create a perfect bite every time, wrapped tight enough to survive the chaos of city life. It's fast food that respects your time and your taste buds.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                sandwich: {
-                    name: 'The Gentleman\'s Club Sandwich',
-                    image: 'sandwich.png',
-                    prices: { big: 4000, bigger: 6000, biggest: 8000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This sandwich wears a three-piece suit to work. Layer upon layer of carefully selected ingredients, stacked with architectural precision. It's the kind of sandwich that commands respect in any room, whether that's a boardroom or your backyard. Every bite is a statement of sophistication.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                salad: {
-                    name: 'The Garden Symphony Salad',
-                    image: 'salad.png',
-                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This isn't just a salad, it's a celebration of everything that grows under the Nigerian sun. We source our greens from secret gardens where the soil whispers ancient secrets to the roots. Each leaf is chosen for its character, its crunch, its contribution to the symphony of flavors dancing in your bowl.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                frittata: {
-                    name: 'The Lagos Morning Frittata',
-                    image: 'frittata.png',
-                    prices: { big: 3500, bigger: 5000, biggest: 6500 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Born in the bustling morning markets of Lagos, where vendors call out their wares and the air is thick with possibility. This frittata captures the energy of a new day—eggs whisked with the dreams of ambitious souls, folded with ingredients that tell stories of hustle and hope. It's breakfast poetry, written in golden, fluffy verses.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                parfait: {
-                    name: 'The Layered Dreams Parfait',
-                    image: 'parfait.png',
-                    prices: { big: 2500, bigger: 3500, biggest: 4500 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Like life itself, this parfait is built in layers—each one telling its own story, yet contributing to a greater narrative. Creamy yogurt meets crunchy granola, sweet fruit dances with subtle spice. It's a meditation in a glass, a reminder that the most beautiful things are often the simplest, assembled with intention and love.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                scotchegg: {
-                    name: 'The London-Lagos Scotch Egg',
-                    image: 'scotchegg.png',
-                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A tale of two cities—the foggy streets of London and the vibrant energy of Lagos. We took the British classic and gave it a Nigerian soul, wrapping it in our spiced meat blend and frying it to golden perfection. It's a bridge between worlds, a handshake between cultures, served warm with respect for both traditions.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                springroll: {
-                    name: 'The Crispy Spring Chronicle',
-                    image: 'springroll.png',
-                    prices: { big: 2500, bigger: 3500, biggest: 4500 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Each roll holds secrets—vegetables that crunch with the memory of morning dew, spices that whisper tales of ancient trade routes. Wrapped tight in gossamer thin pastry and fried until they sing. These aren't just spring rolls; they're tiny capsules of joy, delivering bursts of flavor that transport you to bustling Asian markets filtered through a Nigerian lens.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                samosa: {
-                    name: 'The Triangular Treasures',
-                    image: 'samosa.png',
-                    prices: { big: 2000, bigger: 3000, biggest: 4000 },
-                    toppings: savoryToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Geometry has never tasted so good. These golden triangles arrived on the spice route centuries ago and made themselves at home in our hearts. We fill them with stories—spiced potatoes that remember their journey from distant fields, peas that pop with sweetness, all wrapped in pastry that shatters beautifully at first bite. Small packages, infinite possibilities.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                puffpuff: {
-                    name: 'The Cloud Spheres of Joy',
-                    image: 'puffpuff.png',
-                    prices: { big: 1500, bigger: 2500, biggest: 3500 },
-                    toppings: sweetToppings,
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">These are more than just fried dough—they're edible clouds, little spheres of happiness that float on your tongue before dissolving into pure bliss. Made from a recipe that's been passed down through generations of street vendors and loving grandmothers. Each bite is a memory, each sphere a moment of pure, unadulterated joy. Simple magic, profound pleasure.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                },
-                waffles: {
-                    name: 'The Golden Grid Delights',
-                    image: 'wafles.png',
-                    prices: { big: 3000, bigger: 4500, biggest: 6000 },
-                    toppings: [...pancakeToppings, ...sweetToppings],
-                    letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Perfection lives in the details—each square pocket designed to hold syrup, each ridge crafted to deliver the perfect ratio of crisp to fluffy. These waffles are architectural marvels, golden grids that transform simple batter into breakfast art. Whether crowned with fruit or drizzled with honey, they're a canvas for your morning dreams.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
-                }
-            };
-
+    const menuData = {
+    taco: { 
+        name: 'The Beloved Taco',
+        aliases: ['taco', 'beloved', 'classic', 'mexican', 'tortilla'],
+        image: 'taco.png',
+        prices: { big: 5000, bigger: 8000, biggest: 10000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 1,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">They say you can't improve on a classic. I disagree. This recipe was born from a dozen late-night arguments in a Lagos kitchen, a quest to find the perfect balance between the familiar and the divine. Each spice was chosen not just for its taste, but for the story it tells. This isn't just a taco. It's a conversation; a taste of home, whispered in a new language.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    burrito: { 
+        name: 'The Obese Burrito',
+        aliases: ['burrito', 'obese', 'wrap', 'mexican', 'big', 'large'],
+        image: 'burrito.png',
+        prices: { big: 6000, bigger: 9000, biggest: 12000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 2,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We were told it was impossible. "Too much," they said. "It cannot be contained." We saw it as a challenge. This burrito is an architectural marvel, a testament to pure ambition. We layered flavors like a master weaver, ensuring every single bite is a journey through a landscape of taste. It is a feast in your hands, an experience that demands your full attention. I dare you to conquer it.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    burger: {
+        name: 'The BBL Burger',
+        aliases: ['burger', 'bbl', 'beef', 'patty', 'american', 'hamburger'],
+        image: 'burger.png',
+        prices: { big: 6000, bigger: 9000, biggest: 12000 },
+        toppings: burgerToppings,
+        category: 'mains',
+        order: 3,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This is not a burger. This is architecture. A tower of flavor, engineered for maximum satisfaction. We flame-grill the patty to seal in the juices, then build upon that foundation with layers of texture and taste. It's a handful of happiness, a monument to the art of the grill.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    spaghetti: {
+        name: 'The Strands della Foresta',
+        aliases: ['spaghetti', 'strands', 'foresta', 'pasta', 'italian', 'noodles'],
+        image: 'spaghetti.png',
+        prices: { big: 5500, bigger: 8500, biggest: 11000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 4,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A recipe found in a journal from a traveler who got lost in the deep woods of Italy, only to be saved by a Nigerian chef. A fusion of rich, slow-cooked tomato sauce and the smoky, spicy notes of the motherland. Each strand tells a story of survival and delicious discovery, a testament to the unexpected bonds forged over a shared meal.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    boba: { 
+        name: 'The Taiwanese Original Boba',
+        aliases: ['boba', 'taiwanese', 'tea', 'bubble tea', 'pearls', 'milk tea'],
+        image: 'boba.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: sweetToppings,
+        category: 'drinks',
+        order: 5,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">From a bustling night market in Taipei, a recipe was carried across oceans. It wasn't written down, but rememberedâ€"a precise balance of tea, milk, and the perfect 'Q' of the pearl. We brew our tea in small, dedicated batches, ensuring every cup carries the authentic, fragrant soul of its origin. The pearls are prepared hourly, their texture a testament to our dedication.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    salad: {
+        name: 'The Garden Symphony Salad',
+        aliases: ['salad', 'garden', 'symphony', 'greens', 'vegetables', 'healthy'],
+        image: 'salad.png',
+        prices: { big: 3000, bigger: 4500, biggest: 6000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 6,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This isn't just a salad, it's a celebration of everything that grows under the Nigerian sun. We source our greens from secret gardens where the soil whispers ancient secrets to the roots. Each leaf is chosen for its character, its crunch, its contribution to the symphony of flavors dancing in your bowl.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    poutine: { 
+        name: 'The Montreal Poutine',
+        aliases: ['poutine', 'montreal', 'fries', 'gravy', 'cheese', 'canadian'],
+        image: 'poutine.png',
+        prices: { big: 10000, bigger: 16000, biggest: 20000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 7,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A message arrived on a cold wind from the North, a recipe scrawled on birch bark. It spoke of fries, curds, and gravy. We honored the tradition, but we could not ignore the call of our own spices. We introduced the warmth of the Sahara to the chill of the Canadian winter. The result is a culinary dialogue between two worlds, a comforting dish that tells a story of unexpected friendship.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    pizza: {
+        name: 'The Italian Special',
+        aliases: ['pizza', 'italian', 'special', 'pie', 'cheese', 'tomato'],
+        image: 'pizza.png',
+        prices: { big: 7000, bigger: 10000, biggest: 13000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 8,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">An Italian classic, kidnapped and brought to a bustling Lagos market. We showed it our spices, our smoke, our fire. It resisted at first, but then it understood. On a bed of hand-stretched dough, Italian tradition and Nigerian audacity dance together. Topped with Suya, Yaji, and our secret sauce, it's a pizza that speaks with a bold new accent.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    shawarma: {
+        name: 'The Midnight Shawarma',
+        aliases: ['shawarma', 'midnight', 'wrap', 'meat', 'arab', 'middle eastern'],
+        image: 'shawarma.png',
+        prices: { big: 4500, bigger: 6500, biggest: 8500 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 9,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Learned from a master on a bustling street corner, under a sky of a thousand stars. The secret isn't just the spice, but the patience of the flame. Slow-roasted, hand-carved, and wrapped with reverence. This is the taste of a thousand and one late nights, a story of savory satisfaction told in every single bite.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    jollof: {
+        name: "Chim's Smokey Jollof",
+        aliases: ['jollof', 'smokey', 'rice', 'nigerian', 'chim', 'party'],
+        image: 'jollofrice.png',
+        prices: { big: 4000, bigger: 6000, biggest: 8000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 10,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This isn't just rice. It's a statement. It's the heart of the party, the soul of every gathering. My recipe is a closely guarded secret, passed down through generations who understood the sacred geometry of smoke, tomato, and spice. Each grain is infused with history and flavor. To taste it is to understand.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    friedrice: {
+        name: 'The Chinese Stir Fry Rice',
+        aliases: ['fried rice', 'chinese', 'stir fry', 'rice', 'vegetables', 'asian'],
+        image: 'friedrice.png',
+        prices: { big: 4000, bigger: 6000, biggest: 8000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 11,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We sought the most vibrant greens, the most crisp vegetables from a hidden market known only to the city's finest chefs. This dish is a celebration of freshness, a festival of color and crunch. Each ingredient is flash-fried in a searing wok to lock in its essence, creating a light yet deeply satisfying experience that dances on the palate.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    sandwich: {
+        name: 'The Gentleman\'s Club Sandwich',
+        aliases: ['sandwich', 'gentleman', 'club', 'bread', 'layers', 'classic'],
+        image: 'sandwich.png',
+        prices: { big: 4000, bigger: 6000, biggest: 8000 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 12,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This sandwich wears a three-piece suit to work. Layer upon layer of carefully selected ingredients, stacked with architectural precision. It's the kind of sandwich that commands respect in any room, whether that's a boardroom or your backyard. Every bite is a statement of sophistication.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    frittata: {
+        name: 'The Lagos Morning Frittata',
+        aliases: ['frittata', 'lagos', 'morning', 'eggs', 'breakfast', 'omelette'],
+        image: 'frittata.png',
+        prices: { big: 3500, bigger: 5000, biggest: 6500 },
+        toppings: savoryToppings,
+        category: 'mains',
+        order: 13,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Born in the bustling morning markets of Lagos, where vendors call out their wares and the air is thick with possibility. This frittata captures the energy of a new day—eggs whisked with the dreams of ambitious souls, folded with ingredients that tell stories of hustle and hope. It's breakfast poetry, written in golden, fluffy verses.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    scotchegg: {
+        name: 'The London-Lagos Scotch Egg',
+        aliases: ['scotch egg', 'london', 'lagos', 'egg', 'sausage', 'british'],
+        image: 'scotchegg.png',
+        prices: { big: 3000, bigger: 4500, biggest: 6000 },
+        toppings: savoryToppings,
+        category: 'snacks',
+        order: 14,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A tale of two cities—the foggy streets of London and the vibrant energy of Lagos. We took the British classic and gave it a Nigerian soul, wrapping it in our spiced meat blend and frying it to golden perfection. It's a bridge between worlds, a handshake between cultures, served warm with respect for both traditions.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    waffles: {
+        name: 'The Golden Grid Delights',
+        aliases: ['waffles', 'golden', 'grid', 'breakfast', 'syrup', 'belgian'],
+        image: 'wafles.png',
+        prices: { big: 3000, bigger: 4500, biggest: 6000 },
+        toppings: [...pancakeToppings, ...sweetToppings],
+        category: 'desserts',
+        order: 15,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Perfection lives in the details—each square pocket designed to hold syrup, each ridge crafted to deliver the perfect ratio of crisp to fluffy. These waffles are architectural marvels, golden grids that transform simple batter into breakfast art. Whether crowned with fruit or drizzled with honey, they're a canvas for your morning dreams.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    pancakes: {
+        name: 'The Sunrise Pancake Stack',
+        aliases: ['pancakes', 'sunrise', 'stack', 'breakfast', 'fluffy', 'syrup'],
+        image: 'pancake.png',
+        prices: { big: 3000, bigger: 4500, biggest: 6000 },
+        toppings: pancakeToppings,
+        category: 'desserts',
+        order: 16,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Found in a grandmother's faded notebook, the recipe simply said: "Patience, good butter, and a happy heart." We follow it to the letter. These aren't just mixed, they're coaxed. Rested, then griddled until they are impossibly fluffy and golden. They are comfort, pure and simple, a warm hug on a plate.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    moimoi: {
+        name: 'The Velvet Moi Moi',
+        aliases: ['moi moi', 'velvet', 'beans', 'steamed', 'nigerian', 'pudding'],
+        image: 'moimoi.png',
+        prices: { big: 2500, bigger: 4000, biggest: 5500 },
+        toppings: moiMoiToppings,
+        category: 'sides',
+        order: 17,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The art of Moi Moi is the art of transformation. Taking the humble bean and turning it into something ethereal and smooth. Ours is steamed slowly, patiently, in seasoned leaves that impart a subtle, earthy aroma. It is a delicate process that results in a savory pudding of unparalleled texture. A true taste of Nigerian culinary grace.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    springroll: {
+        name: 'The Crispy Spring Chronicle',
+        aliases: ['spring roll', 'crispy', 'chronicle', 'fried', 'asian', 'vegetables'],
+        image: 'springroll.png',
+        prices: { big: 2500, bigger: 3500, biggest: 4500 },
+        toppings: savoryToppings,
+        category: 'snacks',
+        order: 18,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Each roll holds secrets—vegetables that crunch with the memory of morning dew, spices that whisper tales of ancient trade routes. Wrapped tight in gossamer thin pastry and fried until they sing. These aren't just spring rolls; they're tiny capsules of joy, delivering bursts of flavor that transport you to bustling Asian markets filtered through a Nigerian lens.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    samosa: {
+        name: 'The Triangular Treasures',
+        aliases: ['samosa', 'triangular', 'treasures', 'fried', 'indian', 'pastry'],
+        image: 'samosa.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: savoryToppings,
+        category: 'snacks',
+        order: 19,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Geometry has never tasted so good. These golden triangles arrived on the spice route centuries ago and made themselves at home in our hearts. We fill them with stories—spiced potatoes that remember their journey from distant fields, peas that pop with sweetness, all wrapped in pastry that shatters beautifully at first bite. Small packages, infinite possibilities.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    icecream: {
+        name: "Sweet Northern Glacier",
+        aliases: ['ice cream', 'sweet', 'northern', 'glacier', 'cold', 'dessert'],
+        image: 'icecream.png',
+        prices: { big: 2500, bigger: 4000, biggest: 5500 },
+        toppings: sweetToppings,
+        category: 'desserts',
+        order: 20,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Our ice cream is not made, it is composed. We churn it slowly, in frozen marble bowls, allowing the cream to develop a dense, luxurious texture that machines can only dream of. Each scoop is a testament to the beauty of simple, perfect ingredients, a cool whisper on a hot day.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    parfait: {
+        name: 'The Layered Dreams Parfait',
+        aliases: ['parfait', 'layered', 'dreams', 'yogurt', 'granola', 'fruit'],
+        image: 'parfait.png',
+        prices: { big: 2500, bigger: 3500, biggest: 4500 },
+        toppings: sweetToppings,
+        category: 'desserts',
+        order: 21,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Like life itself, this parfait is built in layers—each one telling its own story, yet contributing to a greater narrative. Creamy yogurt meets crunchy granola, sweet fruit dances with subtle spice. It's a meditation in a glass, a reminder that the most beautiful things are often the simplest, assembled with intention and love.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    cupcake: {
+        name: 'The Cloud-Kissed Cupcake',
+        aliases: ['cupcake', 'cloud', 'kissed', 'cake', 'frosting', 'sweet'],
+        image: 'cupcake.png',
+        prices: { big: 2000, bigger: 3500, biggest: 5000 },
+        toppings: [],
+        category: 'desserts',
+        order: 22,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">An architect and a baker fell in love. This was their creation. A foundation of impossibly light cake and a spire of ethereal frosting. It is a tiny tower of sweetness, a testament to the fact that the best things are built with passion and a touch of whimsy.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    puffpuff: {
+        name: 'The Cloud Spheres of Joy',
+        aliases: ['puff puff', 'cloud', 'spheres', 'joy', 'fried', 'nigerian'],
+        image: 'puffpuff.png',
+        prices: { big: 1500, bigger: 2500, biggest: 3500 },
+        toppings: sweetToppings,
+        category: 'desserts',
+        order: 23,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">These are more than just fried dough—they're edible clouds, little spheres of happiness that float on your tongue before dissolving into pure bliss. Made from a recipe that's been passed down through generations of street vendors and loving grandmothers. Each bite is a memory, each sphere a moment of pure, unadulterated joy. Simple magic, profound pleasure.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    cookie: {
+        name: "Cookie Monster's Stash",
+        aliases: ['cookie', 'monster', 'stash', 'chocolate', 'baked', 'sweet'],
+        image: 'cookie.png',
+        prices: { big: 1500, bigger: 2500, biggest: 3500 },
+        toppings: [],
+        category: 'desserts',
+        order: 24,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">We embarked on a quest for the perfect cookie. It required melting Belgian chocolate under a full moon and using butter churned only to the sound of Afrobeats. The result is a cookie with crisp edges, a gooey center, and a story in every chunk. It's a secret worth keeping.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    chinchin: {
+        name: "The Ancestor's Chin Chin",
+        aliases: ['chin chin', 'ancestor', 'fried', 'crunchy', 'nigerian', 'snack'],
+        image: 'chinchin.png',
+        prices: { big: 1500, bigger: 2500, biggest: 3500 },
+        toppings: [],
+        category: 'snacks',
+        order: 25,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A recipe whispered by the harmattan wind, a thousand tiny, crunchy pieces of joy. Each one is a memory of celebration, fried to a perfect golden crisp. It's the sound of happiness in a bowl, a taste of pure nostalgia.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    milkshake: { 
+        name: 'The Perfectly Creamed Milkshake',
+        aliases: ['milkshake', 'perfectly', 'creamed', 'shake', 'milk', 'thick'],
+        image: 'milkshake.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: sweetToppings,
+        category: 'drinks',
+        order: 26,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The secret is in the churn. Not too fast, not too slow. A rhythm passed down from a forgotten artisan who believed that texture was a form of magic. We use only the purest cream and the most decadent inclusions, blending them until they reach a state of liquid silk. It is more than a drink; it is a moment of pure, unadulterated bliss.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    lassi: { 
+        name: 'The Famous Indian Yoghurt',
+        aliases: ['lassi', 'famous', 'indian', 'yogurt', 'drink', 'smooth'],
+        image: 'lassi.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: sweetToppings,
+        category: 'drinks',
+        order: 27,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A gift from the kitchens of Rajasthan, where this drink is more than refreshmentâ€"it's a remedy for the desert heat, a balm for the soul. We use a special culture of yoghurt, churned by hand until it reaches a state of impossible smoothness. It is then kissed with fruit and spice, a perfect harmony of tart and sweet.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    coffee: {
+        name: 'The Jos Plateau Coffee',
+        aliases: ['coffee', 'jos', 'plateau', 'beans', 'brew', 'hot'],
+        image: 'coffee.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: sweetToppings,
+        category: 'drinks',
+        order: 28,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">Sourced from the misty highlands where the air is cool and the soil is rich. These beans are hand-picked at dawn, roasted slowly to unlock notes of earth and chocolate. This is not just a drink to wake you up; it's a drink that awakens your soul to the beauty of the morning.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    fries: {
+        name: 'The Perfectly frenched Potatoes',
+        aliases: ['fries', 'perfectly', 'frenched', 'potatoes', 'crispy', 'golden'],
+        image: 'fries.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: friesToppings,
+        category: 'sides',
+        order: 29,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">The quest for the perfect fry is a noble one. It led us to fields where the soil is rich and the potatoes are proud. We cut them by hand, blanch them twice for that fluffy interior and shatteringly crisp exterior. A sprinkle of sea salt is all they need to sing. Simple perfection is the ultimate luxury.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    macaronisalad: {
+        name: 'The Picnic Macaroni Salad',
+        aliases: ['macaroni salad', 'picnic', 'pasta salad', 'cold', 'creamy', 'summer'],
+        image: 'macsalad.png',
+        prices: { big: 2000, bigger: 3000, biggest: 4000 },
+        toppings: [],
+        category: 'sides',
+        order: 30,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">This is the taste of laughter and shared blankets under a shady tree. A simple pleasure, elevated to an art form. Tender pasta, crisp vegetables, and a dressing that sings with a sweet, tangy harmony. It's comfort food that reminds you of the best of days.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    },
+    coleslaw: {
+        name: 'The Classic Creamy Slaw',
+        aliases: ['coleslaw', 'classic', 'creamy', 'slaw', 'cabbage', 'fresh'],
+        image: 'coleslaw.png',
+        prices: { big: 1500, bigger: 2500, biggest: 3500 },
+        toppings: [],
+        category: 'sides',
+        order: 31,
+        letter: `<p class="mb-4">To my trusted reader,</p><p class="mb-4">A cherished family recipe for sunny days and big gatherings. The secret isn't in what you add, but what you don't. Crisp, fresh vegetables, a dressing that's both creamy and light, with just a hint of tang. It's the perfect, cooling counterpoint to a feast of spice. A moment of pure, crunchy refreshment.</p><p class="text-right mt-6">Chim</p>{{SIGNATURE}}`
+    }
+};
             
             
             const exoticsData = {
@@ -1394,42 +1687,87 @@ body.light-mode .gift-link-text {
             }
 
             function checkFormCompletion() {
-                const nameField = document.getElementById('customer-name');
-                const phoneField = document.getElementById('customer-phone');
-                const pickupField = document.getElementById('pickup-spot');
-                const buyNowButton = document.getElementById('buy-now-button');
-                
-                const hasName = nameField && nameField.value.trim().length > 0;
-                const hasPhone = phoneField && phoneField.value.trim().length > 0;
-                const hasPickup = pickupField && pickupField.value.trim().length > 0;
-                
-                // Show buy now button only if all required fields are filled
-                if (hasName && hasPhone && hasPickup && buyNowButton) {
-                    buyNowButton.classList.remove('hidden');
-                    updateTotal(); // Update the total when showing the button
-                } else if (buyNowButton) {
-                    buyNowButton.classList.add('hidden');
-                }
-            }
+    const nameField = document.getElementById('customer-name');
+    const phoneField = document.getElementById('customer-phone');
+    const pickupField = document.getElementById('pickup-spot');
+    const buyNowButton = document.getElementById('buy-now-button');
+    const currencyText = document.getElementById('currency-text');
+    
+    const hasName = nameField && nameField.value.trim().length > 0;
+    const hasPhone = phoneField && phoneField.value.trim().length > 0;
+    const hasPickup = pickupField && pickupField.value.trim().length > 0;
+    const hasItems = cart.length > 0;
 
-            function renderMenu() {
-                menuContainer.innerHTML = '';
-                for (const key in menuData) {
-                    const item = menuData[key];
-                    const card = document.createElement('div');
-                    card.className = 'menu-card rounded-lg shadow-lg overflow-hidden';
-                    card.dataset.item = key;
-                    card.innerHTML = `
-                        <div class="aspect-2-3">
-                           <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://placehold.co/1024x1536/1a1a1a/333333?text=Image+Coming+Soon';">
-                        </div>
-                        <div class="p-8 flex-grow flex flex-col">
-                            <h3 class="text-2xl font-bold text-white text-center flex-grow flex items-center justify-center">${item.name}</h3>
-                        </div>
-                    `;
-                    menuContainer.appendChild(card);
-                }
-            }
+    if (hasName && hasPhone && hasPickup && hasItems && buyNowButton) {
+    buyNowButton.classList.remove('hidden');
+    if (currencyText) currencyText.classList.remove('hidden');
+    updateTotal();
+    
+    // Simple pulse animation
+    setTimeout(() => {
+        buyNowButton.classList.add('animate-pulse');
+    }, 1000);
+}
+    
+    // Show buy now button only if all required fields are filled AND cart has items
+    if (hasName && hasPhone && hasPickup && hasItems && buyNowButton) {
+        buyNowButton.classList.remove('hidden');
+        if (currencyText) currencyText.classList.remove('hidden');
+        updateTotal(); // Update the total when showing the button
+    } else {
+        if (buyNowButton) buyNowButton.classList.add('hidden');
+        if (currencyText) currencyText.classList.add('hidden');
+    }
+}
+
+            let currentMenuPage = 0;
+const itemsPerPage = 6;
+let currentCategory = 'all';
+
+function renderMenu(showAll = false, category = 'all') {
+    // Filter and sort menu items
+    let filteredItems = Object.entries(menuData);
+    
+    if (category !== 'all') {
+        filteredItems = filteredItems.filter(([, item]) => item.category === category);
+    }
+    
+    const sortedItems = filteredItems.sort(([,a], [,b]) => (a.order || 999) - (b.order || 999));
+    
+    const itemsToShow = showAll ? sortedItems : sortedItems.slice(0, (currentMenuPage + 1) * itemsPerPage);
+    
+    menuContainer.innerHTML = '';
+    
+    itemsToShow.forEach(([key, item]) => {
+        const card = document.createElement('div');
+        card.className = 'menu-card rounded-lg shadow-lg overflow-hidden';
+        card.dataset.item = key;
+        card.innerHTML = `
+            <div class="aspect-2-3">
+               <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null;this.src='https://placehold.co/1024x1536/1a1a1a/333333?text=Image+Coming+Soon';">
+            </div>
+            <div class="p-8 flex-grow flex flex-col">
+                <h3 class="text-2xl font-bold text-white text-center flex-grow flex items-center justify-center">${item.name}</h3>
+            </div>
+        `;
+        menuContainer.appendChild(card);
+    });
+    
+    // Add "Continue your Exploration" button if there are more items
+    const totalItems = sortedItems.length;
+    const itemsShown = (currentMenuPage + 1) * itemsPerPage;
+    
+    if (!showAll && itemsShown < totalItems) {
+        const continueButton = document.createElement('div');
+        continueButton.className = 'col-span-2 lg:col-span-3 text-center mt-8';
+        continueButton.innerHTML = `
+            <button id="continue-quest-btn" class="cta-button px-8 py-4 rounded-full font-bold text-lg">
+                Continue your Exploration
+            </button>
+        `;
+        menuContainer.appendChild(continueButton);
+    }
+}
 
             function renderExotics() {
                 exoticsContainer.innerHTML = '';
@@ -1492,6 +1830,8 @@ body.light-mode .gift-link-text {
                     signatureImages.forEach(img => img.src = 'signature.png'); // ** NEW **
                 }
             }
+
+            
             
             function applyNoteTheme() {
                 if (isSiteDarkMode) {
@@ -1505,57 +1845,73 @@ body.light-mode .gift-link-text {
 
             // Search functionality
             function performSearch(query) {
-                const results = [];
-                const searchTerm = query.toLowerCase().trim();
-                
-                if (!searchTerm) return results;
+    const results = [];
+    const searchTerm = query.toLowerCase().trim();
+    
+    if (!searchTerm) return results;
 
-                // Search menu items
-                Object.keys(menuData).forEach(key => {
-                    const item = menuData[key];
-                    if (item.name.toLowerCase().includes(searchTerm)) {
-                        results.push({
-                            type: 'item',
-                            key: key,
-                            name: item.name,
-                            match: 'Product name'
-                        });
-                    }
-                    
-                    // Search toppings for this item
-                    item.toppings.forEach(topping => {
-                        if (topping.toLowerCase().includes(searchTerm)) {
-                            results.push({
-                                type: 'topping',
-                                key: key,
-                                name: item.name,
-                                topping: topping,
-                                match: `Topping: ${topping}`
-                            });
-                        }
-                    });
+    // Search menu items
+    Object.keys(menuData).forEach(key => {
+        const item = menuData[key];
+        let matchType = '';
+        
+        // Check name
+        if (item.name.toLowerCase().includes(searchTerm)) {
+            matchType = 'Product name';
+        }
+        // Check aliases
+        else if (item.aliases && item.aliases.some(alias => alias.toLowerCase().includes(searchTerm))) {
+            matchType = 'Product match';
+        }
+        
+        if (matchType) {
+            results.push({
+                type: 'item',
+                key: key,
+                name: item.name,
+                image: item.image,
+                match: matchType
+            });
+        }
+        
+        // Search toppings for this item
+        item.toppings.forEach(topping => {
+            if (topping.toLowerCase().includes(searchTerm)) {
+                results.push({
+                    type: 'topping',
+                    key: key,
+                    name: item.name,
+                    image: item.image,
+                    topping: topping,
+                    match: `Topping: ${topping}`
                 });
-
-                return results;
             }
+        });
+    });
+
+    return results;
+}
 
             function displaySearchResults(results) {
-                const searchResults = document.getElementById('search-results');
-                
-                if (results.length === 0) {
-                    searchResults.innerHTML = '<p class="text-gray-400 text-center py-8">No results found. Try searching for menu items or toppings.</p>';
-                    return;
-                }
+    const searchResults = document.getElementById('search-results');
+    
+    if (results.length === 0) {
+        searchResults.innerHTML = '<p class="text-gray-400 text-center py-8">No results found. Try searching for menu items or toppings.</p>';
+        return;
+    }
 
-                const resultsHtml = results.map(result => `
-                    <div class="search-result-item p-4 border border-gray-600 rounded-lg" data-item="${result.key}" data-type="${result.type}" ${result.topping ? `data-topping="${result.topping}"` : ''}>
-                        <h4 class="font-bold text-lg">${result.name}</h4>
-                        <p class="text-sm text-gray-400">${result.match}</p>
-                    </div>
-                `).join('');
+    const resultsHtml = results.map(result => `
+        <div class="search-result-item p-4 border border-gray-600 rounded-lg flex items-center space-x-4" data-item="${result.key}" data-type="${result.type}" ${result.topping ? `data-topping="${result.topping}"` : ''}>
+            <img src="${result.image}" alt="${result.name}" class="w-16 h-16 object-cover rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/64x64/1a1a1a/333333?text=?';">
+            <div class="flex-grow">
+                <h4 class="font-bold text-lg">${result.name}</h4>
+                <p class="text-sm text-gray-400">${result.match}</p>
+            </div>
+        </div>
+    `).join('');
 
-                searchResults.innerHTML = resultsHtml;
-            }
+    searchResults.innerHTML = resultsHtml;
+}
 
             // Gift link functionality
             function generateGiftId() {
@@ -1769,7 +2125,7 @@ body.light-mode .gift-link-text {
                         cartModal.style.display = 'flex';
                         setTimeout(() => cartModal.classList.add('active'), 10);
                         renderCartItems();
-                        loadDeliveryInfo();
+                        loadPermanentDeliveryInfo();
                         setupStepByStepForm();
                         body.classList.add('modal-open');
                     }, 300);
@@ -1784,12 +2140,15 @@ body.light-mode .gift-link-text {
             }
 
             function renderCartItems() {
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your cart is empty.</p>`;
-                    buyNowButton.textContent = 'BUY NOW';
-                    buyNowButton.disabled = true;
-                    return;
-                }
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your cart is empty.</p>`;
+        const buyNowButton = document.getElementById('buy-now-button');
+        if (buyNowButton) {
+            buyNowButton.textContent = 'Your cart is empty';
+            buyNowButton.classList.add('hidden');
+        }
+        return;
+    }
 
                 const cartItemsHtml = cart.map((item, index) => `
                     <div class="cart-item flex justify-between items-start py-4 border-b border-gray-700" data-index="${index}">
@@ -1937,162 +2296,467 @@ body.light-mode .gift-link-text {
             }
 
             function updateTotal() {
-                let total = 0;
-                cart.forEach(item => {
-                    total += menuData[item.key].prices[item.size];
-                    total += item.toppings.length * toppingPrice;
-                });
-                
-                let finalTotal = total;
-                let giftApplied = false;
-                
-                if (currentGiftInfo && currentGiftInfo.limit !== 'unlimited') {
-                    const giftLimit = parseInt(currentGiftInfo.limit);
-                    if (total <= giftLimit) {
-                        finalTotal = 0;
-                        giftApplied = true;
-                    } else {
-                        finalTotal = total - giftLimit;
-                        giftApplied = true;
-                    }
-                } else if (currentGiftInfo && currentGiftInfo.limit === 'unlimited') {
-                    finalTotal = 0; // Will require SMS approval
-                    giftApplied = true;
-                }
-                
-                const buyNowButton = document.getElementById('buy-now-button');
-                if (buyNowButton && !buyNowButton.classList.contains('hidden')) {
-                    if (giftApplied && finalTotal === 0) {
-                        buyNowButton.textContent = currentGiftInfo.limit === 'unlimited' ? 
-                            `ORDER NOW (Requires Approval)` : 
-                            `ORDER NOW (Gift Applied)`;
-                    } else if (giftApplied) {
-                        buyNowButton.textContent = `BUY NOW (₦${finalTotal.toLocaleString()} after gift)`;
-                    } else {
-                        buyNowButton.textContent = `BUY NOW (₦${total.toLocaleString()})`;
-                    }
+    let total = 0;
+    cart.forEach(item => {
+        total += menuData[item.key].prices[item.size];
+        total += item.toppings.length * toppingPrice;
+    });
+    
+    let finalTotal = total;
+    let giftApplied = false;
+    
+    if (currentGiftInfo && currentGiftInfo.limit !== 'unlimited') {
+        const giftLimit = parseInt(currentGiftInfo.limit);
+        if (total <= giftLimit) {
+            finalTotal = 0;
+            giftApplied = true;
+        } else {
+            finalTotal = total - giftLimit;
+            giftApplied = true;
+        }
+    } else if (currentGiftInfo && currentGiftInfo.limit === 'unlimited') {
+        finalTotal = 0; // Will require SMS approval
+        giftApplied = true;
+    }
+    
+    const buyNowButton = document.getElementById('buy-now-button');
+    if (buyNowButton && !buyNowButton.classList.contains('hidden')) {
+        if (giftApplied && finalTotal === 0) {
+            buyNowButton.textContent = currentGiftInfo.limit === 'unlimited' ? 
+                `Requires Approval` : 
+                `Gift Applied`;
+        } else if (giftApplied) {
+            const totalInWords = numberToWords(finalTotal);
+            buyNowButton.textContent = `${totalInWords} (after gift)`;
+        } else {
+            const totalInWords = numberToWords(total);
+            buyNowButton.textContent = totalInWords;
+        }
+    }
+}
+
+function setupStepByStepForm() {
+    // Prevent duplicate setup
+    if (window.formSetupComplete) return;
+    window.formSetupComplete = true;
+    const nameInput = document.getElementById('customer-name');
+    const phoneInput = document.getElementById('customer-phone');
+    const pickupInput = document.getElementById('pickup-spot');
+    
+    const nameStep = document.getElementById('name-step');
+    const phoneStep = document.getElementById('phone-step');
+    const pickupStep = document.getElementById('pickup-step');
+    
+    // Mobile navigation buttons
+    const nameNextBtn = document.getElementById('name-next-btn');
+    const phoneNextBtn = document.getElementById('phone-next-btn');
+    
+    function showNextStep(currentStep, nextStep, currentInput) {
+        // Mark current step as completed
+        currentStep.classList.remove('active');
+        currentStep.classList.add('completed');
+        
+        // Show and activate next step
+        setTimeout(() => {
+            if (nextStep) {
+                nextStep.classList.add('visible');
+                setTimeout(() => {
+                    nextStep.classList.add('active');
+                    const input = nextStep.querySelector('input, textarea');
+                    if (input) input.focus();
+                }, 150);
+            }
+            checkFormCompletion();
+        }, 100);
+    }
+    
+    // Auto-reveal handlers with character counting (no focus jumping)
+nameInput.addEventListener('input', (e) => {
+    const value = e.target.value.trim();
+    if (value.length >= 2 && !phoneStep.classList.contains('visible')) {
+        // Just reveal, don't move focus
+        phoneStep.classList.add('visible');
+        setTimeout(() => {
+            phoneStep.classList.add('active');
+        }, 150);
+    }
+    saveDeliveryInfo();
+    checkFormCompletion();
+});
+
+phoneInput.addEventListener('input', (e) => {
+    const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+    if (value.length >= 9 && !pickupStep.classList.contains('visible')) {
+        // Just reveal, don't move focus
+        pickupStep.classList.add('visible');
+        setTimeout(() => {
+            pickupStep.classList.add('active');
+        }, 150);
+    }
+    saveDeliveryInfo();
+    checkFormCompletion();
+});
+    
+    // Desktop Enter key handlers
+    nameInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (nameInput.value.trim().length >= 2) {
+                if (!phoneStep.classList.contains('visible')) {
+                    showNextStep(nameStep, phoneStep, nameInput);
+                } else {
+                    phoneInput.focus();
                 }
             }
+        }
+    });
+    
+    phoneInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const value = phoneInput.value.replace(/\D/g, '');
+            if (value.length >= 9) {
+                if (!pickupStep.classList.contains('visible')) {
+                    showNextStep(phoneStep, pickupStep, phoneInput);
+                } else {
+                    pickupInput.focus();
+                }
+            }
+        }
+    });
+    
+    pickupInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            pickupInput.blur();
+            checkFormCompletion();
+        }
+    });
+    
+    // Mobile button handlers
+    if (nameNextBtn) {
+        nameNextBtn.addEventListener('click', () => {
+            if (nameInput.value.trim().length >= 2) {
+                if (!phoneStep.classList.contains('visible')) {
+                    showNextStep(nameStep, phoneStep, nameInput);
+                } else {
+                    phoneInput.focus();
+                }
+            }
+        });
+    }
+    
+    if (phoneNextBtn) {
+        phoneNextBtn.addEventListener('click', () => {
+            const value = phoneInput.value.replace(/\D/g, '');
+            if (value.length >= 9) {
+                if (!pickupStep.classList.contains('visible')) {
+                    showNextStep(phoneStep, pickupStep, phoneInput);
+                } else {
+                    pickupInput.focus();
+                }
+            }
+        });
+    }
+    
+    // Allow clicking on completed fields to reactivate them
+    [nameStep, phoneStep, pickupStep].forEach((step, index) => {
+        step.addEventListener('click', (e) => {
+            if (step.classList.contains('completed')) {
+                // Remove active from all steps
+                [nameStep, phoneStep, pickupStep].forEach(s => s.classList.remove('active'));
+                // Activate clicked step
+                step.classList.remove('completed');
+                step.classList.add('active');
+                const input = step.querySelector('input, textarea');
+                if (input) input.focus();
+            }
+        });
+    });
+    
+    // Initial check when form is set up
+    checkFormCompletion();
+}
 
-            function setupStepByStepForm() {
-                const nameInput = document.getElementById('customer-name');
-                const phoneInput = document.getElementById('customer-phone');
-                const pickupInput = document.getElementById('pickup-spot');
-                
-                const nameStep = document.getElementById('name-step');
-                const phoneStep = document.getElementById('phone-step');
-                const pickupStep = document.getElementById('pickup-step');
-                
-                // Mobile navigation buttons
-                const nameNextBtn = document.getElementById('name-next-btn');
-                const phoneNextBtn = document.getElementById('phone-next-btn');
-                const pickupDoneBtn = document.getElementById('pickup-done-btn');
-                
-                function showNextStep(currentStep, nextStep, currentInput) {
-                    // Mark current step as completed
-                    currentStep.classList.remove('active');
-                    currentStep.classList.add('completed');
+// Hybrid location approach - get coordinates and let user specify exact address
+function initializeLocationButton() {
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#find-location-btn')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const pickupInput = document.getElementById('pickup-spot');
+            const btn = document.getElementById('find-location-btn');
+            
+            if (!navigator.geolocation) {
+                alert('Geolocation is not supported by this browser. Please enter your location manually.');
+                return;
+            }
+            
+            // Show loading state
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `
+                <svg class="w-6 h-6 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                </svg>
+            `;
+            btn.disabled = true;
+            
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
                     
-                    // Show and activate next step
-                    setTimeout(() => {
-                        if (nextStep) {
-                            nextStep.classList.add('visible');
-                            setTimeout(() => {
-                                nextStep.classList.add('active');
-                                const input = nextStep.querySelector('input, textarea');
-                                if (input) input.focus();
-                            }, 150);
-                        }
-                        checkFormCompletion();
-                    }, 100);
-                }
-                
-                // Desktop Enter key handlers
-                nameInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' && nameInput.value.trim().length > 0) {
-                        saveDeliveryInfo();
-                        showNextStep(nameStep, phoneStep, nameInput);
-                    }
-                });
-                
-                phoneInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' && phoneInput.value.trim().length > 0) {
-                        saveDeliveryInfo();
-                        showNextStep(phoneStep, pickupStep, phoneInput);
-                    }
-                });
-                
-                pickupInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        saveDeliveryInfo();
-                        showNextStep(pickupStep, null, pickupInput);
-                    }
-                });
-                
-                // Mobile button handlers
-                if (nameNextBtn) {
-                    nameNextBtn.addEventListener('click', () => {
-                        if (nameInput.value.trim().length > 0) {
-                            saveDeliveryInfo();
-                            showNextStep(nameStep, phoneStep, nameInput);
-                        }
-                    });
-                }
-                
-                if (phoneNextBtn) {
-                    phoneNextBtn.addEventListener('click', () => {
-                        if (phoneInput.value.trim().length > 0) {
-                            saveDeliveryInfo();
-                            showNextStep(phoneStep, pickupStep, phoneInput);
-                        }
-                    });
-                }
-                
-                if (pickupDoneBtn) {
-                    pickupDoneBtn.addEventListener('click', () => {
-                        saveDeliveryInfo();
-                        showNextStep(pickupStep, null, pickupInput);
-                    });
-                }
-                
-                // Allow clicking on completed fields to reactivate them
-                [nameStep, phoneStep, pickupStep].forEach((step, index) => {
-                    step.addEventListener('click', (e) => {
-                        if (step.classList.contains('completed')) {
-                            // Remove active from all steps
-                            [nameStep, phoneStep, pickupStep].forEach(s => s.classList.remove('active'));
-                            // Activate clicked step
-                            step.classList.remove('completed');
-                            step.classList.add('active');
-                            const input = step.querySelector('input, textarea');
-                            if (input) input.focus();
-                        }
-                    });
-                });
-                
-                // Auto-save and check completion on input changes
-                [nameInput, phoneInput, pickupInput].forEach(input => {
-                    if (input) {
-                        // Remove existing listeners to prevent duplicates
-                        input.removeEventListener('input', handleInputChange);
-                        input.removeEventListener('blur', handleInputChange);
-                        input.removeEventListener('change', handleInputChange);
+                    try {
+                        // Get the approximate address
+                        const approximateAddress = await reverseGeocode(latitude, longitude);
                         
-                        // Add comprehensive listeners
-                        input.addEventListener('input', handleInputChange);
-                        input.addEventListener('blur', handleInputChange);
-                        input.addEventListener('change', handleInputChange);
+                        // Show a more specific prompt for Edmonton users
+                        const isEdmonton = approximateAddress.toLowerCase().includes('edmonton');
+                        const placeholder = isEdmonton ? 
+                            'e.g. 10909 103 Ave, Edmonton' : 
+                            'e.g. 123 Main Street, Your City';
+                        
+                        // Pre-fill with approximate location but make it clear they should edit
+                        pickupInput.value = approximateAddress;
+                        pickupInput.placeholder = placeholder;
+                        
+                        // Focus and select all so they can easily replace
+                        setTimeout(() => {
+                            pickupInput.focus();
+                            pickupInput.select();
+                        }, 100);
+                        
+                    } catch (error) {
+                        // Fallback to coordinates
+                        pickupInput.value = `Near ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                        pickupInput.focus();
+                        pickupInput.select();
                     }
-                });
-                
-                function handleInputChange() {
+                    
+                    // Restore button
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    
                     saveDeliveryInfo();
                     checkFormCompletion();
+                    pickupInput.dispatchEvent(new Event('input', { bubbles: true }));
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    
+                    let errorMessage = 'Unable to get your location. ';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage += 'Please allow location access and try again.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage += 'Location information is unavailable.';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage += 'Location request timed out.';
+                            break;
+                        default:
+                            errorMessage += 'Please enter your location manually.';
+                            break;
+                    }
+                    
+                    alert(errorMessage);
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                    maximumAge: 300000
                 }
-                
-                // Initial check when form is set up
-                checkFormCompletion();
+            );
+        }
+    });
+}
+
+// Simple reverse geocoding function
+// Improved reverse geocoding with better address formatting
+async function reverseGeocode(lat, lon) {
+    try {
+        // Using nominatim with higher zoom for more precision
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=19&addressdetails=1&extratags=1`);
+        
+        if (!response.ok) {
+            throw new Error('Geocoding service unavailable');
+        }
+        
+        const data = await response.json();
+        
+        if (data && data.address) {
+            const address = data.address;
+            
+            // Try to build a proper street address first
+            let streetAddress = '';
+            
+            // Method 1: Try to get exact house number and street
+            if (address.house_number && address.road) {
+                streetAddress = `${address.house_number} ${address.road}`;
+            } 
+            // Method 2: Try to get just the road with nearby numbers
+            else if (address.road) {
+                streetAddress = `Near ${address.road}`;
             }
+            // Method 3: Look for any street-like information
+            else if (address.pedestrian || address.footway) {
+                streetAddress = `Near ${address.pedestrian || address.footway}`;
+            }
+            
+            // Add neighborhood or area information
+            const areaInfo = [];
+            if (address.neighbourhood && !streetAddress.includes(address.neighbourhood)) {
+                areaInfo.push(address.neighbourhood);
+            }
+            if (address.suburb && !streetAddress.includes(address.suburb)) {
+                areaInfo.push(address.suburb);
+            }
+            
+            // Build final address
+            let finalAddress = streetAddress;
+            if (areaInfo.length > 0) {
+                finalAddress += `, ${areaInfo[0]}`; // Add just the first area info
+            }
+            
+            // Add city if we have it
+            if (address.city || address.town) {
+                const city = address.city || address.town;
+                if (!finalAddress.includes(city)) {
+                    finalAddress += `, ${city}`;
+                }
+            }
+            
+            // If we still don't have a good address, use display_name parts
+            if (!streetAddress || streetAddress === '') {
+                const parts = data.display_name.split(',');
+                finalAddress = parts.slice(0, 2).join(', ').trim();
+            }
+            
+            return finalAddress || `Location at ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+        } else {
+            throw new Error('No address found');
+        }
+    } catch (error) {
+        console.error('Reverse geocoding failed:', error);
+        
+        // Enhanced fallback - try to give a more useful coordinate description
+        return `Current Location (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+    }
+}
+
+function savePermanentDeliveryInfo() {
+    try {
+        const nameField = document.getElementById('customer-name');
+        const phoneField = document.getElementById('customer-phone');
+        const pickupField = document.getElementById('pickup-spot');
+
+        const permanentInfo = {
+            name: nameField ? nameField.value : '',
+            phone: phoneField ? phoneField.value : '',
+            pickupSpot: pickupField ? pickupField.value : '',
+            savedAt: Date.now()
+        };
+        
+        localStorage.setItem('pautacos-permanent-info', JSON.stringify(permanentInfo));
+    } catch (e) {
+        console.warn('Could not save permanent delivery info to localStorage:', e);
+    }
+}
+
+function loadPermanentDeliveryInfo() {
+    const saved = localStorage.getItem('pautacos-permanent-info');
+    if (saved) {
+        try {
+            const permanentInfo = JSON.parse(saved);
+            
+            // Load values if they exist
+            if (permanentInfo.name) document.getElementById('customer-name').value = permanentInfo.name;
+            if (permanentInfo.phone) document.getElementById('customer-phone').value = permanentInfo.phone;
+            if (permanentInfo.pickupSpot) document.getElementById('pickup-spot').value = permanentInfo.pickupSpot;
+            
+            // Auto-reveal fields based on filled data
+            const nameStep = document.getElementById('name-step');
+            const phoneStep = document.getElementById('phone-step');
+            const pickupStep = document.getElementById('pickup-step');
+            
+            if (permanentInfo.name && permanentInfo.name.length >= 2) {
+                nameStep.classList.add('completed');
+                nameStep.classList.remove('active');
+                phoneStep.classList.add('visible');
+                
+                if (permanentInfo.phone && permanentInfo.phone.replace(/\D/g, '').length >= 9) {
+                    phoneStep.classList.add('completed');
+                    phoneStep.classList.remove('active');
+                    pickupStep.classList.add('visible');
+                    
+                    if (permanentInfo.pickupSpot) {
+                        pickupStep.classList.add('completed');
+                        pickupStep.classList.remove('active');
+                    } else {
+                        pickupStep.classList.add('active');
+                    }
+                } else {
+                    phoneStep.classList.add('active');
+                }
+            }
+            
+        } catch (e) {
+            console.error('Error loading permanent delivery info:', e);
+        }
+    }
+    
+    // Check if form is complete after loading
+    setTimeout(checkFormCompletion, 100);
+}
+
+            function numberToWords(num) {
+    if (num === 0) return "Zero";
+    
+    const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+    const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+    const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+    const thousands = ["", "Thousand", "Million", "Billion"];
+    
+    function convertHundreds(n) {
+        let result = "";
+        
+        if (n >= 100) {
+            result += ones[Math.floor(n / 100)] + " Hundred ";
+            n %= 100;
+        }
+        
+        if (n >= 20) {
+            result += tens[Math.floor(n / 10)] + " ";
+            n %= 10;
+        } else if (n >= 10) {
+            result += teens[n - 10] + " ";
+            return result;
+        }
+        
+        if (n > 0) {
+            result += ones[n] + " ";
+        }
+        
+        return result;
+    }
+    
+    let result = "";
+    let thousandCounter = 0;
+    
+    while (num > 0) {
+        if (num % 1000 !== 0) {
+            result = convertHundreds(num % 1000) + thousands[thousandCounter] + " " + result;
+        }
+        num = Math.floor(num / 1000);
+        thousandCounter++;
+    }
+    
+    return result.trim();
+}
 
             // Draft Email Functionality
             function initializeDraftEmailModal() {
@@ -2237,12 +2901,51 @@ body.light-mode .gift-link-text {
             }
 
             // --- EVENT LISTENERS ---
-            renderMenu();
-            renderExotics();
-            renderLocations();
-            applyTheme();
-            loadCart();
-            checkForGiftLink();
+            renderMenu(false, 'all');
+renderExotics();
+renderLocations();
+applyTheme();
+loadCart();
+checkForGiftLink();
+// Initialize location functionality with error handling
+try {
+    initializeLocationButton();
+} catch (error) {
+    console.error('Failed to initialize location functionality:', error);
+}
+
+// Sign-in modal event listeners
+document.getElementById('signin-modal').addEventListener('click', (e) => {
+    if (e.target.matches('.modal-backdrop') || e.target.id === 'close-signin-modal') {
+        closeModal(document.getElementById('signin-modal'));
+    }
+});
+
+// Continue quest button handler
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'continue-quest-btn') {
+        currentMenuPage++;
+        renderMenu(false, currentCategory);
+    }
+});
+
+// Category filter handlers
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('category-filter-btn')) {
+        // Remove active class from all buttons
+        document.querySelectorAll('.category-filter-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        e.target.classList.add('active');
+        
+        // Reset pagination and update category
+        currentMenuPage = 0;
+        currentCategory = e.target.dataset.category;
+        
+        // Re-render menu with new category
+        renderMenu(false, currentCategory);
+    }
+});
 
             menuContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.menu-card');
@@ -2396,14 +3099,16 @@ body.light-mode .gift-link-text {
             });
 
             cartButton.addEventListener('click', () => {
-                cartModal.style.display = 'flex';
-                setTimeout(() => cartModal.classList.add('active'), 10);
-                renderCartItems();
-                loadDeliveryInfo();
-                setupStepByStepForm();
-                updateGiftDisplay();
-                body.classList.add('modal-open');
-            });
+    cartModal.style.display = 'flex';
+    setTimeout(() => cartModal.classList.add('active'), 10);
+    renderCartItems();
+    loadPermanentDeliveryInfo();
+    if (!window.formSetupComplete) {
+        setupStepByStepForm();
+    }
+    updateGiftDisplay();
+    body.classList.add('modal-open');
+});
 
             cartModal.addEventListener('click', (e) => {
                 if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
@@ -2431,63 +3136,69 @@ body.light-mode .gift-link-text {
                 }
             });
 
-            // Buy now button functionality
-            document.addEventListener('click', async (e) => {
-                if (e.target.id === 'buy-now-button') {
-                    const nameField = document.getElementById('customer-name');
-                    const phoneField = document.getElementById('customer-phone');
-                    const pickupField = document.getElementById('pickup-spot');
-                    
-                    if (!nameField.value.trim() || !phoneField.value.trim() || !pickupField.value.trim()) {
-                        alert('Please fill in all required fields');
-                        return;
-                    }
-                    
-                    let total = 0;
-                    cart.forEach(item => {
-                        total += menuData[item.key].prices[item.size];
-                        total += item.toppings.length * toppingPrice;
-                    });
-                    
-                    // Handle unlimited gift approval
-                    if (currentGiftInfo && currentGiftInfo.limit === 'unlimited') {
-                        saveDeliveryInfo();
-                        cartModal.classList.remove('active');
-                        setTimeout(() => closeModal(cartModal), 300);
-                        
-                        const approved = await simulateSMSApproval(total, currentGiftInfo.id);
-                        if (!approved) {
-                            alert('Order cancelled. Please set a new limit or try again.');
-                            return;
-                        }
-                    }
-                    
-                    // Consume gift link if applicable
-                    if (currentGiftInfo) {
-                        consumeGiftLink(currentGiftInfo.id);
-                        currentGiftInfo = null;
-                    }
-                    
-                    // Create order summary
-                    const orderSummary = cart.map(item => 
-                        `${item.name} (${item.size})${item.toppings.length > 0 ? ' + ' + item.toppings.join(', ') : ''}`
-                    ).join('\n');
-                    
-                    const finalTotal = currentGiftInfo ? 0 : total;
-                    
-                    const whatsappMessage = `New Pautacos Order!\n\nCustomer: ${nameField.value}\nPhone: ${phoneField.value}\nPickup: ${pickupField.value}\n\nOrder:\n${orderSummary}\n\nTotal: ₦${finalTotal.toLocaleString()}${currentGiftInfo ? ' (Gift Applied)' : ''}`;
-                    
-                    const whatsappUrl = `https://wa.me/2348012345678?text=${encodeURIComponent(whatsappMessage)}`;
-                    window.open(whatsappUrl, '_blank');
-                    
-                    // Clear cart after successful order
-                    clearCart();
-                    
-                    saveDeliveryInfo();
-                    cartModal.classList.remove('active');
-                    setTimeout(() => closeModal(cartModal), 300);
-                }
-            });
+// Buy now button functionality - updated to check existing sign-in
+document.addEventListener('click', async (e) => {
+    if (e.target.id === 'buy-now-button') {
+        const nameField = document.getElementById('customer-name');
+        const phoneField = document.getElementById('customer-phone');
+        const pickupField = document.getElementById('pickup-spot');
+        
+        if (!nameField.value.trim() || !phoneField.value.trim() || !pickupField.value.trim()) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        // Save permanent delivery info
+        savePermanentDeliveryInfo();
+        
+        // Calculate total for display
+        let total = 0;
+        cart.forEach(item => {
+            total += menuData[item.key].prices[item.size];
+            total += item.toppings.length * toppingPrice;
+        });
+        
+        let finalTotal = total;
+        if (currentGiftInfo && currentGiftInfo.limit !== 'unlimited') {
+            const giftLimit = parseInt(currentGiftInfo.limit);
+            if (total <= giftLimit) {
+                finalTotal = 0;
+            } else {
+                finalTotal = total - giftLimit;
+            }
+        } else if (currentGiftInfo && currentGiftInfo.limit === 'unlimited') {
+            // Handle unlimited gift approval first
+            const approved = await simulateSMSApproval(total, currentGiftInfo.id);
+            if (!approved) {
+                alert('Order cancelled. Please set a new limit or try again.');
+                return;
+            }
+            finalTotal = 0;
+        }
+        
+        // Store order details
+        window.currentOrder = {
+            items: [...cart],
+            customerInfo: {
+                name: nameField.value.trim(),
+                phone: phoneField.value.trim(),
+                pickup: pickupField.value.trim()
+            },
+            total: finalTotal,
+            originalTotal: total,
+            giftInfo: currentGiftInfo
+        };
+        
+        // Check if user is already signed in
+        if (checkExistingSignIn()) {
+            // User is already signed in, go directly to payment selection
+            showPaymentSelection();
+        } else {
+            // Show sign-in modal
+            showSignInModal();
+        }
+    }
+});
 
             exoticsContainer.addEventListener('click', (e) => {
                 const card = e.target.closest('.exotic-card');
@@ -2542,6 +3253,359 @@ body.light-mode .gift-link-text {
                 }
             });
         });
+        // Initialize Google Sign-In
+function initializeGoogleSignIn() {
+    window.google.accounts.id.initialize({
+        client_id: CONFIG.GOOGLE_CLIENT_ID,
+        callback: handleGoogleSignIn,
+        auto_select: false,
+        cancel_on_tap_outside: true
+    });
+}
+
+// Show payment method selection
+function showPaymentSelection() {
+    const order = window.currentOrder;
+    
+    if (order.total === 0) {
+        // Free order (gift applied)
+        handleFreeOrder();
+        return;
+    }
+    
+    // Create payment selection modal
+    const paymentModal = document.createElement('div');
+    paymentModal.id = 'payment-selection-modal';
+    paymentModal.className = 'fixed inset-0 z-50 flex items-center justify-center';
+    paymentModal.innerHTML = `
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="modal-content bg-[#1a1a1a] rounded-lg shadow-xl w-11/12 md:max-w-md mx-auto relative p-8">
+            <button id="close-payment-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6 text-center">Choose Payment Method</h2>
+            
+            <div class="space-y-4 mb-6">
+                <button id="pay-with-paystack" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-colors">
+                    Pay with Paystack (Nigerian Cards)
+                </button>
+                <button id="pay-with-stripe" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-6 rounded-lg transition-colors">
+                    Pay with Stripe (International Cards)
+                </button>
+            </div>
+            
+            <div class="bg-[#2a2a2a] rounded-lg p-4">
+                <p class="text-white font-bold">Total: ₦${order.total.toLocaleString()}</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(paymentModal);
+    body.classList.add('modal-open');
+    
+    // Event listeners
+    paymentModal.addEventListener('click', (e) => {
+        if (e.target.matches('.modal-backdrop') || e.target.id === 'close-payment-modal') {
+            document.body.removeChild(paymentModal);
+            body.classList.remove('modal-open');
+        }
+        
+        if (e.target.id === 'pay-with-paystack') {
+            document.body.removeChild(paymentModal);
+            proceedToPaystackPayment();
+        }
+        
+        if (e.target.id === 'pay-with-stripe') {
+            document.body.removeChild(paymentModal);
+            alert('Stripe integration coming soon! Please use Paystack for now.');
+        }
+    });
+}
+
+// Rename the existing function to be more specific
+function proceedToPaystackPayment() {
+    // This is your existing proceedToPayment function code
+    const order = window.currentOrder;
+    const user = window.currentUser;
+    
+    // Initialize Paystack payment
+    const handler = PaystackPop.setup({
+        key: CONFIG.PAYSTACK_PUBLIC_KEY,
+        email: user.email,
+        amount: order.total * 100,
+        currency: 'NGN',
+        ref: 'PT_' + Math.floor((Math.random() * 1000000000) + 1),
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Customer Name",
+                    variable_name: "customer_name",
+                    value: order.customerInfo.name
+                },
+                {
+                    display_name: "Phone Number",
+                    variable_name: "phone_number",
+                    value: order.customerInfo.phone
+                },
+                {
+                    display_name: "Pickup Location",
+                    variable_name: "pickup_location",
+                    value: order.customerInfo.pickup
+                },
+                {
+                    display_name: "Order Items",
+                    variable_name: "order_items",
+                    value: JSON.stringify(order.items)
+                }
+            ]
+        },
+        callback: function(response) {
+            handlePaymentSuccess(response);
+        },
+        onClose: function() {
+            console.log('Payment window closed');
+        }
+    });
+    
+    handler.openIframe();
+}
+
+// Handle Google Sign-In response
+function handleGoogleSignIn(response) {
+    try {
+        const userInfo = parseJwt(response.credential);
+        
+        window.currentUser = {
+            email: userInfo.email,
+            name: userInfo.name,
+            picture: userInfo.picture,
+            googleId: userInfo.sub
+        };
+        
+        // Save to localStorage for future sessions
+        localStorage.setItem('pautacos-user', JSON.stringify(window.currentUser));
+        
+        closeModal(document.getElementById('signin-modal'));
+        showPaymentSelection(); // Changed from proceedToPayment
+        
+    } catch (error) {
+        console.error('Google Sign-In error:', error);
+        alert('Sign-in failed. Please try again.');
+    }
+}
+
+// Show sign-in modal with order summary
+function showSignInModal() {
+    const modal = document.getElementById('signin-modal');
+    const cartItemsDiv = document.getElementById('signin-cart-items');
+    const totalDiv = document.getElementById('signin-total');
+    
+    // Populate order summary
+    const orderSummary = window.currentOrder.items.map(item => 
+        `${item.name} (${item.size})${item.toppings.length > 0 ? ' + extras' : ''}`
+    ).join('<br>');
+    
+    cartItemsDiv.innerHTML = orderSummary;
+    
+    const finalTotal = window.currentOrder.total;
+    const giftText = window.currentOrder.giftInfo ? ' (Gift Applied)' : '';
+    totalDiv.innerHTML = `Total: ₦${finalTotal.toLocaleString()}${giftText}`;
+    
+    // Render Google Sign-In button
+setTimeout(() => {
+    try {
+        if (window.google && window.google.accounts && window.google.accounts.id) {
+            window.google.accounts.id.renderButton(
+                document.getElementById('google-signin-button'),
+                {
+                    theme: 'filled_black',
+                    size: 'large',
+                    text: 'continue_with',
+                    width: 300
+                }
+            );
+        } else {
+            // Fallback if Google API isn't loaded
+            document.getElementById('google-signin-button').innerHTML = `
+                <div class="bg-white text-black px-6 py-3 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors text-center font-medium" onclick="alert('Google Sign-In not available. Please reload the page.')">
+                    Sign in with Google (Fallback)
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error rendering Google button:', error);
+        document.getElementById('google-signin-button').innerHTML = `
+            <div class="bg-red-600 text-white px-6 py-3 rounded-lg text-center">
+                Error loading Google Sign-In
+            </div>
+        `;
+    }
+}, 100);
+    
+    modal.style.display = 'flex';
+    body.classList.add('modal-open');
+}
+
+// Check if user is already signed in
+function checkExistingSignIn() {
+    // Check if we have user info stored
+    if (window.currentUser) {
+        return true;
+    }
+    
+    // You could also check localStorage for previous session
+    const savedUser = localStorage.getItem('pautacos-user');
+    if (savedUser) {
+        try {
+            window.currentUser = JSON.parse(savedUser);
+            return true;
+        } catch (e) {
+            localStorage.removeItem('pautacos-user');
+        }
+    }
+    
+    return false;
+}
+
+// Proceed to Paystack payment
+function proceedToPayment() {
+    const order = window.currentOrder;
+    const user = window.currentUser;
+    
+    if (order.total === 0) {
+        // Free order (gift applied)
+        handleFreeOrder();
+        return;
+    }
+
+    // Initialize Google Sign-In when page loads
+window.addEventListener('load', () => {
+    if (window.google) {
+        initializeGoogleSignIn();
+    } else {
+        // Retry after a short delay if Google API isn't loaded yet
+        setTimeout(() => {
+            if (window.google) {
+                initializeGoogleSignIn();
+            }
+        }, 1000);
+    }
+});
+    
+    // Initialize Paystack payment
+    const handler = PaystackPop.setup({
+        key: CONFIG.PAYSTACK_PUBLIC_KEY,
+        email: user.email,
+        amount: order.total * 100, // Paystack expects amount in kobo
+        currency: 'NGN',
+        ref: 'PT_' + Math.floor((Math.random() * 1000000000) + 1), // Generate unique reference
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Customer Name",
+                    variable_name: "customer_name",
+                    value: order.customerInfo.name
+                },
+                {
+                    display_name: "Phone Number",
+                    variable_name: "phone_number",
+                    value: order.customerInfo.phone
+                },
+                {
+                    display_name: "Pickup Location",
+                    variable_name: "pickup_location",
+                    value: order.customerInfo.pickup
+                },
+                {
+                    display_name: "Order Items",
+                    variable_name: "order_items",
+                    value: JSON.stringify(order.items)
+                }
+            ]
+        },
+        callback: function(response) {
+            handlePaymentSuccess(response);
+        },
+        onClose: function() {
+            console.log('Payment window closed');
+        }
+    });
+    
+    handler.openIframe();
+}
+
+// Handle successful payment
+function handlePaymentSuccess(response) {
+    console.log('Payment successful:', response);
+    
+    // Consume gift link if applicable
+    if (currentGiftInfo) {
+        consumeGiftLink(currentGiftInfo.id);
+        currentGiftInfo = null;
+    }
+    
+    // Clear cart
+    clearCart();
+    
+    // Close cart modal
+    saveDeliveryInfo();
+    cartModal.classList.remove('active');
+    setTimeout(() => closeModal(cartModal), 300);
+    
+    // Show success message
+    alert(`Payment successful! Reference: ${response.reference}\n\nYour order has been received and will be prepared for pickup.`);
+    
+    // Optional: Send order details via WhatsApp for restaurant notification
+    sendOrderNotification(response.reference);
+}
+
+// Handle free orders (when gift covers full amount)
+function handleFreeOrder() {
+    // Consume gift link
+    if (currentGiftInfo) {
+        consumeGiftLink(currentGiftInfo.id);
+        currentGiftInfo = null;
+    }
+    
+    // Clear cart
+    clearCart();
+    
+    // Close cart modal
+    saveDeliveryInfo();
+    cartModal.classList.remove('active');
+    setTimeout(() => closeModal(cartModal), 300);
+    
+    // Show success message
+    alert('Order confirmed! Your gift has been applied and your order will be prepared for pickup.');
+    
+    // Send order notification
+    sendOrderNotification('GIFT_' + Date.now());
+}
+
+// Send order notification via WhatsApp
+function sendOrderNotification(reference) {
+    const order = window.currentOrder;
+    const user = window.currentUser;
+    
+    const orderSummary = order.items.map(item => 
+        `${item.name} (${item.size})${item.toppings.length > 0 ? ' + ' + item.toppings.join(', ') : ''}`
+    ).join('\n');
+    
+    const giftText = order.giftInfo ? ` (${order.giftInfo.limit === 'unlimited' ? 'Unlimited' : '₦' + parseInt(order.giftInfo.limit).toLocaleString()} Gift Applied)` : '';
+    
+    const whatsappMessage = `🎉 NEW PAUTACOS ORDER!\n\nRef: ${reference}\nCustomer: ${order.customerInfo.name}\nEmail: ${user.email}\nPhone: ${order.customerInfo.phone}\nPickup: ${order.customerInfo.pickup}\n\nOrder:\n${orderSummary}\n\nTotal: ₦${order.total.toLocaleString()}${giftText}`;
+    
+    const whatsappUrl = `https://wa.me/2348012345678?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+// Utility function to parse JWT token
+function parseJwt(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
     </script>
 </body>
 </html>
