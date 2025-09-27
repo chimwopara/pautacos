@@ -1,0 +1,508 @@
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Scroll Hint */
+    .scroll-hint {
+        bottom: 6rem;
+    }
+    
+    /* Mobile Newsletter Layout */
+    .mobile-newsletter-left {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        flex-direction: column !important;
+    }
+    
+    .mobile-newsletter-left .sender-form-field {
+        width: 100% !important;
+        margin-left: 0 !important;
+        order: 2;
+        align-self: flex-start !important;
+    }
+    
+    .mobile-newsletter-left > div:first-child {
+        order: 1;
+        align-self: flex-start !important;
+        margin-bottom: 1rem;
+    }
+    
+    /* Target the actual sender form */
+    .sender-form-field div {
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+    
+    .sender-form-field form {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+    }
+    
+    .sender-form-field input,
+    .sender-form-field button {
+        align-self: flex-start !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Prevent Mobile Zoom on Input Focus */
+@media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea,
+    select {
+        font-size: 16px !important;
+        transform-origin: left top;
+        transform: scale(1);
+    }
+    
+    /* Specific targeting for form inputs */
+    #customer-name,
+    #customer-phone,
+    #pickup-spot,
+    #search-input,
+    #gift-uses,
+    .form-input {
+        font-size: 16px !important;
+    }
+    
+    /* Draft email modal inputs */
+    #email-name,
+    #email-email,
+    #email-phone,
+    #email-message {
+        font-size: 16px !important;
+    }
+}
+
+/* Maintain Visual Consistency While Preventing Zoom */
+@media screen and (max-width: 768px) {
+    .step-container input,
+    .step-container textarea {
+        font-size: 16px !important;
+        line-height: 1.25;
+    }
+    
+    .step-container label {
+        font-size: 14px;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Hero Section Adjustments for Tablet */
+    .hero-section h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero-section p {
+        font-size: 1rem;
+    }
+    
+    /* Menu Grid for Tablet */
+    #menu-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Exotics Grid for Tablet */
+    #exotics-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Locations Grid for Tablet */
+    #locations-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    /* Header Logo Size */
+    header img {
+        height: 4rem;
+        width: 4rem;
+    }
+    
+    /* Header Icons */
+    header button svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    /* Hero Section */
+    .hero-section h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-section p {
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Section Titles */
+    .font-playfair.text-5xl,
+    .font-playfair.text-6xl {
+        font-size: 2.5rem !important;
+    }
+    
+    /* Menu Cards */
+    #menu-items {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .menu-card {
+        margin: 0 auto;
+        max-width: 280px;
+    }
+    
+    /* Category Filter Buttons */
+    .category-filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Exotics Section */
+    #exotics-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .exotics-section-bg {
+        padding: 2rem 1rem;
+    }
+    
+    /* Locations Section */
+    #locations-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Footer */
+    footer .grid.grid-cols-1.lg\\:grid-cols-2 {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    footer h2 {
+        font-size: 2rem !important;
+        text-align: center;
+    }
+    
+    footer .text-4xl.lg\\:text-5xl {
+        font-size: 2rem !important;
+    }
+    
+    /* Social Media Icons */
+    footer .flex.items-center.space-x-4 {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    /* Modal Adjustments */
+    .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+    
+    .search-modal-content,
+    .gift-modal-content,
+    .approval-modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    /* Cart Modal */
+    .cart-modal-content {
+        width: 100%;
+        max-width: none;
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    /* Order Modal */
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Search Modal */
+    .search-modal-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    #search-input {
+        padding: 0.75rem;
+        font-size: 16px;
+    }
+    
+    /* Gift Modal */
+    .gift-modal-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .gift-limit-option {
+        padding: 0.75rem;
+    }
+    
+    .gift-limit-option .text-xl {
+        font-size: 1.125rem;
+    }
+    
+    /* Profile Dropdown */
+    #profile-dropdown {
+        width: 16rem;
+        right: -2rem;
+    }
+    
+    /* Step Container Mobile Optimization */
+    .step-container {
+        padding: 0.5rem 0;
+    }
+    
+    .step-container input,
+    .step-container textarea {
+        padding: 0.75rem;
+    }
+    
+    /* Mobile Navigation Buttons */
+    .mobile-nav-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    /* Buy Now Button */
+    #buy-now-button {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+    /* Container Padding */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Header */
+    header nav {
+        padding: 1rem;
+    }
+    
+    header img {
+        height: 3rem;
+        width: 3rem;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        padding: 1rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section p {
+        font-size: 0.75rem;
+    }
+    
+    /* Section Padding */
+    section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    
+    /* Modal Full Screen */
+    .modal-content,
+    .search-modal-content,
+    .gift-modal-content {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+    }
+    
+    /* Category Buttons Scroll */
+    .flex.flex-wrap.justify-center.gap-4.mb-12 {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .flex.flex-wrap.justify-center.gap-4.mb-12::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .category-filter-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+}
+
+/* Landscape Mobile Styles */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Reduce Hero Height in Landscape */
+    .hero-section {
+        height: 100vh;
+        min-height: 500px;
+    }
+    
+    .hero-section h1 {
+        font-size: 3rem;
+    }
+    
+    /* Scroll Hint Position */
+    .scroll-hint {
+        bottom: 1rem;
+    }
+    
+    /* Modal Adjustments */
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    /* Cart Modal in Landscape */
+    .cart-modal-content {
+        max-width: 400px;
+        height: 100vh;
+    }
+}
+
+/* High DPI / Retina Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Ensure images look crisp on retina displays */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+    
+    /* Thin borders on high DPI */
+    .border {
+        border-width: 0.5px;
+    }
+}
+
+/* Dark Mode Media Query Support */
+@media (prefers-color-scheme: dark) {
+    /* This will be overridden by JavaScript theme toggle */
+    /* but provides fallback for users who prefer dark mode */
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .hero-video {
+        display: none;
+    }
+    
+    /* Disable bouncing animation */
+    .scroll-hint {
+        animation: none;
+    }
+    
+    /* Disable pulse animation */
+    #buy-now-button.animate-pulse {
+        animation: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    /* Hide non-essential elements when printing */
+    header,
+    footer,
+    .modal-backdrop,
+    .modal-content,
+    .fixed,
+    .sticky,
+    .scroll-hint,
+    button:not(.print-visible) {
+        display: none !important;
+    }
+    
+    /* Optimize for print */
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Ensure menu items display nicely */
+    .menu-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        padding: 1rem;
+    }
+    
+    /* Hide background videos and images for print */
+    .hero-video,
+    .hero-overlay {
+        display: none;
+    }
+    
+    /* Simplify hero section for print */
+    .hero-section {
+        height: auto;
+        padding: 2rem 0;
+        background: white;
+        color: black;
+    }
+}
+
+/* Focus Styles for Accessibility */
+@media (min-width: 769px) {
+    /* Enhanced focus styles for keyboard navigation on desktop */
+    button:focus,
+    input:focus,
+    textarea:focus,
+    select:focus,
+    a:focus {
+        outline: 2px solid #DC2626;
+        outline-offset: 2px;
+    }
+    
+    /* Skip link for accessibility */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #DC2626;
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        z-index: 100;
+    }
+    
+    .skip-link:focus {
+        top: 6px;
+    }
+}
