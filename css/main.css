@@ -316,6 +316,36 @@ body.light-mode .cart-modal-content label {
     color: #000 !important;
 }
 
+/* Add these new panel styles */
+.right-panel-container {
+    justify-content: flex-end;
+}
+
+.right-panel-content {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    max-width: 400px;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: calc(100vh - 2rem);
+}
+
+.right-panel-container.active .right-panel-content {
+    transform: translateX(0);
+}
+
+/* Mobile full-screen panels */
+@media (max-width: 480px) {
+    .right-panel-content {
+        max-width: none;
+        border-radius: 0;
+    }
+}
+
 /* Light Mode Order Modal Styles */
 body.light-mode .modal-content {
     background-color: #ffffff;
@@ -772,6 +802,36 @@ body.light-mode .gift-modal-content label {
     background-color: rgba(220, 38, 38, 0.2);
 }
 
+.gift-uses-option {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gift-uses-option:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.gift-uses-option.selected {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.2);
+}
+
+.gift-duration-option {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gift-duration-option:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.gift-duration-option.selected {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.2);
+}
+
 /* Mobile Navigation Buttons */
 .mobile-nav-button {
     background-color: #DC2626;
@@ -939,3 +999,4 @@ body.light-mode #profile-dropdown .text-gray-500 {
 #buy-now-button.animate-pulse:hover {
     animation-play-state: paused;
 }
+

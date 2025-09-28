@@ -1762,6 +1762,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search functionality
     searchButton.addEventListener('click', () => {
         searchModal.style.display = 'flex';
+setTimeout(() => searchModal.classList.add('active'), 10);
         body.classList.add('modal-open');
         document.getElementById('search-input').focus();
         displayRecentSearches();
@@ -1809,7 +1810,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveRecentSearch(searchInput.value.trim(), itemKey);
             }
             
-            closeModal(searchModal);
+            searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
             
             if (type === 'item') {
                 openOrderModal(itemKey);
@@ -1828,7 +1830,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (itemKey) {
                 // If it's a specific item, open it directly
-                closeModal(searchModal);
+                searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
                 openOrderModal(itemKey);
             } else {
                 // If it's a search term, populate search input
@@ -1845,43 +1848,189 @@ document.addEventListener('DOMContentLoaded', () => {
         const suggestedItem = e.target.closest('.suggested-item');
         if (suggestedItem) {
             const itemKey = suggestedItem.dataset.item;
-            closeModal(searchModal);
+            searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
             openOrderModal(itemKey);
         }
     });
 
     searchModal.addEventListener('click', (e) => {
         if (e.target.matches('.modal-backdrop') || e.target.id === 'close-search-modal') {
-            closeModal(searchModal);
+            searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
         }
     });
 
     // Gift functionality
     giftButton.addEventListener('click', () => {
         giftModal.style.display = 'flex';
+setTimeout(() => giftModal.classList.add('active'), 10);
         body.classList.add('modal-open');
     });
 
+
+
     document.querySelectorAll('.gift-limit-option').forEach(option => {
-        option.addEventListener('click', () => {
-            document.querySelectorAll('.gift-limit-option').forEach(opt => opt.classList.remove('selected'));
-            option.classList.add('selected');
-        });
+    option.addEventListener('click', () => {
+        document.querySelectorAll('.gift-limit-option').forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
     });
+});
+
+document.querySelectorAll('.gift-uses-option').forEach(option => {
+    option.addEventListener('click', () => {
+        document.querySelectorAll('.gift-uses-option').forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+    });
+});
+
+document.querySelectorAll('.gift-duration-option').forEach(option => {
+    option.addEventListener('click', () => {
+        document.querySelectorAll('.gift-duration-option').forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+    });
+});
 
     document.getElementById('create-gift-link').addEventListener('click', () => {
-        const selectedOption = document.querySelector('.gift-limit-option.selected');
-        const usesInput = document.getElementById('gift-uses');
-        const hoursSelect = document.getElementById('gift-hours');
-        
-        if (!selectedOption) {
-            alert('Please select a gift limit');
-            return;
+    const selectedLimit = document.querySelector('.gift-limit-option.selected');
+    const selectedUses = document.querySelector('.gift-uses-option.selected');
+    const selectedDuration = document.querySelector('.gift-duration-option.selected');
+
+    // Gift Receipts functionality
+function formatGiftDateTime(timestamp) {
+    const date = new Date(timestamp);
+    const timeOptions = { 
+        hour: 'numeric', 
+        minute: '2-digit', 
+        hour12: true 
+    };
+    const dateOptions = { 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric' 
+    };
+    
+    const time = date.toLocaleTimeString('en-US', timeOptions);
+    const dateStr = date.toLocaleDateString('en-US', dateOptions);
+    
+    return `${time} ${dateStr}`;
+}
+
+function renderGiftReceipts() {
+    const unopenedContainer = document.getElementById('unopened-gifts-container');
+    const usedContainer = document.getElementById('used-gifts-container');
+    
+    if (!unopenedContainer || !usedContainer) return;
+    
+    // Get gift data
+    const allGifts = JSON.parse(localStorage.getItem('pautacos-all-gifts') || '[]');
+    const orderHistory = JSON.parse(localStorage.getItem('pautacos-order-history') || '[]');
+    
+    // Render unopened gifts
+    const unopenedGifts = giftLinks.filter(gift => gift.usesLeft > 0 && Date.now() < gift.expiresAt);
+    
+    if (unopenedGifts.length === 0) {
+        unopenedContainer.innerHTML = '<p class="text-gray-400 text-sm">No unopened gifts</p>';
+    } else {
+        unopenedContainer.innerHTML = unopenedGifts.map(gift => {
+            const limitText = gift.limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(gift.limit).toLocaleString()}`;
+            const createdTime = formatGiftDateTime(gift.createdAt);
+            const expiresTime = formatGiftDateTime(gift.expiresAt);
+            
+            return `
+                <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <p class="text-white font-medium">${limitText} Gift</p>
+                            <p class="text-gray-400 text-sm">Created: ${createdTime}</p>
+                            <p class="text-gray-400 text-sm">Expires: ${expiresTime}</p>
+                            <p class="text-gray-400 text-sm">${gift.usesLeft}/${gift.originalUses} uses left</p>
+                        </div>
+                        <button onclick="expireGift('${gift.id}')" class="text-red-400 hover:text-red-300 text-sm">
+                            Expire Now
+                        </button>
+                    </div>
+                    <div class="mt-3">
+                        <button onclick="copyGiftLink('${gift.id}')" class="text-blue-400 hover:text-blue-300 text-sm">
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    // Render used gifts (from order history)
+    const usedGifts = orderHistory.filter(order => order.gift && order.gift.id);
+    
+    if (usedGifts.length === 0) {
+        usedContainer.innerHTML = '<p class="text-gray-400 text-sm">No used gifts</p>';
+    } else {
+        usedContainer.innerHTML = usedGifts.map(order => {
+            const limitText = order.gift.limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(order.gift.limit).toLocaleString()}`;
+            const usedTime = formatGiftDateTime(new Date(order.timestamp).getTime());
+            
+            // Extract city from pickup location
+            const pickupParts = order.customer.pickupLocation.split(',');
+            const city = pickupParts.length > 1 ? pickupParts[pickupParts.length - 1].trim() : 'Unknown City';
+            
+            return `
+                <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-white font-medium">${limitText} Gift</p>
+                            <p class="text-gray-400 text-sm">Used by: ${order.customer.name}</p>
+                            <p class="text-gray-400 text-sm">Location: ${city}</p>
+                            <p class="text-gray-400 text-sm">Used: ${usedTime}</p>
+                            <p class="text-gray-400 text-sm">Order: ${order.orderNumber}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+}
+
+// Expire gift function
+window.expireGift = function(giftId) {
+    if (confirm('Are you sure you want to expire this gift? This action cannot be undone.')) {
+        const giftIndex = giftLinks.findIndex(link => link.id === giftId);
+        if (giftIndex !== -1) {
+            giftLinks.splice(giftIndex, 1);
+            localStorage.setItem('pautacos-gift-links', JSON.stringify(giftLinks));
+            renderGiftReceipts();
         }
-        
-        const limit = selectedOption.dataset.limit;
-        const uses = usesInput.value;
-        const hours = parseInt(hoursSelect.value);
+    }
+};
+
+// Copy gift link function
+window.copyGiftLink = function(giftId) {
+    const baseUrl = window.location.origin + window.location.pathname;
+    const fullGiftLink = `${baseUrl}?gift=${giftId}`;
+    
+    navigator.clipboard.writeText(fullGiftLink).then(() => {
+        alert('Gift link copied to clipboard!');
+    }).catch(() => {
+        prompt('Copy this gift link:', fullGiftLink);
+    });
+};
+    
+    if (!selectedLimit) {
+        alert('Please select a gift limit');
+        return;
+    }
+    if (!selectedUses) {
+        alert('Please select number of uses');
+        return;
+    }
+    if (!selectedDuration) {
+        alert('Please select expiration time');
+        return;
+    }
+    
+    const limit = selectedLimit.dataset.limit;
+    const uses = selectedUses.dataset.uses;
+    const hours = parseInt(selectedDuration.dataset.hours);
         
         if (!uses || uses < 1) {
             alert('Please enter a valid number of uses');
@@ -1892,7 +2041,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const baseUrl = window.location.origin + window.location.pathname;
         const fullGiftLink = `${baseUrl}?gift=${giftLink.id}`;
         
-        closeModal(giftModal);
+        giftModal.classList.remove('active');
+setTimeout(() => closeModal(giftModal), 300);
         
         const giftLinkContent = document.getElementById('gift-link-content');
         const limitText = limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(limit).toLocaleString()}`;
@@ -1971,7 +2121,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     giftModal.addEventListener('click', (e) => {
         if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-modal') {
-            closeModal(giftModal);
+            giftModal.classList.remove('active');
+setTimeout(() => closeModal(giftModal), 300);
         }
     });
 
@@ -2075,7 +2226,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('profile-button').addEventListener('click', (e) => {
         e.stopPropagation();
         const dropdown = document.getElementById('profile-dropdown');
-        dropdown.classList.toggle('hidden');
+        if (dropdown.classList.contains('hidden')) {
+    dropdown.classList.remove('hidden');
+    dropdown.style.display = 'flex';
+    setTimeout(() => dropdown.classList.add('active'), 10);
+} else {
+    dropdown.classList.remove('active');
+    setTimeout(() => {
+        dropdown.classList.remove('active');
+setTimeout(() => {
+    dropdown.classList.add('hidden');
+    dropdown.style.display = 'none';
+}, 300);
+        dropdown.style.display = 'none';
+    }, 300);
+}
         updateProfileUI();
         
         // Small delay to ensure dropdown is visible before rendering button
@@ -2093,7 +2258,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropdown = document.getElementById('profile-dropdown');
         const profileButton = document.getElementById('profile-button');
         if (!dropdown.contains(e.target) && !profileButton.contains(e.target)) {
-            dropdown.classList.add('hidden');
+            dropdown.classList.remove('active');
+setTimeout(() => {
+    dropdown.classList.add('hidden');
+    dropdown.style.display = 'none';
+}, 300);
         }
     });
     
@@ -2123,6 +2292,36 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(renderProfileGoogleButton, 100);
         }
     });
+
+    // Gift receipts button
+document.getElementById('gift-receipts-button').addEventListener('click', () => {
+    document.getElementById('profile-dropdown').classList.remove('active');
+    setTimeout(() => {
+        document.getElementById('profile-dropdown').classList.add('hidden');
+        document.getElementById('profile-dropdown').style.display = 'none';
+    }, 300);
+    
+    const giftReceiptsModal = document.getElementById('gift-receipts-modal');
+    giftReceiptsModal.classList.remove('hidden');
+    giftReceiptsModal.style.display = 'flex';
+    setTimeout(() => giftReceiptsModal.classList.add('active'), 10);
+    body.classList.add('modal-open');
+    
+    renderGiftReceipts();
+});
+
+// Close gift receipts modal
+document.getElementById('gift-receipts-modal').addEventListener('click', (e) => {
+    if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-receipts-modal') {
+        const modal = document.getElementById('gift-receipts-modal');
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+            body.classList.remove('modal-open');
+        }, 300);
+    }
+});
     
     window.addEventListener('scroll', () => {
         if (header) {

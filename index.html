@@ -78,8 +78,11 @@
                     </button>
                     
                     <!-- Profile Dropdown -->
-                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-64 bg-[#1a1a1a] border border-gray-700 rounded-3xl shadow-xl z-50">
-                        <div class="p-4">
+<div id="profile-dropdown" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="bg-[#1a1a1a] border border-gray-700 rounded-3xl shadow-xl right-panel-content p-4">
+
+
                             <!-- User Info Section -->
                             <div id="user-info-section" class="hidden border-b border-gray-700 pb-4 mb-4">
                                 <div class="flex items-center space-x-3">
@@ -90,20 +93,44 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <!-- Gift Receipts Modal -->
+<div id="gift-receipts-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="bg-[#1a1a1a] rounded-l-3xl shadow-xl right-panel-content p-6">
+        <button id="close-gift-receipts-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+        <h2 class="font-playfair text-3xl text-white mb-6">Gift Receipts</h2>
+        
+        <!-- Unopened Gifts Section -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-white mb-4">Unopened Gifts</h3>
+            <div id="unopened-gifts-container" class="space-y-3">
+                <!-- Unopened gifts will be populated here -->
+            </div>
+        </div>
+        
+        <!-- Used Gifts Section -->
+        <div>
+            <h3 class="text-xl font-semibold text-white mb-4">Used Gifts</h3>
+            <div id="used-gifts-container" class="space-y-3">
+                <!-- Used gifts will be populated here -->
+            </div>
+        </div>
+    </div>
+</div>
                             <!-- Sign In Section -->
                             <div id="sign-in-section" class="border-b border-gray-700 pb-4 mb-4">
                                 <div id="profile-google-signin-button" class="flex justify-center"></div>
                             </div>
                             
-                            <!-- Menu Items -->
-                            <div class="space-y-2">
-                                <button id="receipts-button" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center space-x-3">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                    </svg>
-                                    <span>My Receipts</span>
-                                </button>
+                            
+                            <!-- User Actions -->
+<div class="space-y-2">
+    <button id="receipts-button" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gray-800 transition-colors text-gray-300 text-sm">
+        📄 Order Receipts
+    </button>
+    <button id="gift-receipts-button" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gray-800 transition-colors text-gray-300 text-sm">
+        🎁 Gift Receipts
+    </button>
                                 
                                 <button id="theme-toggle" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center justify-between">
                                     <div class="flex items-center space-x-3">
@@ -255,9 +282,9 @@
 </footer>
 
     <!-- Search Modal -->
-    <div id="search-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
-        <div class="modal-backdrop absolute inset-0"></div>
-        <div class="search-modal-content rounded-3xl shadow-xl w-11/12 md:max-w-2xl mx-auto relative p-8">
+<div id="search-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="search-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl right-panel-content p-8">
             <button id="close-search-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
             <h2 class="font-playfair text-3xl text-white mb-6">Search Menu</h2>
             <input type="text" id="search-input" class="w-full bg-[#2a2a2a] text-white p-4 rounded-2xl border border-gray-600 focus:outline-none focus:border-red-500 mb-6" placeholder="Search for items or toppings...">
@@ -285,9 +312,9 @@
     </div>
 
     <!-- Gift Modal -->
-    <div id="gift-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
-        <div class="modal-backdrop absolute inset-0"></div>
-        <div class="gift-modal-content rounded-3xl shadow-xl w-11/12 md:max-w-xl mx-auto relative p-8">
+<div id="gift-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="gift-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl right-panel-content p-8">
             <button id="close-gift-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
             <h2 class="font-playfair text-3xl text-white mb-6">Create Gift Link</h2>
             
@@ -310,22 +337,41 @@
                     </div>
                 </div>
 
-                <div>
-                    <label for="gift-uses" class="block mb-2 text-lg font-semibold text-white">Number of Uses</label>
-                    <input type="number" id="gift-uses" class="w-full bg-[#2a2a2a] text-white p-3 rounded-3xl border border-gray-600 focus:outline-none focus:border-red-500" min="1" max="10" value="1" placeholder="How many times can this link be used?">
-                </div>
+               <div>
+    <label class="block mb-3 text-lg font-semibold text-white">Number of Uses</label>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="gift-uses-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-uses="1">
+            <div class="text-xl font-bold">1 Order</div>
+            <div class="text-sm text-gray-400">Single use gift</div>
+        </div>
+        <div class="gift-uses-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-uses="30">
+            <div class="text-xl font-bold">30 Orders</div>
+            <div class="text-sm text-gray-400">Multiple occasions</div>
+        </div>
+        <div class="gift-uses-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-uses="1000">
+            <div class="text-xl font-bold">1000 Orders</div>
+            <div class="text-sm text-gray-400">Practically unlimited uses</div>
+        </div>
+    </div>
+</div>
 
-                <div>
-                    <label for="gift-hours" class="block mb-2 text-lg font-semibold text-white">Expires After (Hours)</label>
-                    <select id="gift-hours" class="w-full bg-[#2a2a2a] text-white p-3 rounded-3xl border border-gray-600 focus:outline-none focus:border-red-500">
-                        <option value="1">1 Hour</option>
-                        <option value="2">2 Hours</option>
-                        <option value="3">3 Hours</option>
-                        <option value="6">6 Hours</option>
-                        <option value="12">12 Hours</option>
-                        <option value="24">24 Hours</option>
-                    </select>
-                </div>
+<div>
+    <label class="block mb-3 text-lg font-semibold text-white">Expires After</label>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="gift-duration-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-hours="1">
+            <div class="text-xl font-bold">1 Hour</div>
+            <div class="text-sm text-gray-400">Quick gift</div>
+        </div>
+        <div class="gift-duration-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-hours="720">
+            <div class="text-xl font-bold">1 Month</div>
+            <div class="text-sm text-gray-400">Flexible timing</div>
+        </div>
+        <div class="gift-duration-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-hours="8760">
+            <div class="text-xl font-bold">1 Year</div>
+            <div class="text-sm text-gray-400">Long-term gift</div>
+        </div>
+    </div>
+</div>
 
                 <button id="create-gift-link" class="cta-button w-full font-bold py-4 rounded-full text-lg">Create Gift Link</button>
             </div>
