@@ -752,11 +752,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = type === 'menu' ? menuData[itemKey] : (type === 'exotic' ? exoticsData[itemKey] : locationsData[itemKey]);
         let buttonHtml = '';
 
-        // Determine which signature to use based on the theme
-        const signatureSrc = isSiteDarkMode ? 'whitesig.png' : 'assets/logos/signature.png';
-        const signatureHtml = `<img src="${signatureSrc}" class="h-5 ml-auto signature-image" alt="Signature">`;
-
-        if (type === 'menu') {
+            // Determine which signature to use based on the theme
+            const signatureSrc = isSiteDarkMode ? 'assets/logos/whitesig.png' : 'assets/logos/signature.png';
+            const signatureHtml = `<img src="${signatureSrc}" class="h-5 ml-auto signature-image" alt="Signature">`;        if (type === 'menu') {
             buttonHtml = `<button id="experience-now-button" class="blur-button mt-6" data-item="${itemKey}">Experience at Home</button>`;
         } else if (type === 'exotic') {
             buttonHtml = `<a href="#newsletter" id="update-letter-button" class="blur-button mt-6">${isTouchDevice() ? 'Tap' : 'Click'} to Intercept Future Updates</a>`;
@@ -2222,106 +2220,68 @@ setTimeout(() => closeModal(giftModal), 300);
         }
     });
 
-    // Profile dropdown toggle
-    document.getElementById('profile-button').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const dropdown = document.getElementById('profile-dropdown');
-        if (dropdown.classList.contains('hidden')) {
-    dropdown.classList.remove('hidden');
-    dropdown.style.display = 'flex';
-    setTimeout(() => dropdown.classList.add('active'), 10);
-} else {
-    dropdown.classList.remove('active');
-    setTimeout(() => {
-        dropdown.classList.remove('active');
-setTimeout(() => {
-    dropdown.classList.add('hidden');
-    dropdown.style.display = 'none';
-}, 300);
-        dropdown.style.display = 'none';
-    }, 300);
-}
+ // Profile dropdown toggle
+document.getElementById('profile-button').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = document.getElementById('profile-dropdown');
+    if (dropdown.classList.contains('hidden')) {
+        dropdown.classList.remove('hidden');
+        dropdown.style.display = 'flex';
+        setTimeout(() => dropdown.classList.add('active'), 10);
         updateProfileUI();
         
         // Small delay to ensure dropdown is visible before rendering button
-        if (!dropdown.classList.contains('hidden')) {
+        if (!dropdown.classList.contains('hidden') && !window.currentUser) {
             setTimeout(() => {
                 renderProfileGoogleButton();
                 // Retry after 1 second if Google SDK wasn't ready
                 setTimeout(renderProfileGoogleButton, 1000);
             }, 50);
         }
-    });
-    
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        const dropdown = document.getElementById('profile-dropdown');
-        const profileButton = document.getElementById('profile-button');
-        if (!dropdown.contains(e.target) && !profileButton.contains(e.target)) {
-            dropdown.classList.remove('active');
-setTimeout(() => {
-    dropdown.classList.add('hidden');
-    dropdown.style.display = 'none';
-}, 300);
-        }
-    });
-    
-    // Sign out button
-    document.getElementById('sign-out-button').addEventListener('click', () => {
-        window.currentUser = null;
-        localStorage.removeItem('pautacos-user');
-        document.getElementById('profile-dropdown').classList.add('hidden');
-        updateProfileUI();
-        alert('Signed out successfully');
-    });
-    
-    // Receipts button (placeholder)
-    document.getElementById('receipts-button').addEventListener('click', () => {
-        document.getElementById('profile-dropdown').classList.add('hidden');
-        alert('Receipts feature coming soon!');
-    });
-
-    themeToggle.addEventListener('click', () => {
-        isSiteDarkMode = !isSiteDarkMode;
-        localStorage.setItem('siteDarkMode', isSiteDarkMode);
-        applyTheme();
-        
-        // Re-render Google button with new theme
-        const dropdown = document.getElementById('profile-dropdown');
-        if (!dropdown.classList.contains('hidden') && !window.currentUser) {
-            setTimeout(renderProfileGoogleButton, 100);
-        }
-    });
-
-    // Gift receipts button
-document.getElementById('gift-receipts-button').addEventListener('click', () => {
-    document.getElementById('profile-dropdown').classList.remove('active');
-    setTimeout(() => {
-        document.getElementById('profile-dropdown').classList.add('hidden');
-        document.getElementById('profile-dropdown').style.display = 'none';
-    }, 300);
-    
-    const giftReceiptsModal = document.getElementById('gift-receipts-modal');
-    giftReceiptsModal.classList.remove('hidden');
-    giftReceiptsModal.style.display = 'flex';
-    setTimeout(() => giftReceiptsModal.classList.add('active'), 10);
-    body.classList.add('modal-open');
-    
-    renderGiftReceipts();
-});
-
-// Close gift receipts modal
-document.getElementById('gift-receipts-modal').addEventListener('click', (e) => {
-    if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-receipts-modal') {
-        const modal = document.getElementById('gift-receipts-modal');
-        modal.classList.remove('active');
+    } else {
+        dropdown.classList.remove('active');
         setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.style.display = 'none';
-            body.classList.remove('modal-open');
+            dropdown.classList.add('hidden');
+            dropdown.style.display = 'none';
         }, 300);
     }
 });
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('profile-dropdown');
+    const profileButton = document.getElementById('profile-button');
+    if (dropdown && !dropdown.contains(e.target) && !profileButton.contains(e.target)) {
+        dropdown.classList.remove('active');
+        setTimeout(() => {
+            dropdown.classList.add('hidden');
+            dropdown.style.display = 'none';
+        }, 300);
+    }
+});
+
+// Sign out button
+document.getElementById('sign-out-button').addEventListener('click', () => {
+    window.currentUser = null;
+    localStorage.removeItem('pautacos-user');
+    document.getElementById('profile-dropdown').classList.add('hidden');
+    updateProfileUI();
+    alert('Signed out successfully');
+});
+
+themeToggle.addEventListener('click', () => {
+    isSiteDarkMode = !isSiteDarkMode;
+    localStorage.setItem('siteDarkMode', isSiteDarkMode);
+    applyTheme();
+    
+    // Re-render Google button with new theme
+    const dropdown = document.getElementById('profile-dropdown');
+    if (!dropdown.classList.contains('hidden') && !window.currentUser) {
+        setTimeout(renderProfileGoogleButton, 100);
+    }
+});
+
+// NOTE: The listener for 'gift-receipts-modal' is now removed as it's no longer used.
     
     window.addEventListener('scroll', () => {
         if (header) {
