@@ -162,6 +162,8 @@ body.light-mode .exotics-section-bg {
 header {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 50;
 }
 
 header.scrolled {
@@ -176,6 +178,7 @@ body.light-mode header.scrolled {
 .modal-backdrop {
     background-color: rgba(0,0,0,0.7);
 }
+
 
 .modal-content {
     max-height: 90vh;
@@ -434,6 +437,100 @@ body.light-mode header.scrolled #theme-toggle {
     color: #000 !important;
 }
 
+/* Light Mode Profile Dropdown - Complete Fix */
+body.light-mode #profile-dropdown .right-panel-content {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+}
+
+body.light-mode #profile-dropdown h2,
+body.light-mode #profile-dropdown h3 {
+    color: #000000 !important;
+}
+
+body.light-mode #profile-dropdown p {
+    color: #374151 !important;
+}
+
+body.light-mode #profile-dropdown button {
+    color: #000000 !important;
+}
+
+body.light-mode #profile-dropdown .text-white {
+    color: #000000 !important;
+}
+
+body.light-mode #profile-dropdown .text-gray-300 {
+    color: #374151 !important;
+}
+
+body.light-mode #profile-dropdown .text-gray-400 {
+    color: #6b7280 !important;
+}
+
+body.light-mode #profile-dropdown .text-gray-500 {
+    color: #9ca3af !important;
+}
+
+body.light-mode #profile-dropdown .border-gray-700 {
+    border-color: #e5e7eb !important;
+}
+
+body.light-mode #profile-dropdown .bg-\[#2a2a2a\] {
+    background-color: #f8f9fa !important;
+}
+
+body.light-mode #profile-dropdown .hover\:bg-gray-800:hover {
+    background-color: #f3f4f6 !important;
+}
+
+body.light-mode #profile-dropdown input,
+body.light-mode #profile-dropdown textarea,
+body.light-mode #profile-dropdown select {
+    background-color: #f8f9fa !important;
+    color: #000000 !important;
+    border-color: #d1d5db !important;
+}
+
+body.light-mode #profile-dropdown input::placeholder,
+body.light-mode #profile-dropdown textarea::placeholder {
+    color: #9ca3af !important;
+}
+
+body.light-mode .profile-back-btn {
+    color: #6b7280 !important;
+}
+
+body.light-mode .profile-back-btn:hover {
+    color: #000000 !important;
+}
+
+body.light-mode #profile-dropdown .bg-gray-700 {
+    background-color: #e5e7eb !important;
+}
+
+body.light-mode #profile-dropdown .bg-red-600 {
+    background-color: #DC2626 !important;
+    color: #ffffff !important;
+}
+
+#profile-dropdown .right-panel-content {
+    margin-top: 0;
+}
+
+/* Make profile dropdown container transparent - don't add background */
+#profile-dropdown {
+    background: transparent !important;
+}
+
+/* Profile dropdown backdrop - start below header AND be visible */
+#profile-dropdown .modal-backdrop {
+    top: 7rem;
+    bottom: 0;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Force backdrop to be visible */
+}
+
 /* Force Location Names to Stay White */
 body.light-mode .location-card h3 {
     color: #fff !important;
@@ -624,7 +721,14 @@ body.light-mode #draft-email-btn:hover {
     background-color: #000000;
     color: #ffffff;
 }
+/* Profile back button light mode */
+body.light-mode .profile-back-btn {
+    color: #6b7280;
+}
 
+body.light-mode .profile-back-btn:hover {
+    color: #000;
+}
 /* Step Container Styles */
 .step-container {
     opacity: 0;
@@ -686,6 +790,10 @@ body.light-mode .step-container.completed:hover {
     color: #E0E0E0;
     max-height: 90vh;
     overflow-y: auto;
+}
+
+.search-modal-content .p-8 {
+    padding-bottom: 1rem !important;
 }
 
 body.light-mode .search-modal-content {

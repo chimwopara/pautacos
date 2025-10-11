@@ -7,7 +7,7 @@
     <meta property="og:image:type" content="image/png" />
 
     <!-- Google Sign-In -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>*/
 
     <!-- Paystack Inline -->
     <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -77,84 +77,260 @@
                         </svg>
                     </button>
                     
-                    <!-- Profile Dropdown -->
-<div id="profile-dropdown" class="fixed inset-0 z-50 flex right-panel-container hidden">
+<!-- Profile Dropdown -->
+<div id="profile-dropdown" class="fixed inset-0 z-40 flex right-panel-container hidden">
     <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="bg-[#1a1a1a] border border-gray-700 rounded-3xl shadow-xl right-panel-content p-4">
 
-
-                            <!-- User Info Section -->
-                            <div id="user-info-section" class="hidden border-b border-gray-700 pb-4 mb-4">
-                                <div class="flex items-center space-x-3">
-                                    <img id="user-avatar" class="w-10 h-10 rounded-full" src="" alt="Profile">
-                                    <div>
-                                        <p id="user-name" class="text-white font-medium text-sm"></p>
-                                        <p id="user-email" class="text-gray-400 text-xs"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Gift Receipts Modal -->
-<div id="gift-receipts-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
-    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
-    <div class="bg-[#1a1a1a] rounded-l-3xl shadow-xl right-panel-content p-6">
-        <button id="close-gift-receipts-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
-        <h2 class="font-playfair text-3xl text-white mb-6">Gift Receipts</h2>
-        
-        <!-- Unopened Gifts Section -->
-        <div class="mb-8">
-            <h3 class="text-xl font-semibold text-white mb-4">Unopened Gifts</h3>
-            <div id="unopened-gifts-container" class="space-y-3">
-                <!-- Unopened gifts will be populated here -->
-            </div>
-        </div>
-        
-        <!-- Used Gifts Section -->
-        <div>
-            <h3 class="text-xl font-semibold text-white mb-4">Used Gifts</h3>
-            <div id="used-gifts-container" class="space-y-3">
-                <!-- Used gifts will be populated here -->
-            </div>
-        </div>
-    </div>
-</div>
-                            <!-- Sign In Section -->
-                            <div id="sign-in-section" class="border-b border-gray-700 pb-4 mb-4">
-                                <div id="profile-google-signin-button" class="flex justify-center"></div>
-                            </div>
-                            
-                            
-                            <!-- User Actions -->
-<div class="space-y-2">
-    <button id="receipts-button" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gray-800 transition-colors text-gray-300 text-sm">
-        📄 Order Receipts
-    </button>
-    <button id="gift-receipts-button" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gray-800 transition-colors text-gray-300 text-sm">
-        🎁 Gift Receipts
-    </button>
-                                
-                                <button id="theme-toggle" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                                        </svg>
-                                        <span>Theme</span>
-                                    </div>
-                                    <span id="theme-indicator" class="text-xs text-gray-500">Dark</span>
-                                </button>
-                                
-                                <button id="sign-out-button" class="hidden w-full text-left px-3 py-2 text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center space-x-3">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                                    </svg>
-                                    <span>Sign Out</span>
-                                </button>
-                            </div>
-                        </div>
+        <!-- Main Menu -->
+        <div id="profile-main-menu">
+            <!-- User Info Section -->
+            <div id="user-info-section" class="hidden pb-4 mb-4">
+                <div class="flex items-center space-x-3">
+                    <img id="user-avatar" class="w-10 h-10 rounded-full" src="" alt="Profile">
+                    <div>
+                        <p id="user-name" class="text-white font-medium text-sm"></p>
+                        <p id="user-email" class="text-gray-400 text-xs"></p>
                     </div>
                 </div>
             </div>
-        </nav>
-    </header>
+
+            <!-- Sign In Section -->
+            <div id="sign-in-section" class="pb-4 mb-4">
+                <div id="profile-google-signin-button" class="flex justify-center"></div>
+            </div>
+            
+            <!-- Your Experience Section -->
+            <div class="pb-4 mb-2">
+                <h3 class="font-playfair text-2xl text-white px-4">Your Experience</h3>
+            </div>
+
+            <!-- User Actions -->
+            <div class="space-y-0">
+                <button id="receipts-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-t border-b border-gray-700">
+                    📄 Orders Receipts
+                </button>
+                <button id="gift-receipts-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🎁 Gifts Receipts
+                </button>
+                <button id="become-member-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    ⭐ Become a Member
+                </button>
+                <button id="become-chef-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🔪 Become a Chef
+                </button>
+                <button id="invite-chef-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    👨‍🍳 Invite a Chef
+                </button>
+                <button id="dietary-preferences-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🥗 Dietary Preferences
+                </button>
+                <button id="chef-preferences-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    👤 Chef Preferences
+                </button>
+                <button id="delivery-preferences-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🚚 Delivery Preferences
+                </button>
+                <button id="nutrition-tracker-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    📊 Nutrition Tracker
+                </button>
+                
+                <button id="theme-toggle" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center justify-between mt-4">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <span>Theme</span>
+                    </div>
+                    <span id="theme-indicator" class="text-xs text-gray-500">Dark</span>
+                </button>
+                
+                <button id="sign-out-button" class="hidden w-full text-left px-3 py-2 text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center space-x-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Subpages for each option -->
+        <div id="orders-receipts-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Orders Receipts</h2>
+            <p class="text-gray-300">Your order history will appear here.</p>
+        </div>
+
+        <div id="gifts-receipts-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Gifts Receipts</h2>
+            <p class="text-gray-300">Your gift receipts will appear here.</p>
+        </div>
+
+        <div id="invite-chef-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Invite a Chef</h2>
+            <p class="text-gray-300 mb-4">Know a talented chef? Invite them to join our network!</p>
+            <input type="text" placeholder="Chef's Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <input type="email" placeholder="Chef's Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <button class="cta-button w-full py-3 rounded-full">Send Invitation</button>
+        </div>
+
+        <div id="become-member-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Become a Member</h2>
+            <p class="text-gray-300 mb-4">Unlock exclusive benefits and early access to exotic dishes!</p>
+            <div class="space-y-3">
+                <div class="bg-[#2a2a2a] p-4 rounded-xl">
+                    <h3 class="text-white font-bold">Basic - ₦5,000/month</h3>
+                    <p class="text-gray-400 text-sm">5% discount on all orders</p>
+                </div>
+                <div class="bg-[#2a2a2a] p-4 rounded-xl">
+                    <h3 class="text-white font-bold">Premium - ₦10,000/month</h3>
+                    <p class="text-gray-400 text-sm">10% discount + early exotic access</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="become-chef-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Become a Chef</h2>
+            <p class="text-gray-300 mb-4">Join our culinary network and share your creations!</p>
+            <input type="text" placeholder="Your Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <input type="email" placeholder="Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <textarea placeholder="Tell us about your culinary experience..." class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3 h-24"></textarea>
+            <button class="cta-button w-full py-3 rounded-full">Submit Application</button>
+        </div>
+
+        <div id="delivery-preferences-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Delivery Preferences</h2>
+            <p class="text-gray-300 mb-4">Set your preferred pickup locations and times</p>
+            <input type="text" placeholder="Default Pickup Location" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <select class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                <option>Preferred Time: Anytime</option>
+                <option>Morning (8am-12pm)</option>
+                <option>Afternoon (12pm-5pm)</option>
+                <option>Evening (5pm-9pm)</option>
+            </select>
+            <button class="cta-button w-full py-3 rounded-full">Save Preferences</button>
+        </div>
+
+        <div id="dietary-preferences-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Dietary Preferences</h2>
+            <p class="text-gray-300 mb-4">Customize your dietary restrictions and preferences</p>
+            <div class="space-y-2">
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Vegetarian</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Vegan</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Gluten-Free</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Halal</span>
+                </label>
+            </div>
+            <button class="cta-button w-full py-3 rounded-full mt-4">Save Preferences</button>
+        </div>
+
+        <div id="chef-preferences-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Chef Preferences</h2>
+            <p class="text-gray-300 mb-4">Follow your favorite chefs and get notified of their specials</p>
+            <div class="space-y-3">
+                <div class="bg-[#2a2a2a] p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-bold">Chef Chim</h3>
+                        <p class="text-gray-400 text-sm">Master of Fusion</p>
+                    </div>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Follow</button>
+                </div>
+                <div class="bg-[#2a2a2a] p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-bold">Chef Ada</h3>
+                        <p class="text-gray-400 text-sm">Traditional Nigerian</p>
+                    </div>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Follow</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="nutrition-tracker-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Nutrition Tracker</h2>
+            <p class="text-gray-300 mb-4">Track your daily nutrition and calorie goals</p>
+            <div class="bg-[#2a2a2a] p-4 rounded-xl mb-4">
+                <h3 class="text-white font-bold mb-2">Daily Goal: 2000 calories</h3>
+                <div class="bg-gray-700 h-4 rounded-full overflow-hidden">
+                    <div class="bg-red-600 h-full w-1/2"></div>
+                </div>
+                <p class="text-gray-400 text-sm mt-2">1000 / 2000 calories consumed</p>
+            </div>
+            <input type="number" placeholder="Daily Calorie Goal" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <button class="cta-button w-full py-3 rounded-full">Update Goal</button>
+        </div>
+
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
@@ -284,7 +460,7 @@
     <!-- Search Modal -->
 <div id="search-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
     <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
-    <div class="search-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl right-panel-content p-8">
+    <div class="search-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl right-panel-content p-8 pb-4">
             <button id="close-search-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
             <h2 class="font-playfair text-3xl text-white mb-6">Search Menu</h2>
             <input type="text" id="search-input" class="w-full bg-[#2a2a2a] text-white p-4 rounded-2xl border border-gray-600 focus:outline-none focus:border-red-500 mb-6" placeholder="Search for items or toppings...">

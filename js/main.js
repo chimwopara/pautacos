@@ -1289,6 +1289,74 @@ document.addEventListener('DOMContentLoaded', () => {
         checkFormCompletion();
     }
 
+    // Profile menu navigation
+function showProfilePage(pageId) {
+    // Hide main menu
+    document.getElementById('profile-main-menu').classList.add('hidden');
+    
+    // Hide all pages
+    document.querySelectorAll('[id$="-page"]').forEach(page => {
+        page.classList.add('hidden');
+    });
+    
+    // Show selected page
+    document.getElementById(pageId).classList.remove('hidden');
+}
+
+function showProfileMainMenu() {
+    // Show main menu
+    document.getElementById('profile-main-menu').classList.remove('hidden');
+    
+    // Hide all pages
+    document.querySelectorAll('[id$="-page"]').forEach(page => {
+        page.classList.add('hidden');
+    });
+}
+
+// Profile button click handlers
+document.getElementById('receipts-button')?.addEventListener('click', () => {
+    showProfilePage('orders-receipts-page');
+});
+
+document.getElementById('gift-receipts-button')?.addEventListener('click', () => {
+    showProfilePage('gifts-receipts-page');
+});
+
+document.getElementById('invite-chef-button')?.addEventListener('click', () => {
+    showProfilePage('invite-chef-page');
+});
+
+document.getElementById('become-member-button')?.addEventListener('click', () => {
+    showProfilePage('become-member-page');
+});
+
+document.getElementById('become-chef-button')?.addEventListener('click', () => {
+    showProfilePage('become-chef-page');
+});
+
+document.getElementById('delivery-preferences-button')?.addEventListener('click', () => {
+    showProfilePage('delivery-preferences-page');
+});
+
+document.getElementById('dietary-preferences-button')?.addEventListener('click', () => {
+    showProfilePage('dietary-preferences-page');
+});
+
+document.getElementById('chef-preferences-button')?.addEventListener('click', () => {
+    showProfilePage('chef-preferences-page');
+});
+
+document.getElementById('nutrition-tracker-button')?.addEventListener('click', () => {
+    showProfilePage('nutrition-tracker-page');
+});
+
+// Back buttons
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.profile-back-btn')) {
+        showProfileMainMenu();
+    }
+});
+
     // --- LOCATION FUNCTIONALITY ---
     function initializeLocationButton() {
         document.addEventListener('click', (e) => {
@@ -2229,6 +2297,7 @@ document.getElementById('profile-button').addEventListener('click', (e) => {
         dropdown.style.display = 'flex';
         setTimeout(() => dropdown.classList.add('active'), 10);
         updateProfileUI();
+        header.classList.remove('scrolled');
         
         // Small delay to ensure dropdown is visible before rendering button
         if (!dropdown.classList.contains('hidden') && !window.currentUser) {
@@ -2258,6 +2327,43 @@ document.addEventListener('click', (e) => {
             dropdown.style.display = 'none';
         }, 300);
     }
+});
+
+// New button handlers
+document.getElementById('invite-chef-button')?.addEventListener('click', () => {
+    alert('Invite a Chef feature coming soon!');
+    // Add your invite chef functionality here
+});
+
+document.getElementById('become-member-button')?.addEventListener('click', () => {
+    alert('Become a Member feature coming soon!');
+    // Add your membership functionality here
+});
+
+document.getElementById('become-chef-button')?.addEventListener('click', () => {
+    alert('Become a Chef feature coming soon!');
+    // Add your chef application functionality here
+});
+
+// Preferences and tracking button handlers
+document.getElementById('dietary-preferences-button')?.addEventListener('click', () => {
+    alert('Dietary Preferences: Set your dietary restrictions and preferences here (vegetarian, vegan, gluten-free, etc.)');
+    // Add your dietary preferences functionality here
+});
+
+document.getElementById('chef-preferences-button')?.addEventListener('click', () => {
+    alert('Chef Preferences: Choose your favorite chefs and get notified of their special dishes!');
+    // Add your chef preferences functionality here
+});
+
+document.getElementById('nutrition-tracker-button')?.addEventListener('click', () => {
+    alert('Nutrition Tracker: Track your daily nutrition intake and calorie goals!');
+    // Add your nutrition tracking functionality here
+});
+// Delivery preferences button handler
+document.getElementById('delivery-preferences-button')?.addEventListener('click', () => {
+    alert('Delivery Preferences: Set your preferred pickup locations, delivery times, and save favorite addresses!');
+    // Add your delivery preferences functionality here
 });
 
 // Sign out button
