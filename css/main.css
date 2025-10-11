@@ -347,6 +347,7 @@ body.light-mode .cart-modal-content label {
         max-width: none;
         border-radius: 0;
     }
+    
 }
 
 /* Light Mode Order Modal Styles */
@@ -514,22 +515,52 @@ body.light-mode #profile-dropdown .bg-red-600 {
     color: #ffffff !important;
 }
 
-#profile-dropdown .right-panel-content {
-    margin-top: 0;
-}
-
-/* Make profile dropdown container transparent - don't add background */
-#profile-dropdown {
-    background: transparent !important;
-}
-
-/* Profile dropdown backdrop - start below header AND be visible */
+/* Profile dropdown backdrop - start below header */
 #profile-dropdown .modal-backdrop {
     top: 7rem;
-    bottom: 0;
-    height: auto;
-    background-color: rgba(0, 0, 0, 0.5) !important; /* Force backdrop to be visible */
 }
+
+/* Profile Dropdown - Keep rounded on mobile */
+@media (max-width: 768px) {
+    #profile-dropdown .modal-backdrop {
+        top: 0;
+    }
+    
+    #profile-dropdown .right-panel-content {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+        border-radius: 1.5rem; /* Keep rounded corners */
+        max-height: calc(100vh - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    #profile-dropdown .right-panel-content {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+}
+
+/* Light Mode - Profile 2x2 Grid Boxes */
+body.light-mode .grid button[id*="become"] {
+    background-color: #f8f9fa !important;
+    border-color: #d1d5db !important;
+}
+
+body.light-mode .grid button[id*="become"]:hover {
+    background-color: #e5e7eb !important;
+    border-color: #DC2626 !important;
+}
+
+body.light-mode .grid button[id*="become"] .text-white {
+    color: #000 !important;
+}
+
+body.light-mode .grid button[id*="become"] .text-gray-400 {
+    color: #6b7280 !important;
+}
+
+
 
 /* Force Location Names to Stay White */
 body.light-mode .location-card h3 {
@@ -1037,17 +1068,7 @@ body.light-mode .category-filter-btn.active {
     color: #ffffff;
 }
 
-/* Profile Dropdown Styles */
-#profile-dropdown {
-    background-color: #1a1a1a;
-    color: #E0E0E0;
-}
 
-body.light-mode #profile-dropdown {
-    background-color: #ffffff;
-    color: #333;
-    border-color: #e5e7eb;
-}
 
 body.light-mode #profile-dropdown .border-gray-700 {
     border-color: #e5e7eb;

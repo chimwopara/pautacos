@@ -159,6 +159,21 @@
         margin: 0 auto;
         max-width: 280px;
     }
+
+    /* Menu Grid - 2 columns for mobile devices */
+@media (max-width: 480px) {
+    #menu-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    #menu-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
     
     /* Category Filter Buttons */
     .category-filter-btn {

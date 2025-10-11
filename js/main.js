@@ -1350,6 +1350,24 @@ document.getElementById('nutrition-tracker-button')?.addEventListener('click', (
     showProfilePage('nutrition-tracker-page');
 });
 
+document.getElementById('become-dispatcher-button')?.addEventListener('click', () => {
+    showProfilePage('become-dispatcher-page');
+});
+
+document.getElementById('become-auditor-button')?.addEventListener('click', () => {
+    showProfilePage('become-auditor-page');
+});
+// Close profile dropdown button
+document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'close-profile-dropdown') {
+        const dropdown = document.getElementById('profile-dropdown');
+        dropdown.classList.remove('active');
+        setTimeout(() => {
+            dropdown.classList.add('hidden');
+            dropdown.style.display = 'none';
+        }, 300);
+    }
+});
 // Back buttons
 document.addEventListener('click', (e) => {
     if (e.target.closest('.profile-back-btn')) {

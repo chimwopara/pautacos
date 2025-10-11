@@ -77,10 +77,12 @@
                         </svg>
                     </button>
                     
-<!-- Profile Dropdown -->
 <div id="profile-dropdown" class="fixed inset-0 z-40 flex right-panel-container hidden">
     <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="bg-[#1a1a1a] border border-gray-700 rounded-3xl shadow-xl right-panel-content p-4">
+        
+        <!-- Add this close button -->
+        <button id="close-profile-dropdown" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-10">&times;</button>
 
         <!-- Main Menu -->
         <div id="profile-main-menu">
@@ -101,23 +103,44 @@
             </div>
             
             <!-- Your Experience Section -->
-            <div class="pb-4 mb-2">
-                <h3 class="font-playfair text-2xl text-white px-4">Your Experience</h3>
+            <div class="pb-4 mb-4">
+                <h3 class="font-playfair text-2xl text-white text-center">Your Experience</h3>
             </div>
 
-            <!-- User Actions -->
-            <div class="space-y-0">
+            <!-- 2x2 Grid for Main Actions -->
+            <div class="grid grid-cols-2 gap-3 px-4 mb-4">
+                <button id="become-chef-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔪</div>
+                    <div class="text-white font-bold text-sm">Become a Chef</div>
+                    <div class="text-gray-400 text-xs mt-1">Join our network</div>
+                </button>
+                
+                <button id="become-member-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">⭐</div>
+                    <div class="text-white font-bold text-sm">Become a Member</div>
+                    <div class="text-gray-400 text-xs mt-1">Get exclusive perks</div>
+                </button>
+                
+                <button id="become-dispatcher-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🚚</div>
+                    <div class="text-white font-bold text-sm">Become a Dispatcher</div>
+                    <div class="text-gray-400 text-xs mt-1">Deliver orders</div>
+                </button>
+                
+                <button id="become-auditor-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">📋</div>
+                    <div class="text-white font-bold text-sm">Become an Auditor</div>
+                    <div class="text-gray-400 text-xs mt-1">Quality control</div>
+                </button>
+            </div>
+
+            <!-- Other User Actions -->
+            <div class="space-y-0 mt-4">
                 <button id="receipts-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-t border-b border-gray-700">
                     📄 Orders Receipts
                 </button>
                 <button id="gift-receipts-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
                     🎁 Gifts Receipts
-                </button>
-                <button id="become-member-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
-                    ⭐ Become a Member
-                </button>
-                <button id="become-chef-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
-                    🔪 Become a Chef
                 </button>
                 <button id="invite-chef-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
                     👨‍🍳 Invite a Chef
@@ -323,8 +346,46 @@
             <button class="cta-button w-full py-3 rounded-full">Update Goal</button>
         </div>
 
-    </div>
-</div>
+        <div id="become-dispatcher-page" class="hidden">
+                    <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2 class="font-playfair text-2xl text-white mb-4">Become a Dispatcher</h2>
+                    <p class="text-gray-300 mb-4">Join our delivery network and earn flexible income!</p>
+                    <input type="text" placeholder="Your Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <input type="email" placeholder="Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <input type="tel" placeholder="Phone Number" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <select class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                        <option>Select Your Location</option>
+                        <option>Lagos</option>
+                        <option>Port Harcourt</option>
+                        <option>Abuja</option>
+                    </select>
+                    <button class="cta-button w-full py-3 rounded-full">Submit Application</button>
+                </div>
+
+                <div id="become-auditor-page" class="hidden">
+                    <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2 class="font-playfair text-2xl text-white mb-4">Become an Auditor</h2>
+                    <p class="text-gray-300 mb-4">Help us maintain the highest quality standards!</p>
+                    <input type="text" placeholder="Your Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <input type="email" placeholder="Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <textarea placeholder="Tell us about your quality control experience..." class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3 h-24"></textarea>
+                    <button class="cta-button w-full py-3 rounded-full">Submit Application</button>
+                </div>
+
+            </div>
+        </div>
+
+
 
                 </div>
             </div>
