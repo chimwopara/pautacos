@@ -541,6 +541,55 @@ body.light-mode #profile-dropdown .bg-red-600 {
     }
 }
 
+/* Profile Dropdown Mobile Centering Fix */
+@media (max-width: 768px) {
+    #profile-main-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    #profile-main-menu > div {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Center the Your Experience section */
+    #profile-main-menu .pb-4.mb-4 {
+        width: 100%;
+        text-align: center;
+    }
+    
+    #profile-main-menu h3 {
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100%;
+    }
+    
+    /* Center the grid */
+    #profile-main-menu .grid {
+        width: 100%;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        margin-left: auto;
+        margin-right: auto;
+        justify-items: center;
+    }
+    
+    /* Ensure grid items are centered */
+    #profile-main-menu .grid button {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Center the list items section */
+    #profile-main-menu .space-y-0 {
+        width: 100%;
+    }
+}
+
 /* Light Mode - Profile 2x2 Grid Boxes */
 body.light-mode .grid button[id*="become"] {
     background-color: #f8f9fa !important;
