@@ -515,78 +515,31 @@ body.light-mode #profile-dropdown .bg-red-600 {
     color: #ffffff !important;
 }
 
-/* Profile dropdown backdrop - start below header */
-#profile-dropdown .modal-backdrop {
-    top: 7rem;
-}
-
-/* Profile Dropdown - Keep rounded on mobile */
+/* Profile Dropdown Mobile - Full Width */
 @media (max-width: 768px) {
-    #profile-dropdown .modal-backdrop {
-        top: 0;
+    #profile-dropdown .right-panel-content {
+        max-width: 95vw; /* 95% of viewport width */
+        width: 95vw;
+        margin: 1rem auto;
     }
     
-    #profile-dropdown .right-panel-content {
-        margin: 1rem;
-        max-width: calc(100% - 2rem);
-        border-radius: 1.5rem; /* Keep rounded corners */
-        max-height: calc(100vh - 2rem);
+    #profile-main-menu {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #profile-main-menu .grid {
+        width: 100%;
+        padding: 0 1rem;
     }
 }
 
 @media (max-width: 480px) {
     #profile-dropdown .right-panel-content {
-        margin: 0.5rem;
-        max-width: calc(100% - 1rem);
-    }
-}
-
-/* Profile Dropdown Mobile Centering Fix */
-@media (max-width: 768px) {
-    #profile-main-menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-    
-    #profile-main-menu > div {
-        width: 100%;
-        max-width: 100%;
-    }
-    
-    /* Center the Your Experience section */
-    #profile-main-menu .pb-4.mb-4 {
-        width: 100%;
-        text-align: center;
-    }
-    
-    #profile-main-menu h3 {
-        text-align: center !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        width: 100%;
-    }
-    
-    /* Center the grid */
-    #profile-main-menu .grid {
-        width: 100%;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        margin-left: auto;
-        margin-right: auto;
-        justify-items: center;
-    }
-    
-    /* Ensure grid items are centered */
-    #profile-main-menu .grid button {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    /* Center the list items section */
-    #profile-main-menu .space-y-0 {
-        width: 100%;
+        max-width: 90vw;
+        width: 90vw;
     }
 }
 

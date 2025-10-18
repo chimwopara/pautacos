@@ -2314,8 +2314,9 @@ document.getElementById('profile-button').addEventListener('click', (e) => {
         dropdown.classList.remove('hidden');
         dropdown.style.display = 'flex';
         setTimeout(() => dropdown.classList.add('active'), 10);
+        body.classList.add('modal-open');
         updateProfileUI();
-        header.classList.remove('scrolled');
+        //header.classList.remove('scrolled');
         
         // Small delay to ensure dropdown is visible before rendering button
         if (!dropdown.classList.contains('hidden') && !window.currentUser) {
@@ -2330,6 +2331,7 @@ document.getElementById('profile-button').addEventListener('click', (e) => {
         setTimeout(() => {
             dropdown.classList.add('hidden');
             dropdown.style.display = 'none';
+            body.classList.remove('modal-open');
         }, 300);
     }
 });
@@ -2343,6 +2345,7 @@ document.addEventListener('click', (e) => {
         setTimeout(() => {
             dropdown.classList.add('hidden');
             dropdown.style.display = 'none';
+            body.classList.remove('modal-open');
         }, 300);
     }
 });
