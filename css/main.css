@@ -1131,3 +1131,149 @@ body.light-mode #profile-dropdown .text-gray-500 {
     animation-play-state: paused;
 }
 
+/* Food Category Filter Buttons */
+.food-category-btn {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.food-category-btn:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.food-category-btn.active {
+    background-color: #DC2626;
+    border-color: #DC2626;
+    color: #ffffff;
+}
+
+body.light-mode .food-category-btn {
+    color: #333;
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .food-category-btn:hover {
+    border-color: #DC2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+body.light-mode .food-category-btn.active {
+    background-color: #DC2626;
+    border-color: #DC2626;
+    color: #ffffff;
+}
+
+/* Food Item Checkbox Label */
+.food-item-label {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.food-item-label:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.food-item-checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    margin-right: 0.75rem;
+    cursor: pointer;
+}
+
+.food-item-name {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+body.light-mode .food-item-name {
+    color: #333;
+}
+
+/* Chef Application Form Styles */
+#chef-application-form input[type="checkbox"] {
+    accent-color: #DC2626;
+}
+
+body.light-mode #food-items-container {
+    background-color: #f8f9fa;
+    border-color: #e5e7eb;
+}
+
+body.light-mode #food-search {
+    background-color: #f8f9fa;
+    border-color: #e5e7eb;
+    color: #333;
+}
+
+body.light-mode #chef-professional-name,
+body.light-mode #chef-real-name,
+body.light-mode #chef-kitchen-address,
+body.light-mode #chef-phone {
+    background-color: #f8f9fa;
+    border-color: #e5e7eb;
+    color: #333;
+}
+
+/* Expmenu (Experience Menu) Styles */
+.expmenu-back-btn {
+    cursor: pointer;
+}
+
+body.light-mode .expmenu-back-btn {
+    color: #6b7280;
+}
+
+body.light-mode .expmenu-back-btn:hover {
+    color: #000;
+}
+
+body.light-mode #expmenu-panel .border-gray-700 {
+    border-color: #e5e7eb;
+}
+
+body.light-mode #expmenu-panel .text-white {
+    color: #333;
+}
+
+body.light-mode #expmenu-panel .text-gray-400 {
+    color: #6b7280;
+}
+
+body.light-mode #expmenu-panel .text-gray-300 {
+    color: #374151;
+}
+
+body.light-mode #expmenu-panel .hover\:bg-gray-800:hover {
+    background-color: #f3f4f6;
+}
+
+body.light-mode #expmenu-panel .text-gray-500 {
+    color: #6b7280;
+}
+
+body.light-mode #expmenu-panel .bg-\[#1a1a1a\] {
+    background-color: #ffffff;
+}
+
+body.light-mode #expmenu-panel .bg-\[#2a2a2a\] {
+    background-color: #f8f9fa;
+}
+
+body.light-mode #expmenu-panel h2,
+body.light-mode #expmenu-panel h3 {
+    color: #000 !important;
+}
+

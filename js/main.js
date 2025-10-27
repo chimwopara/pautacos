@@ -2415,4 +2415,476 @@ themeToggle.addEventListener('click', () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
         }
     });
+
+    // === CHEF APPLICATION FORM === //
+    
+    // Comprehensive food items list organized by categories
+    const foodItems = {
+        'soups-stews': [
+            'Afang Soup',
+            'Atama Soup',
+            'Banga Soup',
+            'Banga Stew',
+            'Bitterleaf Soup',
+            'Black Soup',
+            'Edikang Ikong',
+            'Eforiro',
+            'Egusi Soup',
+            'Ewedu Soup',
+            'Fisherman Soup',
+            'Gbegiri Soup',
+            'Native Soup',
+            'Ofe Oha',
+            'Ofe Owere',
+            'Ofe Owerri',
+            'Ofe Utazi',
+            'Ogbono Soup',
+            'Oha Soup',
+            'Okra Soup',
+            'Owo Soup',
+            'Pepper Soup',
+            'Stew',
+            'Vegetable Soup',
+            'White Soup',
+        ],
+        'rice-grains': [
+            'Coconut Rice',
+            'Fried Rice',
+            'Jollof Beans',
+            'Jollof Coconut Rice',
+            'Jollof Rice',
+            'Jollof Spaghetti',
+            'Massa',
+            'Noodles',
+            'Ofada Rice',
+            'Pineapple Fried Rice',
+            'Pineapple Jollof Rice',
+            'Spaghetti',
+            'Tuwo Shinkafa',
+            'White Rice',
+        ],
+        'proteins': [
+            'Asun',
+            'Bacon',
+            'Boiled Egg',
+            'Boiled Sausage',
+            'Boiled Yam',
+            'Cat fish',
+            'Corned Beef',
+            'Cow Meat',
+            'Crab',
+            'Croaker Fish',
+            'Fried Chicken',
+            'Fried Egg',
+            'Fried Fish',
+            'Fried Plantain',
+            'Fried Prawns',
+            'Fried Sardine',
+            'Fried Sausage',
+            'Fried Yam',
+            'Goat Meat',
+            'Grilled Chicken',
+            'Grilled Fish',
+            'Grilled Sausage',
+            'Lobster',
+            'Meat Balls',
+            'Peri Winkle',
+            'Pomo',
+            'Scrambled Egg',
+            'Snail',
+            'Suya',
+            'Tilapia Fish',
+            'Turkey',
+        ],
+        'swallow': [
+            'Abacha (African Salad)',
+            'Adalu',
+            'Agidi',
+            'Akara',
+            'Akidi',
+            'Akpu',
+            'Amala',
+            'Bole',
+            'Eba',
+            'Echicha',
+            'Echere',
+            'Ekpang Nkukwo',
+            'Ekuru',
+            'Fiofio',
+            'Fufu',
+            'Fura da Nono',
+            'Kekefia',
+            'Nkwobi',
+            'Okpa',
+            'Onunu',
+            'Pounded Yam',
+            'Semo',
+            'Starch',
+            'Ukodo',
+        ],
+        'sides': [
+            'Baked Beans',
+            'Black Eyed Peas',
+            'Boiled Beans',
+            'Boiled Plantain',
+            'Buns',
+            'Burger',
+            'Chicken Pie',
+            'Chin Chin',
+            'Coleslaw',
+            'Donut',
+            'Egg Roll',
+            'Ewa Agoyin',
+            'Fish Pie',
+            'Fish Roll',
+            'Fried Plantain',
+            'Fried Potato',
+            'Fried Yam',
+            'Garden Egg',
+            'Garden Egg Sauce',
+            'Meat Pie',
+            'Moi Moi',
+            'Mushrooms',
+            'Pancakes',
+            'Plantain Chips',
+            'Pounded Yam',
+            'Puff Puff',
+            'Sausage Roll',
+            'Scotch Roll',
+            'Spring Rolls',
+            'Sweet Potato',
+            'Unripe Plantain',
+            'Water Yam',
+            'Water Yam Fritters',
+        ],
+        'drinks': [
+            'Apple Smoothie',
+            'Banana Smoothie',
+            'Grape Smoothie',
+            'Orange Smoothie',
+            'Pineapple Smoothie',
+            'Strawberry Smoothie',
+            'Tangerine Smoothie',
+            'Tiger Nuts Juice',
+            'Zobo',
+        ]
+    };
+
+    // Flatten all food items into a single array for "all" category
+    const allFoodItems = Object.values(foodItems).flat().sort();
+
+    // Initialize chef application form
+    function initChefApplicationForm() {
+        const foodItemsList = document.getElementById('food-items-list');
+        const foodSearch = document.getElementById('food-search');
+        const foodCategoryBtns = document.querySelectorAll('.food-category-btn');
+        let currentCategory = 'all';
+
+        // Function to render food items
+        function renderFoodItems(category = 'all', searchTerm = '') {
+            if (!foodItemsList) return;
+            
+            let itemsToShow = category === 'all' ? allFoodItems : foodItems[category];
+            
+            // Filter by search term
+            if (searchTerm) {
+                itemsToShow = itemsToShow.filter(item => 
+                    item.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+
+            // Clear and render
+            foodItemsList.innerHTML = '';
+            
+            if (itemsToShow.length === 0) {
+                foodItemsList.innerHTML = '<p class="text-gray-400 text-center py-4">No items found</p>';
+                return;
+            }
+
+            itemsToShow.forEach(item => {
+                const label = document.createElement('label');
+                label.className = 'food-item-label';
+                label.innerHTML = `
+                    <input type="checkbox" name="food-items" value="${item}" class="food-item-checkbox">
+                    <span class="food-item-name">${item}</span>
+                `;
+                foodItemsList.appendChild(label);
+            });
+        }
+
+        // Category button click handler
+        foodCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                foodCategoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Get category and render
+                currentCategory = btn.dataset.category;
+                renderFoodItems(currentCategory, foodSearch?.value || '');
+            });
+        });
+
+        // Search input handler
+        if (foodSearch) {
+            foodSearch.addEventListener('input', (e) => {
+                renderFoodItems(currentCategory, e.target.value);
+            });
+        }
+
+        // Initial render
+        renderFoodItems('all');
+
+        // Form submission handler
+        const chefForm = document.getElementById('chef-application-form');
+        if (chefForm) {
+            chefForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    professionalName: document.getElementById('chef-professional-name')?.value,
+                    realName: document.getElementById('chef-real-name')?.value,
+                    kitchenAddress: document.getElementById('chef-kitchen-address')?.value,
+                    phone: document.getElementById('chef-phone')?.value,
+                    operationDays: Array.from(document.querySelectorAll('input[name="operation-days"]:checked')).map(cb => cb.value),
+                    weekdayTimes: Array.from(document.querySelectorAll('input[name="weekday-times"]:checked')).map(cb => cb.value),
+                    weekendTimes: Array.from(document.querySelectorAll('input[name="weekend-times"]:checked')).map(cb => cb.value),
+                    foodItems: Array.from(document.querySelectorAll('input[name="food-items"]:checked')).map(cb => cb.value)
+                };
+
+                // Validate
+                if (!formData.professionalName || !formData.realName || !formData.kitchenAddress || !formData.phone) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+
+                if (formData.operationDays.length === 0) {
+                    alert('Please select at least one day of operation');
+                    return;
+                }
+
+                if (formData.weekdayTimes.length === 0 || formData.weekendTimes.length === 0) {
+                    alert('Please select operation times for both weekdays and weekends');
+                    return;
+                }
+
+                if (formData.foodItems.length === 0) {
+                    alert('Please select at least one food item you can cook');
+                    return;
+                }
+
+                console.log('Chef Application Submitted:', formData);
+                
+                // Show success message
+                alert('Thank you for your application! We will review it and get back to you soon.');
+                
+                // Reset form
+                chefForm.reset();
+                renderFoodItems('all');
+            });
+        }
+    }
+
+    // Initialize when become-chef-page is shown
+    const becomeChefButton = document.getElementById('become-chef-button');
+    if (becomeChefButton) {
+        becomeChefButton.addEventListener('click', () => {
+            setTimeout(() => {
+                initChefApplicationForm();
+            }, 100);
+        });
+    }
+
+    // === EXPERIENCE MENU (EXPMENU) SYSTEM === //
+    // This is a complete rewrite of the profile menu system
+    
+    // Open/Close expmenu
+    const expmenuButton = document.getElementById('expmenu-button');
+    const expmenuPanel = document.getElementById('expmenu-panel');
+    const closeExpmenu = document.getElementById('close-expmenu');
+    
+    if (expmenuButton) {
+        expmenuButton.addEventListener('click', () => {
+            if (expmenuPanel) {
+                expmenuPanel.classList.remove('hidden');
+                expmenuPanel.style.display = 'flex';
+                setTimeout(() => {
+                    expmenuPanel.classList.add('active');
+                }, 10);
+            }
+        });
+    }
+    
+    if (closeExpmenu) {
+        closeExpmenu.addEventListener('click', () => {
+            if (expmenuPanel) {
+                expmenuPanel.classList.remove('active');
+                setTimeout(() => {
+                    expmenuPanel.classList.add('hidden');
+                    expmenuPanel.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+    
+    // Close when clicking backdrop
+    if (expmenuPanel) {
+        expmenuPanel.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-backdrop')) {
+                expmenuPanel.classList.remove('active');
+                setTimeout(() => {
+                    expmenuPanel.classList.add('hidden');
+                    expmenuPanel.style.display = 'none';
+                }, 300);
+            }
+        });
+    }
+    
+    // Helper functions for expmenu
+    function showExpmenuPage(pageId) {
+        const mainMenu = document.getElementById('expmenu-main-menu');
+        if (mainMenu) {
+            mainMenu.classList.add('hidden');
+        }
+        
+        // Hide all pages
+        document.querySelectorAll('[id^="expmenu-"][id$="-page"]').forEach(page => {
+            page.classList.add('hidden');
+        });
+        
+        // Show selected page
+        const selectedPage = document.getElementById(pageId);
+        if (selectedPage) {
+            selectedPage.classList.remove('hidden');
+        }
+    }
+    
+    function showExpmenuMainMenu() {
+        const mainMenu = document.getElementById('expmenu-main-menu');
+        if (mainMenu) {
+            mainMenu.classList.remove('hidden');
+        }
+        
+        // Hide all pages
+        document.querySelectorAll('[id^="expmenu-"][id$="-page"]').forEach(page => {
+            page.classList.add('hidden');
+        });
+    }
+    
+    // Button click handlers
+    document.getElementById('expmenu-receipts-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-orders-receipts-page');
+    });
+    
+    document.getElementById('expmenu-gift-receipts-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-gifts-receipts-page');
+    });
+    
+    document.getElementById('expmenu-invite-chef-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-invite-chef-page');
+    });
+    
+    document.getElementById('expmenu-become-member-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-become-member-page');
+    });
+    
+    document.getElementById('expmenu-become-chef-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-become-chef-page');
+        // Initialize chef form after page is shown
+        setTimeout(() => {
+            initChefApplicationForm();
+        }, 100);
+    });
+    
+    document.getElementById('expmenu-delivery-preferences-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-delivery-preferences-page');
+    });
+    
+    document.getElementById('expmenu-dietary-preferences-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-dietary-preferences-page');
+    });
+    
+    document.getElementById('expmenu-chef-preferences-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-chef-preferences-page');
+    });
+    
+    document.getElementById('expmenu-nutrition-tracker-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-nutrition-tracker-page');
+    });
+    
+    document.getElementById('expmenu-become-dispatcher-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-become-dispatcher-page');
+    });
+    
+    document.getElementById('expmenu-become-auditor-button')?.addEventListener('click', () => {
+        showExpmenuPage('expmenu-become-auditor-page');
+    });
+    
+    // Back buttons
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.expmenu-back-btn')) {
+            showExpmenuMainMenu();
+        }
+    });
+    
+    // Theme toggle for expmenu
+    const expmenuThemeToggle = document.getElementById('expmenu-theme-toggle');
+    if (expmenuThemeToggle) {
+        expmenuThemeToggle.addEventListener('click', () => {
+            // Toggle site theme
+            isSiteDarkMode = !isSiteDarkMode;
+            localStorage.setItem('siteDarkMode', isSiteDarkMode);
+            applyTheme();
+            
+            // Update indicator
+            const indicator = document.getElementById('expmenu-theme-indicator');
+            if (indicator) {
+                indicator.textContent = isSiteDarkMode ? 'Dark' : 'Light';
+            }
+        });
+    }
+    
+    // Sign out button
+    const expmenuSignOutBtn = document.getElementById('expmenu-sign-out-button');
+    if (expmenuSignOutBtn) {
+        expmenuSignOutBtn.addEventListener('click', () => {
+            // Sign out logic (to be implemented with actual auth)
+            console.log('Sign out clicked');
+            window.currentUser = null;
+            updateExpmenuUserDisplay();
+        });
+    }
+    
+    // Update user display in expmenu
+    function updateExpmenuUserDisplay() {
+        const userInfoSection = document.getElementById('expmenu-user-info-section');
+        const signInSection = document.getElementById('expmenu-sign-in-section');
+        const signOutBtn = document.getElementById('expmenu-sign-out-button');
+        const userAvatar = document.getElementById('expmenu-user-avatar');
+        const userName = document.getElementById('expmenu-user-name');
+        const userEmail = document.getElementById('expmenu-user-email');
+        
+        if (window.currentUser) {
+            // Show user info, hide sign in
+            if (userInfoSection) userInfoSection.classList.remove('hidden');
+            if (signInSection) signInSection.classList.add('hidden');
+            if (signOutBtn) signOutBtn.classList.remove('hidden');
+            
+            // Set user data
+            if (userAvatar) userAvatar.src = window.currentUser.picture || '';
+            if (userName) userName.textContent = window.currentUser.name || '';
+            if (userEmail) userEmail.textContent = window.currentUser.email || '';
+        } else {
+            // Show sign in, hide user info
+            if (userInfoSection) userInfoSection.classList.add('hidden');
+            if (signInSection) signInSection.classList.remove('hidden');
+            if (signOutBtn) signOutBtn.classList.add('hidden');
+        }
+    }
+    
+    // Initialize user display
+    updateExpmenuUserDisplay();
+    
+    console.log('✓ Experience Menu (expmenu) system initialized');
 });

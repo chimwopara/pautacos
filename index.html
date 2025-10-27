@@ -235,19 +235,172 @@
             </div>
         </div>
 
-        <div id="become-chef-page" class="hidden">
-            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+        <div id="become-chef-page" class="hidden overflow-y-auto max-h-[80vh]">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center sticky top-0 bg-[#1a1a1a] z-10 py-2">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
                 Back
             </button>
             <h2 class="font-playfair text-2xl text-white mb-4">Become a Chef</h2>
-            <p class="text-gray-300 mb-4">Join our culinary network and share your creations!</p>
-            <input type="text" placeholder="Your Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
-            <input type="email" placeholder="Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
-            <textarea placeholder="Tell us about your culinary experience..." class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3 h-24"></textarea>
-            <button class="cta-button w-full py-3 rounded-full">Submit Application</button>
+            <p class="text-gray-300 mb-6">Join our culinary network and share your creations!</p>
+            
+            <form id="chef-application-form" class="space-y-4">
+                <!-- Professional Chef Name -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Your Professional Chef Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="chef-professional-name" placeholder="e.g. Chef Chim" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Real Full Name -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Real Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="chef-real-name" placeholder="Your legal full name" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Kitchen Address -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Full Kitchen Address <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="chef-kitchen-address" rows="3" placeholder="Complete address of your kitchen" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500"></textarea>
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Phone Number <span class="text-red-500">*</span>
+                    </label>
+                    <input type="tel" id="chef-phone" placeholder="e.g. +234 123 456 7890" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Days of Operation -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        Days of Operation <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Monday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Monday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Tuesday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Tuesday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Wednesday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Wednesday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Thursday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Thursday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Friday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Friday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Saturday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Saturday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Sunday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Sunday</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Time of Operations on Weekdays -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        Time of Operations on Weekdays <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekday-times" value="Morning" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Morning</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekday-times" value="Afternoon" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Afternoon</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekday-times" value="Evening" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Evening</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Time of Operations on Weekends -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        Time of Operations on Weekends <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekend-times" value="Morning" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Morning</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekend-times" value="Afternoon" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Afternoon</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekend-times" value="Evening" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Evening</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- What Food Can You Cook -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        What Food Can You Cook? <span class="text-red-500">*</span>
+                    </label>
+                    <p class="text-gray-400 text-xs mb-3">Select all the dishes you can prepare professionally</p>
+                    
+                    <!-- Search Box -->
+                    <div class="relative mb-4">
+                        <input type="text" id="food-search" placeholder="Search for food items..." 
+                            class="w-full bg-[#2a2a2a] text-white p-3 pl-10 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button type="button" class="food-category-btn active" data-category="all">All</button>
+                        <button type="button" class="food-category-btn" data-category="soups-stews">Soups & Stews</button>
+                        <button type="button" class="food-category-btn" data-category="rice-grains">Rice & Grains</button>
+                        <button type="button" class="food-category-btn" data-category="proteins">Proteins & Meat</button>
+                        <button type="button" class="food-category-btn" data-category="swallow">Swallow Foods</button>
+                        <button type="button" class="food-category-btn" data-category="sides">Sides & Snacks</button>
+                        <button type="button" class="food-category-btn" data-category="drinks">Drinks & Smoothies</button>
+                    </div>
+
+                    <!-- Food Items Checklist -->
+                    <div id="food-items-container" class="max-h-96 overflow-y-auto bg-[#2a2a2a] rounded-xl p-4 border border-gray-600">
+                        <div id="food-items-list" class="space-y-2">
+                            <!-- Food items will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="cta-button w-full py-4 rounded-full text-lg font-bold mt-6">
+                    Submit Application
+                </button>
+            </form>
         </div>
 
         <div id="delivery-preferences-page" class="hidden">
