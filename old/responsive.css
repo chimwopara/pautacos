@@ -1,26 +1,5 @@
 /* Mobile Styles */
 @media (max-width: 768px) {
-    /* Unified Side Panel Mobile */
-    .side-panel-content {
-        max-width: 100% !important;
-        border-radius: 0 !important;
-    }
-    
-    .side-panel-tab {
-        padding: 0.75rem 0.5rem;
-    }
-    
-    .side-panel-tab span {
-        font-size: 0.65rem;
-    }
-    
-    #tab-cart .p-4,
-    #tab-search .p-4,
-    #tab-gift .p-4,
-    #tab-account .p-4 {
-        padding: 1rem !important;
-    }
-    
     /* Scroll Hint */
     .scroll-hint {
         bottom: 6rem;

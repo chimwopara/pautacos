@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pautacos - Artisanal Nigerian Fusion Cuisine</title>
+    <meta property="og:image:type" content="image/png" />
+
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>*/
+
+    <!-- Paystack Inline -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    
+    <meta name="description" content="Experience the pinnacle of Nigerian fusion cuisine at Pau Tacos. Serving artisanal tacos, exotic pepper soup, and more in Lagos, Port Harcourt, and Abuja.">
+    <meta name="keywords" content="Nigerian Tacos, Fusion Cuisine, Lagos Food, Abuja Restaurants, Port Harcourt Food, Campus Food, Pau Tacos, Artisanal Tacos, Exotic Pepper Soup">
+    
+    <!-- Social Share Preview -->
+    <meta property="og:title" content="Pautacos" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pautacos.com" />
+    <meta property="og:image" content="https://pautacos.com/preview.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="940" />
+    <meta property="og:image:alt" content="Pautacos - Artisanal Nigerian Fusion Cuisine Kitchen" />
+    <meta property="og:image:secure_url" content="https://pautacos.com/preview.png" />
+    <meta property="og:description" content="#1 Artisanal Cravings network." />
+    <meta property="og:site_name" content="Pautacos" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="fb:admins" content="100000000000000" />
+    
+    <link rel="apple-touch-icon" href="assets/logos/fulllogo.png">
+    <link rel="shortcut icon" href="assets/logos/fulllogo.png">
+    <link rel="icon" href="assets/logos/fulllogo.png" type="image/png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&family=Kalam:wght@400&display=swap" rel="stylesheet">
+
+    <!-- Your CSS files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header" class="bg-transparent fixed top-0 w-full z-50 transition-colors duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="assets/logos/logo.png" alt="Pau Tacos Logo - Artisanal Nigerian Tacos" class="h-20 w-20" onerror="this.onerror=null;this.src='https://placehold.co/80x80/DC2626/ffffff?text=PT';">
+            </a>
+            <div class="flex items-center space-x-4">
+                <!-- Search Icon -->
+                <button id="search-button" class="relative text-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+                
+                <!-- Gift Icon -->
+                <button id="gift-button" class="relative text-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                    </svg>
+                </button>
+                
+                 <!-- Cart Icon -->
+                <button id="cart-button" class="relative text-white">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+</button>
+                
+                <!-- Profile Menu -->
+                <div class="relative">
+                    <button id="profile-button" class="text-white">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </button>
+                    
+<div id="profile-dropdown" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="bg-[#1a1a1a] border border-gray-700 rounded-3xl shadow-xl right-panel-content p-4">
+        
+        <!-- Add this close button -->
+        <button id="close-profile-dropdown" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-10">&times;</button>
+
+        <!-- Main Menu -->
+        <div id="profile-main-menu">
+            <!-- User Info Section -->
+            <div id="user-info-section" class="hidden pb-4 mb-4">
+                <div class="flex items-center space-x-3">
+                    <img id="user-avatar" class="w-10 h-10 rounded-full" src="" alt="Profile">
+                    <div>
+                        <p id="user-name" class="text-white font-medium text-sm"></p>
+                        <p id="user-email" class="text-gray-400 text-xs"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sign In Section -->
+            <div id="sign-in-section" class="pb-4 mb-4">
+                <div id="profile-google-signin-button" class="flex justify-center"></div>
+            </div>
+            
+            <!-- Your Experience Section -->
+            <div class="pb-4 mb-4">
+                <h3 class="font-playfair text-2xl text-white text-center">Your Experience</h3>
+            </div>
+
+            <!-- 2x2 Grid for Main Actions -->
+            <div class="grid grid-cols-2 gap-3 px-4 mb-4">
+                <button id="become-chef-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔪</div>
+                    <div class="text-white font-bold text-sm">Become a Chef</div>
+                    <div class="text-gray-400 text-xs mt-1">Join our network</div>
+                </button>
+                
+                <button id="become-member-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">⭐</div>
+                    <div class="text-white font-bold text-sm">Become a Member</div>
+                    <div class="text-gray-400 text-xs mt-1">Get exclusive perks</div>
+                </button>
+                
+                <button id="become-dispatcher-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🚚</div>
+                    <div class="text-white font-bold text-sm">Become a Dispatcher</div>
+                    <div class="text-gray-400 text-xs mt-1">Deliver orders</div>
+                </button>
+                
+                <button id="become-auditor-button" class="bg-[#2a2a2a] hover:bg-gray-700 transition-all duration-300 p-6 rounded-2xl border border-gray-700 hover:border-red-500 text-center group">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">📋</div>
+                    <div class="text-white font-bold text-sm">Become an Auditor</div>
+                    <div class="text-gray-400 text-xs mt-1">Quality control</div>
+                </button>
+            </div>
+
+            <!-- Other User Actions -->
+            <div class="space-y-0 mt-4">
+                <button id="receipts-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-t border-b border-gray-700">
+                    📄 Orders Receipts
+                </button>
+                <button id="gift-receipts-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🎁 Gifts Receipts
+                </button>
+                <button id="invite-chef-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    👨‍🍳 Invite a Chef
+                </button>
+                <button id="dietary-preferences-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🥗 Dietary Preferences
+                </button>
+                <button id="chef-preferences-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    👤 Chef Preferences
+                </button>
+                <button id="delivery-preferences-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    🚚 Delivery Preferences
+                </button>
+                <button id="nutrition-tracker-button" class="w-full text-left px-4 py-4 hover:bg-gray-800 transition-colors text-white text-base font-medium border-b border-gray-700">
+                    📊 Nutrition Tracker
+                </button>
+                
+                <button id="theme-toggle" class="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center justify-between mt-4">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <span>Theme</span>
+                    </div>
+                    <span id="theme-indicator" class="text-xs text-gray-500">Dark</span>
+                </button>
+                
+                <button id="sign-out-button" class="hidden w-full text-left px-3 py-2 text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-3xl transition-colors text-sm flex items-center space-x-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Subpages for each option -->
+        <div id="orders-receipts-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Orders Receipts</h2>
+            <p class="text-gray-300">Your order history will appear here.</p>
+        </div>
+
+        <div id="gifts-receipts-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Gifts Receipts</h2>
+            <p class="text-gray-300">Your gift receipts will appear here.</p>
+        </div>
+
+        <div id="invite-chef-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Invite a Chef</h2>
+            <p class="text-gray-300 mb-4">Know a talented chef? Invite them to join our network!</p>
+            <input type="text" placeholder="Chef's Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <input type="email" placeholder="Chef's Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <button class="cta-button w-full py-3 rounded-full">Send Invitation</button>
+        </div>
+
+        <div id="become-member-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Become a Member</h2>
+            <p class="text-gray-300 mb-4">Unlock exclusive benefits and early access to exotic dishes!</p>
+            <div class="space-y-3">
+                <div class="bg-[#2a2a2a] p-4 rounded-xl">
+                    <h3 class="text-white font-bold">Basic - ₦5,000/month</h3>
+                    <p class="text-gray-400 text-sm">5% discount on all orders</p>
+                </div>
+                <div class="bg-[#2a2a2a] p-4 rounded-xl">
+                    <h3 class="text-white font-bold">Premium - ₦10,000/month</h3>
+                    <p class="text-gray-400 text-sm">10% discount + early exotic access</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="become-chef-page" class="hidden overflow-y-auto max-h-[80vh]">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center sticky top-0 bg-[#1a1a1a] z-10 py-2">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Become a Chef</h2>
+            <p class="text-gray-300 mb-6">Join our culinary network and share your creations!</p>
+            
+            <form id="chef-application-form" class="space-y-4">
+                <!-- Professional Chef Name -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Your Professional Chef Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="chef-professional-name" placeholder="e.g. Chef Chim" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Real Full Name -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Real Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="chef-real-name" placeholder="Your legal full name" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Kitchen Address -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Full Kitchen Address <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="chef-kitchen-address" rows="3" placeholder="Complete address of your kitchen" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500"></textarea>
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-2">
+                        Phone Number <span class="text-red-500">*</span>
+                    </label>
+                    <input type="tel" id="chef-phone" placeholder="e.g. +234 123 456 7890" required
+                        class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Days of Operation -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        Days of Operation <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Monday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Monday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Tuesday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Tuesday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Wednesday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Wednesday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Thursday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Thursday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Friday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Friday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Saturday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Saturday</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="operation-days" value="Sunday" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Sunday</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Time of Operations on Weekdays -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        Time of Operations on Weekdays <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekday-times" value="Morning" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Morning</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekday-times" value="Afternoon" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Afternoon</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekday-times" value="Evening" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Evening</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Time of Operations on Weekends -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        Time of Operations on Weekends <span class="text-red-500">*</span>
+                    </label>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekend-times" value="Morning" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Morning</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekend-times" value="Afternoon" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Afternoon</span>
+                        </label>
+                        <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl cursor-pointer hover:bg-[#2f2f2f]">
+                            <input type="checkbox" name="weekend-times" value="Evening" class="form-checkbox h-5 w-5 text-red-600 rounded">
+                            <span class="text-white">Evening</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- What Food Can You Cook -->
+                <div>
+                    <label class="block text-white text-sm font-semibold mb-3">
+                        What Food Can You Cook? <span class="text-red-500">*</span>
+                    </label>
+                    <p class="text-gray-400 text-xs mb-3">Select all the dishes you can prepare professionally</p>
+                    
+                    <!-- Search Box -->
+                    <div class="relative mb-4">
+                        <input type="text" id="food-search" placeholder="Search for food items..." 
+                            class="w-full bg-[#2a2a2a] text-white p-3 pl-10 rounded-xl border border-gray-600 focus:outline-none focus:border-red-500">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button type="button" class="food-category-btn active" data-category="all">All</button>
+                        <button type="button" class="food-category-btn" data-category="soups-stews">Soups & Stews</button>
+                        <button type="button" class="food-category-btn" data-category="rice-grains">Rice & Grains</button>
+                        <button type="button" class="food-category-btn" data-category="proteins">Proteins & Meat</button>
+                        <button type="button" class="food-category-btn" data-category="swallow">Swallow Foods</button>
+                        <button type="button" class="food-category-btn" data-category="sides">Sides & Snacks</button>
+                        <button type="button" class="food-category-btn" data-category="drinks">Drinks & Smoothies</button>
+                    </div>
+
+                    <!-- Food Items Checklist -->
+                    <div id="food-items-container" class="max-h-96 overflow-y-auto bg-[#2a2a2a] rounded-xl p-4 border border-gray-600">
+                        <div id="food-items-list" class="space-y-2">
+                            <!-- Food items will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="cta-button w-full py-4 rounded-full text-lg font-bold mt-6">
+                    Submit Application
+                </button>
+            </form>
+        </div>
+
+        <div id="delivery-preferences-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Delivery Preferences</h2>
+            <p class="text-gray-300 mb-4">Set your preferred pickup locations and times</p>
+            <input type="text" placeholder="Default Pickup Location" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <select class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                <option>Preferred Time: Anytime</option>
+                <option>Morning (8am-12pm)</option>
+                <option>Afternoon (12pm-5pm)</option>
+                <option>Evening (5pm-9pm)</option>
+            </select>
+            <button class="cta-button w-full py-3 rounded-full">Save Preferences</button>
+        </div>
+
+        <div id="dietary-preferences-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Dietary Preferences</h2>
+            <p class="text-gray-300 mb-4">Customize your dietary restrictions and preferences</p>
+            <div class="space-y-2">
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Vegetarian</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Vegan</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Gluten-Free</span>
+                </label>
+                <label class="flex items-center space-x-3 bg-[#2a2a2a] p-3 rounded-xl">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600">
+                    <span class="text-white">Halal</span>
+                </label>
+            </div>
+            <button class="cta-button w-full py-3 rounded-full mt-4">Save Preferences</button>
+        </div>
+
+        <div id="chef-preferences-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Chef Preferences</h2>
+            <p class="text-gray-300 mb-4">Follow your favorite chefs and get notified of their specials</p>
+            <div class="space-y-3">
+                <div class="bg-[#2a2a2a] p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-bold">Chef Chim</h3>
+                        <p class="text-gray-400 text-sm">Master of Fusion</p>
+                    </div>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Follow</button>
+                </div>
+                <div class="bg-[#2a2a2a] p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-bold">Chef Ada</h3>
+                        <p class="text-gray-400 text-sm">Traditional Nigerian</p>
+                    </div>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Follow</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="nutrition-tracker-page" class="hidden">
+            <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+            <h2 class="font-playfair text-2xl text-white mb-4">Nutrition Tracker</h2>
+            <p class="text-gray-300 mb-4">Track your daily nutrition and calorie goals</p>
+            <div class="bg-[#2a2a2a] p-4 rounded-xl mb-4">
+                <h3 class="text-white font-bold mb-2">Daily Goal: 2000 calories</h3>
+                <div class="bg-gray-700 h-4 rounded-full overflow-hidden">
+                    <div class="bg-red-600 h-full w-1/2"></div>
+                </div>
+                <p class="text-gray-400 text-sm mt-2">1000 / 2000 calories consumed</p>
+            </div>
+            <input type="number" placeholder="Daily Calorie Goal" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+            <button class="cta-button w-full py-3 rounded-full">Update Goal</button>
+        </div>
+
+        <div id="become-dispatcher-page" class="hidden">
+                    <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2 class="font-playfair text-2xl text-white mb-4">Become a Dispatcher</h2>
+                    <p class="text-gray-300 mb-4">Join our delivery network and earn flexible income!</p>
+                    <input type="text" placeholder="Your Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <input type="email" placeholder="Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <input type="tel" placeholder="Phone Number" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <select class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                        <option>Select Your Location</option>
+                        <option>Lagos</option>
+                        <option>Port Harcourt</option>
+                        <option>Abuja</option>
+                    </select>
+                    <button class="cta-button w-full py-3 rounded-full">Submit Application</button>
+                </div>
+
+                <div id="become-auditor-page" class="hidden">
+                    <button class="profile-back-btn text-gray-400 hover:text-white mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2 class="font-playfair text-2xl text-white mb-4">Become an Auditor</h2>
+                    <p class="text-gray-300 mb-4">Help us maintain the highest quality standards!</p>
+                    <input type="text" placeholder="Your Name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <input type="email" placeholder="Email" class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3">
+                    <textarea placeholder="Tell us about your quality control experience..." class="w-full bg-[#2a2a2a] text-white p-3 rounded-xl mb-3 h-24"></textarea>
+                    <button class="cta-button w-full py-3 rounded-full">Submit Application</button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="assets/preview/hero.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container mx-auto px-6 relative">
+            <h1 class="font-playfair text-5xl md:text-7xl font-bold mb-6 leading-tight">A Symphony of Spice & Tradition</h1>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-300">Chim's Curated Collection of Sophisticated Culinary Artistry, Unprecedented in Nigeria.</p>
+        </div>
+        <a href="#menu" class="scroll-hint">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </a>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-[#121212] transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">The <span class="text-brand-red">Artisanal</span> Collection</h2>
+
+<!-- Category Filter Buttons -->
+<div class="flex flex-wrap justify-center gap-4 mb-12">
+    <button class="category-filter-btn active" data-category="all">All</button>
+    <button class="category-filter-btn" data-category="mains">Mains</button>
+    <button class="category-filter-btn" data-category="sides">Sides</button>
+    <button class="category-filter-btn" data-category="snacks">Snacks</button>
+    <button class="category-filter-btn" data-category="desserts">Desserts</button>
+    <button class="category-filter-btn" data-category="drinks">Drinks</button>
+</div>
+
+<div id="menu-items" class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-12">
+                <!-- Menu items will be dynamically injected here by JavaScript -->
+            </div>
+            
+            <!-- Exotics Section -->
+            <div class="mt-24 exotics-section-bg rounded-2xl p-8 md:p-16">
+                 <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-6 text-white">The 2025 <span class="text-red-400">Exotics</span></h2>
+                 <p class="text-center text-gray-300 max-w-2xl mx-auto mb-12">A curated selection of rare delicacies, available only on Mystery Days. Inquire within for availability.</p>
+                 <div id="exotics-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Exotic items will be dynamically injected here -->
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="bg-[#181818] py-24 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <h2 class="font-playfair text-5xl md:text-6xl font-bold text-center mb-16">Our <span class="text-brand-red">Locations</span></h2>
+            <div id="locations-container" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Location cards will be dynamically injected here -->
+            </div>
+        </div>
+    </section>
+    
+<!-- Unified Footer Section -->
+<footer class="bg-[#0a0a0a] border-t border-gray-800 py-20 transition-colors duration-300">
+    <div class="container mx-auto px-6">
+        <!-- Main Footer Content -->
+        <div class="backdrop-blur-lg bg-black/20 border border-gray-800/50 rounded-3xl p-12">
+            <!-- Newsletter Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="font-playfair text-4xl lg:text-5xl font-bold text-white mb-6">
+                        Receive the <span class="text-brand-red">Huntsman's</span> Letters
+                    </h2>
+                    <p class="text-gray-500 text-sm mb-8">
+                        A <a href="https://fromsupply.com" target="_blank" class="text-brand-red hover:text-red-400 transition-colors font-medium">fromsupply Mall</a> brand, 
+                        In <a href="https://chimwopara.com" target="_blank" class="text-brand-red hover:text-red-400 transition-colors font-medium">Chim Wopara Enterprises</a>
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Be the first to know when our Exotic selections arrive. Subscribe for exclusive updates and tales from the wild.
+                    </p>
+                    
+                    <!-- Website Info -->
+                    <div class="mb-6">
+                        <p class="text-xl font-playfair text-white mb-2">pautacos.com</p>
+                        <p class="text-gray-500 text-sm mb-2">Pautacos may outsource recipes, ingerdients or meals to deliver with speed. Product media are Generated with AI. Storytelling is fictional and used for branding purposes.</p>
+                        <p class="text-gray-500 text-sm mb-6">&copy; 2025 PauTacos. All Rights Reserved.</p>
+                    </div>
+                    
+                    <!-- Draft Email Button with Social Media inline -->
+                    <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 mobile-newsletter-left">
+                        <button id="draft-email-btn" class="bg-transparent border border-white text-white px-6 py-3 rounded-3xl font-medium hover:bg-white hover:text-black transition-all duration-300">
+                            Draft Email
+                        </button>
+                        
+                        <!-- Social Media Icons - Natural shapes -->
+                        <div class="flex items-center space-x-4">
+                            <a href="https://www.tiktok.com/@fromsupply" target="_blank" class="group">
+                                <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-3xl flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+                                    <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                    </svg>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.instagram.com/fromsupply" target="_blank" class="group">
+    <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-3xl flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.043c-1.06.048-1.693.212-2.22.427a3.41 3.41 0 00-1.226.825 3.41 3.41 0 00-.825 1.226c-.215.527-.379 1.16-.427 2.22-.048 1.04-.06 1.358-.06 3.64s.012 2.6.06 3.64c.048 1.06.212 1.693.427 2.22a3.41 3.41 0 00.825 1.226 3.41 3.41 0 001.226.825c.527.215 1.16.379 2.22.427 1.04.048 1.358.06 3.64.06s2.6-.012 3.64-.06c1.06-.048 1.693-.212 2.22-.427a3.41 3.41 0 001.226-.825 3.41 3.41 0 00.825-1.226c.215-.527.379-1.16.427-2.22.048-1.04.06-1.358.06-3.64s-.012-2.6-.06-3.64c-.048-1.06-.212-1.693-.427-2.22a3.41 3.41 0 00-.825-1.226 3.41 3.41 0 00-1.226-.825c-.527-.215-1.16-.379-2.22-.427-1.04-.048-1.358-.06-3.64-.06zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.468a3.333 3.333 0 110-6.666 3.333 3.333 0 010 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"/>
+        </svg>
+    </div>
+</a>
+
+<a href="https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox" target="_blank" class="group">
+    <div class="p-2 bg-gray-800/50 backdrop-blur border border-gray-700/50 rounded-3xl flex items-center justify-center group-hover:border-brand-red/50 group-hover:bg-brand-red/10 transition-all duration-300">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24a11.43 11.43 0 0 0-8.94 0L5.65 5.67a.637.637 0 0 0-.83-.22c-.3.16-.42.54-.26.85L6.4 9.48C3.3 11.25 1.28 14.44 1 18h22c-.28-3.56-2.3-6.75-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/>
+        </svg>
+    </div>
+</a>
+                        </div>
+                    </div>
+                </div>
+                
+               <div class="flex flex-col justify-start items-end">
+    <div class="sender-form-field w-4/5 ml-auto" data-sender-form-id="b68xOn"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="search-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl right-panel-content p-8 pb-4">
+            <button id="close-search-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Search Menu</h2>
+            <input type="text" id="search-input" class="w-full bg-[#2a2a2a] text-white p-4 rounded-2xl border border-gray-600 focus:outline-none focus:border-red-500 mb-6" placeholder="Search for items or toppings...">
+            
+            <!-- Recently Searched Section -->
+            <div id="recently-searched-section" class="mb-6 hidden">
+                <h3 class="text-lg font-semibold text-white mb-3">Recently Searched</h3>
+                <div id="recently-searched-items" class="space-y-2 mb-4">
+                    <!-- Recently searched items will be populated here -->
+                </div>
+            </div>
+            
+            <!-- Suggested Items Section -->
+            <div id="suggested-items-section" class="mb-6">
+                <h3 class="text-lg font-semibold text-white mb-3">Suggested for You</h3>
+                <div id="suggested-items" class="space-y-3 mb-4">
+                    <!-- Suggested items will be populated here -->
+                </div>
+            </div>
+            
+            <div id="search-results" class="space-y-4 max-h-96 overflow-y-auto">
+                <!-- Search results will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Modal -->
+<div id="gift-modal" class="fixed inset-0 z-50 flex right-panel-container hidden">
+    <div class="modal-backdrop absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="gift-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl right-panel-content p-8">
+            <button id="close-gift-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Create Gift Link</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block mb-3 text-lg font-semibold text-white">Gift Amount Limit</label>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="gift-limit-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-limit="25000">
+                            <div class="text-xl font-bold">₦25,000</div>
+                            <div class="text-sm text-gray-400">Perfect for a nice meal</div>
+                        </div>
+                        <div class="gift-limit-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-limit="50000">
+                            <div class="text-xl font-bold">₦50,000</div>
+                            <div class="text-sm text-gray-400">Great for a feast</div>
+                        </div>
+                        <div class="gift-limit-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-limit="unlimited">
+                            <div class="text-xl font-bold">♾️ Unlimited</div>
+                            <div class="text-sm text-gray-400">Requires SMS approval for each order</div>
+                        </div>
+                    </div>
+                </div>
+
+               <div>
+    <label class="block mb-3 text-lg font-semibold text-white">Number of Uses</label>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="gift-uses-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-uses="1">
+            <div class="text-xl font-bold">1 Order</div>
+            <div class="text-sm text-gray-400">Single use gift</div>
+        </div>
+        <div class="gift-uses-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-uses="30">
+            <div class="text-xl font-bold">30 Orders</div>
+            <div class="text-sm text-gray-400">Multiple occasions</div>
+        </div>
+        <div class="gift-uses-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-uses="1000">
+            <div class="text-xl font-bold">1000 Orders</div>
+            <div class="text-sm text-gray-400">Practically unlimited uses</div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <label class="block mb-3 text-lg font-semibold text-white">Expires After</label>
+    <div class="grid grid-cols-1 gap-4">
+        <div class="gift-duration-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-hours="1">
+            <div class="text-xl font-bold">1 Hour</div>
+            <div class="text-sm text-gray-400">Quick gift</div>
+        </div>
+        <div class="gift-duration-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-hours="720">
+            <div class="text-xl font-bold">1 Month</div>
+            <div class="text-sm text-gray-400">Flexible timing</div>
+        </div>
+        <div class="gift-duration-option border-2 border-gray-600 rounded-3xl p-4 text-center" data-hours="8760">
+            <div class="text-xl font-bold">1 Year</div>
+            <div class="text-sm text-gray-400">Long-term gift</div>
+        </div>
+    </div>
+</div>
+
+                <button id="create-gift-link" class="cta-button w-full font-bold py-4 rounded-full text-lg">Create Gift Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Link Display Modal -->
+    <div id="gift-link-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="gift-modal-content rounded-3xl shadow-xl w-11/12 md:max-w-xl mx-auto relative p-8">
+            <button id="close-gift-link-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+            <h2 class="font-playfair text-3xl text-white mb-6">Gift Link Created!</h2>
+            
+            <div id="gift-link-content" class="space-y-4">
+                <!-- Gift link details will be populated here -->
+            </div>
+            
+            <div class="flex space-x-4 mt-6">
+                <button id="copy-gift-link" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-3xl transition-colors flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Copy Link</span>
+                </button>
+                <button id="share-gift-link" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-3xl transition-colors flex items-center justify-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                    </svg>
+                    <span>Share</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Approval Modal -->
+    <div id="sms-approval-modal" class="fixed inset-0 z-[60] items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="approval-modal-content rounded-3xl shadow-xl w-11/12 md:max-w-md mx-auto relative p-8">
+            <h2 class="font-playfair text-2xl text-white mb-4">SMS Approval Required</h2>
+            <p class="text-gray-300 mb-6">An SMS has been sent to your phone for approval of this unlimited gift order.</p>
+            <div id="sms-approval-details" class="bg-[#2a2a2a] p-4 rounded-3xl mb-6">
+                <!-- Approval details will be populated here -->
+            </div>
+            <div class="flex space-x-4">
+                <button id="approve-unlimited-order" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-3xl transition-colors">Approve (Yes)</button>
+                <button id="deny-unlimited-order" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-3xl transition-colors">Deny (No)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="modal-content bg-[#1a1a1a] rounded-3xl shadow-xl w-11/12 md:max-w-2xl mx-auto relative p-8 overflow-y-auto">
+            <!-- Modal content will be injected here -->
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 flex items-start justify-end hidden p-4 md:p-8 cart-modal-container">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div class="cart-modal-content bg-[#1a1a1a] rounded-3xl shadow-xl w-full max-w-md relative h-full flex flex-col">
+     <div class="p-6 flex justify-between items-center border-b border-gray-700">
+        <h2 class="font-playfair text-2xl text-white">Your Box</h2>
+        <button id="close-cart-modal" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+     </div>
+     <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto">
+        <!-- Cart items will be here -->
+     </div>
+     <div class="p-6 border-t border-gray-700">
+    <div class="space-y-4">
+        <!-- Step 1: Name -->
+        <div id="name-step" class="step-container visible active">
+            <label for="customer-name" class="block mb-2 text-sm font-semibold text-gray-300">Your Name</label>
+            <input type="text" id="customer-name" class="w-full bg-[#2a2a2a] text-white p-3 rounded-3xl border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. Chim Wopara">
+            <div class="flex justify-between items-center mt-2">
+                <p class="text-xs text-gray-500">Enter your name</p>
+                <button id="name-next-btn" class="mobile-nav-button md:hidden text-sm px-3 py-1">Next</button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Phone -->
+        <div id="phone-step" class="step-container">
+            <label for="customer-phone" class="block mb-2 text-sm font-semibold text-gray-300">Phone Number</label>
+            <input type="tel" id="customer-phone" class="w-full bg-[#2a2a2a] text-white p-3 rounded-3xl border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. 08012345678">
+            <div class="flex justify-between items-center mt-2">
+                <p class="text-xs text-gray-500">Enter your phone number</p>
+                <button id="phone-next-btn" class="mobile-nav-button md:hidden text-sm px-3 py-1">Next</button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Pickup Spot -->
+<div id="pickup-step" class="step-container">
+    <label for="pickup-spot" class="block mb-2 text-sm font-semibold text-gray-300">Pickup Spot Address</label>
+    <div class="relative">
+        <textarea id="pickup-spot" rows="2" class="w-full bg-[#2a2a2a] text-white p-3 pr-12 rounded-3xl border border-gray-600 focus:outline-none focus:border-red-500" placeholder="e.g. In front of the library"></textarea>
+        <button id="find-location-btn" type="button" class="absolute right-2 top-2 text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        </button>
+    </div>
+    <div class="flex justify-between items-center mt-2">
+        <p class="text-xs text-gray-500">Enter pickup location</p>
+    </div>
+</div>
+        
+    </div>
+    <div id="gift-info-container" class="hidden mt-4 p-4 bg-green-900 bg-opacity-30 border border-green-500 rounded-3xl">
+        <p class="text-green-400 font-medium text-sm mb-2">🎁 Gift Applied</p>
+        <p id="gift-info-text" class="text-green-300 text-sm"></p>
+    </div>
+    <div class="mt-6">
+    <button id="buy-now-button" class="cta-button w-full font-bold py-4 rounded-full text-lg hidden">BUY NOW</button>
+    <p id="currency-text" class="text-center text-xs text-gray-500 mt-2 hidden">Nigerian Naira</p>
+</div>
+</div>
+</div>
+    </div>
+    
+    <!-- Note/Lure Modal -->
+    <div id="note-modal" class="fixed inset-0 z-[60] items-center justify-center hidden">
+        <div class="modal-backdrop absolute inset-0"></div>
+        <div id="note-content" class="modal-content letter-modal-content rounded-3xl shadow-xl w-11/12 md:max-w-lg mx-auto relative p-8">
+            <!-- Letter content will be injected here -->
+        </div>
+    </div>
+
+<!-- Sign-In Modal -->
+<div id="signin-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+    <div class="modal-backdrop absolute inset-0"></div>
+    <div class="modal-content bg-[#1a1a1a] rounded-3xl shadow-xl w-11/12 md:max-w-md mx-auto relative p-8">
+        <button id="close-signin-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+        <h2 class="font-playfair text-3xl text-white mb-6 text-center">Sign In to Continue</h2>
+        <p class="text-gray-300 mb-8 text-center">Please sign in with Google to complete your order</p>
+        
+        <!-- Google Sign-In Button Container -->
+        <div id="google-signin-button" class="flex justify-center mb-6"></div>
+        
+        <!-- Order Summary -->
+        <div id="signin-order-summary" class="bg-[#2a2a2a] rounded-3xl p-4 mb-6">
+            <h3 class="text-white font-bold mb-2">Order Summary</h3>
+            <div id="signin-cart-items" class="text-gray-300 text-sm"></div>
+            <div id="signin-total" class="text-white font-bold mt-2 pt-2 border-t border-gray-600"></div>
+        </div>
+    </div>
+</div>
+
+    <!-- Draft Email Modal -->
+<div id="draft-email-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[70] flex items-center justify-center p-4">
+    <div id="draft-email-container" class="bg-[#1a1a1a] border border-gray-700 rounded-xl p-6 max-w-3xl w-full relative">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-white">Draft Email</h2>
+            <button id="close-draft-modal-btn" class="text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <form id="email-draft-form" class="max-w-2xl mx-auto">
+            <div id="email-form-success" class="hidden text-white p-4 rounded-3xl mb-6 text-center"></div>
+            <div class="form-field active" id="email-name-field">
+                <input type="text" id="email-name" name="name" placeholder="What's your full name?" class="form-input w-full text-white" required>
+            </div>
+            <div class="form-field" id="email-email-field">
+                <input type="email" id="email-email" name="email" placeholder="What's your email address?" class="form-input w-full text-white" required>
+            </div>
+            <div class="form-field" id="email-phone-field">
+                <input type="tel" id="email-phone" name="phone" placeholder="Enter phone number" class="form-input w-full text-white" required>
+                <div id="phone-error" class="hidden text-red-400 text-sm mt-1">Please enter at least 10 digits</div>
+            </div>
+            <div class="form-field" id="email-message-field">
+                <textarea id="email-message" name="message" rows="4" placeholder="How can we help you?" class="form-input w-full text-white resize-none" required></textarea>
+            </div>
+            <div class="form-field" id="email-urgency-field">
+                <div class="mb-4">
+                    <label class="text-white text-sm mb-3 block">What is the nature of this email?</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button type="button" class="urgency-option p-3 border border-gray-600 rounded-3xl text-center transition-all hover:border-white" data-urgency="Gratitude">
+                            <div class="text-sm font-medium text-white">Gratitude</div>
+                        </button>
+                        <button type="button" class="urgency-option p-3 border border-gray-600 rounded-3xl text-center transition-all hover:border-white" data-urgency="Suggestion">
+                            <div class="text-sm font-medium text-white">Suggestion</div>
+                        </button>
+                        <button type="button" class="urgency-option p-3 border border-gray-600 rounded-3xl text-center transition-all hover:border-white" data-urgency="Complaint">
+                            <div class="text-sm font-medium text-white">Complaint</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-field" id="email-submit-field">
+                <button type="button" id="draft-email-submit-btn" class="btn-primary font-medium py-3 px-8 rounded-3xl mt-6 w-full">Open in Mail App</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <!-- Newsletter Script -->
+    <script>
+      (function (s, e, n, d, er) {
+        s['Sender'] = er;
+        s[er] = s[er] || function () {
+          (s[er].q = s[er].q || []).push(arguments)
+        }, s[er].l = 1 * new Date();
+        var a = e.createElement(n),
+            m = e.getElementsByTagName(n)[0];
+        a.async = 1;
+        a.src = d;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+      sender('722cce33374677')
+    </script>
+
+    <!-- Your JavaScript files -->
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>

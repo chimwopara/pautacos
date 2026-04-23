@@ -262,188 +262,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const exoticsContainer = document.getElementById('exotics-container');
     const locationsContainer = document.getElementById('locations-container');
     const orderModal = document.getElementById('order-modal');
+    const cartModal = document.getElementById('cart-modal');
     const noteModal = document.getElementById('note-modal');
     const noteContent = document.getElementById('note-content');
+    const searchModal = document.getElementById('search-modal');
+    const giftModal = document.getElementById('gift-modal');
     const giftLinkModal = document.getElementById('gift-link-modal');
     const smsApprovalModal = document.getElementById('sms-approval-modal');
+    const cartButton = document.getElementById('cart-button');
+    const searchButton = document.getElementById('search-button');
+    const giftButton = document.getElementById('gift-button');
     const cartCount = document.getElementById('cart-count');
-    const tabCartCount = document.getElementById('tab-cart-count');
     const cartItemsContainer = document.getElementById('cart-items-container');
     const buyNowButton = document.getElementById('buy-now-button');
     const header = document.getElementById('header');
     const themeToggle = document.getElementById('theme-toggle');
-    
-    // Unified Side Panel Elements
-    const unifiedSidePanel = document.getElementById('unified-side-panel');
-    const sidePanelToggle = document.getElementById('side-panel-toggle');
-    const closeSidePanel = document.getElementById('close-side-panel');
-    const sidePanelTabs = document.querySelectorAll('.side-panel-tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    // === UNIFIED SIDE PANEL FUNCTIONALITY ===
-    function openSidePanel(targetTab = 'search') {
-        unifiedSidePanel.style.display = 'flex';
-        setTimeout(() => unifiedSidePanel.classList.add('active'), 10);
-        body.classList.add('modal-open');
-        switchTab(targetTab);
-        
-        // Render Google button if needed
-        if (targetTab === 'account' && !window.currentUser) {
-            setTimeout(() => {
-                renderProfileGoogleButton();
-                setTimeout(renderProfileGoogleButton, 1000);
-            }, 50);
-        }
-    }
-    
-    function closeSidePanelFunc() {
-        unifiedSidePanel.classList.remove('active');
-        setTimeout(() => {
-            unifiedSidePanel.style.display = 'none';
-            body.classList.remove('modal-open');
-        }, 350);
-    }
-    
-    function switchTab(tabName) {
-        // Update tab buttons
-        sidePanelTabs.forEach(tab => {
-            if (tab.dataset.tab === tabName) {
-                tab.classList.add('active');
-            } else {
-                tab.classList.remove('active');
-            }
-        });
-        
-        // Update tab content using style.display
-        tabContents.forEach(content => {
-            if (content.id === `tab-${tabName}`) {
-                content.style.display = 'block';
-            } else {
-                content.style.display = 'none';
-            }
-        });
-        
-        // Reset account subpages when switching to account tab
-        if (tabName === 'account') {
-            hideAllAccountSubpages();
-            // Render Google button
-            if (!window.currentUser) {
-                setTimeout(() => {
-                    renderProfileGoogleButton();
-                }, 100);
-            }
-        }
-        
-        // Focus search input when switching to search
-        if (tabName === 'search') {
-            setTimeout(() => {
-                const searchInput = document.getElementById('search-input');
-                if (searchInput) searchInput.focus();
-                displayRecentSearches();
-                displaySuggestedItems();
-            }, 100);
-        }
-        
-        // Initialize cart when switching to cart tab
-        if (tabName === 'cart') {
-            renderCartItems();
-            loadPermanentDeliveryInfo();
-            if (!window.formSetupComplete) {
-                setupStepByStepForm();
-            }
-            updateGiftDisplay();
-        }
-    }
-    
-    function hideAllAccountSubpages() {
-        const subpages = document.querySelectorAll('.account-subpage');
-        const mainMenu = document.getElementById('account-main-menu');
-        
-        subpages.forEach(page => page.style.display = 'none');
-        if (mainMenu) mainMenu.style.display = 'block';
-    }
-    
-    function showAccountSubpage(pageId) {
-        const mainMenu = document.getElementById('account-main-menu');
-        const targetPage = document.getElementById(pageId);
-        
-        if (mainMenu) mainMenu.style.display = 'none';
-        if (targetPage) targetPage.style.display = 'block';
-    }
-    
-    // Side Panel Toggle
-    if (sidePanelToggle) {
-        sidePanelToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (unifiedSidePanel.classList.contains('active')) {
-                closeSidePanelFunc();
-            } else {
-                openSidePanel('search');
-            }
-        });
-    }
-    
-    // Close Side Panel Button
-    if (closeSidePanel) {
-        closeSidePanel.addEventListener('click', closeSidePanelFunc);
-    }
-    
-    // Close panel on backdrop click
-    if (unifiedSidePanel) {
-        unifiedSidePanel.addEventListener('click', (e) => {
-            if (e.target.classList.contains('side-panel-backdrop')) {
-                closeSidePanelFunc();
-            }
-        });
-    }
-    
-    // Tab Navigation
-    sidePanelTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            switchTab(tab.dataset.tab);
-        });
-    });
-    
-    // Account Back Buttons
-    document.querySelectorAll('.profile-back-btn').forEach(btn => {
-        btn.addEventListener('click', hideAllAccountSubpages);
-    });
-    
-    // Account Menu Navigation
-    const accountMenuItems = {
-        'receipts-button': 'orders-receipts-page',
-        'gift-receipts-button': 'gifts-receipts-page',
-        'invite-chef-button': 'invite-chef-page',
-        'become-member-button': 'become-member-page',
-        'become-chef-button': 'become-chef-page',
-        'become-dispatcher-button': 'become-dispatcher-page',
-        'become-auditor-button': 'become-auditor-page',
-        'dietary-preferences-button': 'dietary-preferences-page',
-        'chef-preferences-button': 'chef-preferences-page',
-        'delivery-preferences-button': 'delivery-preferences-page',
-        'nutrition-tracker-button': 'nutrition-tracker-page'
-    };
-    
-    Object.entries(accountMenuItems).forEach(([buttonId, pageId]) => {
-        const btn = document.getElementById(buttonId);
-        if (btn) {
-            btn.addEventListener('click', () => showAccountSubpage(pageId));
-        }
-    });
-    
-    // Update cart count to show in both places
-    function updateCartCountDisplay(count) {
-        const countDisplay = count > 0 ? count.toString() : '';
-        
-        if (cartCount) {
-            cartCount.textContent = countDisplay;
-            cartCount.style.display = count > 0 ? 'flex' : 'none';
-        }
-        if (tabCartCount) {
-            tabCartCount.textContent = countDisplay;
-            tabCartCount.style.display = count > 0 ? 'flex' : 'none';
-        }
-    }
 
     // --- UTILITY FUNCTIONS ---
     function isTouchDevice() {
@@ -468,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasItems = cart.length > 0;
 
         if (hasName && hasPhone && hasPickup && hasItems && buyNowButton) {
-            buyNowButton.style.display = 'block';
-            if (currencyText) currencyText.style.display = 'block';
+            buyNowButton.classList.remove('hidden');
+            if (currencyText) currencyText.classList.remove('hidden');
             updateTotal();
             
             // Simple pulse animation
@@ -477,8 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 buyNowButton.classList.add('animate-pulse');
             }, 1000);
         } else {
-            if (buyNowButton) buyNowButton.style.display = 'none';
-            if (currencyText) currencyText.style.display = 'none';
+            if (buyNowButton) buyNowButton.classList.add('hidden');
+            if (currencyText) currencyText.classList.add('hidden');
         }
     }
 
@@ -674,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (results.length === 0) {
             searchResults.innerHTML = '<p class="text-gray-400 text-center py-8">No results found. Try searching for menu items or toppings.</p>';
             // Keep suggestions hidden even when no results found
-            document.getElementById('suggested-items-section').style.display = 'none';
+            document.getElementById('suggested-items-section').classList.add('hidden');
             return;
         }
 
@@ -692,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResults.innerHTML = resultsHtml;
         
         // Keep suggestions hidden when there are search results
-        document.getElementById('suggested-items-section').style.display = 'none';
+        document.getElementById('suggested-items-section').classList.add('hidden');
     }
 
     // Search storage and suggestions
@@ -727,11 +560,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const section = document.getElementById('recently-searched-section');
         
         if (recentSearches.length === 0) {
-            section.style.display = 'none';
+            section.classList.add('hidden');
             return;
         }
         
-        section.style.display = 'block';
+        section.classList.remove('hidden');
         container.innerHTML = recentSearches.map(search => {
             // Handle old format (string) and new format (object)
             const query = typeof search === 'string' ? search : search.query;
@@ -852,11 +685,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const giftText = document.getElementById('gift-info-text');
         
         if (currentGiftInfo) {
-            giftContainer.style.display = 'block';
+            giftContainer.classList.remove('hidden');
             const limitText = currentGiftInfo.limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(currentGiftInfo.limit).toLocaleString()}`;
             giftText.textContent = `Chim's ${limitText} gift (${currentGiftInfo.usesLeft} uses left)`;
         } else {
-            giftContainer.style.display = 'none';
+            giftContainer.classList.add('hidden');
         }
     }
 
@@ -1032,7 +865,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCart() {
-        updateCartCountDisplay(cart.length);
+        cartCount.textContent = cart.length;
         renderCartItems();
         saveDeliveryInfo();
         saveCart();
@@ -1040,10 +873,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderCartItems() {
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your box is empty.</p>`;
+            cartItemsContainer.innerHTML = `<p class="text-gray-400 text-center py-8">Your cart is empty.</p>`;
             const buyNowButton = document.getElementById('buy-now-button');
             if (buyNowButton) {
-                buyNowButton.textContent = 'Your box is empty';
+                buyNowButton.textContent = 'Your cart is empty';
                 buyNowButton.classList.add('hidden');
             }
             return;
@@ -1083,18 +916,22 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCartItems();
         
         // Reset cart count
-        updateCartCountDisplay(0);
+        cartCount.textContent = '0';
     }
 
     function editCartItem(index) {
         const item = cart[index];
         window.editingCartIndex = index;
         
-        // Close side panel first
+        // Close cart modal first
         saveDeliveryInfo();
-        closeSidePanelFunc();
+        cartModal.classList.remove('active');
+        setTimeout(() => {
+            closeModal(cartModal);
+            body.classList.remove('cart-open');
+        }, 300);
         
-        // Open order modal after panel closes
+        // Open order modal after cart closes
         setTimeout(() => {
             openOrderModal(item.key);
             
@@ -1452,37 +1289,86 @@ document.addEventListener('DOMContentLoaded', () => {
         checkFormCompletion();
     }
 
-    // Profile menu navigation (for unified side panel)
+    // Profile menu navigation
 function showProfilePage(pageId) {
     // Hide main menu
-    const mainMenu = document.getElementById('account-main-menu');
-    if (mainMenu) mainMenu.style.display = 'none';
+    document.getElementById('profile-main-menu').classList.add('hidden');
     
-    // Hide all account subpages
-    document.querySelectorAll('.account-subpage').forEach(page => {
-        page.style.display = 'none';
+    // Hide all pages
+    document.querySelectorAll('[id$="-page"]').forEach(page => {
+        page.classList.add('hidden');
     });
     
     // Show selected page
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) targetPage.style.display = 'block';
+    document.getElementById(pageId).classList.remove('hidden');
 }
 
 function showProfileMainMenu() {
     // Show main menu
-    const mainMenu = document.getElementById('account-main-menu');
-    if (mainMenu) mainMenu.style.display = 'block';
+    document.getElementById('profile-main-menu').classList.remove('hidden');
     
-    // Hide all account subpages
-    document.querySelectorAll('.account-subpage').forEach(page => {
-        page.style.display = 'none';
+    // Hide all pages
+    document.querySelectorAll('[id$="-page"]').forEach(page => {
+        page.classList.add('hidden');
     });
 }
 
-// Profile button click handlers (these are now handled in the unified panel setup)
-// But we keep these as fallbacks for any other triggers
+// Profile button click handlers
+document.getElementById('receipts-button')?.addEventListener('click', () => {
+    showProfilePage('orders-receipts-page');
+});
 
-// Back buttons handler
+document.getElementById('gift-receipts-button')?.addEventListener('click', () => {
+    showProfilePage('gifts-receipts-page');
+});
+
+document.getElementById('invite-chef-button')?.addEventListener('click', () => {
+    showProfilePage('invite-chef-page');
+});
+
+document.getElementById('become-member-button')?.addEventListener('click', () => {
+    showProfilePage('become-member-page');
+});
+
+document.getElementById('become-chef-button')?.addEventListener('click', () => {
+    showProfilePage('become-chef-page');
+});
+
+document.getElementById('delivery-preferences-button')?.addEventListener('click', () => {
+    showProfilePage('delivery-preferences-page');
+});
+
+document.getElementById('dietary-preferences-button')?.addEventListener('click', () => {
+    showProfilePage('dietary-preferences-page');
+});
+
+document.getElementById('chef-preferences-button')?.addEventListener('click', () => {
+    showProfilePage('chef-preferences-page');
+});
+
+document.getElementById('nutrition-tracker-button')?.addEventListener('click', () => {
+    showProfilePage('nutrition-tracker-page');
+});
+
+document.getElementById('become-dispatcher-button')?.addEventListener('click', () => {
+    showProfilePage('become-dispatcher-page');
+});
+
+document.getElementById('become-auditor-button')?.addEventListener('click', () => {
+    showProfilePage('become-auditor-page');
+});
+// Close profile dropdown button
+document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'close-profile-dropdown') {
+        const dropdown = document.getElementById('profile-dropdown');
+        dropdown.classList.remove('active');
+        setTimeout(() => {
+            dropdown.classList.add('hidden');
+            dropdown.style.display = 'none';
+        }, 300);
+    }
+});
+// Back buttons
 document.addEventListener('click', (e) => {
     if (e.target.closest('.profile-back-btn')) {
         showProfileMainMenu();
@@ -1830,22 +1716,22 @@ document.addEventListener('click', (e) => {
         const themeIndicator = document.getElementById('theme-indicator');
         
         // Update theme indicator
-        if (themeIndicator) themeIndicator.textContent = isSiteDarkMode ? 'Dark' : 'Light';
+        themeIndicator.textContent = isSiteDarkMode ? 'Dark' : 'Light';
         
         if (window.currentUser) {
             // User is signed in
-            if (userInfoSection) userInfoSection.style.display = 'block';
-            if (signInSection) signInSection.style.display = 'none';
-            if (signOutButton) signOutButton.style.display = 'flex';
+            userInfoSection.classList.remove('hidden');
+            signInSection.classList.add('hidden');
+            signOutButton.classList.remove('hidden');
             
-            if (userAvatar) userAvatar.src = window.currentUser.picture || '';
-            if (userName) userName.textContent = window.currentUser.name || '';
-            if (userEmail) userEmail.textContent = window.currentUser.email || '';
+            userAvatar.src = window.currentUser.picture || '';
+            userName.textContent = window.currentUser.name || '';
+            userEmail.textContent = window.currentUser.email || '';
         } else {
             // User is not signed in
-            if (userInfoSection) userInfoSection.style.display = 'none';
-            if (signInSection) signInSection.style.display = 'block';
-            if (signOutButton) signOutButton.style.display = 'none';
+            userInfoSection.classList.add('hidden');
+            signInSection.classList.remove('hidden');
+            signOutButton.classList.add('hidden');
             
             // Render Google Sign-In button in profile dropdown
             renderProfileGoogleButton();
@@ -1957,7 +1843,16 @@ document.addEventListener('click', (e) => {
         }
     });
 
-    // Search functionality - now in side panel
+    // Search functionality
+    searchButton.addEventListener('click', () => {
+        searchModal.style.display = 'flex';
+setTimeout(() => searchModal.classList.add('active'), 10);
+        body.classList.add('modal-open');
+        document.getElementById('search-input').focus();
+        displayRecentSearches();
+        displaySuggestedItems();
+    });
+
     document.getElementById('search-input').addEventListener('input', (e) => {
         const query = e.target.value;
         const results = performSearch(query);
@@ -1967,13 +1862,13 @@ document.addEventListener('click', (e) => {
         const hasQuery = query.trim().length > 0;
         if (hasQuery) {
             // Hide suggestions when there are search results
-            document.getElementById('suggested-items-section').style.display = 'none';
-            document.getElementById('recently-searched-section').style.display = 'none';
+            document.getElementById('suggested-items-section').classList.add('hidden');
+            document.getElementById('recently-searched-section').classList.add('hidden');
         } else {
             // Show suggestions and recent searches when no search query
             displaySuggestedItems([]); // Reset suggestions when clearing search
-            document.getElementById('suggested-items-section').style.display = 'block';
-            document.getElementById('recently-searched-section').style.display = 'block';
+            document.getElementById('suggested-items-section').classList.remove('hidden');
+            document.getElementById('recently-searched-section').classList.remove('hidden');
         }
     });
     
@@ -1999,15 +1894,14 @@ document.addEventListener('click', (e) => {
                 saveRecentSearch(searchInput.value.trim(), itemKey);
             }
             
-            closeSidePanelFunc();
+            searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
             
-            setTimeout(() => {
-                if (type === 'item') {
-                    openOrderModal(itemKey);
-                } else if (type === 'topping') {
-                    openOrderModal(itemKey, topping);
-                }
-            }, 350);
+            if (type === 'item') {
+                openOrderModal(itemKey);
+            } else if (type === 'topping') {
+                openOrderModal(itemKey, topping);
+            }
         }
     });
     
@@ -2020,8 +1914,9 @@ document.addEventListener('click', (e) => {
             
             if (itemKey) {
                 // If it's a specific item, open it directly
-                closeSidePanelFunc();
-                setTimeout(() => openOrderModal(itemKey), 350);
+                searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
+                openOrderModal(itemKey);
             } else {
                 // If it's a search term, populate search input
                 const searchInput = document.getElementById('search-input');
@@ -2037,12 +1932,25 @@ document.addEventListener('click', (e) => {
         const suggestedItem = e.target.closest('.suggested-item');
         if (suggestedItem) {
             const itemKey = suggestedItem.dataset.item;
-            closeSidePanelFunc();
-            setTimeout(() => openOrderModal(itemKey), 350);
+            searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
+            openOrderModal(itemKey);
         }
     });
 
-    // Gift functionality - now in side panel
+    searchModal.addEventListener('click', (e) => {
+        if (e.target.matches('.modal-backdrop') || e.target.id === 'close-search-modal') {
+            searchModal.classList.remove('active');
+setTimeout(() => closeModal(searchModal), 300);
+        }
+    });
+
+    // Gift functionality
+    giftButton.addEventListener('click', () => {
+        giftModal.style.display = 'flex';
+setTimeout(() => giftModal.classList.add('active'), 10);
+        body.classList.add('modal-open');
+    });
 
 
 
@@ -2217,28 +2125,27 @@ window.copyGiftLink = function(giftId) {
         const baseUrl = window.location.origin + window.location.pathname;
         const fullGiftLink = `${baseUrl}?gift=${giftLink.id}`;
         
-        closeSidePanelFunc();
+        giftModal.classList.remove('active');
+setTimeout(() => closeModal(giftModal), 300);
         
-        setTimeout(() => {
-            const giftLinkContent = document.getElementById('gift-link-content');
-            const limitText = limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(limit).toLocaleString()}`;
-            const hoursText = hours === 1 ? '1 hour' : `${hours} hours`;
-            
-            giftLinkContent.innerHTML = `
-                <div class="gift-link-display">
-                    <h3 class="font-bold text-lg mb-2">Your Gift Link Created!</h3>
-                    <p class="text-sm text-gray-300 mb-3">Chim's ${limitText} gift • ${uses} uses • Expires in ${hoursText}</p>
-                    <div class="gift-link-text" id="gift-link-url">${fullGiftLink}</div>
-                    <p class="text-xs text-gray-400 mt-2">Share this link with anyone you want to gift!</p>
-                </div>
-            `;
-            
-            // Store current gift link for copying/sharing
-            window.currentGiftLinkUrl = fullGiftLink;
-            
-            giftLinkModal.style.display = 'flex';
-            body.classList.add('modal-open');
-        }, 350);
+        const giftLinkContent = document.getElementById('gift-link-content');
+        const limitText = limit === 'unlimited' ? '♾️ Unlimited' : `₦${parseInt(limit).toLocaleString()}`;
+        const hoursText = hours === 1 ? '1 hour' : `${hours} hours`;
+        
+        giftLinkContent.innerHTML = `
+            <div class="gift-link-display">
+                <h3 class="font-bold text-lg mb-2">Your Gift Link Created!</h3>
+                <p class="text-sm text-gray-300 mb-3">Chim's ${limitText} gift • ${uses} uses • Expires in ${hoursText}</p>
+                <div class="gift-link-text" id="gift-link-url">${fullGiftLink}</div>
+                <p class="text-xs text-gray-400 mt-2">Share this link with anyone you want to gift!</p>
+            </div>
+        `;
+        
+        // Store current gift link for copying/sharing
+        window.currentGiftLinkUrl = fullGiftLink;
+        
+        giftLinkModal.style.display = 'flex';
+        body.classList.add('modal-open');
     });
 
     document.getElementById('copy-gift-link').addEventListener('click', () => {
@@ -2296,6 +2203,13 @@ window.copyGiftLink = function(giftId) {
         }
     });
 
+    giftModal.addEventListener('click', (e) => {
+        if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-modal') {
+            giftModal.classList.remove('active');
+setTimeout(() => closeModal(giftModal), 300);
+        }
+    });
+
     giftLinkModal.addEventListener('click', (e) => {
         if (e.target.matches('.modal-backdrop') || e.target.id === 'close-gift-link-modal') {
             closeModal(giftLinkModal);
@@ -2311,29 +2225,49 @@ window.copyGiftLink = function(giftId) {
         }
     });
 
-    // Cart functionality is now in the side panel - handle cart item interactions
-    document.addEventListener('click', (e) => {
-        // Handle cart item removal
+    cartButton.addEventListener('click', () => {
+        cartModal.style.display = 'flex';
+        setTimeout(() => cartModal.classList.add('active'), 10);
+        renderCartItems();
+        loadPermanentDeliveryInfo();
+        if (!window.formSetupComplete) {
+            setupStepByStepForm();
+        }
+        updateGiftDisplay();
+        body.classList.add('modal-open');
+    });
+
+    cartModal.addEventListener('click', (e) => {
+        if (e.target.matches('.modal-backdrop') || e.target.id === 'close-cart-modal') {
+            saveDeliveryInfo();
+            cartModal.classList.remove('active');
+            setTimeout(() => closeModal(cartModal), 300);
+        }
         if (e.target.matches('.remove-item-button')) {
             e.stopPropagation();
             removeFromCart(e.target.dataset.index);
         }
-        
         // Clear cart button functionality
-        if (e.target && e.target.id === 'clear-cart-button') {
-            e.preventDefault();
+        if (e.target.id === 'clear-cart-button') {
             e.stopPropagation();
-            if (confirm('Are you sure you want to clear all items from your box?')) {
+            if (confirm('Are you sure you want to clear all items from your cart?')) {
                 clearCart();
             }
         }
-        
-        // Cart item editing
+        // Add cart item editing
         if (e.target.closest('.cart-item') && !e.target.matches('.remove-item-button')) {
-            const cartItem = e.target.closest('.cart-item');
-            if (cartItem) {
-                const index = parseInt(cartItem.dataset.index);
-                editCartItem(index);
+            const index = parseInt(e.target.closest('.cart-item').dataset.index);
+            editCartItem(index);
+        }
+    });
+
+    // Clear cart button functionality
+    document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'clear-cart-button') {
+            e.preventDefault();
+            e.stopPropagation();
+            if (confirm('Are you sure you want to clear all items from your cart?')) {
+                clearCart();
             }
         }
     });
@@ -2372,10 +2306,92 @@ window.copyGiftLink = function(giftId) {
         }
     });
 
+ // Profile dropdown toggle
+document.getElementById('profile-button').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = document.getElementById('profile-dropdown');
+    if (dropdown.classList.contains('hidden')) {
+        dropdown.classList.remove('hidden');
+        dropdown.style.display = 'flex';
+        setTimeout(() => dropdown.classList.add('active'), 10);
+        body.classList.add('modal-open');
+        updateProfileUI();
+        //header.classList.remove('scrolled');
+        
+        // Small delay to ensure dropdown is visible before rendering button
+        if (!dropdown.classList.contains('hidden') && !window.currentUser) {
+            setTimeout(() => {
+                renderProfileGoogleButton();
+                // Retry after 1 second if Google SDK wasn't ready
+                setTimeout(renderProfileGoogleButton, 1000);
+            }, 50);
+        }
+    } else {
+        dropdown.classList.remove('active');
+        setTimeout(() => {
+            dropdown.classList.add('hidden');
+            dropdown.style.display = 'none';
+            body.classList.remove('modal-open');
+        }, 300);
+    }
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('profile-dropdown');
+    const profileButton = document.getElementById('profile-button');
+    if (dropdown && !dropdown.contains(e.target) && !profileButton.contains(e.target)) {
+        dropdown.classList.remove('active');
+        setTimeout(() => {
+            dropdown.classList.add('hidden');
+            dropdown.style.display = 'none';
+            body.classList.remove('modal-open');
+        }, 300);
+    }
+});
+
+// New button handlers
+document.getElementById('invite-chef-button')?.addEventListener('click', () => {
+    alert('Invite a Chef feature coming soon!');
+    // Add your invite chef functionality here
+});
+
+document.getElementById('become-member-button')?.addEventListener('click', () => {
+    alert('Become a Member feature coming soon!');
+    // Add your membership functionality here
+});
+
+document.getElementById('become-chef-button')?.addEventListener('click', () => {
+    alert('Become a Chef feature coming soon!');
+    // Add your chef application functionality here
+});
+
+// Preferences and tracking button handlers
+document.getElementById('dietary-preferences-button')?.addEventListener('click', () => {
+    alert('Dietary Preferences: Set your dietary restrictions and preferences here (vegetarian, vegan, gluten-free, etc.)');
+    // Add your dietary preferences functionality here
+});
+
+document.getElementById('chef-preferences-button')?.addEventListener('click', () => {
+    alert('Chef Preferences: Choose your favorite chefs and get notified of their special dishes!');
+    // Add your chef preferences functionality here
+});
+
+document.getElementById('nutrition-tracker-button')?.addEventListener('click', () => {
+    alert('Nutrition Tracker: Track your daily nutrition intake and calorie goals!');
+    // Add your nutrition tracking functionality here
+});
+// Delivery preferences button handler
+document.getElementById('delivery-preferences-button')?.addEventListener('click', () => {
+    alert('Delivery Preferences: Set your preferred pickup locations, delivery times, and save favorite addresses!');
+    // Add your delivery preferences functionality here
+});
+
 // Sign out button
 document.getElementById('sign-out-button').addEventListener('click', () => {
     window.currentUser = null;
     localStorage.removeItem('pautacos-user');
+    document.getElementById('profile-dropdown').classList.add('hidden');
     updateProfileUI();
     alert('Signed out successfully');
 });
@@ -2386,8 +2402,8 @@ themeToggle.addEventListener('click', () => {
     applyTheme();
     
     // Re-render Google button with new theme
-    const unifiedPanel = document.getElementById('unified-side-panel');
-    if (unifiedPanel && unifiedPanel.classList.contains('active') && !window.currentUser) {
+    const dropdown = document.getElementById('profile-dropdown');
+    if (!dropdown.classList.contains('hidden') && !window.currentUser) {
         setTimeout(renderProfileGoogleButton, 100);
     }
 });
